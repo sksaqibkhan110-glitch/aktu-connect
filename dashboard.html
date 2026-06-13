@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKTU Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<body>
+
+<div class="nav">
+    <button onclick="goPage('dashboard.html')">Dashboard</button>
+    <button onclick="goPage('profile.html')">Profile</button>
+    <button onclick="goPage('leaderboard.html')">Leaderboard</button>
+    <button onclick="goPage('chatbot.html')">Chatbot</button>
+    <button onclick="goPage('clan.html')">Clan</button>
+    <button onclick="goPage('study.html')">Study</button>
+</div>
+
+
+<!-- MAIN CONTAINER -->
+<div class="container">
+
+    <h1>AKTU Connect 🚀</h1>
+    <h3 id="welcome">Welcome</h3>
+
+    <!-- USER INFO -->
+    <div class="card">
+        <p>Semester: <span id="sem"></span></p>
+        <p>Branch: <span id="branch"></span></p>
+        <p>Target CGPA: <span id="cgpa"></span></p>
+    </div>
+
+    <!-- XP CARD -->
+    <div class="card">
+        <p>XP: <span id="xp">0</span></p>
+
+        <button id="studybtn">📚 Study (+10 XP)</button>
+
+        <p>Level: <span id="level">1</span></p>
+
+        <p>Progress:</p>
+        <div class="progress-box">
+            <div id="progress-bar"></div>
+        </div>
+    </div>
+
+    <!-- STREAK -->
+    <div class="card">
+        <h2>🔥 Study Streak</h2>
+        <p id="streak">0 Days</p>
+        <button id="streakBtn">Mark Today Studied</button>
+    </div>
+
+    <!-- COUNTDOWN -->
+    <div class="card">
+        <h2>📅 Exam Countdown</h2>
+        <p id="countdown">Loading...</p>
+    </div>
+
+    <!-- DAILY TASKS (KEEP FOR NOW BUT CLEAN LATER) -->
+    <div class="card">
+        <h2>📚 Daily Tasks</h2>
+        <button id="task1">Study 1 Hour (+20 XP)</button>
+        <button id="task2">Solve 10 Questions (+15 XP)</button>
+        <button id="task3">Complete Quiz (+30 XP)</button>
+    </div>
+
+</div>
+
+<script src="dashboard.js"></script>
+
+<!-- NAV FUNCTION -->
+<script>
+function goPage(page) {
+    window.location.href = page;
+}
+</script>
+
+</body>
+</html>
