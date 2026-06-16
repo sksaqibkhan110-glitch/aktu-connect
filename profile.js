@@ -6,7 +6,7 @@ if (!data) {
         goal: "Not set",
         xp: 0,
         tasks: 0,
-        avatar: "https://i.imgur.com/8RKXAIV.png"
+        avatar: ""
     };
 }
 
@@ -24,8 +24,14 @@ document.getElementById("xpFill").style.width = progress + "%";
 document.getElementById("xpText").innerText = `${progress} / 100 XP`;
 
 let avatar = document.getElementById("avatar");
+
 if (avatar) {
-    avatar.src = data.avatar || "https://i.imgur.com/8RKXAIV.png";
+    if (data.avatar) {
+        avatar.src = data.avatar;
+    } else {
+        avatar.src =
+            "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23d1d5db'/%3E%3C/svg%3E";
+    }
 }
 
 function showToast(message) {
