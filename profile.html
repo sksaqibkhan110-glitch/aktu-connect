@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKTU Connect | Profile</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+<div class="bg"></div>
+
+<div class="profile-wrapper">
+    <div class="profile-card">
+
+        <div class="top-section">
+            <div class="avatar">
+                <img id="avatar" src="https://i.imgur.com/8RKXAIV.png" alt="Avatar">
+            </div>
+
+            <div class="user-info">
+                <h1 id="name">Player</h1>
+                <p id="goal">Goal: Not set</p>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <h3 id="level">1</h3>
+                <p>Level</p>
+            </div>
+
+            <div class="stat-box">
+                <h3 id="xp">0</h3>
+                <p>XP</p>
+            </div>
+
+            <div class="stat-box">
+                <h3 id="tasks">0</h3>
+                <p>Tasks</p>
+            </div>
+        </div>
+
+        <div class="xp-bar">
+            <div class="xp-fill" id="xpFill"></div>
+        </div>
+
+        <p class="xp-text" id="xpText">0 / 100 XP</p>
+
+        <button onclick="openEditPopup()">✏️ Edit Profile</button>
+        <button onclick="goBack()">⬅ Back to Dashboard</button>
+
+        <div class="badges-section">
+            <h3>🏆 Achievements</h3>
+
+            <div class="badges">
+                <div class="badge" id="b1">
+                    🥇
+                    <p>Beginner</p>
+                </div>
+
+                <div class="badge" id="b2">
+                    🔥
+                    <p>10 Tasks</p>
+                </div>
+
+                <div class="badge" id="b3">
+                    ⚡
+                    <p>100 XP</p>
+                </div>
+
+                <div class="badge" id="b4">
+                    🎯
+                    <p>Goal Setter</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- Edit Profile Popup -->
+<div id="editPopup" class="popup">
+    <div class="popup-box">
+        <h2>Edit Profile</h2>
+
+        <input id="editName" type="text" placeholder="Enter Name">
+
+        <input id="editGoal" type="text" placeholder="Enter Goal">
+
+        <button onclick="saveProfile()">💾 Save</button>
+
+        <button onclick="closeEditPopup()">❌ Cancel</button>
+    </div>
+</div>
+
+<script src="profile.js"></script>
+
+</body>
+</html>
