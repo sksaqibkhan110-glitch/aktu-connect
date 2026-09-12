@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AKTU Connect - Academic Goal Setup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="theme.js"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-zinc-950 text-zinc-100 justify-center items-center py-10">
+
+  <main class="max-w-md w-full px-4">
+    
+    <!-- Branding Header -->
+    <div class="text-center mb-8">
+      <div class="w-12 h-12 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-lg mx-auto mb-3">
+        AC
+      </div>
+      <h1 class="text-2xl font-bold tracking-tight">Setup Your Academic Goals</h1>
+      <p class="text-sm text-zinc-400 mt-1">Configure your branch, semester, and target CGPA to personalize your AKTU Connect experience.</p>
+    </div>
+
+    <!-- Goal Setup Form Card -->
+    <div class="ui-card p-6 border border-zinc-800 bg-zinc-900/80 rounded-2xl shadow-xl">
+      <form onsubmit="saveGoals(event)" class="space-y-4">
+        
+        <!-- Branch Selection -->
+        <div>
+          <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-1.5">Select Branch</label>
+          <select id="goal-branch" class="ui-input font-medium w-full bg-zinc-950 border border-zinc-700 rounded-lg p-2.5 text-sm text-zinc-100">
+            <option value="CSE_AIML">Computer Science (AI & ML)</option>
+            <option value="CSE_CORE">Computer Science (Core)</option>
+            <option value="CSE_AIDS">Computer Science (AI & DS)</option>
+            <option value="IT">Information Technology</option>
+            <option value="ECE">Electronics & Comm. (ECE)</option>
+          </select>
+        </div>
+
+        <!-- Semester Selection -->
+        <div>
+          <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-1.5">Current Semester</label>
+          <select id="goal-sem" class="ui-input font-medium w-full bg-zinc-950 border border-zinc-700 rounded-lg p-2.5 text-sm text-zinc-100">
+            <option value="1">Semester 1 (Group A)</option>
+            <option value="2">Semester 2 (Group B)</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5" selected>Semester 5</option>
+            <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
+          </select>
+        </div>
+
+        <!-- Target CGPA Dropdown Selection (6, 7, 8, 9 Options) -->
+        <div>
+          <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-1.5">Target CGPA</label>
+          <select id="goal-cgpa" class="ui-input font-medium w-full bg-zinc-950 border border-zinc-700 rounded-lg p-2.5 text-sm text-zinc-100">
+            <option value="6.0">6 CGPA (Good & Stable)</option>
+            <option value="7.0">7 CGPA (Above Average)</option>
+            <option value="8.0" selected>8 CGPA (First Division / Honors)</option>
+            <option value="9.0">9 CGPA (Topper Target 🚀)</option>
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="w-full mt-2 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-sm transition shadow-md">
+          Save Goals & Continue to Study Hub 🚀
+        </button>
+
+      </form>
+    </div>
+
+  </main>
+
+  <script>
+    function saveGoals(event) {
+      event.preventDefault();
+      const branch = document.getElementById('goal-branch').value;
+      const sem = document.getElementById('goal-sem').value;
+      const cgpa = document.getElementById('goal-cgpa').value;
+
+      // Save user targets to localStorage
+      localStorage.setItem('akt_branch', branch);
+      localStorage.setItem('akt_sem', sem);
+      localStorage.setItem('akt_target_cgpa', cgpa);
+
+      alert("🎯 Goals Saved Successfully! Redirecting to Study Hub...");
+      window.location.href = "study.html";
+    }
+  </script>
+</body>
+</html>

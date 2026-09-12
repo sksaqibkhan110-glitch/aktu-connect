@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AKTU Connect - Log In</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="theme.js"></script>
+</head>
+<body class="flex flex-col min-h-screen bg-zinc-950 text-zinc-100">
+
+  <!-- Minimal Nav for Login -->
+  <nav class="max-w-6xl mx-auto w-full px-6 py-4 flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
+        AC
+      </div>
+      <span class="font-bold text-lg tracking-tight">AKTU Connect</span>
+    </div>
+    <button onclick="toggleGlobalTheme()" class="theme-toggle-btn ui-btn-secondary text-xs px-3 py-1.5 rounded-md">
+      🌙 Dark
+    </button>
+  </nav>
+
+  <!-- Main Login Box -->
+  <main class="flex-1 flex items-center justify-center p-6">
+    <div class="w-full max-w-md">
+      
+      <div class="ui-card p-8 border border-zinc-800 bg-zinc-900/80 rounded-2xl shadow-xl">
+        <div class="mb-6">
+          <h1 class="text-xl font-bold tracking-tight">Sign in to AKTU Connect</h1>
+          <p class="text-xs text-zinc-400 mt-1">Access your semester roadmaps, lectures, and target goals.</p>
+        </div>
+
+        <form onsubmit="handleLogin(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 mb-1.5">University Roll Number</label>
+            <input type="text" required placeholder="e.g. 22009701000..." class="ui-input w-full bg-zinc-950 border border-zinc-700 rounded-lg p-2.5 text-sm text-zinc-100 placeholder-zinc-600" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 mb-1.5">Password</label>
+            <input type="password" required placeholder="••••••••" class="ui-input w-full bg-zinc-950 border border-zinc-700 rounded-lg p-2.5 text-sm text-zinc-100 placeholder-zinc-600" />
+          </div>
+
+          <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-sm transition shadow-md">
+            Continue to Goal Setup 🚀
+          </button>
+        </form>
+
+        <div class="mt-6 pt-5 border-t border-zinc-800 text-center">
+          <a href="study.html" class="text-xs font-semibold text-indigo-400 hover:underline">
+            Continue as Guest directly →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="py-4 text-center text-xs text-zinc-500 border-t border-zinc-800">
+    AKTU Connect • Fast, Clean Academic Portal
+  </footer>
+
+  <script>
+    function handleLogin(e) {
+      e.preventDefault();
+      // Redirect to goal setup on successful sign in
+      window.location.href = "goal-setup.html";
+    }
+  </script>
+</body>
+</html>

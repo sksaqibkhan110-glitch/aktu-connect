@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AKTU Connect - Student Profile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="theme.js"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-zinc-950 text-zinc-100">
+
+  <!-- Permanent Top Navigation Bar -->
+  <nav class="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center h-16">
+      <div class="flex items-center gap-6 sm:gap-8">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">AC</div>
+          <span class="font-bold text-lg tracking-tight hidden sm:inline">AKTU Connect</span>
+        </div>
+        <div class="flex items-center gap-1 sm:gap-2">
+          <a href="study.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📖 Study Hub</a>
+          <a href="pyq.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📄 PYQs</a>
+          <a href="quest.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🎯 Quests</a>
+          <a href="focus.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">⏳ Focus</a>
+          <a href="leaderboard.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🏆 Leaderboard</a>
+          <a href="chat.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🤖 AI Tutor</a>
+          <a href="profile.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/40">👤 Profile</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="toggleGlobalTheme()" class="theme-toggle-btn ui-btn-secondary text-xs px-3 py-1.5 rounded-md">🌙 Dark</button>
+        <a href="index.html" class="text-xs font-semibold text-rose-500 hover:underline">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Profile Container -->
+  <main class="max-w-4xl mx-auto px-4 flex-1 my-8 w-full">
+    
+    <!-- Page Header -->
+    <div class="mb-6">
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">Student Profile</h1>
+      <p class="text-sm text-zinc-400 mt-1">Manage your academic credentials, goals, and track your AKTU exam readiness.</p>
+    </div>
+
+    <!-- Student Identity Card -->
+    <div class="ui-card p-6 border border-zinc-800 bg-zinc-900/80 rounded-2xl mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <div class="w-16 h-16 rounded-2xl bg-indigo-600 flex items-center justify-center text-white font-bold text-2xl shadow-lg">
+          SK
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-zinc-100">Saqib Khan</h2>
+          <p class="text-xs sm:text-sm text-zinc-400 mt-0.5">B.Tech Computer Science (AI & ML) • <span id="user-display-sem">5th Semester</span></p>
+        </div>
+      </div>
+      <div class="text-left sm:text-right">
+        <div class="text-xs text-zinc-400 uppercase font-semibold">Institution</div>
+        <div class="text-sm font-bold text-zinc-200">GNIOT College</div>
+        <div class="text-xs text-indigo-400 mt-1 font-mono">Graduating 2028</div>
+      </div>
+    </div>
+
+    <!-- Academic Goal & Readiness Tracker Card -->
+    <div class="ui-card p-6 border border-zinc-800 bg-zinc-900/80 rounded-2xl mb-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+        <h3 class="text-lg font-bold text-zinc-100">🎯 AKTU Exam Readiness & Goal Tracker</h3>
+        <span id="target-cgpa-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-950/80 text-indigo-400 border border-indigo-800">Target: Loading...</span>
+      </div>
+      
+      <p class="text-sm text-zinc-400 mb-4">To achieve your target CGPA and prove your readiness, complete quest tests and focus arena sessions to reach your required XP milestone.</p>
+
+      <!-- Progress Bar -->
+      <div class="space-y-2">
+        <div class="flex justify-between text-xs font-semibold">
+          <span class="text-zinc-400">Readiness XP Progress</span>
+          <span id="xp-progress-text" class="text-indigo-400 font-mono">0 / 0 XP</span>
+        </div>
+        <div class="w-full bg-zinc-800 rounded-full h-3 overflow-hidden">
+          <div id="xp-progress-bar" class="bg-indigo-600 h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Status / Readiness Message -->
+      <div id="readiness-status" class="mt-4 p-3 rounded-lg bg-zinc-950 border border-zinc-800 text-xs text-zinc-300">
+        Loading readiness diagnostics...
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="flex justify-between items-center">
+      <a href="goal-setup.html" class="px-4 py-2.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 transition">
+        ⚙️ Update Academic Goals
+      </a>
+      <a href="study.html" class="px-6 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md transition">
+        Resume Studying →
+      </a>
+    </div>
+
+  </main>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      // Fetch saved targets from localStorage (default to 8 CGPA and semester 5 if not set)
+      const targetCgpa = parseFloat(localStorage.getItem('akt_target_cgpa')) || 8.0;
+      const currentSem = localStorage.getItem('akt_sem') || '5';
+      const currentXP = parseInt(localStorage.getItem('akt_xp')) || 620;
+
+      document.getElementById('user-display-sem').innerText = `${currentSem}th Semester`;
+
+      // Define required XP thresholds based on target CGPA
+      let requiredXP = 1000;
+      let cgpaLabel = `${targetCgpa} CGPA (Standard)`;
+
+      if (targetCgpa >= 9.0) {
+        requiredXP = 1500;
+        cgpaLabel = `9 CGPA (Topper Target 🚀)`;
+      } else if (targetCgpa >= 8.0) {
+        requiredXP = 1200;
+        cgpaLabel = `8 CGPA (Honors)`;
+      } else if (targetCgpa <= 7.0) {
+        requiredXP = 800;
+        cgpaLabel = `${targetCgpa} CGPA`;
+      }
+
+      document.getElementById('target-cgpa-badge').innerText = `Target: ${cgpaLabel}`;
+
+      const percentage = Math.min(Math.round((currentXP / requiredXP) * 100), 100);
+      document.getElementById('xp-progress-text').innerText = `${currentXP} / ${requiredXP} XP (${percentage}%)`;
+      document.getElementById('xp-progress-bar').style.width = `${percentage}%`;
+
+      const statusBox = document.getElementById('readiness-status');
+      if (percentage >= 100) {
+        statusBox.innerHTML = `🎉 <b>AKTU Exam Ready!</b> You have crushed your XP target for your goal. You are fully prepared to secure top marks in your semester!`;
+        statusBox.className = "mt-4 p-3 rounded-lg bg-emerald-950/40 border border-emerald-800 text-xs text-emerald-300";
+      } else {
+        let testsNeeded = Math.ceil((requiredXP - currentXP) / 50);
+        statusBox.innerHTML = `💡 <b>Readiness Insight:</b> You need approximately <b>${testsNeeded} more test vaults</b> or focus sessions to hit your elite readiness mark and master your subjects!`;
+      }
+    });
+  </script>
+</body>
+</html>

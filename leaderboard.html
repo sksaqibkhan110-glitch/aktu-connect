@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AKTU Connect - Leaderboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="theme.js"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-zinc-950 text-zinc-100">
+
+  <!-- Permanent Top Navigation Bar -->
+  <nav class="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center h-16">
+      <div class="flex items-center gap-6 sm:gap-8">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">AC</div>
+          <span class="font-bold text-lg tracking-tight hidden sm:inline">AKTU Connect</span>
+        </div>
+        <div class="flex items-center gap-1 sm:gap-2">
+          <a href="study.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📖 Study Hub</a>
+          <a href="pyq.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📄 PYQs</a>
+          <a href="quest.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🎯 Quests</a>
+          <a href="focus.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">⏳ Focus</a>
+          <a href="leaderboard.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/40">🏆 Leaderboard</a>
+          <a href="chat.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🤖 AI Tutor</a>
+          <a href="profile.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">👤 Profile</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="toggleGlobalTheme()" class="theme-toggle-btn ui-btn-secondary text-xs px-3 py-1.5 rounded-md">🌙 Dark</button>
+        <a href="index.html" class="text-xs font-semibold text-rose-500 hover:underline">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="max-w-4xl mx-auto px-4 flex-1 my-8 w-full">
+    
+    <!-- Page Header -->
+    <div class="mb-6 text-center">
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">Student Leaderboard</h1>
+      <p class="text-sm text-zinc-400 mt-1">Top performing AKTU scholars ranked by earned XP and focus consistency.</p>
+    </div>
+
+    <!-- Leaderboard Card List -->
+    <div class="ui-card border border-zinc-800 bg-zinc-900/60 rounded-xl overflow-hidden divide-y divide-zinc-800" id="leaderboard-list">
+      <!-- Dynamically populated via script -->
+    </div>
+
+  </main>
+
+  <script>
+    function renderLeaderboard() {
+      // Get user's actual live XP from localStorage
+      const userXP = parseInt(localStorage.getItem('akt_xp')) || 620;
+      const userLevel = Math.floor(userXP / 100);
+
+      // Mock other student entries combined with user's live data
+      const contenders = [
+        { name: "Aman Verma", branch: "CSE Core", xp: 850, level: 8 },
+        { name: "Saqib Khan (You)", branch: "CSE (AI & ML)", xp: userXP, level: userLevel, isUser: true },
+        { name: "Priya Sharma", branch: "IT", xp: 590, level: 5 },
+        { name: "Rahul Gupta", branch: "ECE", xp: 480, level: 4 },
+        { name: "Sneha Singh", branch: "CSE (AI & DS)", xp: 350, level: 3 }
+      ];
+
+      // Sort descending by XP
+      contenders.sort((a, b) => b.xp - a.xp);
+
+      const container = document.getElementById('leaderboard-list');
+      container.innerHTML = "";
+
+      contenders.forEach((item, index) => {
+        let rankBadge = `#${index + 1}`;
+        let bgStyle = index === 0 ? "bg-amber-500/10 border-l-4 border-amber-500" : (item.isUser ? "bg-indigo-950/40 border-l-4 border-indigo-500" : "");
+        
+        container.innerHTML += `
+          <div class="p-4 sm:p-5 flex items-center justify-between gap-4 ${bgStyle}">
+            <div class="flex items-center gap-4">
+              <span class="w-8 font-bold text-center text-sm ${index === 0 ? 'text-amber-400 text-lg' : 'text-zinc-400'}">${rankBadge}</span>
+              <div>
+                <h3 class="font-semibold text-sm sm:text-base text-zinc-100">${item.name} ${item.isUser ? '<span class="text-xs bg-indigo-600 text-white px-2 py-0.5 rounded ml-2">You</span>' : ''}</h3>
+                <p class="text-xs text-zinc-400">Branch: ${item.branch} • Level ${item.level}</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="font-mono font-bold text-indigo-400 text-sm sm:text-base">${item.xp} XP</div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", renderLeaderboard);
+  </script>
+</body>
+</html>

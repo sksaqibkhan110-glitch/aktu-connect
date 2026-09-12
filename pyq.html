@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AKTU Connect - PYQ Vault & Instant Analyser</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="theme.js"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-zinc-950 text-zinc-100">
+
+  <!-- Permanent Top Navigation Bar -->
+  <nav class="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center h-16">
+      <div class="flex items-center gap-6 sm:gap-8">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">AC</div>
+          <span class="font-bold text-lg tracking-tight hidden sm:inline">AKTU Connect</span>
+        </div>
+        <div class="flex items-center gap-1 sm:gap-2">
+          <a href="study.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📖 Study Hub</a>
+          <a href="pyq.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/40">📄 PYQs</a>
+          <a href="quest.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🎯 Quests</a>
+          <a href="focus.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">⏳ Focus</a>
+          <a href="leaderboard.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🏆 Leaderboard</a>
+          <a href="chat.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🤖 AI Tutor</a>
+          <a href="profile.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">👤 Profile</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="toggleGlobalTheme()" class="theme-toggle-btn ui-btn-secondary text-xs px-3 py-1.5 rounded-md">🌙 Dark</button>
+        <a href="index.html" class="text-xs font-semibold text-rose-500 hover:underline">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENT -->
+  <main class="max-w-6xl mx-auto px-4 flex-1 my-8 w-full">
+    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight mb-2">📊 AKTU PYQ Trend & Repetition Analyser</h1>
+    <p class="text-sm text-zinc-400 mb-6">Select Semester, Branch, and Subject to compare exam sessions and calculate question probabilities.</p>
+
+    <!-- CRITERIA -->
+    <div class="ui-card p-6 border border-zinc-800 bg-zinc-900/80 rounded-2xl mb-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        
+        <!-- SEMESTER -->
+        <div class="space-y-1.5">
+          <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider">SEMESTER</label>
+          <select id="sem-select" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg p-2.5 text-sm text-zinc-100 outline-none focus:border-indigo-500">
+            <option value="ALL" selected>🌟 All Semesters (Show All)</option>
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
+          </select>
+        </div>
+
+        <!-- BRANCH SELECT -->
+        <div class="space-y-1.5">
+          <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider">BRANCH</label>
+          <select id="branch-select" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg p-2.5 text-sm text-zinc-100 outline-none focus:border-indigo-500">
+            <option value="ALL" selected>All Branches / Any</option>
+            <option value="CSE">Computer Science (CSE / IT)</option>
+            <option value="AIML">B.Tech CSE (AI & ML)</option>
+            <option value="AIDS">B.Tech CSE (AI & Data Science)</option>
+            <option value="ECE">Electronics (ECE)</option>
+            <option value="EE">Electrical (EE / EN)</option>
+            <option value="ME_CE">Mechanical / Civil</option>
+          </select>
+        </div>
+
+        <!-- SUBJECT SELECT WITH SEARCH -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between items-center">
+            <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider">SUBJECT</label>
+            <input type="text" id="subject-search" class="bg-zinc-950 border border-zinc-700 text-indigo-400 text-xs px-2 py-0.5 rounded outline-none placeholder-zinc-600 w-32" placeholder="🔍 Search...">
+          </div>
+          <select id="subject-select" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg p-2.5 text-sm text-zinc-100 outline-none focus:border-indigo-500">
+            <!-- Dynamically Loaded -->
+          </select>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center mb-3">
+        <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">SELECT EXAM PAPERS TO COMPARE</span>
+        <button id="select-all" class="text-xs text-indigo-400 hover:underline bg-transparent border-none cursor-pointer">Select All</button>
+      </div>
+
+      <div id="years-container" class="flex items-center gap-2 flex-wrap mb-6"></div>
+
+      <div class="text-right">
+        <button id="run-btn" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-sm transition shadow-md cursor-pointer" type="button">
+          ⚡ Run Repetition Analyser
+        </button>
+      </div>
+    </div>
+
+    <!-- CONTROLS STRIP -->
+    <div class="ui-card p-4 border border-zinc-800 bg-zinc-900/60 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 text-sm">
+      <div class="flex items-center gap-4 flex-wrap">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-semibold text-zinc-400">UNIT:</span>
+          <select id="unit-filter" class="bg-zinc-950 border border-zinc-700 rounded px-2 py-1 text-xs text-zinc-200 outline-none">
+            <option value="ALL">All Units (1 to 5)</option>
+            <option value="1">Unit 1</option>
+            <option value="2">Unit 2</option>
+            <option value="3">Unit 3</option>
+            <option value="4">Unit 4</option>
+            <option value="5">Unit 5</option>
+          </select>
+        </div>
+
+        <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-300">
+          <input type="checkbox" id="filter-rep" checked class="accent-indigo-600">
+          <span>Show Repeated Questions Only (Min 2 Years)</span>
+        </label>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-semibold text-zinc-400">MARKS:</span>
+        <div class="flex gap-1">
+          <button class="mark-btn active px-3 py-1 rounded bg-indigo-600 text-white text-xs font-medium cursor-pointer" data-marks="ALL" type="button">All</button>
+          <button class="mark-btn px-3 py-1 rounded bg-zinc-800 text-zinc-400 text-xs font-medium cursor-pointer hover:bg-zinc-700" data-marks="2" type="button">2 Marks</button>
+          <button class="mark-btn px-3 py-1 rounded bg-zinc-800 text-zinc-400 text-xs font-medium cursor-pointer hover:bg-zinc-700" data-marks="7" type="button">7/10 Marks</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS RESULTS -->
+    <div class="flex justify-between items-center text-xs font-bold text-zinc-400 mb-4 uppercase tracking-wider">
+      <span>🔥 Analyzed Questions Ranked by Frequency</span>
+      <span id="results-count" class="bg-zinc-900 border border-zinc-800 px-3 py-1 rounded-full text-zinc-300">0 Questions</span>
+    </div>
+
+    <div id="questions-list" class="space-y-4"></div>
+  </main>
+
+  <script src="pyq-bank.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const semSelect = document.getElementById("sem-select");
+      const branchSelect = document.getElementById("branch-select");
+      const subjectSelect = document.getElementById("subject-select");
+      const subjectSearch = document.getElementById("subject-search");
+      const yearsContainer = document.getElementById("years-container");
+      const selectAllBtn = document.getElementById("select-all");
+      const runBtn = document.getElementById("run-btn");
+      const questionsList = document.getElementById("questions-list");
+      const resultsCount = document.getElementById("results-count");
+      const unitFilter = document.getElementById("unit-filter");
+      const filterRepeated = document.getElementById("filter-rep");
+
+      let currentMarks = "ALL";
+
+      function getDatabase() {
+        return window.PYQ_DATABASE || {};
+      }
+
+      function populateSubjects() {
+        const sem = semSelect.value;
+        const query = (subjectSearch.value || "").toLowerCase().trim();
+        subjectSelect.innerHTML = "";
+
+        const db = getDatabase();
+        const allSubjects = Object.values(db);
+
+        const filtered = allSubjects.filter(sub => {
+          if (sem !== "ALL" && String(sub.sem) !== String(sem)) return false;
+
+          if (query) {
+            const matchesCode = sub.code.toLowerCase().includes(query);
+            const matchesName = (sub.name || "").toLowerCase().includes(query);
+            return matchesCode || matchesName;
+          }
+          return true;
+        });
+
+        if (filtered.length === 0) {
+          subjectSelect.innerHTML = `<option value="">No subjects found</option>`;
+          yearsContainer.innerHTML = `<span class="text-zinc-500 text-xs">No exam sessions</span>`;
+          questionsList.innerHTML = `<div class="text-center py-10 text-zinc-500">No question papers found.</div>`;
+          resultsCount.textContent = "0 Questions";
+          return;
+        }
+
+        filtered.forEach((sub, idx) => {
+          const opt = document.createElement("option");
+          opt.value = sub.code;
+          opt.textContent = `${sub.code} - ${sub.name}`;
+          if (idx === 0) opt.selected = true;
+          subjectSelect.appendChild(opt);
+        });
+
+        renderYears();
+        analyzeQuestions();
+      }
+
+      function renderYears() {
+        yearsContainer.innerHTML = "";
+        const code = subjectSelect.value;
+        const db = getDatabase();
+        const sub = db[code];
+
+        if (!sub || !sub.years || sub.years.length === 0) {
+          yearsContainer.innerHTML = `<span class="text-zinc-500 text-xs">No exam years found.</span>`;
+          return;
+        }
+
+        sub.years.forEach(yr => {
+          const lbl = document.createElement("label");
+          lbl.className = "bg-zinc-950 border border-zinc-800 px-3 py-1.5 rounded-md flex items-center gap-2 text-xs cursor-pointer text-zinc-300";
+          lbl.innerHTML = `<input type="checkbox" value="${yr}" checked class="accent-indigo-600"> <span>${yr}</span>`;
+          yearsContainer.appendChild(lbl);
+        });
+      }
+
+      function getSimilarity(s1, s2) {
+        const w1 = new Set(s1.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(' ').filter(w => w.length > 3));
+        const w2 = new Set(s2.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(' ').filter(w => w.length > 3));
+        if (w1.size === 0 || w2.size === 0) return 0;
+        const intersection = new Set([...w1].filter(x => w2.has(x)));
+        return (intersection.size / Math.min(w1.size, w2.size));
+      }
+
+      function analyzeQuestions() {
+        const code = subjectSelect.value;
+        const db = getDatabase();
+        const sub = db[code];
+
+        if (!sub || !sub.questions || sub.questions.length === 0) {
+          questionsList.innerHTML = `<div class="text-center py-10 text-zinc-500">No questions available for this subject.</div>`;
+          resultsCount.textContent = "0 Questions";
+          return;
+        }
+
+        const checkedYears = Array.from(yearsContainer.querySelectorAll("input:checked")).map(cb => cb.value);
+        const totalChecked = checkedYears.length || 1;
+        const selectedUnit = unitFilter.value;
+
+        const valid = sub.questions.filter(q => {
+          const yMatch = checkedYears.length === 0 || checkedYears.includes(q.year);
+          const uMatch = (selectedUnit === "ALL") || (String(q.unit) === selectedUnit);
+          const mMatch = (currentMarks === "ALL") || (String(q.marks) === currentMarks);
+          return yMatch && uMatch && mMatch;
+        });
+
+        const clusters = [];
+        valid.forEach(q => {
+          let matchedCluster = null;
+          for (const c of clusters) {
+            if (getSimilarity(c.canonical.text, q.text) > 0.35 && c.canonical.marks === q.marks) {
+              matchedCluster = c;
+              break;
+            }
+          }
+          if (matchedCluster) {
+            matchedCluster.years.add(q.year);
+            matchedCluster.count += 1;
+          } else {
+            clusters.push({
+              canonical: q,
+              years: new Set([q.year]),
+              count: 1
+            });
+          }
+        });
+
+        let results = clusters.map(item => {
+          const repCount = item.years.size;
+          const repChance = Math.min(Math.round((repCount / totalChecked) * 100), 100);
+          return { ...item, repCount, repChance };
+        });
+
+        const hasMultiRepeats = results.some(item => item.repCount >= 2);
+        if (filterRepeated.checked && totalChecked > 1 && hasMultiRepeats) {
+          results = results.filter(item => item.repCount >= 2);
+        }
+
+        results.sort((a, b) => {
+          if (b.repChance !== a.repChance) return b.repChance - a.repChance;
+          return b.repCount - a.repCount;
+        });
+
+        resultsCount.textContent = `${results.length} Questions (${totalChecked} Exam Years Compared)`;
+
+        if (results.length === 0) {
+          questionsList.innerHTML = `<div class="text-center py-10 text-zinc-500">No questions found matching criteria. Try disabling "Show Repeated Only".</div>`;
+          return;
+        }
+
+        questionsList.innerHTML = results.map(item => {
+          const q = item.canonical;
+          const repCount = item.repCount;
+          const repChance = item.repChance;
+          const yrArray = Array.from(item.years);
+          const isHighYield = repChance >= 40;
+
+          return `
+            <div class="ui-card p-5 border border-zinc-800 bg-zinc-900/60 rounded-xl flex justify-between items-center gap-4" style="border-left: 3px solid ${isHighYield ? '#818cf8' : '#374151'};">
+              <div class="flex-1">
+                <div class="flex items-center gap-2 flex-wrap mb-2 text-xs">
+                  <span class="bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded font-bold border border-indigo-800/40">${q.marks} Marks</span>
+                  <span class="bg-zinc-800 text-zinc-300 px-2 py-0.5 rounded font-semibold">Unit ${q.unit}</span>
+                  <span class="bg-zinc-950 text-zinc-400 px-2 py-0.5 rounded border border-zinc-800">Found in ${repCount} / ${totalChecked} Years (${yrArray.join(", ")})</span>
+                  <span class="px-2.5 py-0.5 rounded font-semibold ${isHighYield ? 'bg-purple-950/60 text-purple-300 border border-purple-800/40' : 'bg-zinc-800 text-zinc-400'}">
+                    ${isHighYield ? '🔥' : '📄'} ${repCount >= 2 ? `Repeated ${repCount} Times` : 'Single Session'}
+                  </span>
+                </div>
+                <p class="text-sm sm:text-base text-zinc-200 leading-relaxed">${q.text}</p>
+              </div>
+              <div class="text-center min-w-[90px]">
+                <div class="text-2xl font-extrabold font-mono ${isHighYield ? 'text-indigo-400' : 'text-zinc-400'}">${repChance}%</div>
+                <div class="text-[10px] font-bold tracking-wider text-zinc-500">${isHighYield ? 'HIGH PROBABILITY' : 'REPEAT CHANCE'}</div>
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      semSelect.addEventListener("change", populateSubjects);
+      subjectSelect.addEventListener("change", () => {
+        renderYears();
+        analyzeQuestions();
+      });
+      subjectSearch.addEventListener("input", populateSubjects);
+      runBtn.addEventListener("click", analyzeQuestions);
+      unitFilter.addEventListener("change", analyzeQuestions);
+      filterRepeated.addEventListener("change", analyzeQuestions);
+
+      yearsContainer.addEventListener("change", () => {
+        analyzeQuestions();
+      });
+
+      selectAllBtn.addEventListener("click", () => {
+        const boxes = yearsContainer.querySelectorAll("input[type='checkbox']");
+        const all = Array.from(boxes).every(b => b.checked);
+        boxes.forEach(b => b.checked = !all);
+        analyzeQuestions();
+      });
+
+      document.querySelectorAll(".mark-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          document.querySelectorAll(".mark-btn").forEach(b => {
+            b.classList.remove("active", "bg-indigo-600", "text-white");
+            b.classList.add("bg-zinc-800", "text-zinc-400");
+          });
+          e.target.classList.add("active", "bg-indigo-600", "text-white");
+          e.target.classList.remove("bg-zinc-800", "text-zinc-400");
+          currentMarks = e.target.getAttribute("data-marks");
+          analyzeQuestions();
+        });
+      });
+
+      populateSubjects();
+    });
+  </script>
+</body>
+</html>
