@@ -1,24 +1,41 @@
-(function () {
+// Universal Theme Toggle Handler
+function toggleGlobalTheme() {
+  const htmlEl = document.documentElement;
+  htmlEl.classList.toggle('dark');
+  
+  const isDark = htmlEl.classList.contains('dark');
+  localStorage.setItem('aktu_theme', isDark ? 'dark' : 'light');
+  
+  updateThemeButtonText(isDark);
+}
+
+function updateThemeButtonText(isDark) {
+  const btn = document.querySelector('.theme-toggle-btn');
+  if (btn) {
+    btn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+  }
+}
+
+// Initialize theme immediately on script load & DOM content loaded
+(function() {
   const savedTheme = localStorage.getItem('aktu_theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-    document.documentElement.classList.add('dark');
+  const htmlEl = document.documentElement;
+  
+  if (savedTheme === 'light') {
+    htmlEl.classList.remove('dark');
   } else {
-    document.documentElement.classList.remove('dark');
+    htmlEl.classList.add('dark');
   }
 })();
 
-function toggleGlobalTheme() {
-  const isDark = document.documentElement.classList.toggle('dark');
-  localStorage.setItem('aktu_theme', isDark ? 'dark' : 'light');
-  updateThemeIcons();
-}
-
-function updateThemeIcons() {
+document.addEventListener('DOMContentLoaded', () => {
   const isDark = document.documentElement.classList.contains('dark');
-  document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
-    btn.innerHTML = isDark ? '☀️ Light' : '🌙 Dark';
-  });
-}
+  updateThemeButtonTestByState(isDark);
+});
 
-window.addEventListener('DOMContentLoaded', updateThemeIcons);
+function updateThemeButtonTestByState(isDark) {
+  const btn = document.querySelector('.theme-toggle-btn');
+  if (btn) {
+    btn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+  }
+}
