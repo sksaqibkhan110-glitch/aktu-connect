@@ -23,7 +23,6 @@
           <a href="study.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📖 Study Hub</a>
           <a href="pyq.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📄 PYQs</a>
           <a href="quest.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🎯 Quests</a>
-          <a href="focus.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">⏳ Focus</a>
           <a href="leaderboard.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🏆 Leaderboard</a>
           <a href="chat.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🤖 AI Tutor</a>
           <a href="profile.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/40">👤 Profile</a>
@@ -70,7 +69,7 @@
         <span id="target-cgpa-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-950/80 text-indigo-400 border border-indigo-800">Target: Loading...</span>
       </div>
       
-      <p class="text-sm text-zinc-400 mb-4">To achieve your target CGPA and prove your readiness, complete quest tests and focus arena sessions to reach your required XP milestone.</p>
+      <p class="text-sm text-zinc-400 mb-4">To achieve your target CGPA and prove your readiness, complete quest tests and focus sessions to reach your required XP milestone.</p>
 
       <!-- Progress Bar -->
       <div class="space-y-2">
@@ -103,16 +102,14 @@
 
   <script>
     window.addEventListener("DOMContentLoaded", () => {
-      // Fetch saved targets from localStorage (default to 8 CGPA and semester 5 if not set)
       const targetCgpa = parseFloat(localStorage.getItem('akt_target_cgpa')) || 8.0;
       const currentSem = localStorage.getItem('akt_sem') || '5';
       const currentXP = parseInt(localStorage.getItem('akt_xp')) || 620;
 
       document.getElementById('user-display-sem').innerText = `${currentSem}th Semester`;
 
-      // Define required XP thresholds based on target CGPA
-      let requiredXP = 1000;
-      let cgpaLabel = `${targetCgpa} CGPA (Standard)`;
+      let requiredXP = 1200;
+      let cgpaLabel = `8 CGPA (Honors)`;
 
       if (targetCgpa >= 9.0) {
         requiredXP = 1500;
@@ -120,7 +117,7 @@
       } else if (targetCgpa >= 8.0) {
         requiredXP = 1200;
         cgpaLabel = `8 CGPA (Honors)`;
-      } else if (targetCgpa <= 7.0) {
+      } else if (targetCgpa <= 7.5) {
         requiredXP = 800;
         cgpaLabel = `${targetCgpa} CGPA`;
       }
@@ -137,7 +134,7 @@
         statusBox.className = "mt-4 p-3 rounded-lg bg-emerald-950/40 border border-emerald-800 text-xs text-emerald-300";
       } else {
         let testsNeeded = Math.ceil((requiredXP - currentXP) / 50);
-        statusBox.innerHTML = `💡 <b>Readiness Insight:</b> You need approximately <b>${testsNeeded} more test vaults</b> or focus sessions to hit your elite readiness mark and master your subjects!`;
+        statusBox.innerHTML = `💡 <b>Readiness Insight:</b> You need approximately <b>${testsNeeded} more test vaults</b> or study sessions to hit your elite readiness mark and master your subjects!`;
       }
     });
   </script>
