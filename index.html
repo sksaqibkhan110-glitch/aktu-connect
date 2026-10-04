@@ -159,8 +159,7 @@
       font-weight: 800;
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
-
-    /* PHONE VIEW ONLY (<640px) - Perfectly Centered in Board Screen */
+/* PHONE VIEW ONLY (<640px) - Seamless Board Fit */
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 360px;
@@ -182,38 +181,40 @@
         z-index: 1;
       }
 
-      /* Exact Fit: Locked inside device screen frame */
+      /* Whiteboard ke exact boundary pe stretch aur seamless background */
       .whiteboard-active-area {
-        top: 53.6% !important;
+        top: 59% !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         width: 53.5% !important;
         height: 25.5% !important;
-        min-height: 142px !important;
-        max-height: 155px !important;
-        padding: 5px 7px 4px !important;
-        border-radius: 0.65rem !important;
+        min-height: unset !important;
+        max-height: unset !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 4px 6px !important;
+        justify-content: space-evenly !important;
       }
 
       .board-input {
-        font-size: 0.60rem;
-        padding: 0.18rem 0.35rem;
-        border-radius: 0.4rem;
+        background: #ffffff !important;
+        border: 1.5px solid #d2e3d8 !important;
+        font-size: 0.65rem !important;
+        padding: 0.28rem 0.45rem !important;
+        border-radius: 0.45rem !important;
       }
+      
       .board-btn-primary {
-        font-size: 0.64rem;
-        padding: 0.22rem 0.35rem;
-        border-radius: 0.4rem;
+        font-size: 0.70rem !important;
+        padding: 0.32rem 0.45rem !important;
+        border-radius: 0.45rem !important;
       }
+
       .board-tab {
-        font-size: 0.60rem;
-        padding: 0.12rem 0;
+        font-size: 0.65rem !important;
+        padding: 0.18rem 0 !important;
       }
     }
-  </style>
-</head>
-<body>
-
   <!-- MODALS -->
   <div id="google-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100">
