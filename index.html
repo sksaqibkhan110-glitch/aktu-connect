@@ -16,13 +16,7 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
     body {
       background: radial-gradient(circle at 50% 30%, #1e4535 0%, #133024 60%, #0a1c14 100%) !important;
       min-height: 100vh;
@@ -75,7 +69,6 @@
       line-height: normal;
     }
 
-    /* Laptop Whiteboard */
     .whiteboard-active-area {
       position: absolute;
       top: 50%;
@@ -123,9 +116,6 @@
       box-shadow: 0 3px 8px rgba(27, 67, 50, 0.3);
       transition: all 0.15s ease;
     }
-    .board-btn-primary:hover {
-      transform: translateY(-1px);
-    }
 
     .board-tab {
       flex: 1;
@@ -147,146 +137,87 @@
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
 
-    /* PHONE ADJUSTMENT: EXACT CENTER ON MASCOT BOARD */
+    /* PHONE VIEW - EXACT CO-ORDINATES */
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 375px;
         border-radius: 2.25rem;
       }
-      .desktop-bg-img {
-        display: none !important;
-      }
-      .mobile-bg-img {
-        display: block !important;
-        width: 100%;
-        height: auto;
-        pointer-events: none;
-        user-select: none;
-      }
+      .desktop-bg-img { display: none !important; }
+      .mobile-bg-img { display: block !important; width: 100%; height: auto; }
       .whiteboard-active-area {
-        top: 47.8% !important;
-        left: 26% !important;
-        width: 48% !important;
-        height: 38% !important;
-        padding: 4px 6px 3px !important;
-        border-radius: 0.65rem !important;
+        top: 48.5% !important;
+        left: 24.5% !important;
+        width: 51% !important;
+        height: 39% !important;
+        padding: 5px 6px 3px !important;
+        border-radius: 0.75rem !important;
       }
-      .board-input {
-        font-size: 0.62rem;
-        padding: 0.2rem 0.4rem;
-      }
-      .board-btn-primary {
-        font-size: 0.68rem;
-        padding: 0.28rem 0.4rem;
-      }
-      .board-tab {
-        font-size: 0.62rem;
-        padding: 0.16rem 0;
-      }
+      .board-input { font-size: 0.62rem; padding: 0.22rem 0.4rem; }
+      .board-btn-primary { font-size: 0.68rem; padding: 0.28rem 0.4rem; }
+      .board-tab { font-size: 0.62rem; padding: 0.16rem 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- GOOGLE MODAL -->
+  <!-- MODALS (Google, Forgot, OTP, Set Password) -->
   <div id="google-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-        <div class="flex items-center gap-2">
-          <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-          <span class="text-xs font-bold text-slate-800">Sign in with Google</span>
-        </div>
-        <button onclick="closeGoogleModal()" class="text-slate-400 hover:text-slate-800 text-sm font-bold cursor-pointer">✕</button>
+        <span class="text-xs font-bold text-slate-800">Sign in with Google</span>
+        <button onclick="closeGoogleModal()" class="text-slate-400 text-sm font-bold">✕</button>
       </div>
-      <p class="text-xs text-slate-500 mb-3">Enter your Gmail address to continue:</p>
       <input type="email" id="custom-google-email" placeholder="student@gmail.com" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl mb-3 outline-none" />
-      <button onclick="handleGoogleInputSubmit()" class="w-full py-2.5 board-btn-primary text-xs">
-        Continue with Gmail
-      </button>
+      <button onclick="handleGoogleInputSubmit()" class="w-full py-2.5 board-btn-primary text-xs">Continue with Gmail</button>
     </div>
   </div>
 
-  <!-- FORGOT PASSWORD MODAL -->
   <div id="forgot-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100 text-left">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100 mb-3">
-        <h3 class="text-sm font-extrabold text-slate-900 flex items-center gap-1.5"><span>🔐</span> Reset Password</h3>
-        <button onclick="closeForgotModal()" class="text-slate-400 hover:text-slate-800 text-sm font-bold cursor-pointer">✕</button>
+        <h3 class="text-sm font-extrabold text-slate-900">Reset Password</h3>
+        <button onclick="closeForgotModal()" class="text-slate-400 text-sm font-bold">✕</button>
       </div>
       <form onsubmit="handleForgotPasswordRequest(event)" class="space-y-3">
-        <div>
-          <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Registered Email</label>
-          <input type="email" id="forgot-email" required placeholder="student@aktu.ac.in" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none" />
-        </div>
+        <input type="email" id="forgot-email" required placeholder="student@aktu.ac.in" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none" />
         <p id="forgot-error" class="text-[11px] text-rose-600 font-bold hidden"></p>
-        <button type="submit" class="w-full py-2.5 board-btn-primary text-xs">
-          Send Reset OTP ✉️
-        </button>
+        <button type="submit" class="w-full py-2.5 board-btn-primary text-xs">Send Reset OTP ✉️</button>
       </form>
     </div>
   </div>
 
-  <!-- OTP MODAL -->
   <div id="otp-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100 text-center">
-      <div class="w-12 h-12 bg-emerald-50 text-emerald-700 rounded-2xl flex items-center justify-center text-xl mx-auto mb-2.5">✉</div>
       <h3 class="text-base font-extrabold text-slate-900 mb-0.5">Verify Identity</h3>
       <p class="text-xs text-slate-500 mb-3" id="otp-subtext">Check your email for 6-digit verification code.</p>
-
-      <div id="otp-status" class="mb-3 text-xs font-bold text-emerald-700 flex items-center justify-center gap-1.5">
-        <div class="w-3.5 h-3.5 border-2 border-emerald-700 border-t-transparent rounded-full animate-spin"></div>
-        <span>Sending OTP...</span>
-      </div>
-
-      <input type="text" id="otp-input" maxlength="6" placeholder="• • • • • •" class="w-full text-center tracking-[0.4em] text-lg font-mono font-bold py-2 border-2 border-emerald-200 rounded-2xl focus:border-emerald-600 outline-none mb-2 bg-emerald-50/40" />
+      <input type="text" id="otp-input" maxlength="6" placeholder="• • • • • •" class="w-full text-center tracking-[0.4em] text-lg font-mono font-bold py-2 border-2 border-emerald-200 rounded-2xl outline-none mb-2 bg-emerald-50/40" />
       <p id="otp-error" class="text-[11px] text-rose-600 font-bold mb-2 hidden"></p>
-
       <div class="flex gap-2">
-        <button type="button" onclick="closeOtpModal()" class="flex-1 py-2 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold cursor-pointer">Cancel</button>
+        <button type="button" onclick="closeOtpModal()" class="flex-1 py-2 rounded-xl border border-slate-200 text-xs font-bold">Cancel</button>
         <button type="button" onclick="verifyOtpStep()" class="flex-1 py-2 board-btn-primary text-xs">Verify OTP ✓</button>
       </div>
-
-      <button type="button" onclick="resendOtp()" class="mt-3 text-[11px] font-bold text-slate-400 hover:text-emerald-700 cursor-pointer">Resend OTP</button>
     </div>
   </div>
 
-  <!-- SET PASSWORD MODAL -->
   <div id="set-pwd-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100 text-left">
-      <h3 class="text-base font-extrabold text-slate-900 mb-1" id="pwd-modal-title">Create Password</h3>
-      <p class="text-[11px] text-slate-500 mb-3" id="pwd-modal-subtext">Email verified! Create password to enter portal.</p>
-
+      <h3 class="text-base font-extrabold text-slate-900 mb-1">Set Account Password</h3>
       <form onsubmit="finalizePasswordAndRegister(event)" class="space-y-3">
-        <div>
-          <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">New Password</label>
-          <input type="password" id="new-reg-pwd" required minlength="4" placeholder="Enter password" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none" />
-        </div>
-        <div>
-          <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Confirm Password</label>
-          <input type="password" id="new-reg-pwd-confirm" required minlength="4" placeholder="Re-enter password" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none" />
-        </div>
+        <input type="password" id="new-reg-pwd" required minlength="4" placeholder="Enter password" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none" />
+        <input type="password" id="new-reg-pwd-confirm" required minlength="4" placeholder="Confirm password" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none" />
         <p id="pwd-match-error" class="text-[11px] text-rose-600 font-bold hidden"></p>
-        <button type="submit" id="pwd-modal-btn" class="w-full py-2.5 board-btn-primary text-xs">
-          Complete & Launch Portal 🚀
-        </button>
+        <button type="submit" class="w-full py-2.5 board-btn-primary text-xs">Complete Setup 🚀</button>
       </form>
     </div>
   </div>
 
-  <!-- MASTER MOCKUP FRAME -->
+  <!-- MAIN FRAME -->
   <div class="master-mockup-frame">
-    <div class="top-floating-badge">
-      <span>🎓</span>
-      <span>AKTU Connect</span>
-    </div>
+    <div class="top-floating-badge">🎓 AKTU Connect</div>
+    <img src="boy-board - Copy.png" onerror="this.src='boy-board.png'" alt="Mascot Desktop" class="desktop-bg-img" />
+    <img src="phoneboy.png" onerror="this.src='boy-board - Copy.png'" alt="Mascot Mobile" class="mobile-bg-img" />
 
-    <!-- Desktop Image -->
-    <img src="boy-board - Copy.png" onerror="this.src='boy-board.png'; this.onerror=function(){this.src='boy-board.jpg';}" alt="AKTU Mascot Desktop" class="desktop-bg-img" />
-
-    <!-- Mobile Image -->
-    <img src="phoneboy.png" onerror="this.src='boy-board - Copy.png'" alt="AKTU Mascot Mobile" class="mobile-bg-img" />
-
-    <!-- WHITEBOARD FORM OVERLAY -->
     <div class="whiteboard-active-area">
       <div class="flex bg-[#e8f3ec] p-0.5 rounded-lg border border-[#c8e2d2]">
         <button id="tab-signin-btn" onclick="switchAuthTab('signin')" class="board-tab active">Sign In</button>
@@ -295,46 +226,26 @@
 
       <div id="auth-error-banner" class="hidden p-0.5 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center"></div>
 
-      <!-- SIGN IN FORM -->
       <form id="signin-form" onsubmit="handleSignIn(event)" class="space-y-1">
-        <div>
-          <input type="email" id="signin-id" required placeholder="Email Address" class="board-input" />
-        </div>
-
+        <input type="email" id="signin-id" required placeholder="Email Address" class="board-input" />
         <div>
           <div class="flex justify-between items-center px-0.5 mb-0.5">
             <span class="text-[7.5px] text-slate-400 font-bold uppercase">Password</span>
-            <button type="button" onclick="openForgotModal()" class="text-[8px] font-extrabold text-[#2d6a4f] hover:underline cursor-pointer">
-              Forgot?
-            </button>
+            <button type="button" onclick="openForgotModal()" class="text-[8px] font-extrabold text-[#2d6a4f] cursor-pointer">Forgot?</button>
           </div>
           <input type="password" id="signin-pwd" required placeholder="••••••••" class="board-input" />
         </div>
-
-        <button type="submit" class="board-btn-primary">
-          Login 🚀
-        </button>
+        <button type="submit" class="board-btn-primary">Login 🚀</button>
       </form>
 
-      <!-- SIGN UP FORM -->
       <form id="signup-form" onsubmit="initiateStandardSignUp(event)" class="space-y-1 hidden">
-        <div>
-          <input type="text" id="signup-name" required placeholder="Full Name" class="board-input" />
-        </div>
-
-        <div>
-          <input type="email" id="signup-id" required placeholder="Email Address" class="board-input" />
-        </div>
-
-        <button type="submit" class="board-btn-primary">
-          Send OTP 🔒
-        </button>
+        <input type="text" id="signup-name" required placeholder="Full Name" class="board-input" />
+        <input type="email" id="signup-id" required placeholder="Email Address" class="board-input" />
+        <button type="submit" class="board-btn-primary">Send OTP 🔒</button>
       </form>
 
-      <!-- BOTTOM GOOGLE & FOOTER -->
       <div class="pt-0.5 border-t border-slate-200 flex items-center justify-between">
-        <button type="button" onclick="openGoogleModal()" class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white hover:bg-slate-50 border border-slate-200 text-[8px] font-bold text-slate-700 cursor-pointer shadow-2xs">
-          <svg class="w-2.5 h-2.5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        <button type="button" onclick="openGoogleModal()" class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white border border-slate-200 text-[8px] font-bold text-slate-700 cursor-pointer">
           <span>Google</span>
         </button>
         <span class="text-[7.5px] text-slate-400 font-bold">AKTU 2026</span>
@@ -347,256 +258,54 @@
     const TEMPLATE_ID = "template_qqfc7jp";
     const PUBLIC_KEY = "CRIh5ljNqNGVV8GC7";
 
-    let currentAuthTab = 'signin';
     let pendingAccountData = null;
     let expectedOtp = "";
-    let authMode = "register";
 
     function switchAuthTab(tab) {
-      currentAuthTab = tab;
-      const signinForm = document.getElementById('signin-form');
-      const signupForm = document.getElementById('signup-form');
-      const tabSigninBtn = document.getElementById('tab-signin-btn');
-      const tabSignupBtn = document.getElementById('tab-signup-btn');
-      const errBanner = document.getElementById('auth-error-banner');
-      errBanner.classList.add('hidden');
-
-      if (tab === 'signin') {
-        signinForm.classList.remove('hidden');
-        signupForm.classList.add('hidden');
-        tabSigninBtn.className = "board-tab active";
-        tabSignupBtn.className = "board-tab";
-      } else {
-        signinForm.classList.add('hidden');
-        signupForm.classList.remove('hidden');
-        tabSignupBtn.className = "board-tab active";
-        tabSigninBtn.className = "board-tab";
-      }
+      document.getElementById('signin-form').classList.toggle('hidden', tab !== 'signin');
+      document.getElementById('signup-form').classList.toggle('hidden', tab === 'signin');
+      document.getElementById('tab-signin-btn').className = tab === 'signin' ? "board-tab active" : "board-tab";
+      document.getElementById('tab-signup-btn').className = tab === 'signup' ? "board-tab active" : "board-tab";
+      document.getElementById('auth-error-banner').classList.add('hidden');
     }
 
     function openGoogleModal() { document.getElementById('google-modal').classList.remove('hidden'); }
     function closeGoogleModal() { document.getElementById('google-modal').classList.add('hidden'); }
-
     function openForgotModal() {
       document.getElementById('forgot-email').value = document.getElementById('signin-id').value.trim();
-      document.getElementById('forgot-error').classList.add('hidden');
       document.getElementById('forgot-modal').classList.remove('hidden');
     }
     function closeForgotModal() { document.getElementById('forgot-modal').classList.add('hidden'); }
 
+    // UNIVERSAL USER REGISTRY ENGINE (Zero false negatives)
     function findSavedUser(email) {
       const cleanEmail = (email || '').toLowerCase().trim();
       if (!cleanEmail) return null;
 
+      // 1. Array
       const accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
-      let user = accounts.find(acc => {
-        const accId = (acc.id || acc.email || '').toLowerCase().trim();
-        return accId === cleanEmail;
-      });
+      let user = accounts.find(a => (a.id && a.id.toLowerCase().trim() === cleanEmail) || (a.email && a.email.toLowerCase().trim() === cleanEmail));
       if (user && (user.pwd || user.password)) {
-        return {
-          id: cleanEmail,
-          name: user.name || cleanEmail.split('@')[0],
-          pwd: String(user.pwd || user.password).trim()
-        };
+        return { id: cleanEmail, name: user.name || cleanEmail.split('@')[0], pwd: String(user.pwd || user.password).trim() };
       }
 
+      // 2. Direct JSON key
       const direct = localStorage.getItem(`user_${cleanEmail}`);
       if (direct) {
         try {
-          const parsed = JSON.parse(direct);
-          const p = parsed.pwd || parsed.pass || parsed.password;
-          if (p) {
-            return {
-              id: cleanEmail,
-              name: parsed.name || cleanEmail.split('@')[0],
-              pwd: String(p).trim()
-            };
-          }
+          const p = JSON.parse(direct);
+          const pass = p.pwd || p.pass || p.password;
+          if (pass) return { id: cleanEmail, name: p.name || cleanEmail.split('@')[0], pwd: String(pass).trim() };
         } catch(e) {}
       }
 
-      const simplePwd = localStorage.getItem(`pwd_${cleanEmail}`);
-      if (simplePwd) {
-        return {
-          id: cleanEmail,
-          name: localStorage.getItem(`user_name_${cleanEmail}`) || cleanEmail.split('@')[0],
-          pwd: String(simplePwd).trim()
-        };
+      // 3. String password
+      const simple = localStorage.getItem(`pwd_${cleanEmail}`);
+      if (simple) {
+        return { id: cleanEmail, name: localStorage.getItem(`user_name_${cleanEmail}`) || cleanEmail.split('@')[0], pwd: String(simple).trim() };
       }
 
       return null;
-    }
-
-    function handleForgotPasswordRequest(e) {
-      e.preventDefault();
-      const email = document.getElementById('forgot-email').value.trim().toLowerCase();
-      const errEl = document.getElementById('forgot-error');
-
-      if (!email || !email.includes('@')) {
-        errEl.innerText = "Please enter a valid email address!";
-        errEl.classList.remove('hidden');
-        return;
-      }
-
-      const user = findSavedUser(email);
-      if (!user) {
-        errEl.innerText = "❌ No account found with this email!";
-        errEl.classList.remove('hidden');
-        return;
-      }
-
-      authMode = "forgot_password";
-      pendingAccountData = { name: user.name || email.split('@')[0], id: email };
-      closeForgotModal();
-      sendRealEmailOtp(email, pendingAccountData.name);
-    }
-
-    function handleGoogleInputSubmit() {
-      const email = document.getElementById('custom-google-email').value.trim().toLowerCase();
-      if (!email || !email.includes('@')) {
-        alert("Please enter a valid email address!");
-        return;
-      }
-      closeGoogleModal();
-
-      const existing = findSavedUser(email);
-      if (existing && existing.pwd) {
-        switchAuthTab('signin');
-        document.getElementById('signin-id').value = email;
-        document.getElementById('signin-pwd').value = "";
-        document.getElementById('signin-pwd').focus();
-        return;
-      }
-
-      authMode = "register";
-      pendingAccountData = { name: email.split('@')[0], id: email };
-      sendRealEmailOtp(email, pendingAccountData.name);
-    }
-
-    function initiateStandardSignUp(e) {
-      e.preventDefault();
-      const name = document.getElementById('signup-name').value.trim();
-      const id = document.getElementById('signup-id').value.trim().toLowerCase();
-      const errBanner = document.getElementById('auth-error-banner');
-
-      if (!id.includes('@') || !id.includes('.')) {
-        errBanner.className = "p-0.5 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center block";
-        errBanner.innerText = "❌ Please enter a valid Email.";
-        return;
-      }
-
-      const existing = findSavedUser(id);
-      if (existing && existing.pwd) {
-        errBanner.className = "p-0.5 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center block";
-        errBanner.innerText = "❌ Account already exists. Please Sign In.";
-        return;
-      }
-
-      authMode = "register";
-      pendingAccountData = { name: name, id: id };
-      sendRealEmailOtp(id, name);
-    }
-
-    async function sendRealEmailOtp(targetEmail, userName) {
-      expectedOtp = Math.floor(100000 + Math.random() * 900000).toString();
-      document.getElementById('otp-subtext').innerText = `We have sent a 6-digit code to ${targetEmail}`;
-      document.getElementById('otp-input').value = "";
-      document.getElementById('otp-error').classList.add('hidden');
-      document.getElementById('otp-modal').classList.remove('hidden');
-
-      const statusEl = document.getElementById('otp-status');
-      statusEl.innerHTML = `<div class="w-3.5 h-3.5 border-2 border-emerald-700 border-t-transparent rounded-full animate-spin"></div><span>Sending real OTP...</span>`;
-
-      try {
-        await emailjs.send(
-          SERVICE_ID,
-          TEMPLATE_ID,
-          { to_email: targetEmail, email: targetEmail, otp: expectedOtp, passcode: expectedOtp, to_name: userName || "Student" },
-          PUBLIC_KEY
-        );
-        statusEl.innerHTML = `✓ Code sent! Check inbox.`;
-        statusEl.className = "mb-3 text-xs font-bold text-emerald-700 flex items-center justify-center gap-1.5";
-      } catch (err) {
-        statusEl.innerHTML = `⚠ Direct dispatch failed. Try again.`;
-        statusEl.className = "mb-3 text-xs font-bold text-rose-600";
-      }
-    }
-
-    function resendOtp() {
-      if (pendingAccountData && pendingAccountData.id) {
-        sendRealEmailOtp(pendingAccountData.id, pendingAccountData.name);
-      }
-    }
-
-    function closeOtpModal() {
-      document.getElementById('otp-modal').classList.add('hidden');
-    }
-
-    function verifyOtpStep() {
-      const enteredOtp = document.getElementById('otp-input').value.trim();
-      const errEl = document.getElementById('otp-error');
-
-      if (!enteredOtp || enteredOtp !== expectedOtp) {
-        errEl.innerText = "Invalid OTP code!";
-        errEl.classList.remove('hidden');
-        return;
-      }
-
-      closeOtpModal();
-      document.getElementById('set-pwd-modal').classList.remove('hidden');
-    }
-
-    function setAllAuthSessionKeys(email, name, pwd) {
-      const cleanEmail = email.toLowerCase().trim();
-      const cleanName = name || cleanEmail.split('@')[0];
-      const userObj = { email: cleanEmail, name: cleanName, pwd: pwd, xp: 180 };
-
-      localStorage.setItem('user_name', cleanName);
-      localStorage.setItem(`user_name_${cleanEmail}`, cleanName);
-      localStorage.setItem('user_email', cleanEmail);
-      localStorage.setItem('current_user_email', cleanEmail);
-      localStorage.setItem('currentUser', JSON.stringify(userObj));
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('aktu_user', cleanEmail);
-      sessionStorage.setItem('user_email', cleanEmail);
-      sessionStorage.setItem('current_user_email', cleanEmail);
-      sessionStorage.setItem('isLoggedIn', 'true');
-    }
-
-    function finalizePasswordAndRegister(e) {
-      e.preventDefault();
-      const p1 = String(document.getElementById('new-reg-pwd').value).trim();
-      const p2 = String(document.getElementById('new-reg-pwd-confirm').value).trim();
-      const errEl = document.getElementById('pwd-match-error');
-
-      if (p1 !== p2) {
-        errEl.innerText = "Passwords do not match!";
-        errEl.classList.remove('hidden');
-        return;
-      }
-
-      const email = pendingAccountData.id.trim().toLowerCase();
-      const name = pendingAccountData.name.trim();
-
-      let accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
-      accounts = accounts.filter(acc => {
-        const idCheck = (acc.id || acc.email || '').toLowerCase().trim();
-        return idCheck !== email;
-      });
-      accounts.push({ name: name, id: email, email: email, pwd: p1 });
-      localStorage.setItem('registered_students', JSON.stringify(accounts));
-
-      localStorage.setItem(`user_${email}`, JSON.stringify({ name: name, email: email, pwd: p1, pass: p1 }));
-      localStorage.setItem(`pwd_${email}`, p1);
-
-      if (!localStorage.getItem(`akt_xp_${email}`)) {
-        localStorage.setItem(`akt_xp_${email}`, "180");
-      }
-
-      setAllAuthSessionKeys(email, name, p1);
-      document.getElementById('set-pwd-modal').classList.add('hidden');
-      window.location.href = "study.html";
     }
 
     function handleSignIn(e) {
@@ -607,19 +316,108 @@
 
       const user = findSavedUser(id);
 
+      // Auto-register first-time admin if fresh browser
+      if (!user && id === 'sksaqibkhan110@gmail.com') {
+        const adminPass = enteredPwd;
+        localStorage.setItem(`pwd_${id}`, adminPass);
+        localStorage.setItem(`user_${id}`, JSON.stringify({ name: 'Saqib Khan', email: id, pwd: adminPass }));
+        let accs = JSON.parse(localStorage.getItem('registered_students') || '[]');
+        accs.push({ name: 'Saqib Khan', id: id, email: id, pwd: adminPass });
+        localStorage.setItem('registered_students', JSON.stringify(accs));
+        setSession(id, 'Saqib Khan', adminPass);
+        window.location.href = 'study.html';
+        return;
+      }
+
       if (!user) {
         errBanner.className = "p-1 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center block";
-        errBanner.innerText = "❌ No account found with this email. Please Sign Up!";
+        errBanner.innerText = "❌ No account found! Click Sign Up.";
         return;
       }
 
       if (user.pwd === enteredPwd) {
-        setAllAuthSessionKeys(id, user.name, enteredPwd);
-        window.location.href = "study.html";
+        setSession(id, user.name, enteredPwd);
+        window.location.href = 'study.html';
       } else {
         errBanner.className = "p-1 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center block";
-        errBanner.innerText = "❌ Incorrect Password! Try again or click Forgot?";
+        errBanner.innerText = "❌ Incorrect Password! Click Forgot?";
       }
+    }
+
+    function setSession(email, name, pwd) {
+      const cleanEmail = email.toLowerCase().trim();
+      const cleanName = name || cleanEmail.split('@')[0];
+      localStorage.setItem('user_name', cleanName);
+      localStorage.setItem('user_email', cleanEmail);
+      localStorage.setItem('current_user_email', cleanEmail);
+      localStorage.setItem('isLoggedIn', 'true');
+    }
+
+    function handleForgotPasswordRequest(e) {
+      e.preventDefault();
+      const email = document.getElementById('forgot-email').value.trim().toLowerCase();
+      closeForgotModal();
+      pendingAccountData = { name: email.split('@')[0], id: email };
+      sendOtp(email);
+    }
+
+    function initiateStandardSignUp(e) {
+      e.preventDefault();
+      const name = document.getElementById('signup-name').value.trim();
+      const email = document.getElementById('signup-id').value.trim().toLowerCase();
+      pendingAccountData = { name: name, id: email };
+      sendOtp(email);
+    }
+
+    function handleGoogleInputSubmit() {
+      const email = document.getElementById('custom-google-email').value.trim().toLowerCase();
+      closeGoogleModal();
+      pendingAccountData = { name: email.split('@')[0], id: email };
+      sendOtp(email);
+    }
+
+    async function sendOtp(email) {
+      expectedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+      document.getElementById('otp-subtext').innerText = `OTP sent to ${email}`;
+      document.getElementById('otp-modal').classList.remove('hidden');
+
+      try {
+        await emailjs.send(SERVICE_ID, TEMPLATE_ID, { to_email: email, email: email, otp: expectedOtp, passcode: expectedOtp }, PUBLIC_KEY);
+      } catch(e) {}
+    }
+
+    function closeOtpModal() { document.getElementById('otp-modal').classList.add('hidden'); }
+
+    function verifyOtpStep() {
+      const entered = document.getElementById('otp-input').value.trim();
+      if (entered === expectedOtp) {
+        closeOtpModal();
+        document.getElementById('set-pwd-modal').classList.remove('hidden');
+      } else {
+        document.getElementById('otp-error').innerText = "Invalid OTP!";
+        document.getElementById('otp-error').classList.remove('hidden');
+      }
+    }
+
+    function finalizePasswordAndRegister(e) {
+      e.preventDefault();
+      const p1 = String(document.getElementById('new-reg-pwd').value).trim();
+      const p2 = String(document.getElementById('new-reg-pwd-confirm').value).trim();
+      if (p1 !== p2) return;
+
+      const email = pendingAccountData.id;
+      const name = pendingAccountData.name;
+
+      let accs = JSON.parse(localStorage.getItem('registered_students') || '[]');
+      accs = accs.filter(a => (a.id || a.email || '').toLowerCase().trim() !== email);
+      accs.push({ name: name, id: email, email: email, pwd: p1 });
+      localStorage.setItem('registered_students', JSON.stringify(accs));
+      localStorage.setItem(`user_${email}`, JSON.stringify({ name: name, email: email, pwd: p1 }));
+      localStorage.setItem(`pwd_${email}`, p1);
+
+      setSession(email, name, p1);
+      document.getElementById('set-pwd-modal').classList.add('hidden');
+      window.location.href = 'study.html';
     }
   </script>
 </body>

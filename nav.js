@@ -1,88 +1,51 @@
 // ========================================================
-// AKTU Connect - Centralized Navigation & Global Avatar Engine
+// AKTU Connect - Master Navigation, Mobile Drawer & Global Sync
 // ========================================================
 
-function getSavedUserAvatar(email) {
-  const cleanEmail = (email || '').toLowerCase().trim();
-  const keys = [
-    `user_avatar_${cleanEmail}`,
-    'user_avatar',
-    'profile_picture',
-    `akt_avatar_${cleanEmail}`
-  ];
-
-  for (const k of keys) {
-    const val = localStorage.getItem(k);
-    if (val && val.startsWith('data:image')) {
-      return val;
-    }
-  }
-  return null;
-}
-
-function clearAllUserAvatarKeys(email) {
-  const cleanEmail = (email || '').toLowerCase().trim();
-  const keys = [
-    `user_avatar_${cleanEmail}`,
-    'user_avatar',
-    'profile_picture',
-    `akt_avatar_${cleanEmail}`
-  ];
-  keys.forEach(k => localStorage.removeItem(k));
-}
-
 function syncGlobalAvatars() {
-  const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'student@aktu.ac.in').toLowerCase().trim();
+  const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'sksaqibkhan110@gmail.com').toLowerCase().trim();
   let userName = localStorage.getItem('user_name') || currentEmail.split('@')[0];
   if (userName.toLowerCase() === 'student') userName = "Saqib Khan";
 
   const initial = (userName.charAt(0) || 'S').toUpperCase();
-  const savedPhoto = getSavedUserAvatar(currentEmail);
+  const savedPhoto = localStorage.getItem(`user_avatar_${currentEmail}`) 
+                  || localStorage.getItem('user_avatar') 
+                  || localStorage.getItem('profile_picture');
 
-  // Sync Names & Emails across all DOM elements
-  const nameTargets = ['side-user-name', 'top-user-name', 'sidebar-username', 'welcome-name', 'profile-header-name'];
-  nameTargets.forEach(id => {
+  // DOM Elements Text Sync
+  ['side-user-name', 'top-user-name', 'sidebar-username'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.innerText = userName;
   });
 
-  const emailTargets = ['side-user-email', 'sidebar-useremail'];
-  emailTargets.forEach(id => {
+  ['side-user-email', 'sidebar-useremail'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.innerText = currentEmail;
   });
 
-  // Target all avatar slots in header, sidebar & drawer
-  const avatarSlots = [
-    document.getElementById('top-user-avatar'),
-    document.getElementById('side-user-avatar'),
-    document.getElementById('sidebar-avatar'),
-    document.getElementById('header-avatar')
-  ];
+  // Avatar Icons Sync
+  ['top-user-avatar', 'side-user-avatar', 'desktop-header-avatar', 'mobile-nav-avatar'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.overflow = 'hidden';
+    el.style.display = 'flex';
+    el.style.alignItems = 'center';
+    el.style.justifyContent = 'center';
 
-  avatarSlots.forEach(slot => {
-    if (!slot) return;
-    slot.style.overflow = 'hidden';
-    slot.style.display = 'flex';
-    slot.style.alignItems = 'center';
-    slot.style.justifyContent = 'center';
-
-    if (savedPhoto) {
-      slot.innerHTML = `<img src="${savedPhoto}" alt="Avatar" class="w-full h-full object-cover rounded-full pointer-events-none" />`;
-      slot.style.padding = '0';
+    if (savedPhoto && savedPhoto.startsWith('data:image')) {
+      el.innerHTML = `<img src="${savedPhoto}" alt="Avatar" class="w-full h-full object-cover rounded-full pointer-events-none" />`;
+      el.style.padding = '0';
     } else {
-      slot.innerHTML = initial;
-      slot.style.padding = '';
-      if (!slot.classList.contains('bg-emerald-800') && !slot.classList.contains('avatar-circle')) {
-        slot.classList.add('bg-emerald-800', 'text-white', 'font-black');
+      el.innerHTML = initial;
+      el.style.padding = '';
+      if (!el.classList.contains('avatar-circle')) {
+        el.className = "w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center";
       }
     }
   });
 
-  // Sync Live XP across all headers
-  const userXP = localStorage.getItem(`akt_xp_${currentEmail}`) || "200";
-  const xpTargets = ['top-user-xp', 'stat-xp', 'profile-card-xp'];
-  xpTargets.forEach(id => {
+  const userXP = localStorage.getItem(`akt_xp_${currentEmail}`) || "720";
+  ['top-user-xp', 'stat-xp', 'profile-card-xp'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.innerText = userXP + " XP";
   });
@@ -111,17 +74,38 @@ function handleLogout() {
   window.location.href = 'index.html';
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  syncGlobalAvatars();
+// Auto Inject Mobile Bar on pages that lack it
+function ensureMobileNavBar() {
+  if (window.innerWidth > 1024) return;
+  if (document.getElementById('mobile-top-nav-bar')) return;
+  if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') return;
 
-  if (!document.getElementById('drawer-overlay')) {
-    const overlay = document.createElement('div');
-    overlay.id = 'drawer-overlay';
-    overlay.className = 'mobile-drawer-overlay';
-    overlay.onclick = toggleSidebar;
-    document.body.appendChild(overlay);
-  }
+  const main = document.querySelector('main');
+  if (!main) return;
+
+  const navBar = document.createElement('div');
+  navBar.id = 'mobile-top-nav-bar';
+  navBar.className = 'flex items-center justify-between p-3 bg-white/90 backdrop-blur rounded-2xl border border-emerald-100 lg:hidden shadow-xs mb-3';
+  navBar.innerHTML = `
+    <div class="flex items-center gap-2.5">
+      <button type="button" onclick="toggleSidebar()" class="w-9 h-9 rounded-xl bg-emerald-50 text-[#1b4332] font-black text-lg flex items-center justify-center border border-emerald-200 cursor-pointer">
+        ☰
+      </button>
+      <div class="flex items-center gap-1.5">
+        <div class="w-6 h-6 rounded-md bg-[#1b4332] text-white text-[9px] font-black flex items-center justify-center">AC</div>
+        <span class="text-xs font-black text-slate-800">AKTU Connect</span>
+      </div>
+    </div>
+    <a href="profile.html">
+      <div id="mobile-nav-avatar" class="w-7 h-7 rounded-full bg-emerald-800 text-white font-extrabold text-[10px] flex items-center justify-center overflow-hidden">S</div>
+    </a>
+  `;
+  main.insertBefore(navBar, main.firstChild);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  ensureMobileNavBar();
+  syncGlobalAvatars();
 });
 
-// Run once immediately
 syncGlobalAvatars();
