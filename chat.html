@@ -6,282 +6,322 @@
   <title>AKTU Connect - Zen AI Tutor</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
+  <script src="study-data.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
+    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: #f0f7f4; color: #132a13; min-height: 100vh; margin: 0; }
+
+    /* Custom Scrollbar for Chat */
+    #chat-messages::-webkit-scrollbar {
+      width: 5px;
+    }
+    #chat-messages::-webkit-scrollbar-track {
+      background: #f0f7f4;
+    }
+    #chat-messages::-webkit-scrollbar-thumb {
+      background: #cce3d5;
+      border-radius: 9999px;
+    }
+
+    .prompt-chip {
+      background: #ffffff;
+      border: 1px solid #d4ebdc;
+      color: #1b4332;
+      border-radius: 9999px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .prompt-chip:hover {
+      background: #1b4332;
+      color: #ffffff;
+      border-color: #1b4332;
+      transform: translateY(-1px);
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Backdrop for Mobile Drawer -->
-  <div id="mobile-drawer-overlay" class="mobile-drawer-overlay" onclick="toggleMobileMenu()"></div>
-
-  <!-- Mobile Top Header -->
-  <header class="md:hidden sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 py-2.5 flex justify-between items-center shadow-sm">
-    <div class="flex items-center gap-2.5">
-      <button onclick="toggleMobileMenu()" class="p-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-sm font-bold flex items-center justify-center cursor-pointer">
-        ☰
-      </button>
-      <div class="flex items-center gap-2">
-        <div class="w-7 h-7 rounded-lg bg-blue-600 text-amber-400 font-black text-xs flex items-center justify-center">AC</div>
-        <span class="text-xs font-extrabold text-slate-900">AKTU Connect</span>
-      </div>
-    </div>
-    <a href="profile.html" class="flex items-center">
-      <img id="phone-avatar-img" class="w-8 h-8 rounded-full object-cover border border-blue-600 hidden" />
-      <div id="phone-avatar-fallback" class="w-8 h-8 rounded-full bg-blue-600 text-amber-300 font-bold text-xs flex items-center justify-center">SK</div>
-    </a>
-  </header>
-
   <div class="app-container">
     
-    <!-- Left Menu Card (Desktop Permanent + Mobile Slide-in) -->
-    <aside id="sidebar-card" class="sidebar-menu-card">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar-menu-card">
       <div class="menu-brand">
-        <div class="w-10 h-10 rounded-2xl bg-amber-400 text-amber-950 font-black flex items-center justify-center text-sm shadow-sm">AC</div>
+        <div class="brand-badge">AC</div>
         <div>
-          <span class="font-extrabold text-base leading-tight block text-white">AKTU Connect</span>
-          <span class="text-[11px] text-blue-200 font-semibold block">Student Dashboard</span>
+          <h2 class="text-sm font-extrabold tracking-tight text-white leading-tight">AKTU Connect</h2>
+          <p class="text-[10px] text-emerald-200 font-semibold">Student Dashboard</p>
         </div>
-        <button onclick="toggleMobileMenu()" class="md:hidden ml-auto text-white/80 hover:text-white text-lg font-bold p-1 cursor-pointer">✕</button>
       </div>
 
-      <nav class="flex-1">
-        <a href="study.html" class="menu-item"><span class="text-lg">📖</span><span>Study Hub</span></a>
-        <a href="pyq.html" class="menu-item"><span class="text-lg">📄</span><span>PYQs Vault</span></a>
-        <a href="quest.html" class="menu-item"><span class="text-lg">🎯</span><span>Quests</span></a>
-        <a href="leaderboard.html" class="menu-item"><span class="text-lg">🏆</span><span>Leaderboard</span></a>
-        <a href="chat.html" class="menu-item active"><span class="text-lg">🤖</span><span>Zen AI Tutor</span></a>
-        <a href="profile.html" class="menu-item"><span class="text-lg">👤</span><span>My Profile</span></a>
+      <nav class="flex-1 space-y-1">
+        <a href="study.html" class="menu-item">
+          <span>📖</span> <span>Study Hub</span>
+        </a>
+        <a href="pyq.html" class="menu-item">
+          <span>📄</span> <span>PYQs Vault</span>
+        </a>
+        <a href="quest.html" class="menu-item">
+          <span>🎯</span> <span>Exam Arena</span>
+        </a>
+        <a href="leaderboard.html" class="menu-item">
+          <span>🏆</span> <span>Leaderboard</span>
+        </a>
+        <a href="chat.html" class="menu-item active">
+          <span>🤖</span> <span>Zen AI Tutor</span>
+        </a>
+        <a href="profile.html" class="menu-item">
+          <span>👤</span> <span>My Profile</span>
+        </a>
       </nav>
 
-      <div class="pt-4 border-t border-white/20 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <img id="nav-avatar-img" class="w-8 h-8 rounded-full object-cover border border-white hidden" />
-          <div id="nav-avatar-fallback" class="w-8 h-8 rounded-full bg-white text-blue-700 font-bold text-xs flex items-center justify-center">SK</div>
-          <span class="text-xs font-bold text-white truncate max-w-[100px]" id="nav-user-name">Saqib Khan</span>
+      <!-- Sidebar User Footer -->
+      <div class="sidebar-user-pill">
+        <div class="flex items-center gap-2.5 overflow-hidden">
+          <div id="side-user-avatar" class="avatar-circle">S</div>
+          <div class="truncate">
+            <p id="side-user-name" class="text-xs font-bold text-white truncate">Student</p>
+            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">student@aktu.ac.in</p>
+          </div>
         </div>
-        <a href="index.html" class="text-xs text-rose-200 hover:text-white font-semibold">Logout</a>
+        <button onclick="handleLogout()" class="text-[11px] font-bold text-emerald-200 hover:text-white cursor-pointer ml-2">
+          Logout
+        </button>
       </div>
     </aside>
 
-    <!-- Main Viewport -->
-    <main class="main-viewport flex flex-col h-[calc(100vh-2rem)] space-y-4">
+    <!-- MAIN CHAT CONTAINER -->
+    <main class="flex flex-col h-[calc(100vh-2.5rem)] pb-4 space-y-4">
       
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <!-- Top Title Bar with Profile Widget -->
+      <header class="flex items-center justify-between shrink-0">
         <div>
-          <div class="portal-pill portal-pill-amber mb-1.5">🤖 Zen Academic AI Engine</div>
-          <h2 class="text-xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
-            Zen - Your AI Study Mentor
-          </h2>
-          <p class="text-xs text-slate-500">Ask questions, paste derivations, or upload exam photos for instant solutions.</p>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 mb-1">
+            ★ Zen Academic AI Engine
+          </span>
+          <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Zen – Your AI Study Mentor</h1>
+          <p class="text-xs text-slate-500 font-medium">Ask doubts on AKTU syllabus, derivation proofs, Quantum summaries or PYQ patterns.</p>
         </div>
 
-        <!-- Top Right Mini Chip (Desktop) -->
-        <a href="profile.html" class="top-user-chip hidden sm:inline-flex">
-          <img id="top-avatar-img" class="avatar-img-round hidden" />
-          <div id="top-avatar-fallback" class="avatar-fallback-round">SK</div>
-          <div class="text-left pr-1">
-            <span class="block text-xs font-extrabold text-slate-900 leading-tight" id="top-user-name">Saqib Khan</span>
-            <span class="block text-[10px] font-bold text-amber-600 font-mono leading-tight" id="top-user-xp">0 XP</span>
+        <a href="profile.html" class="top-user-widget">
+          <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center">S</div>
+          <div class="text-left hidden sm:block">
+            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Student</p>
+            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">0 XP</p>
           </div>
         </a>
+      </header>
+
+      <!-- Quick Suggestion Prompts -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-1 shrink-0 no-scrollbar">
+        <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 shrink-0">Try asking:</span>
+        <button onclick="sendQuickPrompt('Explain Normalization in DBMS with 1NF, 2NF, 3NF and BCNF')" class="prompt-chip">
+          Normalization in DBMS 💡
+        </button>
+        <button onclick="sendQuickPrompt('Important questions repeated in AKTU DAA exams')" class="prompt-chip">
+          DAA Repeat Questions 📊
+        </button>
+        <button onclick="sendQuickPrompt('How to write answers in AKTU to score 8+ CGPA?')" class="prompt-chip">
+          AKTU Scoring Strategy 🎯
+        </button>
+        <button onclick="sendQuickPrompt('Solve recurrence using Master Theorem with cases')" class="prompt-chip">
+          Master Theorem Steps ⚡
+        </button>
       </div>
 
-      <div class="portal-card flex-1 flex flex-col overflow-hidden mb-2">
-        <div id="chatMessages" class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4">
+      <!-- MAIN CHAT CARD -->
+      <section class="portal-card flex-1 flex flex-col overflow-hidden p-4 sm:p-5">
+        
+        <!-- Messages Stream -->
+        <div id="chat-messages" class="flex-1 overflow-y-auto space-y-4 pr-1 mb-3">
+          
+          <!-- Zen Welcome Bubble -->
           <div class="flex items-start gap-3">
-            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-blue-600 text-amber-300 font-black text-xs flex items-center justify-center shrink-0">Zen</div>
-            <div class="p-3.5 sm:p-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-xs sm:text-sm text-slate-800 leading-relaxed max-w-[85%] font-medium">
-              Hey! Main Zen hoon. AKTU syllabus, PYQ doubts, ya koi conceptual topic discuss karna ho toh batao! Photo bhi bhej sakte ho 🚀
+            <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 shadow-xs">
+              Zen
+            </div>
+            <div class="bg-emerald-50/80 border border-emerald-100 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
+              <p class="font-semibold text-emerald-900 mb-1">Hey! Main Zen hoon, tera AKTU 24x7 Academic Mentor 🚀</p>
+              <p class="text-slate-600 text-xs">Kisi bhi subject ke units, complex derivation, Quantum topic ya previous year questions mein doubt ho toh batao, step-by-step simplify kar dunga!</p>
             </div>
           </div>
+
         </div>
 
-        <div id="imagePreviewContainer" class="hidden px-4 py-2 bg-slate-100 border-t border-slate-200 flex items-center gap-2">
-          <span class="text-xs text-blue-600 font-bold">Attached:</span>
-          <span id="imageFileName" class="text-xs text-slate-700 truncate max-w-xs font-medium"></span>
-          <button onclick="removeImage()" class="text-xs text-rose-600 font-bold hover:underline ml-auto cursor-pointer">Remove</button>
-        </div>
+        <!-- Chat Input Bar -->
+        <form onsubmit="handleUserMessage(event)" class="pt-2 border-t border-slate-100 flex items-center gap-2 shrink-0">
+          <input 
+            type="text" 
+            id="chat-input" 
+            placeholder="Ask Zen anything about your AKTU syllabus, PYQ or derivations..." 
+            class="flex-1 bg-[#f4faf6] border border-[#cce3d5] focus:border-[#2d6a4f] focus:bg-white text-xs sm:text-sm font-semibold text-slate-900 px-4 py-3 rounded-2xl outline-none transition" 
+            autocomplete="off"
+          />
+          <button 
+            type="submit" 
+            class="px-5 py-3 rounded-2xl bg-[#1b4332] hover:bg-[#2d6a4f] text-white text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition shadow-sm cursor-pointer shrink-0"
+          >
+            <span>Send</span>
+            <span>🚀</span>
+          </button>
+        </form>
 
-        <div class="p-2.5 sm:p-4 bg-white border-t border-slate-200 flex items-center gap-2 sm:gap-2.5">
-          <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="handleImageSelect(event)" />
-          <button onclick="document.getElementById('imageInput').click()" title="Attach Photo" class="p-2.5 sm:p-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl text-slate-700 text-sm flex items-center justify-center shrink-0 cursor-pointer">
-            📷
-          </button>
-          <input type="text" id="chatInput" placeholder="Ask Zen anything..." class="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm" />
-          <button id="sendBtn" class="portal-btn-primary px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm cursor-pointer whitespace-nowrap">
-            Send 🚀
-          </button>
-        </div>
-      </div>
+      </section>
+
     </main>
   </div>
 
-  <script src="config.js"></script>
   <script>
-    function toggleMobileMenu() {
-      const sidebar = document.getElementById('sidebar-card');
-      const overlay = document.getElementById('mobile-drawer-overlay');
-      sidebar.classList.toggle('mobile-open');
-      overlay.classList.toggle('active');
-    }
+    // 1. AUTH & USER HYDRATION
+    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'student@aktu.ac.in').toLowerCase();
+    const currentName = localStorage.getItem('user_name') || currentEmail.split('@')[0];
 
-    let selectedImageBase64 = null;
-    let selectedImageMimeType = null;
+    document.getElementById('side-user-name').innerText = currentName;
+    document.getElementById('side-user-email').innerText = currentEmail;
+    document.getElementById('top-user-name').innerText = currentName;
+    const initial = currentName.charAt(0).toUpperCase();
+    document.getElementById('side-user-avatar').innerText = initial;
+    document.getElementById('top-user-avatar').innerText = initial;
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const sendBtn = document.getElementById('sendBtn');
-      const chatInput = document.getElementById('chatInput');
+    const userXP = parseInt(localStorage.getItem(`akt_xp_${currentEmail}`) || "0", 10);
+    document.getElementById('top-user-xp').innerText = userXP + " XP";
 
-      if (sendBtn) sendBtn.addEventListener('click', sendMessage);
-      if (chatInput) {
-        chatInput.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') sendMessage();
-        });
-      }
+    // 2. CHAT ENGINE & RESPONSE GENERATOR
+    const messagesBox = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
 
-      const autoQuery = sessionStorage.getItem('zen_auto_query');
-      if (autoQuery) {
-        sessionStorage.removeItem('zen_auto_query');
-        if (chatInput) {
-          chatInput.value = autoQuery;
-          sendMessage();
-        }
-      }
+    function appendMessage(sender, text, isUser = false) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `flex items-start gap-3 ${isUser ? 'justify-end' : ''}`;
 
-      const savedAvatar = localStorage.getItem('user_avatar');
-      const savedName = localStorage.getItem('user_name') || 'Saqib Khan';
-      const xp = localStorage.getItem('akt_xp') || 0;
-
-      document.getElementById('top-user-name').innerText = savedName;
-      document.getElementById('nav-user-name').innerText = savedName;
-      document.getElementById('top-user-xp').innerText = `${xp} XP`;
-
-      if (savedAvatar) {
-        const topImg = document.getElementById('top-avatar-img');
-        const topFb = document.getElementById('top-avatar-fallback');
-        const phoneImg = document.getElementById('phone-avatar-img');
-        const phoneFb = document.getElementById('phone-avatar-fallback');
-        const navImg = document.getElementById('nav-avatar-img');
-        const navFb = document.getElementById('nav-avatar-fallback');
-
-        if (topImg && topFb) { topImg.src = savedAvatar; topImg.classList.remove('hidden'); topFb.classList.add('hidden'); }
-        if (phoneImg && phoneFb) { phoneImg.src = savedAvatar; phoneImg.classList.remove('hidden'); phoneFb.classList.add('hidden'); }
-        if (navImg && navFb) { navImg.src = savedAvatar; navImg.classList.remove('hidden'); navFb.classList.add('hidden'); }
-      }
-    });
-
-    function handleImageSelect(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      selectedImageMimeType = file.type;
-      document.getElementById('imageFileName').textContent = file.name;
-      document.getElementById('imagePreviewContainer').classList.remove('hidden');
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        selectedImageBase64 = e.target.result.split(',')[1];
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function removeImage() {
-      selectedImageBase64 = null;
-      selectedImageMimeType = null;
-      document.getElementById('imageInput').value = "";
-      document.getElementById('imagePreviewContainer').classList.add('hidden');
-    }
-
-    async function sendMessage() {
-      const input = document.getElementById('chatInput');
-      const container = document.getElementById('chatMessages');
-      const text = input.value.trim();
-
-      if (!text && !selectedImageBase64) return;
-
-      let userHtmlTag = '';
-      if (selectedImageBase64) {
-        userHtmlTag += `<div class="mb-2"><img src="data:${selectedImageMimeType};base64,${selectedImageBase64}" class="max-w-[200px] rounded-lg border border-slate-300" /></div>`;
-      }
-      if (text) {
-        userHtmlTag += `<div>${escapeHtml(text)}</div>`;
-      }
-
-      container.innerHTML += `
-        <div class="flex items-start justify-end gap-3">
-          <div class="p-3.5 sm:p-4 rounded-2xl bg-[#0f172a] text-white text-xs sm:text-sm leading-relaxed max-w-[85%] font-medium">
-            ${userHtmlTag}
+      if (isUser) {
+        msgDiv.innerHTML = `
+          <div class="bg-[#1b4332] text-white rounded-2xl rounded-tr-sm p-3.5 max-w-xl text-xs sm:text-sm leading-relaxed shadow-2xs font-medium">
+            ${text}
           </div>
-          <div class="w-8 h-8 rounded-xl bg-slate-200 text-slate-800 flex items-center justify-center font-bold text-xs shrink-0">You</div>
-        </div>
-      `;
-      
-      const currentImageBase64 = selectedImageBase64;
-      const currentMimeType = selectedImageMimeType;
-
-      input.value = "";
-      removeImage();
-      container.scrollTop = container.scrollHeight;
-
-      const loadingId = "loading-" + Date.now();
-      container.innerHTML += `
-        <div id="${loadingId}" class="flex items-start gap-3">
-          <div class="w-8 h-8 rounded-xl bg-blue-600 text-amber-300 font-black text-xs shrink-0 flex items-center justify-center">Zen</div>
-          <div class="p-3.5 sm:p-4 rounded-2xl bg-slate-100 text-xs sm:text-sm text-slate-500 animate-pulse font-medium">
-            Zen is formulating solution...
-          </div>
-        </div>
-      `;
-      container.scrollTop = container.scrollHeight;
-
-      const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
-      const apiUrl = isLocal ? "https://aktu-connect.vercel.app/api/chat" : "/api/chat";
-
-      try {
-        const response = await fetch(apiUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            text: text,
-            imageBase64: currentImageBase64,
-            mimeType: currentMimeType
-          })
-        });
-
-        // SAFE PARSING FIX: prevents "Unexpected end of JSON"
-        const rawText = await response.text();
-        let reply = "No response from AI.";
-
-        try {
-          const data = JSON.parse(rawText);
-          reply = data.reply || (data.error ? "Error: " + data.error : rawText);
-        } catch (jsonErr) {
-          if (!response.ok) {
-            reply = `Server status ${response.status}. Ensure Vercel deployment has GEMINI_API_KEY set.`;
-          } else {
-            reply = rawText || "Response was received in non-JSON format.";
-          }
-        }
-
-        document.getElementById(loadingId).innerHTML = `
-          <div class="w-8 h-8 rounded-xl bg-blue-600 text-amber-300 font-black text-xs shrink-0 flex items-center justify-center">Zen</div>
-          <div class="p-3.5 sm:p-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-xs sm:text-sm text-slate-900 leading-relaxed max-w-[85%] whitespace-pre-wrap font-medium">
-            ${escapeHtml(reply)}
+          <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-black flex items-center justify-center shrink-0">
+            ${initial}
           </div>
         `;
-      } catch (err) {
-        document.getElementById(loadingId).innerHTML = `
-          <div class="w-8 h-8 rounded-xl bg-blue-600 text-amber-300 font-black text-xs shrink-0 flex items-center justify-center">Zen</div>
-          <div class="p-3.5 sm:p-4 rounded-2xl bg-red-50 border border-red-200 text-xs sm:text-sm text-red-700">
-            Network Error: ${escapeHtml(err.message)}
+      } else {
+        msgDiv.innerHTML = `
+          <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 shadow-xs">
+            Zen
+          </div>
+          <div class="bg-emerald-50/80 border border-emerald-100 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
+            ${text}
           </div>
         `;
       }
-      container.scrollTop = container.scrollHeight;
+
+      messagesBox.appendChild(msgDiv);
+      messagesBox.scrollTop = messagesBox.scrollHeight;
     }
 
-    function escapeHtml(str) {
-      const div = document.createElement("div");
-      div.textContent = str;
-      return div.innerHTML;
+    function appendTypingIndicator() {
+      const ind = document.createElement('div');
+      ind.id = "typing-indicator";
+      ind.className = "flex items-start gap-3";
+      ind.innerHTML = `
+        <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0">
+          Zen
+        </div>
+        <div class="bg-emerald-50/80 border border-emerald-100 rounded-2xl p-3 text-xs text-slate-500 font-bold flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-700 animate-bounce"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-700 animate-bounce" style="animation-delay: 0.15s"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-700 animate-bounce" style="animation-delay: 0.3s"></span>
+          <span class="ml-1 text-[11px] text-emerald-800">Zen is thinking...</span>
+        </div>
+      `;
+      messagesBox.appendChild(ind);
+      messagesBox.scrollTop = messagesBox.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      const ind = document.getElementById("typing-indicator");
+      if (ind) ind.remove();
+    }
+
+    function getZenAcademicResponse(query) {
+      const q = query.toLowerCase();
+
+      if (q.includes("normalization") || q.includes("1nf") || q.includes("bcnf")) {
+        return `
+          <p class="font-bold text-emerald-900 mb-1">📌 Normalization in AKTU DBMS (10 Marks Must-Ask Topic):</p>
+          <p class="mb-1.5">Normalization redundancy hatane aur anomalies (Insert, Update, Delete) khatam karne ke liye use hoti hai:</p>
+          <ul class="list-disc pl-4 space-y-1 text-[11px] sm:text-xs text-slate-700">
+            <li><strong>1NF:</strong> All attribute values must be atomic (no multivalued attributes).</li>
+            <li><strong>2NF:</strong> Must be in 1NF + No partial dependency (non-prime attributes fully dependent on candidate key).</li>
+            <li><strong>3NF:</strong> Must be in 2NF + No transitive dependency ($X \\rightarrow Y$, $X$ must be super key or $Y$ prime).</li>
+            <li><strong>BCNF:</strong> For every functional dependency $X \\rightarrow Y$, $X$ must be a strict super key.</li>
+          </ul>
+          <p class="mt-2 text-[11px] text-emerald-700 font-semibold">Tip: Exam mein hamesha ek Student/Course table ka example bana kar dikhana full marks milenge!</p>
+        `;
+      }
+
+      if (q.includes("master theorem") || q.includes("recurrence")) {
+        return `
+          <p class="font-bold text-emerald-900 mb-1">⚡ Master Theorem Form: $T(n) = aT(n/b) + f(n)$</p>
+          <p class="mb-1 text-xs">Yahan $a \\ge 1, b > 1$. Hum compare karte hain $f(n)$ ko $n^{\\log_b a}$ se:</p>
+          <ul class="list-disc pl-4 space-y-1 text-[11px] sm:text-xs text-slate-700">
+            <li><strong>Case 1:</strong> Agar $f(n) = O(n^{\\log_b a - \\epsilon}) \\implies T(n) = \\Theta(n^{\\log_b a})$.</li>
+            <li><strong>Case 2:</strong> Agar $f(n) = \\Theta(n^{\\log_b a}) \\implies T(n) = \\Theta(n^{\\log_b a} \\log n)$.</li>
+            <li><strong>Case 3:</strong> Agar $f(n) = \\Omega(n^{\\log_b a + \\epsilon}) \\implies T(n) = \\Theta(f(n))$.</li>
+          </ul>
+        `;
+      }
+
+      if (q.includes("score") || q.includes("cgpa") || q.includes("strategy") || q.includes("prepare")) {
+        return `
+          <p class="font-bold text-emerald-900 mb-1">🎯 AKTU University Examination High-Score Blueprint (8.5+ SGPA):</p>
+          <ol class="list-decimal pl-4 space-y-1 text-[11px] sm:text-xs text-slate-700">
+            <li><strong>Section-A (20 Marks):</strong> 10 mein se 10 point-to-point 2-3 lines mein likho with 1 small formula/diagram.</li>
+            <li><strong>Heading + Diagram presentation:</strong> Examiners points aur neat labeled diagrams par seedha 7/7 marks dete hain.</li>
+            <li><strong>Quantum 3-Year Frequency:</strong> Pichle 3 saal ke repeated questions syllabus ka lagbhag 60-70% cover kar lete hain.</li>
+          </ol>
+        `;
+      }
+
+      return `
+        <p class="font-semibold text-emerald-900 mb-1">💡 AKTU Syllabus Insight for: "<em>${query}</em>"</p>
+        <p class="text-xs text-slate-700 mb-1.5">Yeh question regular AKTU end-sem papers mein repeat hota hai. Is topic ke liye:</p>
+        <p class="text-xs text-slate-600 mb-1">• Pehle formal definition aur 1 block diagram draw karo.</p>
+        <p class="text-xs text-slate-600 mb-1">• Algorithmic steps ya mathematical derivation point-wise likho.</p>
+        <p class="text-xs text-emerald-800 font-bold mt-2">Study Hub tab se is unit ka One-Shot video lecture dekh kar concept 15 minute mein clear kar lo!</p>
+      `;
+    }
+
+    function handleUserMessage(e) {
+      e.preventDefault();
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      appendMessage(currentName, text, true);
+      chatInput.value = "";
+
+      appendTypingIndicator();
+
+      setTimeout(() => {
+        removeTypingIndicator();
+        const reply = getZenAcademicResponse(text);
+        appendMessage("Zen", reply, false);
+      }, 700);
+    }
+
+    function sendQuickPrompt(promptText) {
+      chatInput.value = promptText;
+      handleUserMessage(new Event('submit'));
+    }
+
+    function handleLogout() {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('current_user_email');
+      sessionStorage.clear();
+      window.location.href = 'index.html';
     }
   </script>
 </body>

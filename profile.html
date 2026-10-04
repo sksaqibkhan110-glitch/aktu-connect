@@ -7,45 +7,42 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="bg-[#f4f9f6] text-slate-800 antialiased font-sans">
 
   <!-- Backdrop for Mobile Drawer -->
   <div id="mobile-drawer-overlay" class="mobile-drawer-overlay" onclick="toggleMobileMenu()"></div>
 
   <!-- Mobile Top Header -->
-  <header class="md:hidden sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 py-2.5 flex justify-between items-center shadow-sm">
-    <div class="flex items-center gap-2.5">
+  <header class="md:hidden sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-3.5 py-2.5 flex justify-between items-center shadow-sm">
+    <div class="flex items-center gap-2">
       <button onclick="toggleMobileMenu()" class="p-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-sm font-bold flex items-center justify-center cursor-pointer">
         ☰
       </button>
-      <div class="flex items-center gap-2">
-        <div class="w-7 h-7 rounded-lg bg-blue-600 text-amber-400 font-black text-xs flex items-center justify-center">AC</div>
+      <div class="flex items-center gap-1.5">
+        <div class="w-6 h-6 rounded-lg bg-[#1b4332] text-amber-300 font-black text-[11px] flex items-center justify-center">AC</div>
         <span class="text-xs font-extrabold text-slate-900">AKTU Connect</span>
       </div>
     </div>
-    <a href="profile.html" class="flex items-center">
-      <img id="phone-avatar-img" class="w-8 h-8 rounded-full object-cover border border-blue-600 hidden" />
-      <div id="phone-avatar-fallback" class="w-8 h-8 rounded-full bg-blue-600 text-amber-300 font-bold text-xs flex items-center justify-center">SK</div>
-    </a>
+    <a href="profile.html" class="single-avatar-slot text-xs">ST</a>
   </header>
 
   <div class="app-container">
     
-    <!-- Left Menu Card (Desktop Permanent + Mobile Slide-in) -->
+    <!-- Left Menu Card -->
     <aside id="sidebar-card" class="sidebar-menu-card">
       <div class="menu-brand">
         <div class="w-10 h-10 rounded-2xl bg-amber-400 text-amber-950 font-black flex items-center justify-center text-sm shadow-sm">AC</div>
         <div>
           <span class="font-extrabold text-base leading-tight block text-white">AKTU Connect</span>
-          <span class="text-[11px] text-blue-200 font-semibold block">Student Dashboard</span>
+          <span class="text-[11px] text-emerald-200 font-semibold block">Student Dashboard</span>
         </div>
         <button onclick="toggleMobileMenu()" class="md:hidden ml-auto text-white/80 hover:text-white text-lg font-bold p-1 cursor-pointer">✕</button>
       </div>
 
-      <nav class="flex-1">
+      <nav class="flex-1 space-y-1">
         <a href="study.html" class="menu-item"><span class="text-lg">📖</span><span>Study Hub</span></a>
         <a href="pyq.html" class="menu-item"><span class="text-lg">📄</span><span>PYQs Vault</span></a>
-        <a href="quest.html" class="menu-item"><span class="text-lg">🎯</span><span>Quests</span></a>
+        <a href="quest.html" class="menu-item"><span class="text-lg">🎯</span><span>Exam Arena</span></a>
         <a href="leaderboard.html" class="menu-item"><span class="text-lg">🏆</span><span>Leaderboard</span></a>
         <a href="chat.html" class="menu-item"><span class="text-lg">🤖</span><span>Zen AI Tutor</span></a>
         <a href="profile.html" class="menu-item active"><span class="text-lg">👤</span><span>My Profile</span></a>
@@ -53,191 +50,450 @@
 
       <div class="pt-4 border-t border-white/20 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <img id="nav-avatar-img" class="w-8 h-8 rounded-full object-cover border border-white hidden" />
-          <div id="nav-avatar-fallback" class="w-8 h-8 rounded-full bg-white text-blue-700 font-bold text-xs flex items-center justify-center">SK</div>
-          <span class="text-xs font-bold text-white truncate max-w-[100px]" id="nav-user-name">Saqib Khan</span>
+          <div class="single-avatar-slot" id="nav-avatar-slot">ST</div>
+          <span class="text-xs font-bold text-white truncate max-w-[100px]" id="nav-user-name">Student</span>
         </div>
         <button onclick="handleLogout()" class="text-xs text-rose-200 hover:text-white font-semibold cursor-pointer">Logout</button>
       </div>
     </aside>
 
     <!-- Main Viewport -->
-    <main class="main-viewport space-y-5">
+    <main class="main-viewport space-y-4">
 
-      <!-- Student Banner with Avatar Upload & Dedicated Logout Button -->
-      <div class="portal-card p-5 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
-        <div class="flex items-center gap-4">
+      <!-- Student Banner with Change & Remove Controls -->
+      <div class="portal-card p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-[#d8f3dc] rounded-3xl shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
           
-          <div class="relative group cursor-pointer" onclick="document.getElementById('avatar-input').click()">
-            <img id="profile-avatar-img" class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl object-cover border-2 border-slate-200 shadow-md hidden" />
-            <div id="profile-avatar-fallback" class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-blue-600 text-amber-400 font-black text-xl sm:text-2xl flex items-center justify-center shadow-md">
-              SK
+          <!-- Avatar Display -->
+          <div class="relative group w-16 h-16 shrink-0">
+            <div id="profile-banner-avatar" class="w-16 h-16 rounded-2xl bg-[#1b4332] text-amber-300 font-extrabold text-xl flex items-center justify-center overflow-hidden border-2 border-slate-200 shadow-sm">
+              ST
             </div>
-            <div class="absolute inset-0 bg-black/40 rounded-3xl opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-[11px] font-bold">
-              📷 Edit
-            </div>
-            <input type="file" id="avatar-input" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)" />
           </div>
 
-          <div>
-            <div class="portal-pill portal-pill-amber mb-1 text-[10px]">★ B.Tech CS (AI & ML)</div>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900" id="display-user-name">Saqib Khan</h2>
-            <p class="text-[11px] text-slate-500 font-medium">GNIOT College • 5th Semester • Class of 2028</p>
+          <!-- Info & Actions -->
+          <div class="space-y-1.5">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-[#eaf4ed] text-[#1b4332] border border-[#d6ecdd]" id="banner-branch-pill">★ CSE (Core)</span>
+              <span class="text-[10px] text-slate-400 font-bold" id="banner-college-sem">College • Semester 2</span>
+            </div>
+            
+            <h2 class="text-lg sm:text-2xl font-black text-slate-900 leading-tight" id="display-user-name">Student</h2>
+
+            <!-- CHANGE & REMOVE BUTTONS -->
+            <div class="flex items-center gap-2 pt-1">
+              <button onclick="document.getElementById('avatar-input').click()" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-sm">
+                <span>📷</span>
+                <span>Change Photo</span>
+              </button>
+
+              <button id="btn-remove-avatar" onclick="handleRemoveAvatar()" class="px-3 py-1.5 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer hidden">
+                <span>🗑️</span>
+                <span>Remove</span>
+              </button>
+
+              <input type="file" id="avatar-input" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)" />
+            </div>
           </div>
+
         </div>
 
-        <div class="flex items-center gap-2.5">
-          <div class="bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-2xl text-center">
-            <span class="block text-[10px] font-bold text-slate-400 uppercase">Target CGPA</span>
-            <span class="text-base sm:text-lg font-black text-slate-900">8.5+</span>
+        <div class="flex items-center gap-2 self-start sm:self-center">
+          <div class="bg-amber-50 border border-amber-200 px-3.5 py-2 rounded-xl text-center">
+            <span class="block text-[9px] font-bold text-amber-700 uppercase">Total XP</span>
+            <span class="text-sm sm:text-base font-black text-amber-900 font-mono" id="profile-xp-val">0 XP</span>
           </div>
-          <div class="bg-amber-50 border border-amber-200 px-3.5 py-2.5 rounded-2xl text-center">
-            <span class="block text-[10px] font-bold text-amber-700 uppercase">Total XP</span>
-            <span class="text-base sm:text-lg font-black text-amber-900 font-mono" id="profile-xp-val">0 XP</span>
-          </div>
-          <button onclick="handleLogout()" class="px-4 py-3 rounded-2xl bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-600 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+          <button onclick="handleLogout()" class="px-3.5 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-600 text-xs font-bold transition flex items-center gap-1 cursor-pointer">
             <span>🚪</span>
             <span>Logout</span>
           </button>
         </div>
       </div>
 
-      <!-- Syllabus Bar Graph -->
-      <div class="portal-card p-5 sm:p-8">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-5 border-b border-slate-100 gap-3">
+      <!-- DYNAMIC LEAGUE & BADGES -->
+      <div class="portal-card p-4 sm:p-6 space-y-4 bg-white border border-[#d8f3dc] rounded-3xl shadow-sm">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
           <div>
-            <div class="portal-pill portal-pill-indigo mb-1 text-[10px]">📊 Live Unit Progress</div>
-            <h3 class="text-base sm:text-xl font-extrabold text-slate-900">Semester Unit Coverage Progress</h3>
-            <p class="text-[11px] text-slate-500">Real progress based on lectures marked 'Done' in Study Hub.</p>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-50 text-blue-700 border border-blue-200">🏆 Academic Milestones</span>
+            <h3 class="text-sm sm:text-base font-extrabold text-slate-900 mt-1">XP Milestones & Achievements</h3>
           </div>
-          
-          <div class="flex items-center gap-2 self-start sm:self-auto">
-            <label class="text-[11px] font-bold text-slate-500 uppercase">Semester:</label>
-            <select id="graph-sem-select" onchange="renderSubjectBarGraph()" class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-bold text-slate-800 outline-none cursor-pointer">
-              <option value="1">Semester 1</option>
-              <option value="2">Semester 2</option>
-              <option value="3">Semester 3</option>
-              <option value="4">Semester 4</option>
-              <option value="5" selected>Semester 5</option>
-              <option value="6">Semester 6</option>
+          <span class="text-xs font-extrabold text-emerald-800" id="current-league-badge">Novice Scholar</span>
+        </div>
+
+        <!-- Badges Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 pt-1" id="badges-grid">
+          <div id="badge-1" class="p-3 rounded-2xl border text-center opacity-40 bg-slate-50 border-slate-200">
+            <div class="text-2xl mb-1">🥉</div>
+            <span class="block text-xs font-extrabold text-slate-800">Bronze</span>
+            <span class="text-[10px] text-slate-500 font-mono" id="badge-1-xp">-- XP</span>
+          </div>
+          <div id="badge-2" class="p-3 rounded-2xl border text-center opacity-40 bg-slate-50 border-slate-200">
+            <div class="text-2xl mb-1">🥈</div>
+            <span class="block text-xs font-extrabold text-slate-800">Silver</span>
+            <span class="text-[10px] text-slate-500 font-mono" id="badge-2-xp">-- XP</span>
+          </div>
+          <div id="badge-3" class="p-3 rounded-2xl border text-center opacity-40 bg-slate-50 border-slate-200">
+            <div class="text-2xl mb-1">🥇</div>
+            <span class="block text-xs font-extrabold text-slate-800">Gold</span>
+            <span class="text-[10px] text-slate-500 font-mono" id="badge-3-xp">-- XP</span>
+          </div>
+          <div id="badge-4" class="p-3 rounded-2xl border text-center opacity-40 bg-slate-50 border-slate-200">
+            <div class="text-2xl mb-1">💎</div>
+            <span class="block text-xs font-extrabold text-slate-800">Diamond</span>
+            <span class="text-[10px] text-slate-500 font-mono" id="badge-4-xp">-- XP</span>
+          </div>
+          <div id="badge-5" class="p-3 rounded-2xl border text-center opacity-40 bg-slate-50 border-slate-200 col-span-2 sm:col-span-1">
+            <div class="text-2xl mb-1">👑</div>
+            <span class="block text-xs font-extrabold text-slate-800">Conqueror</span>
+            <span class="text-[10px] text-slate-500 font-mono" id="badge-5-xp">-- XP</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Roadmap -->
+        <div class="pt-3 border-t border-slate-100">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1.5">
+              <span>🚀 XP Progression to Target</span>
+              <span id="roadmap-xp-text" class="text-emerald-800 font-mono font-bold">(0/-- XP)</span>
+            </span>
+            <div class="flex items-center gap-1.5 bg-amber-50 border border-amber-300 px-2.5 py-1 rounded-xl">
+              <span class="text-sm">👑</span>
+              <span class="text-xs font-black text-amber-950" id="roadmap-target-cgpa-label">Target: 6.0 CGPA Goal</span>
+            </div>
+          </div>
+
+          <div class="w-full bg-slate-100 h-5 rounded-full p-1 border border-slate-200 relative overflow-hidden">
+            <div id="roadmap-fill-bar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-600 to-[#1b4332] rounded-full transition-all duration-1000 shadow-sm" style="width: 0%;"></div>
+          </div>
+
+          <div class="flex justify-between text-[10px] text-slate-400 font-bold mt-1.5">
+            <span>0 XP (Start)</span>
+            <span id="scale-mid-1">-- XP</span>
+            <span id="scale-mid-2">-- XP</span>
+            <span class="text-emerald-700 font-extrabold" id="scale-goal-text">Goal Achieved 🎉</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- EDIT ACADEMIC PROFILE & SECURITY -->
+      <div class="portal-card p-4 sm:p-6 bg-white border border-[#d8f3dc] rounded-3xl shadow-sm">
+        <h3 class="text-sm sm:text-base font-extrabold text-slate-900 mb-3 pb-2 border-b border-slate-100">
+          Academic Profile & Account Settings
+        </h3>
+        
+        <form onsubmit="saveAccountSettings(event)" class="space-y-3 max-w-xl">
+          <div id="settings-msg" class="hidden p-2.5 rounded-xl text-xs font-bold"></div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Full Name</label>
+              <input type="text" id="setting-name" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none focus:border-[#2d6a4f]" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Registered Email</label>
+              <input type="text" id="setting-contact" readonly class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 text-slate-500 outline-none" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">College Name</label>
+              <input type="text" id="setting-college" placeholder="e.g. GNIOT, ABES" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none focus:border-[#2d6a4f]" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Branch</label>
+              <select id="setting-branch" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none focus:border-[#2d6a4f] bg-white">
+                <option value="CSE_AIML">CSE (AI & ML)</option>
+                <option value="CSE_CORE">CSE (Core)</option>
+                <option value="IT">IT</option>
+                <option value="ECE">ECE</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Semester</label>
+              <select id="setting-sem" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none focus:border-[#2d6a4f] bg-white">
+                <option value="1">Sem 1</option>
+                <option value="2">Sem 2</option>
+                <option value="3">Sem 3</option>
+                <option value="4">Sem 4</option>
+                <option value="5">Sem 5</option>
+                <option value="6">Sem 6</option>
+                <option value="7">Sem 7</option>
+                <option value="8">Sem 8</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Target CGPA Goal</label>
+            <select id="setting-cgpa" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none focus:border-[#2d6a4f] bg-white">
+              <option value="6.0">6.0 CGPA (Standard Pass - Target: 400 XP)</option>
+              <option value="7.0">7.0 CGPA (First Class - Target: 550 XP)</option>
+              <option value="8.0">8.0 CGPA (Distinction - Target: 700 XP)</option>
+              <option value="9.0">9.0+ CGPA (University Ranker - Target: 850 XP)</option>
             </select>
           </div>
-        </div>
 
-        <div class="pt-3 pb-2">
-          <div class="h-60 flex items-end justify-around gap-2 sm:gap-6 border-b border-slate-200 px-1 sm:px-6" id="bars-track"></div>
-
-          <div class="flex flex-wrap justify-between items-center pt-3 text-[10px] text-slate-500 font-medium">
-            <span>● 5 Units = 100% Completed</span>
-            <span class="text-blue-600 font-bold">Mark lectures 'Done' in Study Hub to grow your bars!</span>
+          <!-- Password Change -->
+          <div class="pt-2 border-t border-slate-100 space-y-2.5">
+            <span class="block text-[11px] font-extrabold text-slate-700">Change Password (Optional)</span>
+            <div>
+              <input type="password" id="setting-old-pwd" placeholder="Current password" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none focus:border-[#2d6a4f]" />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <input type="password" id="setting-new-pwd" placeholder="New password" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none focus:border-[#2d6a4f]" />
+              <input type="password" id="setting-confirm-pwd" placeholder="Confirm new password" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none focus:border-[#2d6a4f]" />
+            </div>
           </div>
-        </div>
+
+          <button type="submit" class="px-5 py-2.5 text-xs font-black bg-[#1b4332] hover:bg-[#143527] text-white rounded-xl shadow-sm transition cursor-pointer">
+            Save Academic Profile & Changes ✓
+          </button>
+        </form>
       </div>
 
     </main>
   </div>
 
-  <script src="subjectsData.js"></script>
+  <script src="nav.js"></script>
   <script>
-    function toggleMobileMenu() {
-      const sidebar = document.getElementById('sidebar-card');
-      const overlay = document.getElementById('mobile-drawer-overlay');
-      sidebar.classList.toggle('mobile-open');
-      overlay.classList.toggle('active');
-    }
+    function getActiveUserName(email) {
+      if (!email) return "Student";
+      
+      let accounts = [];
+      try {
+        accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
+      } catch(e) { accounts = []; }
 
-    function handleLogout() {
-      if (confirm("Are you sure you want to logout?")) {
-        localStorage.removeItem('user_name');
-        localStorage.removeItem('user_email');
-        window.location.href = "index.html";
+      const matched = accounts.find(acc => acc.id && acc.id.toLowerCase() === email.toLowerCase());
+      if (matched && matched.name && matched.name.trim() !== "") {
+        return matched.name;
       }
+
+      const emailSpecific = localStorage.getItem(`user_name_${email}`);
+      if (emailSpecific) return emailSpecific;
+
+      const direct = localStorage.getItem('user_name');
+      if (direct && direct.toLowerCase() !== 'saqib' && direct.toLowerCase() !== 'saqib khan') {
+        return direct;
+      }
+
+      // Default derive from email (e.g. easyinbox110 -> Easyinbox110)
+      const prefix = email.split('@')[0];
+      return prefix.charAt(0).toUpperCase() + prefix.slice(1);
     }
 
     function handleAvatarUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
 
+      if (file.size > 2 * 1024 * 1024) {
+        alert("Image size should be less than 2MB!");
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = function(e) {
-        const base64 = e.target.result;
-        localStorage.setItem('user_avatar', base64);
-        loadUserAvatar();
+        if (typeof setUserAvatar === 'function') {
+          setUserAvatar(e.target.result);
+        } else {
+          const email = getCurrentUserEmail();
+          localStorage.setItem(`user_avatar_${email}`, e.target.result);
+        }
+        loadProfileBanner();
       };
       reader.readAsDataURL(file);
     }
 
-    function loadUserAvatar() {
-      const savedAvatar = localStorage.getItem('user_avatar');
-      const profileImg = document.getElementById('profile-avatar-img');
-      const profileFallback = document.getElementById('profile-avatar-fallback');
-      const navImg = document.getElementById('nav-avatar-img');
-      const navFallback = document.getElementById('nav-avatar-fallback');
-      const phoneImg = document.getElementById('phone-avatar-img');
-      const phoneFallback = document.getElementById('phone-avatar-fallback');
-
-      if (savedAvatar) {
-        if (profileImg && profileFallback) { profileImg.src = savedAvatar; profileImg.classList.remove('hidden'); profileFallback.classList.add('hidden'); }
-        if (navImg && navFallback) { navImg.src = savedAvatar; navImg.classList.remove('hidden'); navFallback.classList.add('hidden'); }
-        if (phoneImg && phoneFallback) { phoneImg.src = savedAvatar; phoneImg.classList.remove('hidden'); phoneFallback.classList.add('hidden'); }
+    function handleRemoveAvatar() {
+      if (confirm("Kya aap profile photo remove karke default name badge lagana chahte hain?")) {
+        if (typeof removeUserAvatar === 'function') {
+          removeUserAvatar();
+        } else {
+          const email = getCurrentUserEmail();
+          localStorage.removeItem(`user_avatar_${email}`);
+        }
+        loadProfileBanner();
       }
     }
 
-    function renderSubjectBarGraph() {
-      const sem = document.getElementById("graph-sem-select").value;
-      const track = document.getElementById("bars-track");
-      track.innerHTML = "";
+    function loadProfileBanner() {
+      const email = typeof getCurrentUserEmail === 'function' ? getCurrentUserEmail() : (localStorage.getItem('user_email') || 'student@aktu.ac.in');
+      const savedAvatar = typeof getUserAvatar === 'function' ? getUserAvatar() : localStorage.getItem(`user_avatar_${email}`);
+      const banner = document.getElementById('profile-banner-avatar');
+      const removeBtn = document.getElementById('btn-remove-avatar');
+      
+      const name = getActiveUserName(email);
+      const college = localStorage.getItem(`user_college_${email}`) || 'College';
+      const branch = localStorage.getItem(`user_branch_${email}`) || 'CSE_CORE';
+      const sem = localStorage.getItem(`user_sem_${email}`) || '2';
 
-      let subjects = [];
-      if (typeof aktuMasterDatabase !== 'undefined') {
-        if (sem === "1") subjects = aktuMasterDatabase["COMMON_1"] || [];
-        else if (sem === "2") subjects = aktuMasterDatabase["COMMON_2"] || [];
-        else subjects = aktuMasterDatabase["CSE_AIML"]?.[sem] || [];
+      document.getElementById('display-user-name').innerText = name;
+      document.getElementById('banner-branch-pill').innerText = `★ ${branch.replace('_', ' ')}`;
+      document.getElementById('banner-college-sem').innerText = `${college} • Semester ${sem}`;
+
+      const initials = name.trim().split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || "ST";
+
+      if (savedAvatar) {
+        banner.innerHTML = `<img src="${savedAvatar}" class="w-full h-full object-cover" />`;
+        if (removeBtn) removeBtn.classList.remove('hidden');
+      } else {
+        banner.innerHTML = `<span class="font-black text-xl text-amber-300">${initials}</span>`;
+        if (removeBtn) removeBtn.classList.add('hidden');
       }
 
-      if (!subjects || subjects.length === 0) {
-        subjects = [
-          { name: "Design & Analysis of Algorithms", id: "BCS503" },
-          { name: "Database Management Systems", id: "BCS501" },
-          { name: "Artificial Intelligence", id: "BCAI501" },
-          { name: "Data Analytics", id: "BCS052" },
-          { name: "Constitution of India", id: "BNC501" }
-        ];
+      // Sync nav sidebar name and initials if elements exist
+      const navName = document.getElementById('nav-user-name');
+      const navAvatar = document.getElementById('nav-avatar-slot');
+      if (navName) navName.innerText = name;
+      if (navAvatar) navAvatar.innerText = initials;
+    }
+
+    function updateLeaguesAndRoadmap() {
+      const email = typeof getCurrentUserEmail === 'function' ? getCurrentUserEmail() : (localStorage.getItem('user_email') || '');
+      const xp = typeof getUserXP === 'function' ? getUserXP() : parseInt(localStorage.getItem(`akt_xp_${email}`) || '0', 10);
+      const targetCgpa = parseFloat(localStorage.getItem(`user_cgpa_${email}`) || "6.0");
+
+      document.getElementById('profile-xp-val').innerText = `${xp} XP`;
+
+      let maxXP = 400;
+      let tiers = [50, 150, 250, 350, 400];
+
+      if (targetCgpa >= 9.0) {
+        maxXP = 850;
+        tiers = [100, 300, 500, 700, 850];
+      } else if (targetCgpa >= 8.0) {
+        maxXP = 700;
+        tiers = [100, 250, 450, 600, 700];
+      } else if (targetCgpa >= 7.0) {
+        maxXP = 550;
+        tiers = [80, 200, 350, 480, 550];
       }
 
-      subjects.forEach((sub, idx) => {
-        const subId = sub.id || sub.code || `SUB${idx+1}`;
-        const completedUnits = parseInt(localStorage.getItem(`progress_${subId}`)) || 0;
-        const totalUnits = 5;
-        const percentage = Math.round((completedUnits / totalUnits) * 100);
-        const barHeightPx = completedUnits === 0 ? 8 : Math.round((percentage / 100) * 180);
+      for (let i = 1; i <= 5; i++) {
+        const badgeEl = document.getElementById(`badge-${i}-xp`);
+        if (badgeEl) badgeEl.innerText = `${tiers[i-1]} XP`;
+      }
 
-        const barCol = document.createElement("div");
-        barCol.className = "flex flex-col items-center gap-1.5 group cursor-pointer flex-1 max-w-[80px]";
-        barCol.innerHTML = `
-          <span class="text-[9px] sm:text-[10px] font-extrabold ${completedUnits > 0 ? 'text-blue-600' : 'text-slate-400'}">
-            ${completedUnits}/5 (${percentage}%)
-          </span>
-          <div class="w-full ${completedUnits > 0 ? 'bg-gradient-to-t from-blue-600 to-indigo-500' : 'bg-slate-200'} rounded-t-xl transition-all duration-500 shadow-sm" style="height: ${barHeightPx}px;"></div>
-          <span class="text-[10px] sm:text-[11px] font-bold text-slate-800 mt-1 truncate max-w-full text-center" title="${sub.name || sub.title}">
-            ${subId}
-          </span>
-        `;
-        track.appendChild(barCol);
+      document.getElementById('scale-mid-1').innerText = `${tiers[1]} XP`;
+      document.getElementById('scale-mid-2').innerText = `${tiers[3]} XP`;
+      document.getElementById('scale-goal-text').innerText = `${maxXP} XP (${targetCgpa} CGPA Achieved 🎉)`;
+      document.getElementById('roadmap-target-cgpa-label').innerText = `Target: ${targetCgpa} CGPA Goal`;
+
+      const b1 = document.getElementById('badge-1');
+      const b2 = document.getElementById('badge-2');
+      const b3 = document.getElementById('badge-3');
+      const b4 = document.getElementById('badge-4');
+      const b5 = document.getElementById('badge-5');
+      const status = document.getElementById('current-league-badge');
+
+      [b1, b2, b3, b4, b5].forEach(b => {
+        if (b) b.className = "p-3 rounded-2xl border text-center opacity-40 bg-slate-50 border-slate-200";
       });
+
+      if (xp >= tiers[0] && b1) b1.className = "p-3 rounded-2xl border text-center bg-amber-100 border-amber-300 opacity-100 shadow-sm";
+      if (xp >= tiers[1] && b2) b2.className = "p-3 rounded-2xl border text-center bg-slate-200 border-slate-400 opacity-100 shadow-sm";
+      if (xp >= tiers[2] && b3) b3.className = "p-3 rounded-2xl border text-center bg-yellow-100 border-yellow-400 opacity-100 shadow-sm";
+      if (xp >= tiers[3] && b4) b4.className = "p-3 rounded-2xl border text-center bg-cyan-100 border-cyan-400 opacity-100 shadow-sm";
+      if (xp >= tiers[4] && b5) b5.className = "p-3 rounded-2xl border text-center bg-purple-100 border-purple-400 opacity-100 shadow-sm";
+
+      if (status) {
+        if (xp >= tiers[4]) status.innerText = "👑 Conqueror Scholar";
+        else if (xp >= tiers[3]) status.innerText = "💎 Diamond Scholar";
+        else if (xp >= tiers[2]) status.innerText = "🥇 Gold Scholar";
+        else if (xp >= tiers[1]) status.innerText = "🥈 Silver Scholar";
+        else if (xp >= tiers[0]) status.innerText = "🥉 Bronze Scholar";
+        else status.innerText = "Novice Scholar";
+      }
+
+      const percent = Math.min(100, Math.round((xp / maxXP) * 100));
+      document.getElementById('roadmap-fill-bar').style.width = `${percent}%`;
+      document.getElementById('roadmap-xp-text').innerText = `(${xp}/${maxXP} XP - ${percent}%)`;
+    }
+
+    function saveAccountSettings(e) {
+      e.preventDefault();
+      const msg = document.getElementById('settings-msg');
+      msg.classList.add('hidden');
+
+      const email = typeof getCurrentUserEmail === 'function' ? getCurrentUserEmail() : (localStorage.getItem('user_email') || '');
+      const newName = document.getElementById('setting-name').value.trim();
+      const newCollege = document.getElementById('setting-college').value.trim();
+      const newBranch = document.getElementById('setting-branch').value;
+      const newSem = document.getElementById('setting-sem').value;
+      const newCgpa = document.getElementById('setting-cgpa').value;
+
+      const oldPwd = document.getElementById('setting-old-pwd').value.trim();
+      const newPwd = document.getElementById('setting-new-pwd').value.trim();
+      const confirmPwd = document.getElementById('setting-confirm-pwd').value.trim();
+
+      let accounts = [];
+      try {
+        accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
+      } catch(e) { accounts = []; }
+
+      let accountIndex = accounts.findIndex(acc => acc.id && acc.id.toLowerCase() === email.toLowerCase());
+
+      if (oldPwd || newPwd || confirmPwd) {
+        if (!oldPwd) {
+          msg.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
+          msg.innerText = "❌ Please enter your Current Password to update password!";
+          return;
+        }
+        if (accountIndex !== -1 && accounts[accountIndex].pwd !== oldPwd) {
+          msg.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
+          msg.innerText = "❌ Incorrect Current Password!";
+          return;
+        }
+        if (newPwd !== confirmPwd) {
+          msg.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
+          msg.innerText = "❌ New Password and Confirm Password do not match!";
+          return;
+        }
+        if (accountIndex !== -1) {
+          accounts[accountIndex].pwd = newPwd;
+        }
+      }
+
+      if (newName) {
+        localStorage.setItem('user_name', newName);
+        localStorage.setItem(`user_name_${email}`, newName);
+      }
+      if (newCollege) localStorage.setItem(`user_college_${email}`, newCollege);
+      localStorage.setItem(`user_branch_${email}`, newBranch);
+      localStorage.setItem(`user_sem_${email}`, newSem);
+      localStorage.setItem(`user_cgpa_${email}`, newCgpa);
+
+      if (accountIndex !== -1) {
+        accounts[accountIndex].name = newName || accounts[accountIndex].name;
+        localStorage.setItem('registered_students', JSON.stringify(accounts));
+      }
+
+      msg.className = "p-2.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 block";
+      msg.innerText = "✓ Academic Profile & Settings saved successfully!";
+
+      document.getElementById('setting-old-pwd').value = "";
+      document.getElementById('setting-new-pwd').value = "";
+      document.getElementById('setting-confirm-pwd').value = "";
+
+      if (typeof syncGlobalProfile === 'function') syncGlobalProfile();
+      loadProfileBanner();
+      updateLeaguesAndRoadmap();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      const xp = localStorage.getItem('akt_xp') || 0;
-      const el = document.getElementById('profile-xp-val');
-      if (el) el.innerText = `${xp} XP`;
+      const email = typeof getCurrentUserEmail === 'function' ? getCurrentUserEmail() : (localStorage.getItem('user_email') || 'student@aktu.ac.in');
+      const activeName = getActiveUserName(email);
+      
+      document.getElementById('setting-name').value = activeName;
+      document.getElementById('setting-contact').value = email;
+      document.getElementById('setting-college').value = localStorage.getItem(`user_college_${email}`) || 'College';
+      document.getElementById('setting-branch').value = localStorage.getItem(`user_branch_${email}`) || 'CSE_CORE';
+      document.getElementById('setting-sem').value = localStorage.getItem(`user_sem_${email}`) || '2';
+      document.getElementById('setting-cgpa').value = localStorage.getItem(`user_cgpa_${email}`) || '6.0';
 
-      const savedName = localStorage.getItem('user_name') || 'Saqib Khan';
-      document.getElementById('display-user-name').innerText = savedName;
-      document.getElementById('nav-user-name').innerText = savedName;
-
-      loadUserAvatar();
-      renderSubjectBarGraph();
+      loadProfileBanner();
+      updateLeaguesAndRoadmap();
     });
   </script>
 </body>

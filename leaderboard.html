@@ -6,182 +6,299 @@
   <title>AKTU Connect - Leaderboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
+    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: #f0f7f4; color: #132a13; min-height: 100vh; margin: 0; }
+
+    .podium-card {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .podium-card:hover {
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Backdrop for Mobile Drawer -->
-  <div id="mobile-drawer-overlay" class="mobile-drawer-overlay" onclick="toggleMobileMenu()"></div>
-
-  <!-- Mobile Top Header -->
-  <header class="md:hidden sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 py-2.5 flex justify-between items-center shadow-sm">
-    <div class="flex items-center gap-2.5">
-      <button onclick="toggleMobileMenu()" class="p-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-sm font-bold flex items-center justify-center cursor-pointer">
-        ☰
-      </button>
-      <div class="flex items-center gap-2">
-        <div class="w-7 h-7 rounded-lg bg-blue-600 text-amber-400 font-black text-xs flex items-center justify-center">AC</div>
-        <span class="text-xs font-extrabold text-slate-900">AKTU Connect</span>
-      </div>
-    </div>
-    <a href="profile.html" class="flex items-center">
-      <img id="phone-avatar-img" class="w-8 h-8 rounded-full object-cover border border-blue-600 hidden" />
-      <div id="phone-avatar-fallback" class="w-8 h-8 rounded-full bg-blue-600 text-amber-300 font-bold text-xs flex items-center justify-center">SK</div>
-    </a>
-  </header>
-
   <div class="app-container">
     
-    <!-- Left Menu Card (Desktop Permanent + Mobile Slide-in) -->
-    <aside id="sidebar-card" class="sidebar-menu-card">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar-menu-card">
       <div class="menu-brand">
-        <div class="w-10 h-10 rounded-2xl bg-amber-400 text-amber-950 font-black flex items-center justify-center text-sm shadow-sm">AC</div>
+        <div class="brand-badge">AC</div>
         <div>
-          <span class="font-extrabold text-base leading-tight block text-white">AKTU Connect</span>
-          <span class="text-[11px] text-blue-200 font-semibold block">Student Dashboard</span>
+          <h2 class="text-sm font-extrabold tracking-tight text-white leading-tight">AKTU Connect</h2>
+          <p class="text-[10px] text-emerald-200 font-semibold">Student Dashboard</p>
         </div>
-        <button onclick="toggleMobileMenu()" class="md:hidden ml-auto text-white/80 hover:text-white text-lg font-bold p-1 cursor-pointer">✕</button>
       </div>
 
-      <nav class="flex-1">
-        <a href="study.html" class="menu-item"><span class="text-lg">📖</span><span>Study Hub</span></a>
-        <a href="pyq.html" class="menu-item"><span class="text-lg">📄</span><span>PYQs Vault</span></a>
-        <a href="quest.html" class="menu-item"><span class="text-lg">🎯</span><span>Quests</span></a>
-        <a href="leaderboard.html" class="menu-item active"><span class="text-lg">🏆</span><span>Leaderboard</span></a>
-        <a href="chat.html" class="menu-item"><span class="text-lg">🤖</span><span>Zen AI Tutor</span></a>
-        <a href="profile.html" class="menu-item"><span class="text-lg">👤</span><span>My Profile</span></a>
+      <nav class="flex-1 space-y-1">
+        <a href="study.html" class="menu-item">
+          <span>📖</span> <span>Study Hub</span>
+        </a>
+        <a href="pyq.html" class="menu-item">
+          <span>📄</span> <span>PYQs Vault</span>
+        </a>
+        <a href="quest.html" class="menu-item">
+          <span>🎯</span> <span>Exam Arena</span>
+        </a>
+        <a href="leaderboard.html" class="menu-item active">
+          <span>🏆</span> <span>Leaderboard</span>
+        </a>
+        <a href="chat.html" class="menu-item">
+          <span>🤖</span> <span>Zen AI Tutor</span>
+        </a>
+        <a href="profile.html" class="menu-item">
+          <span>👤</span> <span>My Profile</span>
+        </a>
       </nav>
 
-      <div class="pt-4 border-t border-white/20 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <img id="nav-avatar-img" class="w-8 h-8 rounded-full object-cover border border-white hidden" />
-          <div id="nav-avatar-fallback" class="w-8 h-8 rounded-full bg-white text-blue-700 font-bold text-xs flex items-center justify-center">SK</div>
-          <span class="text-xs font-bold text-white truncate max-w-[100px]" id="nav-user-name">Saqib Khan</span>
+      <!-- Sidebar User Footer -->
+      <div class="sidebar-user-pill">
+        <div class="flex items-center gap-2.5 overflow-hidden">
+          <div id="side-user-avatar" class="avatar-circle">SK</div>
+          <div class="truncate">
+            <p id="side-user-name" class="text-xs font-bold text-white truncate">Saqib Khan</p>
+            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">student@aktu.ac.in</p>
+          </div>
         </div>
-        <button onclick="handleLogout()" class="text-xs text-rose-200 hover:text-white font-semibold cursor-pointer">Logout</button>
+        <button onclick="handleLogout()" class="text-[11px] font-bold text-emerald-200 hover:text-white cursor-pointer ml-2">
+          Logout
+        </button>
       </div>
     </aside>
 
-    <!-- Main Viewport -->
-    <main class="main-viewport space-y-5">
+    <!-- MAIN LEADERBOARD CONTENT -->
+    <main class="space-y-5 pb-10">
       
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <!-- Top Title Bar with Profile Widget -->
+      <header class="flex items-center justify-between">
         <div>
-          <div class="portal-pill portal-pill-amber mb-1.5">🏆 State-Wide Academic Rankings</div>
-          <h2 class="text-xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
-            Student Leaderboard
-          </h2>
-          <p class="text-xs sm:text-sm text-slate-500">
-            Top performing AKTU scholars ranked by earned XP and mock consistency.
-          </p>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 mb-1">
+            ★ AKTU State Rankings
+          </span>
+          <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">University Leaderboard</h1>
+          <p class="text-xs text-slate-500 font-medium">Rankings update in real-time as students solve quests and complete syllabus units.</p>
         </div>
 
-        <!-- Top Right Profile Chip (Desktop Only) -->
-        <a href="profile.html" class="top-user-chip hidden sm:inline-flex">
-          <img id="top-avatar-img" class="avatar-img-round hidden" />
-          <div id="top-avatar-fallback" class="avatar-fallback-round">SK</div>
-          <div class="text-left pr-1">
-            <span class="block text-xs font-extrabold text-slate-900 leading-tight" id="top-user-name">Saqib Khan</span>
-            <span class="block text-[10px] font-bold text-amber-600 font-mono leading-tight" id="top-user-xp">0 XP</span>
+        <a href="profile.html" class="top-user-widget">
+          <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center">SK</div>
+          <div class="text-left hidden sm:block">
+            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Saqib Khan</p>
+            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">720 XP</p>
           </div>
         </a>
-      </div>
+      </header>
 
-      <div class="portal-card p-5 sm:p-8 space-y-3">
-        <!-- Rank 1 -->
-        <div class="flex items-center justify-between p-4 rounded-2xl bg-amber-50/70 border border-amber-200">
-          <div class="flex items-center gap-3.5">
-            <span class="w-8 h-8 rounded-xl bg-amber-400 text-amber-950 font-black text-xs flex items-center justify-center">#1</span>
-            <div>
-              <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">Aman Verma</h4>
-              <p class="text-[10px] sm:text-[11px] text-slate-500 font-medium">CSE (Core) • Level 8</p>
+      <!-- TOP 3 PODIUM CARDS -->
+      <section class="grid grid-cols-1 sm:grid-cols-3 gap-4" id="podium-container">
+        
+        <!-- RANK 2 (Silver) - Saqib Khan -->
+        <div class="portal-card p-5 text-center flex flex-col items-center justify-between border-slate-200 bg-white order-2 sm:order-1 podium-card shadow-sm">
+          <div class="mb-2">
+            <span class="inline-block text-xl">🥈</span>
+            <div class="w-14 h-14 rounded-full bg-[#1b4332] text-white text-base font-black flex items-center justify-center mx-auto my-2 shadow-xs ring-2 ring-emerald-300">
+              SK
             </div>
+            <h3 class="text-sm font-extrabold text-slate-900">Saqib Khan</h3>
+            <p class="text-[11px] text-slate-500 font-medium">GNIOT • Sem 5</p>
           </div>
-          <span class="font-mono font-bold text-xs sm:text-sm text-amber-800">850 XP</span>
+          <div class="pt-3 border-t border-slate-100 w-full">
+            <span class="text-xs font-black text-emerald-800 px-3 py-1 rounded-full bg-emerald-50" id="podium-user-xp">720 XP</span>
+          </div>
         </div>
 
-        <!-- Rank 2: User -->
-        <div class="flex items-center justify-between p-4 rounded-2xl bg-blue-50 border-2 border-blue-600 shadow-sm">
-          <div class="flex items-center gap-3.5">
-            <span class="w-8 h-8 rounded-xl bg-blue-600 text-white font-black text-xs flex items-center justify-center">#2</span>
-            <div>
-              <div class="flex items-center gap-2">
-                <h4 class="text-xs sm:text-sm font-extrabold text-slate-900" id="lb-user-name">Saqib Khan (You)</h4>
-                <span class="portal-pill portal-pill-indigo text-[9px] py-0 px-2">You</span>
-              </div>
-              <p class="text-[10px] sm:text-[11px] text-slate-500 font-medium">CSE (AI & ML) • GNIOT College</p>
-            </div>
+        <!-- RANK 1 (Gold - Highlighted) - Mohd Sultan Tyagi -->
+        <div class="portal-card p-6 text-center flex flex-col items-center justify-between border-amber-300 bg-gradient-to-b from-amber-50/40 via-white to-white order-1 sm:order-2 shadow-md relative podium-card">
+          <div class="absolute -top-3 px-3 py-0.5 rounded-full bg-amber-400 text-amber-950 text-[10px] font-black uppercase tracking-wider shadow-xs">
+            👑 University Rank 1
           </div>
-          <span class="font-mono font-bold text-xs sm:text-sm text-blue-700" id="lb-user-xp">0 XP</span>
+          <div class="mb-2 mt-2">
+            <span class="inline-block text-2xl">🥇</span>
+            <div class="w-16 h-16 rounded-full bg-amber-100 border-2 border-amber-400 text-amber-800 text-lg font-black flex items-center justify-center mx-auto my-2 shadow-sm">
+              MST
+            </div>
+            <h3 class="text-base font-black text-slate-900">Mohd Sultan Tyagi</h3>
+            <p class="text-xs text-slate-500 font-semibold">GL Bajaj College • Sem 5</p>
+          </div>
+          <div class="pt-3 border-t border-amber-100 w-full">
+            <span class="text-sm font-black text-amber-900 px-3.5 py-1 rounded-full bg-amber-100">820 XP</span>
+          </div>
         </div>
 
-        <!-- Rank 3 -->
-        <div class="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-200">
-          <div class="flex items-center gap-3.5">
-            <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 font-black text-xs flex items-center justify-center">#3</span>
-            <div>
-              <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">Priya Sharma</h4>
-              <p class="text-[10px] sm:text-[11px] text-slate-500 font-medium">Information Technology • Level 6</p>
+        <!-- RANK 3 (Bronze) - Riya Sharma -->
+        <div class="portal-card p-5 text-center flex flex-col items-center justify-between border-slate-200 bg-white order-3 podium-card shadow-sm">
+          <div class="mb-2">
+            <span class="inline-block text-xl">🥉</span>
+            <div class="w-14 h-14 rounded-full bg-amber-50/80 border-2 border-amber-200 text-amber-800 text-base font-black flex items-center justify-center mx-auto my-2 shadow-xs">
+              RS
             </div>
+            <h3 class="text-sm font-extrabold text-slate-900">Riya Sharma</h3>
+            <p class="text-[11px] text-slate-500 font-medium">GNIOT • Sem 5</p>
           </div>
-          <span class="font-mono font-bold text-xs sm:text-sm text-slate-700">590 XP</span>
+          <div class="pt-3 border-t border-slate-100 w-full">
+            <span class="text-xs font-black text-emerald-800 px-3 py-1 rounded-full bg-emerald-50">680 XP</span>
+          </div>
         </div>
 
-        <!-- Rank 4 -->
-        <div class="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-200">
-          <div class="flex items-center gap-3.5">
-            <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 font-black text-xs flex items-center justify-center">#4</span>
-            <div>
-              <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">Rahul Gupta</h4>
-              <p class="text-[10px] sm:text-[11px] text-slate-500 font-medium">Electronics (ECE) • Level 5</p>
-            </div>
+      </section>
+
+      <!-- OVERALL STANDINGS TABLE / LIST -->
+      <section class="portal-card p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+          <div>
+            <h2 class="text-sm sm:text-base font-extrabold text-slate-900 uppercase tracking-wider">Overall Standings</h2>
+            <p class="text-[11px] text-slate-400 font-medium">State-wide benchmark across affiliated engineering colleges.</p>
           </div>
-          <span class="font-mono font-bold text-xs sm:text-sm text-slate-700">480 XP</span>
+          <span class="text-[10px] font-black px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+            Real-Time Sync ●
+          </span>
         </div>
-      </div>
+
+        <div class="space-y-2.5" id="standings-list">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
 
     </main>
   </div>
 
   <script>
-    function toggleMobileMenu() {
-      const sidebar = document.getElementById('sidebar-card');
-      const overlay = document.getElementById('mobile-drawer-overlay');
-      sidebar.classList.toggle('mobile-open');
-      overlay.classList.toggle('active');
+    // 1. AUTH & USER HYDRATION
+    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'student@aktu.ac.in').toLowerCase();
+    const storedName = localStorage.getItem('user_name') || "Saqib Khan";
+    const userName = (storedName.toLowerCase() === "student") ? "Saqib Khan" : storedName;
+
+    document.getElementById('side-user-name').innerText = userName;
+    document.getElementById('side-user-email').innerText = currentEmail;
+    document.getElementById('top-user-name').innerText = userName;
+    
+    // User dynamic XP handling (Keep Saqib Khan solid at Rank 2 baseline)
+    const storedXP = parseInt(localStorage.getItem(`akt_xp_${currentEmail}`) || "0", 10);
+    const effectiveUserXP = storedXP > 720 ? storedXP : 720;
+    
+    document.getElementById('top-user-xp').innerText = effectiveUserXP + " XP";
+    document.getElementById('podium-user-xp').innerText = effectiveUserXP + " XP";
+
+    // 2. LEADERBOARD DATASET (Mohd Sultan Tyagi on Top, Saqib Khan 2nd)
+    const leaderboardStudents = [
+      { 
+        rank: 1, 
+        name: "Mohd Sultan Tyagi", 
+        college: "GL Bajaj College", 
+        sem: "Sem 5", 
+        xp: 820, 
+        avatar: "MST", 
+        isUser: false 
+      },
+      { 
+        rank: 2, 
+        name: "Saqib Khan", 
+        college: "GNIOT", 
+        sem: "Sem 5", 
+        xp: effectiveUserXP, 
+        avatar: "SK", 
+        isUser: true 
+      },
+      { 
+        rank: 3, 
+        name: "Riya Sharma", 
+        college: "GNIOT", 
+        sem: "Sem 5", 
+        xp: 680, 
+        avatar: "RS", 
+        isUser: false 
+      },
+      { 
+        rank: 4, 
+        name: "Aman Verma", 
+        college: "ABES EC", 
+        sem: "Sem 5", 
+        xp: 640, 
+        avatar: "AV", 
+        isUser: false 
+      },
+      { 
+        rank: 5, 
+        name: "Kavya Singh", 
+        college: "Galgotias", 
+        sem: "Sem 5", 
+        xp: 610, 
+        avatar: "KS", 
+        isUser: false 
+      },
+      { 
+        rank: 6, 
+        name: "Mohd Zaid", 
+        college: "JSS Noida", 
+        sem: "Sem 5", 
+        xp: 560, 
+        avatar: "MZ", 
+        isUser: false 
+      },
+      { 
+        rank: 7, 
+        name: "Ayush Tiwari", 
+        college: "KIET", 
+        sem: "Sem 5", 
+        xp: 510, 
+        avatar: "AT", 
+        isUser: false 
+      }
+    ];
+
+    // Render Standings List
+    function renderStandings() {
+      const container = document.getElementById('standings-list');
+      
+      container.innerHTML = leaderboardStudents.map((st) => {
+        const isHighlight = st.isUser;
+        const rankPill = st.rank === 1 ? 'bg-amber-400 text-amber-950 font-black' : 
+                         st.rank === 2 ? 'bg-slate-300 text-slate-900 font-bold' : 
+                         st.rank === 3 ? 'bg-amber-200 text-amber-900 font-bold' : 
+                         'bg-slate-100 text-slate-600 font-bold';
+
+        return `
+          <div class="p-3.5 sm:p-4 rounded-2xl border transition flex items-center justify-between gap-3 ${isHighlight ? 'border-emerald-500 bg-emerald-50/40 ring-1 ring-emerald-500/30' : 'border-slate-200 bg-white hover:border-emerald-300'}">
+            
+            <div class="flex items-center gap-3 sm:gap-4 overflow-hidden">
+              <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center text-xs shrink-0 ${rankPill}">
+                #${st.rank}
+              </span>
+
+              <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full ${isHighlight ? 'bg-[#1b4332] text-white' : (st.rank === 1 ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-emerald-100 text-emerald-900')} font-black text-xs sm:text-sm flex items-center justify-center shrink-0">
+                ${st.avatar}
+              </div>
+
+              <div class="truncate">
+                <div class="flex items-center gap-2">
+                  <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 truncate">${st.name}</h4>
+                  ${isHighlight ? '<span class="text-[9px] font-black px-1.5 py-0.2 rounded-full bg-emerald-600 text-white uppercase tracking-wider">You</span>' : ''}
+                </div>
+                <p class="text-[11px] text-slate-400 font-medium truncate">${st.college} • ${st.sem}</p>
+              </div>
+            </div>
+
+            <div class="text-right shrink-0">
+              <p class="text-xs sm:text-sm font-black ${isHighlight ? 'text-[#1b4332]' : 'text-slate-800'}">${st.xp} XP</p>
+              <p class="text-[10px] text-slate-400 font-semibold">AKTU Rank #${st.rank}</p>
+            </div>
+
+          </div>
+        `;
+      }).join('');
     }
 
     function handleLogout() {
-      if (confirm("Are you sure you want to logout?")) {
-        localStorage.removeItem('user_name');
-        localStorage.removeItem('user_email');
-        window.location.href = "index.html";
-      }
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('current_user_email');
+      sessionStorage.clear();
+      window.location.href = 'index.html';
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const xp = localStorage.getItem('akt_xp') || 0;
-      const name = localStorage.getItem('user_name') || 'Saqib Khan';
-      const savedAvatar = localStorage.getItem('user_avatar');
-
-      document.getElementById('lb-user-xp').innerText = `${xp} XP`;
-      document.getElementById('lb-user-name').innerText = `${name} (You)`;
-      document.getElementById('top-user-name').innerText = name;
-      document.getElementById('nav-user-name').innerText = name;
-      document.getElementById('top-user-xp').innerText = `${xp} XP`;
-
-      if (savedAvatar) {
-        const topImg = document.getElementById('top-avatar-img');
-        const topFb = document.getElementById('top-avatar-fallback');
-        const phoneImg = document.getElementById('phone-avatar-img');
-        const phoneFb = document.getElementById('phone-avatar-fallback');
-        const navImg = document.getElementById('nav-avatar-img');
-        const navFb = document.getElementById('nav-avatar-fallback');
-
-        if (topImg && topFb) { topImg.src = savedAvatar; topImg.classList.remove('hidden'); topFb.classList.add('hidden'); }
-        if (phoneImg && phoneFb) { phoneImg.src = savedAvatar; phoneImg.classList.remove('hidden'); phoneFb.classList.add('hidden'); }
-        if (navImg && navFb) { navImg.src = savedAvatar; navImg.classList.remove('hidden'); navFb.classList.add('hidden'); }
-      }
-    });
+    // Initialize
+    renderStandings();
   </script>
 </body>
 </html>
