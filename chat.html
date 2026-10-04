@@ -2,90 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AKTU Connect - AI Study Mentor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>AKTU Connect - Zen AI Tutor</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config = { darkMode: 'class' };</script>
   <link rel="stylesheet" href="style.css" />
-  <script src="theme.js"></script>
 </head>
-<body class="min-h-screen flex flex-col bg-zinc-950 text-zinc-100">
+<body>
 
-  <!-- Universal Top Navigation Bar -->
-  <nav class="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center h-16">
-      <div class="flex items-center gap-6 sm:gap-8">
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">AC</div>
-          <span class="font-bold text-lg tracking-tight hidden sm:inline">AKTU Connect</span>
-        </div>
-        <div class="flex items-center gap-1 sm:gap-2">
-          <a href="study.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📖 Study Hub</a>
-          <a href="pyq.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📄 PYQs</a>
-          <a href="quest.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🎯 Quests</a>
-          <a href="leaderboard.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🏆 Leaderboard</a>
-          <a href="chat.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-indigo-600 dark:text-indigo-400 font-semibold bg-indigo-50 dark:bg-indigo-950/50 transition">🤖 AI Tutor</a>
-          <a href="profile.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">👤 Profile</a>
-        </div>
-      </div>
-      <div class="flex items-center gap-3">
-        <button onclick="toggleGlobalTheme()" class="theme-toggle-btn ui-btn-secondary text-xs px-3 py-1.5 rounded-md">🌙 Dark</button>
-        <a href="index.html" class="text-xs font-semibold text-rose-500 hover:underline">Logout</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Main Chat Container -->
-  <main class="max-w-4xl mx-auto px-4 flex-1 my-8 w-full flex flex-col">
+  <div class="app-container">
     
-    <div class="mb-4 flex justify-between items-center">
-      <div>
-        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">🤖 Zen - Your AI Tutor</h1>
-        <p class="text-sm text-zinc-400 mt-1">Friendly chat, casual questions, or drop a photo for solutions.</p>
+    <!-- Left Menu Card (Permanent) -->
+    <aside class="sidebar-menu-card">
+      <div class="menu-brand">
+        <div class="w-10 h-10 rounded-2xl bg-amber-400 text-amber-950 font-black flex items-center justify-center text-sm shadow-sm">AC</div>
+        <div>
+          <span class="font-extrabold text-base leading-tight block text-white">AKTU Connect</span>
+          <span class="text-[11px] text-blue-200 font-semibold block">Student Dashboard</span>
+        </div>
       </div>
-    </div>
 
-    <!-- Chat Box Card -->
-    <div class="ui-card flex-1 flex flex-col border border-zinc-800 bg-zinc-900/80 rounded-2xl shadow-xl overflow-hidden h-[65vh]">
+      <nav class="flex-1">
+        <a href="study.html" class="menu-item">
+          <span class="text-lg">📖</span>
+          <span>Study Hub</span>
+        </a>
+        <a href="pyq.html" class="menu-item">
+          <span class="text-lg">📄</span>
+          <span>PYQs Vault</span>
+        </a>
+        <a href="quest.html" class="menu-item">
+          <span class="text-lg">🎯</span>
+          <span>Exam Arena</span>
+        </a>
+        <a href="leaderboard.html" class="menu-item">
+          <span class="text-lg">🏆</span>
+          <span>Leaderboard</span>
+        </a>
+        <a href="chat.html" class="menu-item active">
+          <span class="text-lg">🤖</span>
+          <span>Zen AI Tutor</span>
+        </a>
+        <a href="profile.html" class="menu-item">
+          <span class="text-lg">👤</span>
+          <span>My Profile</span>
+        </a>
+      </nav>
+
+      <div class="pt-4 border-t border-white/20 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-white text-blue-700 font-bold text-xs flex items-center justify-center">SK</div>
+          <span class="text-xs font-bold text-white">Saqib Khan</span>
+        </div>
+        <a href="index.html" class="text-xs text-rose-200 hover:text-white font-semibold">Logout</a>
+      </div>
+    </aside>
+
+    <!-- Main Viewport -->
+    <main class="main-viewport flex flex-col h-screen space-y-4">
       
-      <!-- Messages Area -->
-      <div id="chatMessages" class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4">
-        <div class="flex items-start gap-3">
-          <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-xs shrink-0">Zen</div>
-          <div class="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-zinc-200 leading-relaxed max-w-[85%]">
-            Hey! Main Zen hoon. Padhai ki baat karni ho ya aise hi kuch random discuss karna ho, batao kya scene hai? Photo bhi bhej sakte ho agar koi question solve karwana ho! 🚀
+      <div>
+        <div class="portal-pill portal-pill-amber mb-1.5">🤖 24x7 Academic Assistant</div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
+          Zen - Your AI Study Mentor
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500">Ask questions, paste derivations, or upload exam photos for instant solutions.</p>
+      </div>
+
+      <!-- Chat Box Card -->
+      <div class="portal-card flex-1 flex flex-col overflow-hidden mb-4">
+        
+        <div id="chatMessages" class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-xl bg-blue-600 text-amber-300 font-black text-xs flex items-center justify-center shrink-0">Zen</div>
+            <div class="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-sm text-slate-800 leading-relaxed max-w-[85%] font-medium">
+              Hey! Main Zen hoon. AKTU exam prep, difficult derivation, ya PYQ solve karwana ho toh batao! Photo bhi upload kar sakte ho 🚀
+            </div>
           </div>
         </div>
+
+        <div id="imagePreviewContainer" class="hidden px-4 py-2 bg-slate-100 border-t border-slate-200 flex items-center gap-2">
+          <span class="text-xs text-blue-600 font-bold">Attached:</span>
+          <span id="imageFileName" class="text-xs text-slate-700 truncate max-w-xs font-medium"></span>
+          <button onclick="removeImage()" class="text-xs text-rose-600 font-bold hover:underline ml-auto cursor-pointer">Remove</button>
+        </div>
+
+        <div class="p-3 sm:p-4 bg-white border-t border-slate-200 flex items-center gap-2.5">
+          <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="handleImageSelect(event)" />
+          <button onclick="document.getElementById('imageInput').click()" title="Attach Photo" class="p-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl text-slate-700 text-sm flex items-center justify-center shrink-0 cursor-pointer">
+            📷
+          </button>
+          <input type="text" id="chatInput" placeholder="Ask Zen anything about your AKTU syllabus..." class="flex-1 px-4 py-3 text-sm" />
+          <button id="sendBtn" class="portal-btn-primary px-6 py-3 text-sm cursor-pointer whitespace-nowrap">
+            Send 🚀
+          </button>
+        </div>
+
       </div>
-
-      <!-- Image Preview Indicator -->
-      <div id="imagePreviewContainer" class="hidden px-4 py-2 bg-zinc-900 border-t border-zinc-800 flex items-center gap-2">
-        <span class="text-xs text-indigo-400 font-medium">Attached Image:</span>
-        <span id="imageFileName" class="text-xs text-zinc-300 truncate max-w-xs"></span>
-        <button onclick="removeImage()" class="text-xs text-rose-400 hover:underline ml-auto cursor-pointer">Remove</button>
-      </div>
-
-      <!-- Input Area -->
-      <div class="p-4 bg-zinc-950 border-t border-zinc-800 flex items-center gap-3">
-        
-        <!-- Hidden File Input for Photos -->
-        <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="handleImageSelect(event)" />
-        
-        <!-- Upload Photo Button -->
-        <button onclick="document.getElementById('imageInput').click()" title="Attach Photo" class="p-3 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 rounded-xl text-zinc-300 transition text-sm flex items-center justify-center shrink-0 cursor-pointer">
-          📷
-        </button>
-
-        <input type="text" id="chatInput" placeholder="Type a message or ask anything..." 
-               class="flex-1 bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-100 outline-none focus:border-indigo-500 placeholder-zinc-500" />
-        
-        <button id="sendBtn" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-sm transition shadow-md cursor-pointer whitespace-nowrap">
-          Send 🚀
-        </button>
-      </div>
-
-    </div>
-  </main>
+    </main>
+  </div>
 
   <script src="config.js"></script>
   <script>
@@ -96,18 +110,13 @@
       const sendBtn = document.getElementById('sendBtn');
       const chatInput = document.getElementById('chatInput');
 
-      if (sendBtn) {
-        sendBtn.addEventListener('click', sendMessage);
-      }
+      if (sendBtn) sendBtn.addEventListener('click', sendMessage);
       if (chatInput) {
         chatInput.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') {
-            sendMessage();
-          }
+          if (e.key === 'Enter') sendMessage();
         });
       }
 
-      // Automatically execute doubt query redirected from Quests / Mock Tests
       const autoQuery = sessionStorage.getItem('zen_auto_query');
       if (autoQuery) {
         sessionStorage.removeItem('zen_auto_query');
@@ -128,8 +137,7 @@
 
       const reader = new FileReader();
       reader.onload = function(e) {
-        const base64String = e.target.result.split(',')[1];
-        selectedImageBase64 = base64String;
+        selectedImageBase64 = e.target.result.split(',')[1];
       };
       reader.readAsDataURL(file);
     }
@@ -148,10 +156,9 @@
 
       if (!text && !selectedImageBase64) return;
 
-      // Display User Message
       let userHtmlTag = '';
       if (selectedImageBase64) {
-        userHtmlTag += `<div class="mb-2"><img src="data:${selectedImageMimeType};base64,${selectedImageBase64}" class="max-w-[200px] rounded-lg border border-zinc-700" /></div>`;
+        userHtmlTag += `<div class="mb-2"><img src="data:${selectedImageMimeType};base64,${selectedImageBase64}" class="max-w-[200px] rounded-lg border border-slate-300" /></div>`;
       }
       if (text) {
         userHtmlTag += `<div>${escapeHtml(text)}</div>`;
@@ -159,10 +166,10 @@
 
       container.innerHTML += `
         <div class="flex items-start justify-end gap-3">
-          <div class="p-3.5 rounded-xl bg-indigo-600 text-white text-sm leading-relaxed max-w-[85%] shadow-sm">
+          <div class="p-4 rounded-2xl bg-[#0f172a] text-white text-sm leading-relaxed max-w-[85%] font-medium">
             ${userHtmlTag}
           </div>
-          <div class="w-8 h-8 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-300 font-bold text-xs shrink-0">You</div>
+          <div class="w-9 h-9 rounded-xl bg-slate-200 text-slate-800 flex items-center justify-center font-bold text-xs shrink-0">You</div>
         </div>
       `;
       
@@ -173,13 +180,12 @@
       removeImage();
       container.scrollTop = container.scrollHeight;
 
-      // Loading Placeholder
       const loadingId = "loading-" + Date.now();
       container.innerHTML += `
         <div id="${loadingId}" class="flex items-start gap-3">
-          <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-xs shrink-0">Zen</div>
-          <div class="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-zinc-400 animate-pulse">
-            Zen is thinking...
+          <div class="w-9 h-9 rounded-xl bg-blue-600 text-amber-300 font-black text-xs shrink-0 flex items-center justify-center">Zen</div>
+          <div class="p-4 rounded-2xl bg-slate-100 text-sm text-slate-500 animate-pulse font-medium">
+            Zen is formulating solution...
           </div>
         </div>
       `;
@@ -188,9 +194,7 @@
       try {
         const response = await fetch("/api/chat", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             text: text,
             imageBase64: currentImageBase64,
@@ -199,19 +203,19 @@
         });
 
         const data = await response.json();
-        const reply = data.reply || (data.error ? "Error: " + data.error : "No reply received.");
+        const reply = data.reply || (data.error ? "Error: " + data.error : "No response.");
 
         document.getElementById(loadingId).innerHTML = `
-          <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-xs shrink-0">Zen</div>
-          <div class="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-zinc-200 leading-relaxed max-w-[85%] whitespace-pre-wrap">
+          <div class="w-9 h-9 rounded-xl bg-blue-600 text-amber-300 font-black text-xs shrink-0 flex items-center justify-center">Zen</div>
+          <div class="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-sm text-slate-900 leading-relaxed max-w-[85%] whitespace-pre-wrap font-medium">
             ${escapeHtml(reply)}
           </div>
         `;
       } catch (err) {
         document.getElementById(loadingId).innerHTML = `
-          <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-xs shrink-0">Zen</div>
-          <div class="p-3.5 rounded-xl bg-red-950/60 border border-red-800 text-sm text-red-300">
-            Network Error: ${escapeHtml(err.message)}
+          <div class="w-9 h-9 rounded-xl bg-blue-600 text-amber-300 font-black text-xs shrink-0 flex items-center justify-center">Zen</div>
+          <div class="p-4 rounded-2xl bg-red-50 border border-red-200 text-sm text-red-700">
+            Error: ${escapeHtml(err.message)}
           </div>
         `;
       }
