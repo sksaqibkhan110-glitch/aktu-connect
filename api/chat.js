@@ -34,12 +34,11 @@ export default async function handler(req, res) {
     });
   }
 
-  // Active models priority list (demand spikes se bachne ke liye failover order)
+  // Active models priority list (Stable & active models first)
   const candidateModels = [
-    "gemini-2.0-flash",
-    "gemini-2.0-flash-lite",
     "gemini-1.5-flash",
-    "gemini-1.5-flash-8b"
+    "gemini-1.5-flash-8b",
+    "gemini-2.0-flash"
   ];
 
   let lastError = null;
