@@ -6,7 +6,7 @@
   <title>AKTU Connect - Exam Arena</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
-  <!-- Linked to original curriculum data -->
+  <!-- REAL STUDY DATA SCRIPT -->
   <script src="study-data.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
@@ -224,67 +224,194 @@
     let currentSection = 'A';
     let currentSetNumber = 1;
 
-    // Connect Complete AKTU Curriculum (from study-data.js or built-in schema)
-    const masterCurriculum = window.studyData || window.AKTU_STUDY_DATA || {
-      "Computer Science & Engineering": {
-        "Semester 3": [
-          { code: "KCS301", name: "Data Structures" },
-          { code: "KCS302", name: "Computer Organization & Architecture" },
-          { code: "KCS303", name: "Discrete Structures & Graph Theory" }
-        ],
-        "Semester 4": [
-          { code: "KCS401", name: "Operating Systems" },
-          { code: "KCS402", name: "Theory of Automata & Formal Languages" },
-          { code: "KCS403", name: "Microprocessor" }
-        ],
-        "Semester 5": [
-          { code: "KCS501", name: "Database Management Systems" },
-          { code: "KCS502", name: "Design and Analysis of Algorithms" },
-          { code: "KCS503", name: "Compiler Design" }
-        ],
-        "Semester 6": [
-          { code: "KCS601", name: "Software Engineering" },
-          { code: "KCS602", name: "Web Technology" },
-          { code: "KCS603", name: "Computer Networks" }
-        ]
-      },
-      "CSE (AI & ML)": {
-        "Semester 3": [
-          { code: "BCS301", name: "Data Structures" },
-          { code: "BCS302", name: "Computer Organization & Architecture" },
-          { code: "BCS303", name: "Discrete Mathematics" }
-        ],
-        "Semester 4": [
-          { code: "BCS401", name: "Operating Systems" },
-          { code: "BCS402", name: "Theory of Automata" },
-          { code: "AIML401", name: "Introduction to Artificial Intelligence" }
-        ],
-        "Semester 5": [
-          { code: "BCS501", name: "Database Management Systems" },
-          { code: "BCS502", name: "Design and Analysis of Algorithms" },
-          { code: "AIML501", name: "Machine Learning Techniques" }
-        ]
-      },
-      "Information Technology": {
-        "Semester 3": [
-          { code: "KIT301", name: "Data Structures & Algorithms" },
-          { code: "KIT302", name: "Computer Organization" }
-        ],
-        "Semester 4": [
-          { code: "KIT401", name: "Operating Systems" },
-          { code: "KIT402", name: "Object Oriented Programming" }
-        ],
-        "Semester 5": [
-          { code: "KIT501", name: "Database Management Systems" },
-          { code: "KIT502", name: "Design & Analysis of Algorithms" }
-        ]
+    // Helper: Build Master Curriculum from study-data.js OR Comprehensive AKTU Fallback
+    function getCurriculumData() {
+      // 1. Try global study-data.js objects
+      const extData = window.studyData || window.AKTU_STUDY_DATA || window.coursesData;
+      if (extData && typeof extData === 'object' && Object.keys(extData).length > 0) {
+        // Normalize if it's formatted as array or object
+        return extData;
       }
-    };
+
+      // 2. Comprehensive 1-8 Semester & Complete Branch Database
+      const commonFirstYear = {
+        "Semester 1": [
+          { code: "BAS101", name: "Engineering Physics" },
+          { code: "BAS102", name: "Engineering Chemistry" },
+          { code: "BAS103", name: "Engineering Mathematics-I" },
+          { code: "BEE101", name: "Basic Electrical Engineering" },
+          { code: "BCS101", name: "Programming for Problem Solving (C)" }
+        ],
+        "Semester 2": [
+          { code: "BAS203", name: "Engineering Mathematics-II" },
+          { code: "BEC201", name: "Basic Electronics Engineering" },
+          { code: "BME201", name: "Fundamentals of Mechanical Engineering" },
+          { code: "BAS204", name: "Environment & Ecology" },
+          { code: "BAS205", name: "Soft Skills" }
+        ]
+      };
+
+      return {
+        "Computer Science & Engineering": {
+          ...commonFirstYear,
+          "Semester 3": [
+            { code: "KCS301", name: "Data Structures" },
+            { code: "KCS302", name: "Computer Organization & Architecture" },
+            { code: "KCS303", name: "Discrete Structures & Graph Theory" }
+          ],
+          "Semester 4": [
+            { code: "KCS401", name: "Operating Systems" },
+            { code: "KCS402", name: "Theory of Automata & Formal Languages" },
+            { code: "KCS403", name: "Microprocessor" }
+          ],
+          "Semester 5": [
+            { code: "KCS501", name: "Database Management Systems" },
+            { code: "KCS502", name: "Design and Analysis of Algorithms" },
+            { code: "KCS503", name: "Compiler Design" }
+          ],
+          "Semester 6": [
+            { code: "KCS601", name: "Software Engineering" },
+            { code: "KCS602", name: "Web Technology" },
+            { code: "KCS603", name: "Computer Networks" }
+          ],
+          "Semester 7": [
+            { code: "KCS701", name: "Artificial Intelligence" },
+            { code: "KCS702", name: "Cloud Computing" },
+            { code: "KOE074", name: "Renewable Energy Resources" }
+          ],
+          "Semester 8": [
+            { code: "KCS801", name: "Deep Learning" },
+            { code: "KCS802", name: "Big Data & Data Analytics" }
+          ]
+        },
+        "CSE (AI & ML)": {
+          ...commonFirstYear,
+          "Semester 3": [
+            { code: "BCS301", name: "Data Structures" },
+            { code: "BCS302", name: "Computer Organization & Architecture" },
+            { code: "BCS303", name: "Discrete Mathematics" }
+          ],
+          "Semester 4": [
+            { code: "BCS401", name: "Operating Systems" },
+            { code: "BCS402", name: "Theory of Automata" },
+            { code: "AIML401", name: "Introduction to Artificial Intelligence" }
+          ],
+          "Semester 5": [
+            { code: "BCS501", name: "Database Management Systems" },
+            { code: "BCS502", name: "Design and Analysis of Algorithms" },
+            { code: "AIML501", name: "Machine Learning Techniques" }
+          ],
+          "Semester 6": [
+            { code: "AIML601", name: "Deep Neural Networks" },
+            { code: "AIML602", name: "Natural Language Processing" },
+            { code: "BCS603", name: "Computer Networks" }
+          ],
+          "Semester 7": [
+            { code: "AIML701", name: "Computer Vision" },
+            { code: "AIML702", name: "Reinforcement Learning" }
+          ],
+          "Semester 8": [
+            { code: "AIML801", name: "Generative AI & LLMs" },
+            { code: "AIML802", name: "AI Ethics & Governance" }
+          ]
+        },
+        "Artificial Intelligence & Data Science (AIDS)": {
+          ...commonFirstYear,
+          "Semester 3": [
+            { code: "ADS301", name: "Data Structures & Algorithms" },
+            { code: "ADS302", name: "Statistical Methods for Data Science" }
+          ],
+          "Semester 4": [
+            { code: "ADS401", name: "Database Management & SQL" },
+            { code: "ADS402", name: "Foundations of Data Science" }
+          ],
+          "Semester 5": [
+            { code: "ADS501", name: "Machine Learning" },
+            { code: "ADS502", name: "Data Mining & Warehousing" }
+          ],
+          "Semester 6": [
+            { code: "ADS601", name: "Big Data Analytics" },
+            { code: "ADS602", name: "Data Visualization & BI" }
+          ],
+          "Semester 7": [
+            { code: "ADS701", name: "Deep Learning & Neural Networks" },
+            { code: "ADS702", name: "Business Analytics" }
+          ],
+          "Semester 8": [
+            { code: "ADS801", name: "Predictive Analytics" }
+          ]
+        },
+        "Information Technology": {
+          ...commonFirstYear,
+          "Semester 3": [
+            { code: "KIT301", name: "Data Structures & Algorithms" },
+            { code: "KIT302", name: "Computer Organization" }
+          ],
+          "Semester 4": [
+            { code: "KIT401", name: "Operating Systems" },
+            { code: "KIT402", name: "Object Oriented Programming (Java)" }
+          ],
+          "Semester 5": [
+            { code: "KIT501", name: "Database Management Systems" },
+            { code: "KIT502", name: "Design & Analysis of Algorithms" }
+          ],
+          "Semester 6": [
+            { code: "KIT601", name: "Web Technology & Frameworks" },
+            { code: "KIT602", name: "Computer Networks" }
+          ],
+          "Semester 7": [
+            { code: "KIT701", name: "Cryptography & Network Security" },
+            { code: "KIT702", name: "Cloud Computing" }
+          ],
+          "Semester 8": [
+            { code: "KIT801", name: "Mobile Computing" }
+          ]
+        },
+        "Electronics & Communication (ECE)": {
+          ...commonFirstYear,
+          "Semester 3": [
+            { code: "KEC301", name: "Electronic Devices & Circuits" },
+            { code: "KEC302", name: "Digital System Design" },
+            { code: "KEC303", name: "Network Analysis & Synthesis" }
+          ],
+          "Semester 4": [
+            { code: "KEC401", name: "Communication Engineering" },
+            { code: "KEC402", name: "Analog Circuits" },
+            { code: "KEC403", name: "Signal & Systems" }
+          ],
+          "Semester 5": [
+            { code: "KEC501", name: "Integrated Circuits" },
+            { code: "KEC502", name: "Microprocessor & Microcontroller" },
+            { code: "KEC503", name: "Digital Signal Processing" }
+          ],
+          "Semester 6": [
+            { code: "KEC601", name: "Antennas and Wave Propagation" },
+            { code: "KEC602", name: "Control Systems" },
+            { code: "KEC603", name: "Data Communication Networks" }
+          ],
+          "Semester 7": [
+            { code: "KEC701", name: "VLSI Design" },
+            { code: "KEC702", name: "Optical Communication" }
+          ],
+          "Semester 8": [
+            { code: "KEC801", name: "Wireless & Mobile Communication" }
+          ]
+        }
+      };
+    }
+
+    const masterCurriculum = getCurriculumData();
 
     function populateBranches() {
       const bSel = document.getElementById('arena-branch');
       const branches = Object.keys(masterCurriculum);
       bSel.innerHTML = branches.map(b => `<option value="${b}">${b}</option>`).join('');
+      
+      // Auto select current student branch if saved
+      const savedBranch = localStorage.getItem(`user_branch_${currentEmail}`);
+      if (savedBranch && branches.includes(savedBranch)) {
+        bSel.value = savedBranch;
+      }
       populateSemesters();
     }
 
@@ -292,8 +419,15 @@
       const branch = document.getElementById('arena-branch').value;
       const sSel = document.getElementById('arena-sem');
       const sems = Object.keys(masterCurriculum[branch] || {});
+      
       sSel.innerHTML = sems.map(s => `<option value="${s}">${s}</option>`).join('');
-      if (sems.includes("Semester 5")) sSel.value = "Semester 5";
+      
+      // Default to Semester 5 or Semester 3 if available
+      if (sems.includes("Semester 5")) {
+        sSel.value = "Semester 5";
+      } else if (sems.length > 0) {
+        sSel.value = sems[0];
+      }
       populateSubjects();
     }
 
@@ -303,7 +437,15 @@
       const subSel = document.getElementById('arena-subject');
       const subs = (masterCurriculum[branch] && masterCurriculum[branch][sem]) ? masterCurriculum[branch][sem] : [];
 
-      subSel.innerHTML = subs.map(s => `<option value="${s.name} (${s.code})">${s.name} (${s.code})</option>`).join('');
+      if (subs.length === 0) {
+        subSel.innerHTML = `<option value="Core Engineering Subject">Core Engineering Subject</option>`;
+      } else {
+        subSel.innerHTML = subs.map(s => {
+          const code = s.code ? ` (${s.code})` : '';
+          const name = s.name || s.title || s;
+          return `<option value="${name}${code}">${name}${code}</option>`;
+        }).join('');
+      }
       refreshQuestions();
     }
 
@@ -337,48 +479,53 @@
           }
         }
       } catch (e) {
-        console.warn("Gemini real-time question fetch fallback active:", e);
+        console.warn("Gemini question fetch fallback active:", e);
       }
       return null;
     }
 
-    // Comprehensive Fallback Pool so it NEVER breaks
+    // Dynamic Fallback Bank for all Engineering Topics
     const fallbackBank = [
       {
-        q: "In Database Systems, which Normal Form guarantees that every functional dependency has a candidate key as determinant?",
+        q: "In Relational Database Management Systems, which Normal Form guarantees that every functional dependency has a candidate key as determinant?",
         opts: ["1NF", "2NF", "3NF", "BCNF"],
         ans: 3
       },
       {
-        q: "What is the primary objective of normalizing a relational database schema?",
-        opts: ["Minimize storage and eliminate anomalies", "Increase table join latency", "Enforce static indexes", "Remove foreign key constraints"],
+        q: "What is the primary objective of normalizing a database relation?",
+        opts: ["Minimize storage and eliminate anomalies", "Increase query execution latency", "Force static page locks", "Drop foreign keys automatically"],
         ans: 0
       },
       {
-        q: "In Design and Analysis of Algorithms, what is the tight asymptotic lower bound of comparison-based sorting?",
+        q: "In Design and Analysis of Algorithms, what is the asymptotic lower bound of comparison-based sorting algorithms?",
         opts: ["O(n)", "Omega(n log n)", "O(n^2)", "Omega(log n)"],
         ans: 1
       },
       {
-        q: "In Operating Systems, which scheduling algorithm is strictly non-preemptive?",
-        opts: ["Round Robin", "First-Come First-Served (FCFS)", "Shortest Remaining Time First", "Priority Preemptive"],
+        q: "In Operating Systems, which condition is NOT essential for Deadlock to occur?",
+        opts: ["Mutual Exclusion", "Hold and Wait", "Preemption of resources", "Circular Wait"],
+        ans: 2
+      },
+      {
+        q: "In Computer Networks, which layer is responsible for Process-to-Process end-to-end communication?",
+        opts: ["Network Layer", "Transport Layer", "Data Link Layer", "Application Layer"],
         ans: 1
       },
       {
-        q: "In Computer Networks, which layer is responsible for Host-to-Host packet routing?",
-        opts: ["Data Link Layer", "Network Layer", "Transport Layer", "Session Layer"],
+        q: "In Digital Electronics, how many select lines are required for a 16-to-1 Multiplexer?",
+        opts: ["2", "4", "8", "16"],
         ans: 1
       },
       {
-        q: "In Discrete Mathematics, a relation that is Reflexive, Symmetric, and Transitive is called:",
-        opts: ["Partial Order", "Equivalence Relation", "Strict Total Order", "Bijective Relation"],
+        q: "In Discrete Mathematics, a relation that is Reflexive, Anti-symmetric and Transitive is called:",
+        opts: ["Equivalence Relation", "Partial Order Relation", "Total Order Relation", "Inverse Relation"],
         ans: 1
       }
     ];
 
     async function refreshQuestions() {
       currentSetNumber++;
-      const subject = document.getElementById('arena-subject').value || "Database Management Systems (KCS501)";
+      const subject = document.getElementById('arena-subject').value || "Engineering Core";
       const unit = document.getElementById('arena-unit').value || "Unit 1";
       const feed = document.getElementById('questions-feed');
       const tag = document.getElementById('ai-generating-tag');
@@ -391,10 +538,10 @@
         document.getElementById('arena-set-heading').innerText = `Set ${currentSetNumber} (5 Questions • 10 Marks [2 Marks Each])`;
         feed.innerHTML = `<div class="p-8 text-center text-xs font-bold text-slate-400 flex flex-col items-center justify-center gap-2"><div class="w-6 h-6 border-2 border-emerald-700 border-t-transparent rounded-full animate-spin"></div><span>Generating fresh questions for ${subject} via Gemini AI...</span></div>`;
 
-        // 1. Fetch from Gemini
+        // Fetch from Gemini API
         let questions = await fetchGeminiQuestions(subject, unit, true);
 
-        // 2. If API offline, dynamic shuffle from pool
+        // Instant shuffle from dynamic pool if API latency occurs
         if (!questions) {
           questions = [...fallbackBank].sort(() => 0.5 - Math.random()).slice(0, 5);
         }
@@ -430,14 +577,14 @@
 
       } else {
         document.getElementById('arena-set-heading').innerText = `Set ${currentSetNumber} (Section-B/C Subjective Questions [7 Marks Each])`;
-        feed.innerHTML = `<div class="p-8 text-center text-xs font-bold text-slate-400 flex flex-col items-center justify-center gap-2"><div class="w-6 h-6 border-2 border-emerald-700 border-t-transparent rounded-full animate-spin"></div><span>Generating subjective proofs for ${subject}...</span></div>`;
+        feed.innerHTML = `<div class="p-8 text-center text-xs font-bold text-slate-400 flex flex-col items-center justify-center gap-2"><div class="w-6 h-6 border-2 border-emerald-700 border-t-transparent rounded-full animate-spin"></div><span>Generating 7-mark derivation proofs for ${subject}...</span></div>`;
 
         let subs = await fetchGeminiQuestions(subject, unit, false);
         if (!subs) {
           subs = [
-            { q: `Explain the fundamental architecture and core design of ${subject} with neat block diagrams. [7 Marks]`, tag: "Repeated 2023" },
-            { q: `Derive the mathematical recurrence and step-by-step proofs for ${unit} topics. [7 Marks]`, tag: "Quantum Derivation" },
-            { q: `Discuss the comparative analysis, edge cases, and practical implementation scenarios in ${subject}. [7 Marks]`, tag: "High Probability" }
+            { q: `Explain the fundamental architecture and core design of ${subject} with neat block diagrams. Differentiate between its key components. [7 Marks]`, tag: "Repeated 2023" },
+            { q: `Derive the mathematical recurrence and step-by-step proofs for ${unit} core principles. [7 Marks]`, tag: "Quantum Derivation" },
+            { q: `Discuss the comparative analysis, edge cases, and practical implementation scenarios in ${subject}. [7 Marks]`, tag: "High Weightage" }
           ];
         }
 
@@ -451,7 +598,7 @@
                 <span class="text-[10px] font-black uppercase text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-200">
                   Q${idx + 1} • Long Answer
                 </span>
-                <span class="text-[9px] font-black text-amber-900 bg-amber-100 px-2 py-0.5 rounded-full">${item.tag || 'Quantum Repeated'}</span>
+                <span class="text-[9px] font-black text-amber-900 bg-amber-100 px-2 py-0.5 rounded-full">${item.tag || 'AKTU Quantum Repeated'}</span>
               </div>
               <span class="text-[11px] font-black text-slate-400">7 MARKS</span>
             </div>
@@ -461,7 +608,7 @@
             </p>
 
             <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
-              <span class="text-[11px] text-slate-400 font-semibold">Length: 2.5 to 3 pages with diagrams</span>
+              <span class="text-[11px] text-slate-400 font-semibold">Recommended Length: 2.5 to 3 pages with diagrams</span>
               <a href="chat.html" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#1b4332] text-xs font-bold transition flex items-center gap-1">
                 <span>🤖</span> Ask Zen to Solve
               </a>
@@ -489,7 +636,6 @@
       }
     }
 
-    // Avatar Sync
     function syncArenaAvatars() {
       const savedPhoto = localStorage.getItem(`user_avatar_${currentEmail}`) 
                       || localStorage.getItem('user_avatar') 
