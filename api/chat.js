@@ -32,11 +32,11 @@ export default async function handler(req, res) {
     });
   }
 
-  // Google ke latest error-suggested models
+  // GEMINI-3.8-FLASH STRICTLY FIRST PRIORITY
   const candidateModels = [
     "gemini-3.8-flash",
     "gemini-1.5-flash",
-    "gemini-2.0-flash"
+    "gemini-2.5-flash"
   ];
 
   let lastError = null;
