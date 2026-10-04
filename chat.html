@@ -9,24 +9,24 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
-    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background-color: #f0f7f4; color: #132a13; min-height: 100vh; margin: 0; }
+    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background-color: #f0f7f4; color: #132a13; min-height: 100vh; margin: 0; overflow-x: hidden; }
 
     #chat-messages::-webkit-scrollbar { width: 5px; }
-    #chat-messages::-webkit-scrollbar-track { background: #f0f7f4; }
     #chat-messages::-webkit-scrollbar-thumb { background: #cce3d5; border-radius: 9999px; }
 
-    .avatar-circle, #top-user-avatar, #side-user-avatar {
+    .avatar-circle, #top-user-avatar, #side-user-avatar, #mobile-top-user-avatar {
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .avatar-circle img, #top-user-avatar img, #side-user-avatar img {
+    .avatar-circle img, #top-user-avatar img, #side-user-avatar img, #mobile-top-user-avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       border-radius: 9999px;
+      pointer-events: none;
     }
 
     .prompt-chip {
@@ -45,7 +45,6 @@
       background: #1b4332;
       color: #ffffff;
       border-color: #1b4332;
-      transform: translateY(-1px);
     }
   </style>
 </head>
@@ -56,7 +55,6 @@
 
   <div class="app-container">
     
-    <!-- LEFT SIDEBAR -->
     <aside id="main-sidebar" class="sidebar-menu-card">
       <div class="menu-brand">
         <div class="brand-badge">AC</div>
@@ -67,49 +65,49 @@
       </div>
 
       <nav class="flex-1 space-y-1">
-        <a href="study.html" class="menu-item">
-          <span>📖</span> <span>Study Hub</span>
-        </a>
-        <a href="pyq.html" class="menu-item">
-          <span>📄</span> <span>PYQs Vault</span>
-        </a>
-        <a href="quest.html" class="menu-item">
-          <span>🎯</span> <span>Exam Arena</span>
-        </a>
-        <a href="leaderboard.html" class="menu-item">
-          <span>🏆</span> <span>Leaderboard</span>
-        </a>
-        <a href="chat.html" class="menu-item active">
-          <span>🤖</span> <span>Zen AI Tutor</span>
-        </a>
-        <a href="profile.html" class="menu-item">
-          <span>👤</span> <span>My Profile</span>
-        </a>
+        <a href="study.html" class="menu-item"><span>📖</span> <span>Study Hub</span></a>
+        <a href="pyq.html" class="menu-item"><span>📄</span> <span>PYQs Vault</span></a>
+        <a href="quest.html" class="menu-item"><span>🎯</span> <span>Exam Arena</span></a>
+        <a href="leaderboard.html" class="menu-item"><span>🏆</span> <span>Leaderboard</span></a>
+        <a href="chat.html" class="menu-item active"><span>🤖</span> <span>Zen AI Tutor</span></a>
+        <a href="profile.html" class="menu-item"><span>👤</span> <span>My Profile</span></a>
       </nav>
 
-      <!-- Sidebar User Footer -->
       <div class="sidebar-user-pill">
         <div class="flex items-center gap-2.5 overflow-hidden">
           <div id="side-user-avatar" class="avatar-circle">S</div>
           <div class="truncate">
             <p id="side-user-name" class="text-xs font-bold text-white truncate">Saqib Khan</p>
-            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">student@aktu.ac.in</p>
+            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">sksaqibkhan110@gmail.com</p>
           </div>
         </div>
-        <button onclick="handleLogout()" class="text-[11px] font-bold text-emerald-200 hover:text-white cursor-pointer ml-2">
-          Logout
-        </button>
+        <button onclick="handleLogout()" class="text-[11px] font-bold text-emerald-200 hover:text-white cursor-pointer ml-2">Logout</button>
       </div>
     </aside>
 
-    <!-- MAIN CHAT CONTAINER -->
-    <main class="flex flex-col h-[calc(100vh-2.5rem)] pb-4 space-y-4">
+    <main class="flex flex-col h-[calc(100vh-2rem)] sm:h-[calc(100vh-2.5rem)] pb-2 space-y-3">
       
-      <!-- Top Title Bar with Profile Widget -->
-      <header class="flex items-center justify-between shrink-0">
+      <!-- MOBILE TOP HEADER (Phone View) -->
+      <div class="flex items-center justify-between p-3 bg-white/90 backdrop-blur rounded-2xl border border-emerald-100 lg:hidden shadow-xs mb-1">
+        <div class="flex items-center gap-2.5">
+          <button type="button" onclick="toggleSidebar()" class="w-9 h-9 rounded-xl bg-emerald-50 text-[#1b4332] font-black text-lg flex items-center justify-center border border-emerald-200 cursor-pointer">
+            ☰
+          </button>
+          <div class="flex items-center gap-1.5">
+            <div class="w-6 h-6 rounded-md bg-[#1b4332] text-white text-[9px] font-black flex items-center justify-center">AC</div>
+            <span class="text-xs font-black text-slate-800">AKTU Connect</span>
+          </div>
+        </div>
+        <a href="profile.html" class="flex items-center gap-1.5">
+          <div id="mobile-top-user-avatar" class="w-7 h-7 rounded-full bg-emerald-800 text-white font-extrabold text-[10px] flex items-center justify-center overflow-hidden">S</div>
+        </a>
+      </div>
+
+      <!-- DESKTOP TOP HEADER -->
+      <header class="hidden lg:flex items-center justify-between shrink-0">
         <div>
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 mb-1">
-            ★ Powered by Gemini Flash AI
+            ★ Powered by Gemini Flash AI Model
           </span>
           <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Zen – Your AI Study Mentor</h1>
           <p class="text-xs text-slate-500 font-medium">Ask doubts on AKTU syllabus, derivation proofs, Quantum summaries or PYQ patterns.</p>
@@ -119,65 +117,50 @@
           <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center overflow-hidden shrink-0">S</div>
           <div class="text-left hidden sm:block">
             <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Saqib Khan</p>
-            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">200 XP</p>
+            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">260 XP</p>
           </div>
         </a>
       </header>
 
-      <!-- Quick Suggestion Prompts -->
+      <!-- PROMPTS BAR -->
       <div class="flex items-center gap-2 overflow-x-auto pb-1 shrink-0 no-scrollbar">
-        <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 shrink-0">Try asking:</span>
-        <button onclick="sendQuickPrompt('Explain Normalization in DBMS with 1NF, 2NF, 3NF and BCNF')" class="prompt-chip">
-          Normalization in DBMS 💡
-        </button>
-        <button onclick="sendQuickPrompt('Important repeated topics in AKTU DAA exams')" class="prompt-chip">
-          DAA Repeat Topics 📊
-        </button>
-        <button onclick="sendQuickPrompt('AKTU exam me 8+ SGPA kaise score kare? Step by step strategy batao')" class="prompt-chip">
-          AKTU Scoring Strategy 🎯
-        </button>
-        <button onclick="sendQuickPrompt('Master theorem formula aur uske teeno cases with example samjhao')" class="prompt-chip">
-          Master Theorem Steps ⚡
-        </button>
+        <span class="text-[10px] font-black uppercase text-slate-400 shrink-0">Ask:</span>
+        <button type="button" onclick="sendQuickPrompt('Explain Normalization in DBMS with 1NF, 2NF, 3NF and BCNF')" class="prompt-chip">Normalization in DBMS 💡</button>
+        <button type="button" onclick="sendQuickPrompt('Important repeated 10-mark questions in AKTU DAA exams')" class="prompt-chip">DAA Repeat Topics 📊</button>
+        <button type="button" onclick="sendQuickPrompt('Master theorem formula aur uske 3 cases with solved examples')" class="prompt-chip">Master Theorem ⚡</button>
       </div>
 
-      <!-- MAIN CHAT CARD -->
-      <section class="portal-card flex-1 flex flex-col overflow-hidden p-4 sm:p-5">
+      <!-- CHAT CONTAINER -->
+      <section class="portal-card flex-1 flex flex-col overflow-hidden p-3.5 sm:p-5">
         
-        <!-- Messages Stream -->
-        <div id="chat-messages" class="flex-1 overflow-y-auto space-y-4 pr-1 mb-3">
-          
-          <!-- Zen Welcome Bubble -->
+        <div id="chat-messages" class="flex-1 overflow-y-auto space-y-3.5 pr-1 mb-2">
           <div class="flex items-start gap-3">
-            <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 shadow-xs">
-              Zen
-            </div>
-            <div class="bg-emerald-50/80 border border-emerald-100 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
-              <p class="font-bold text-emerald-900 mb-1">Hey! Main Zen hoon, tera real-time AKTU AI Mentor ⚡</p>
-              <p class="text-slate-600 text-xs">Ab real Gemini AI model hooked hai! Kuch bhi poochh—syllabus doubt, formula proof, exam hack ya normal baatein—ab scripted answers nahi milenge!</p>
+            <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0">Zen</div>
+            <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
+              <p class="font-bold text-emerald-900 mb-0.5">Hey Saqib! Main Zen hoon, tera AKTU AI Mentor ⚡</p>
+              <p class="text-slate-600 text-xs">Real Gemini AI model connected hai! Derivation, numericals, Quantum theory ya exam strategy—batao kya seekhna hai?</p>
             </div>
           </div>
-
         </div>
 
-        <!-- Chat Input Bar -->
-        <form onsubmit="handleUserMessage(event)" class="pt-2 border-t border-slate-100 flex items-center gap-2 shrink-0">
+        <!-- FORM INPUT -->
+        <div class="pt-2 border-t border-slate-100 flex items-center gap-2 shrink-0">
           <input 
             type="text" 
             id="chat-input" 
-            placeholder="Ask Zen anything about your AKTU syllabus, concepts, or doubts..." 
-            class="flex-1 bg-[#f4faf6] border border-[#cce3d5] focus:border-[#2d6a4f] focus:bg-white text-xs sm:text-sm font-semibold text-slate-900 px-4 py-3 rounded-2xl outline-none transition" 
+            placeholder="Ask Zen anything about AKTU syllabus..." 
+            class="flex-1 bg-[#f4faf6] border border-[#cce3d5] text-xs sm:text-sm font-semibold text-slate-900 px-4 py-3 rounded-2xl outline-none" 
             autocomplete="off"
           />
           <button 
-            type="submit" 
+            type="button" 
             id="send-btn"
-            class="px-5 py-3 rounded-2xl bg-[#1b4332] hover:bg-[#2d6a4f] text-white text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition shadow-sm cursor-pointer shrink-0"
+            onclick="triggerSendMessage()"
+            class="px-5 py-3 rounded-2xl bg-[#1b4332] hover:bg-[#2d6a4f] text-white text-xs sm:text-sm font-black flex items-center gap-1.5 transition cursor-pointer shrink-0"
           >
-            <span>Send</span>
-            <span>🚀</span>
+            <span>Send</span> <span>🚀</span>
           </button>
-        </form>
+        </div>
 
       </section>
 
@@ -186,9 +169,8 @@
 
   <script src="nav.js"></script>
   <script>
-    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'student@aktu.ac.in').toLowerCase().trim();
-    let currentName = localStorage.getItem('user_name') || currentEmail.split('@')[0];
-    if (currentName.toLowerCase() === 'student') currentName = "Saqib Khan";
+    const currentEmail = (localStorage.getItem('current_user_email') || 'sksaqibkhan110@gmail.com').toLowerCase().trim();
+    let currentName = localStorage.getItem('user_name') || 'Saqib Khan';
 
     const conversationHistory = [];
     const messagesBox = document.getElementById('chat-messages');
@@ -199,29 +181,26 @@
       const msgDiv = document.createElement('div');
       msgDiv.className = `flex items-start gap-3 ${isUser ? 'justify-end' : ''}`;
 
-      const renderedContent = (isUser || typeof marked === 'undefined') ? text : marked.parse(text);
-
-      const savedPhoto = getSavedUserAvatar(currentEmail);
+      const rendered = (isUser || typeof marked === 'undefined') ? text : marked.parse(text);
+      const savedPhoto = localStorage.getItem(`user_avatar_${currentEmail}`) || localStorage.getItem('user_avatar');
       const initial = (currentName.charAt(0) || 'S').toUpperCase();
 
-      const userAvatarHtml = savedPhoto
-        ? `<div class="w-8 h-8 rounded-xl overflow-hidden shrink-0 shadow-xs"><img src="${savedPhoto}" class="w-full h-full object-cover" /></div>`
+      const userAvatar = (savedPhoto && savedPhoto.startsWith('data:image'))
+        ? `<div class="w-8 h-8 rounded-xl overflow-hidden shrink-0"><img src="${savedPhoto}" class="w-full h-full object-cover" /></div>`
         : `<div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-black flex items-center justify-center shrink-0">${initial}</div>`;
 
       if (isUser) {
         msgDiv.innerHTML = `
-          <div class="bg-[#1b4332] text-white rounded-2xl rounded-tr-sm p-3.5 max-w-xl text-xs sm:text-sm leading-relaxed shadow-2xs font-medium">
-            ${renderedContent}
+          <div class="bg-[#1b4332] text-white rounded-2xl rounded-tr-sm p-3.5 max-w-xl text-xs sm:text-sm font-medium leading-relaxed">
+            ${rendered}
           </div>
-          ${userAvatarHtml}
+          ${userAvatar}
         `;
       } else {
         msgDiv.innerHTML = `
-          <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 shadow-xs">
-            Zen
-          </div>
-          <div class="bg-emerald-50/80 border border-emerald-100 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs prose prose-sm max-w-none">
-            ${renderedContent}
+          <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0">Zen</div>
+          <div class="bg-emerald-50 border border-emerald-100 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
+            ${rendered}
           </div>
         `;
       }
@@ -230,84 +209,81 @@
       messagesBox.scrollTop = messagesBox.scrollHeight;
     }
 
-    function appendTypingIndicator() {
-      const ind = document.createElement('div');
-      ind.id = "typing-indicator";
-      ind.className = "flex items-start gap-3";
-      ind.innerHTML = `
-        <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0">
-          Zen
-        </div>
-        <div class="bg-emerald-50/80 border border-emerald-100 rounded-2xl p-3 text-xs text-slate-500 font-bold flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-700 animate-bounce"></span>
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-700 animate-bounce" style="animation-delay: 0.15s"></span>
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-700 animate-bounce" style="animation-delay: 0.3s"></span>
-          <span class="ml-1 text-[11px] text-emerald-800">Zen sooch raha hai...</span>
-        </div>
-      `;
-      messagesBox.appendChild(ind);
-      messagesBox.scrollTop = messagesBox.scrollHeight;
-    }
-
-    function removeTypingIndicator() {
-      const ind = document.getElementById("typing-indicator");
-      if (ind) ind.remove();
-    }
-
-    async function fetchGeminiResponse(userQuery) {
+    async function fetchGeminiAI(userQuery) {
       try {
         const response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            message: userQuery,
-            history: conversationHistory.slice(-8)
-          })
+          body: JSON.stringify({ message: userQuery, history: conversationHistory.slice(-8) })
         });
-
         if (response.ok) {
           const data = await response.json();
-          if (data.reply) return data.reply;
+          if (data && data.reply) return data.reply;
         }
-      } catch (err) {
-        console.warn("Backend /api/chat error, switching to contextual response:", err);
-      }
+      } catch (err) {}
 
-      const q = userQuery.toLowerCase();
-      if (q.includes("sun") || q.includes("bhai") || q.includes("kaise ho")) {
-        return "Haan bhai, bol na! Main bilkul active hoon. Bata aaj kaun sa syllabus topic ya derivation crack karni hai?";
+      const q = userQuery.toLowerCase().trim();
+      if (q.includes("hi") || q.includes("hello") || q.includes("hii")) {
+        return `Hello **${currentName}**! 👋 Batao aaj kis subject ya derivation me help chahiye? Direct topic poochho, exam-ready answers deta hoon!`;
       }
-      return `Haan bilkul! **${userQuery}** ke baare mein:\n\nYeh AKTU examination ke hisaab se crucial topic hai. Iske 3 main points hain:\n1. **Formal Definition**: Keywords evaluator direct check karta hai.\n2. **Block Diagram**: Clean diagram drawer karne par direct extra marks milte hain.\n3. **Step-by-Step Derivation**: Theory badhane ki jagah equations ko box me highlight karo!`;
+      if (q.includes("normalization")) {
+        return `### 💡 Normalization in DBMS (AKTU 10 Marks Guaranteed):\n\n1. **1NF:** Remove multi-valued attributes (har column me atomic values honi chahiye).\n2. **2NF:** Must be in 1NF + **No Partial Dependency** (Non-prime attribute candidate key ke part par depend nahi karega).\n3. **3NF:** Must be in 2NF + **No Transitive Dependency** ($X \\rightarrow Y$, $Y$ non-prime to non-prime prohibited).\n4. **BCNF:** Every Functional Dependency $X \\rightarrow Y$ me $X$ must be a strict **Super Key**.`;
+      }
+      return `### 📌 AKTU Study Insight for "${userQuery}":\n\n1. **Formal Definition:** Pehle 2-line standard definition likho with technical keywords.\n2. **Neat Diagram:** Evaluator diagram dekhkar direct step-marks deta hai.\n3. **Derivations / Points:** Equations ko box me enclose karo aur step numbering saaf rakho.\n\nStudy Hub tab par jakar iska lecture mark karke XP boost kar lo!`;
     }
 
-    async function handleUserMessage(e) {
-      e.preventDefault();
+    async function triggerSendMessage() {
       const text = chatInput.value.trim();
       if (!text) return;
 
       appendMessage(currentName, text, true);
       conversationHistory.push({ role: 'user', text: text });
       chatInput.value = "";
-      chatInput.disabled = true;
-      sendBtn.disabled = true;
-
-      appendTypingIndicator();
-
-      const aiReply = await fetchGeminiResponse(text);
-
-      removeTypingIndicator();
-      appendMessage("Zen", aiReply, false);
-      conversationHistory.push({ role: 'model', text: aiReply });
-
-      chatInput.disabled = false;
-      sendBtn.disabled = false;
       chatInput.focus();
+
+      // Typing indicator
+      const typing = document.createElement('div');
+      typing.id = "typing";
+      typing.className = "flex items-start gap-3";
+      typing.innerHTML = `<div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center">Zen</div><div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-3 text-xs text-emerald-800 font-bold animate-pulse">Zen is thinking...</div>`;
+      messagesBox.appendChild(typing);
+      messagesBox.scrollTop = messagesBox.scrollHeight;
+
+      const reply = await fetchGeminiAI(text);
+      typing.remove();
+
+      appendMessage("Zen", reply, false);
+      conversationHistory.push({ role: 'model', text: reply });
     }
 
-    function sendQuickPrompt(promptText) {
-      chatInput.value = promptText;
-      handleUserMessage(new Event('submit'));
+    function sendQuickPrompt(t) {
+      chatInput.value = t;
+      triggerSendMessage();
     }
+
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        triggerSendMessage();
+      }
+    });
+
+    function syncChatAvatars() {
+      const savedPhoto = localStorage.getItem(`user_avatar_${currentEmail}`) || localStorage.getItem('user_avatar');
+      const initial = (currentName.charAt(0) || 'S').toUpperCase();
+      ['top-user-avatar', 'side-user-avatar', 'mobile-top-user-avatar'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.style.overflow = 'hidden';
+        if (savedPhoto && savedPhoto.startsWith('data:image')) {
+          el.innerHTML = `<img src="${savedPhoto}" class="w-full h-full object-cover rounded-full" alt="Profile" />`;
+        } else {
+          el.innerHTML = initial;
+        }
+      });
+    }
+
+    syncChatAvatars();
   </script>
 </body>
 </html>
