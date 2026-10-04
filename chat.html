@@ -106,6 +106,16 @@
           }
         });
       }
+
+      // Automatically execute doubt query redirected from Quests / Mock Tests
+      const autoQuery = sessionStorage.getItem('zen_auto_query');
+      if (autoQuery) {
+        sessionStorage.removeItem('zen_auto_query');
+        if (chatInput) {
+          chatInput.value = autoQuery;
+          sendMessage();
+        }
+      }
     });
 
     function handleImageSelect(event) {
@@ -138,7 +148,7 @@
 
       if (!text && !selectedImageBase64) return;
 
-      // Display User Message with Image if attached
+      // Display User Message
       let userHtmlTag = '';
       if (selectedImageBase64) {
         userHtmlTag += `<div class="mb-2"><img src="data:${selectedImageMimeType};base64,${selectedImageBase64}" class="max-w-[200px] rounded-lg border border-zinc-700" /></div>`;
@@ -163,7 +173,7 @@
       removeImage();
       container.scrollTop = container.scrollHeight;
 
-      // Append Loading AI Placeholder
+      // Loading Placeholder
       const loadingId = "loading-" + Date.now();
       container.innerHTML += `
         <div id="${loadingId}" class="flex items-start gap-3">
