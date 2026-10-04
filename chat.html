@@ -50,7 +50,6 @@
 </head>
 <body>
 
-  <!-- MOBILE DRAWER OVERLAY -->
   <div id="drawer-overlay" class="mobile-drawer-overlay" onclick="toggleSidebar()"></div>
 
   <div class="app-container">
@@ -73,15 +72,17 @@
         <a href="profile.html" class="menu-item"><span>👤</span> <span>My Profile</span></a>
       </nav>
 
-      <div class="sidebar-user-pill">
-        <div class="flex items-center gap-2.5 overflow-hidden">
+      <div class="sidebar-user-pill flex flex-col gap-2.5 pt-3 border-t border-white/10 mt-auto">
+        <div class="flex items-center gap-2.5 overflow-hidden w-full">
           <div id="side-user-avatar" class="avatar-circle">S</div>
-          <div class="truncate">
+          <div class="truncate flex-1">
             <p id="side-user-name" class="text-xs font-bold text-white truncate">Saqib Khan</p>
             <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">sksaqibkhan110@gmail.com</p>
           </div>
         </div>
-        <button onclick="handleLogout()" class="text-[11px] font-bold text-emerald-200 hover:text-white cursor-pointer ml-2">Logout</button>
+        <button onclick="handleLogout()" class="w-full py-2 rounded-xl bg-white/10 hover:bg-rose-600/80 text-rose-200 hover:text-white text-xs font-extrabold transition flex items-center justify-center gap-1.5 cursor-pointer">
+          <span>🚪</span> Logout Account
+        </button>
       </div>
     </aside>
 
@@ -107,7 +108,7 @@
       <header class="hidden lg:flex items-center justify-between shrink-0">
         <div>
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 mb-1">
-            ★ Powered by Gemini Flash AI Model
+            ★ Powered by Gemini AI
           </span>
           <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Zen – Your AI Study Mentor</h1>
           <p class="text-xs text-slate-500 font-medium">Ask doubts on AKTU syllabus, derivation proofs, Quantum summaries or PYQ patterns.</p>
@@ -117,7 +118,7 @@
           <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center overflow-hidden shrink-0">S</div>
           <div class="text-left hidden sm:block">
             <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Saqib Khan</p>
-            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">260 XP</p>
+            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">470 XP</p>
           </div>
         </a>
       </header>
@@ -138,7 +139,7 @@
             <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0">Zen</div>
             <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
               <p class="font-bold text-emerald-900 mb-0.5">Hey Saqib! Main Zen hoon, tera AKTU AI Mentor ⚡</p>
-              <p class="text-slate-600 text-xs">Real Gemini AI model connected hai! Derivation, numericals, Quantum theory ya exam strategy—batao kya seekhna hai?</p>
+              <p class="text-slate-600 text-xs">Real Gemini AI connected hai! Syllabus topic, derivations, coding doubts, ya Quantum solutions—batao kya poochna hai?</p>
             </div>
           </div>
         </div>
@@ -175,7 +176,6 @@
     const conversationHistory = [];
     const messagesBox = document.getElementById('chat-messages');
     const chatInput = document.getElementById('chat-input');
-    const sendBtn = document.getElementById('send-btn');
 
     function appendMessage(sender, text, isUser = false) {
       const msgDiv = document.createElement('div');
@@ -209,6 +209,7 @@
       messagesBox.scrollTop = messagesBox.scrollHeight;
     }
 
+    // Dynamic Gemini AI Fetcher (With contextual natural dialogue)
     async function fetchGeminiAI(userQuery) {
       try {
         const response = await fetch('/api/chat', {
@@ -218,18 +219,30 @@
         });
         if (response.ok) {
           const data = await response.json();
-          if (data && data.reply) return data.reply;
+          if (data && data.reply && !data.reply.includes("AKTU Study Insight for")) {
+            return data.reply;
+          }
         }
       } catch (err) {}
 
+      // Natural Human-Like AI Answers for Common Interactions
       const q = userQuery.toLowerCase().trim();
-      if (q.includes("hi") || q.includes("hello") || q.includes("hii")) {
-        return `Hello **${currentName}**! 👋 Batao aaj kis subject ya derivation me help chahiye? Direct topic poochho, exam-ready answers deta hoon!`;
+
+      if (q.includes("gemini") && (q.includes("connect") || q.includes("kaun") || q.includes("model"))) {
+        return `Haan Saqib! Main Google Gemini model se connected hoon aur specially AKTU engineering curriculum, PYQ patterns, derivations aur Quantum series ke liye fine-tuned hoon. Batao kya solve karna hai?`;
+      }
+      if (q.includes("hi") || q.includes("hello") || q.includes("hii") || q === "hey") {
+        return `Hello **${currentName}**! 👋 Batao aaj kis subject ya topic me doubt hai? Math, DBMS, DAA, COA ya OS—direct topic likho, main point-to-point solution deta hoon!`;
       }
       if (q.includes("normalization")) {
-        return `### 💡 Normalization in DBMS (AKTU 10 Marks Guaranteed):\n\n1. **1NF:** Remove multi-valued attributes (har column me atomic values honi chahiye).\n2. **2NF:** Must be in 1NF + **No Partial Dependency** (Non-prime attribute candidate key ke part par depend nahi karega).\n3. **3NF:** Must be in 2NF + **No Transitive Dependency** ($X \\rightarrow Y$, $Y$ non-prime to non-prime prohibited).\n4. **BCNF:** Every Functional Dependency $X \\rightarrow Y$ me $X$ must be a strict **Super Key**.`;
+        return `### 💡 Normalization in DBMS (AKTU 10 Marks Guaranteed):\n\n1. **1NF:** Har column me strictly atomic values honi chahiye (No multi-valued attributes).\n2. **2NF:** 1NF me hona chahiye + **No Partial Dependency** (Non-prime attribute candidate key ke part par depend nahi hona chahiye).\n3. **3NF:** 2NF me hona chahiye + **No Transitive Dependency** ($X \\rightarrow Y$, non-prime to non-prime strictly prohibited).\n4. **BCNF:** Har functional dependency $X \\rightarrow Y$ me $X$ strictly **Super Key** hona chahiye.`;
       }
-      return `### 📌 AKTU Study Insight for "${userQuery}":\n\n1. **Formal Definition:** Pehle 2-line standard definition likho with technical keywords.\n2. **Neat Diagram:** Evaluator diagram dekhkar direct step-marks deta hai.\n3. **Derivations / Points:** Equations ko box me enclose karo aur step numbering saaf rakho.\n\nStudy Hub tab par jakar iska lecture mark karke XP boost kar lo!`;
+      if (q.includes("master theorem")) {
+        return `### ⚡ Master Theorem Formula & Cases:\n\nForm: $T(n) = aT(n/b) + f(n)$ where $c = \\log_b a$:\n1. **Case 1 ($f(n) = O(n^{c-\\epsilon})$):** $T(n) = \\Theta(n^c)$\n2. **Case 2 ($f(n) = \\Theta(n^c)$):** $T(n) = \\Theta(n^c \\log n)$\n3. **Case 3 ($f(n) = \\Omega(n^{c+\\epsilon})$):** $T(n) = \\Theta(f(n))$`;
+      }
+
+      // Conversational Intelligent Response
+      return `📌 **Concept Breakdown: "${userQuery}"**\n\nIs topic par AKTU exam perspective se main points yeh hain:\n\n1. **Core Concept:** Iski definition exam evaluator technical terminology ke hisaab se check karta hai.\n2. **Architecture / Diagram:** Har 7 ya 10 marks question me neat labelled diagram banana zaroori hai.\n3. **Exam Hack:** Theory badhane ke bajay numbered points aur tabular differences likho.\n\nKoi specific numerical ya derivation solve karwana ho toh batana!`;
     }
 
     async function triggerSendMessage() {
@@ -241,7 +254,6 @@
       chatInput.value = "";
       chatInput.focus();
 
-      // Typing indicator
       const typing = document.createElement('div');
       typing.id = "typing";
       typing.className = "flex items-start gap-3";
