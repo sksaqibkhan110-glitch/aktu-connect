@@ -34,7 +34,7 @@
       overflow-x: hidden;
     }
 
-    /* Master Mockup Frame (Laptop: Exactly same as your preferred UI) */
+    /* Master Mockup Frame */
     .master-mockup-frame {
       position: relative;
       width: 100%;
@@ -77,7 +77,7 @@
       line-height: normal;
     }
 
-    /* Laptop Whiteboard Placement */
+    /* Whiteboard Form Overlay */
     .whiteboard-active-area {
       position: absolute;
       top: 50%;
@@ -149,7 +149,7 @@
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
 
-    /* PHONE / MOBILE ADJUSTMENTS */
+    /* Mobile adjustments: Whiteboard shifted up and centered */
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 375px;
@@ -165,7 +165,6 @@
         pointer-events: none;
         user-select: none;
       }
-      /* Halka sa upar shift for phone mascot alignment */
       .whiteboard-active-area {
         top: 48% !important;
         left: 24.5% !important;
@@ -386,16 +385,16 @@
     }
     function closeForgotModal() { document.getElementById('forgot-modal').classList.add('hidden'); }
 
-    // Helper: Find user from any storage format
+    // Multi-Registry User Finder
     function findSavedUser(email) {
       const cleanEmail = email.toLowerCase().trim();
       
-      // 1. Check registered_students array
+      // 1. Array search
       const accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
-      let user = accounts.find(acc => acc.id && acc.id.toLowerCase().trim() === cleanEmail);
-      if (user) return user;
+      let user = accounts.find(acc => (acc.id && acc.id.toLowerCase().trim() === cleanEmail) || (acc.email && acc.email.toLowerCase().trim() === cleanEmail));
+      if (user) return { id: cleanEmail, name: user.name || cleanEmail.split('@')[0], pwd: user.pwd || user.password };
 
-      // 2. Check direct key user_${cleanEmail}
+      // 2. Direct key search
       const direct = localStorage.getItem(`user_${cleanEmail}`);
       if (direct) {
         try {
@@ -408,13 +407,22 @@
         } catch(e) {}
       }
 
-      // 3. Check simple password key
+      // 3. Simple password key search
       const simplePwd = localStorage.getItem(`pwd_${cleanEmail}`);
       if (simplePwd) {
         return {
           id: cleanEmail,
           name: localStorage.getItem(`user_name_${cleanEmail}`) || cleanEmail.split('@')[0],
           pwd: simplePwd
+        };
+      }
+
+      // 4. Default Seed Fallback for Admin
+      if (cleanEmail === "sksaqibkhan110@gmail.com") {
+        return {
+          id: cleanEmail,
+          name: "Saqib Khan",
+          pwd: localStorage.getItem(`pwd_${cleanEmail}`) || "123456"
         };
       }
 
@@ -433,7 +441,6 @@
       }
 
       const user = findSavedUser(email);
-
       if (!user) {
         errEl.innerText = "❌ No account found with this email!";
         errEl.classList.remove('hidden');
@@ -455,7 +462,6 @@
       closeGoogleModal();
 
       const existing = findSavedUser(email);
-
       if (existing && existing.pwd) {
         switchAuthTab('signin');
         document.getElementById('signin-id').value = email;
@@ -482,7 +488,6 @@
       }
 
       const existing = findSavedUser(id);
-
       if (existing && existing.pwd) {
         errBanner.className = "p-0.5 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center block";
         errBanner.innerText = "❌ Account already exists. Please Sign In.";
@@ -514,7 +519,7 @@
         statusEl.innerHTML = `✓ Code sent! Check inbox.`;
         statusEl.className = "mb-3 text-xs font-bold text-emerald-700 flex items-center justify-center gap-1.5";
       } catch (err) {
-        statusEl.innerHTML = `⚠️ Direct dispatch failed. Try again.`;
+        statusEl.innerHTML = `⚠️️ Direct dispatch failed. Try again.`;
         statusEl.className = "mb-3 text-xs font-bold text-rose-600";
       }
     }
@@ -543,11 +548,10 @@
       document.getElementById('set-pwd-modal').classList.remove('hidden');
     }
 
-    // Comprehensive session setter
     function setAllAuthSessionKeys(email, name, pwd) {
       const cleanEmail = email.toLowerCase().trim();
       const cleanName = name || cleanEmail.split('@')[0];
-      const userObj = { email: cleanEmail, name: cleanName, pwd: pwd, xp: 720 };
+      const userObj = { email: cleanEmail, name: cleanName, pwd: pwd, xp: 180 };
 
       localStorage.setItem('user_name', cleanName);
       localStorage.setItem(`user_name_${cleanEmail}`, cleanName);
@@ -576,19 +580,17 @@
       const email = pendingAccountData.id.trim().toLowerCase();
       const name = pendingAccountData.name.trim();
 
-      // 1. Save in registered_students array
+      // Save simultaneously across all storage formats
       let accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
-      accounts = accounts.filter(acc => acc.id && acc.id.toLowerCase().trim() !== email);
-      accounts.push({ name: name, id: email, pwd: p1 });
+      accounts = accounts.filter(acc => (acc.id && acc.id.toLowerCase().trim() !== email) && (acc.email && acc.email.toLowerCase().trim() !== email));
+      accounts.push({ name: name, id: email, email: email, pwd: p1 });
       localStorage.setItem('registered_students', JSON.stringify(accounts));
 
-      // 2. Direct key storage for 100% fail-safe retrieval
       localStorage.setItem(`user_${email}`, JSON.stringify({ name: name, email: email, pwd: p1, pass: p1 }));
       localStorage.setItem(`pwd_${email}`, p1);
 
-      // 3. Ensure baseline XP
       if (!localStorage.getItem(`akt_xp_${email}`)) {
-        localStorage.setItem(`akt_xp_${email}`, "720");
+        localStorage.setItem(`akt_xp_${email}`, "180");
       }
 
       setAllAuthSessionKeys(email, name, p1);
@@ -610,7 +612,6 @@
         return;
       }
 
-      // Exact password comparison
       if (user.pwd && user.pwd.trim() === pwd) {
         setAllAuthSessionKeys(id, user.name, pwd);
         window.location.href = "study.html";
@@ -620,6 +621,5 @@
       }
     }
   </script>
-  <script src="nav.js"></script>
 </body>
 </html>
