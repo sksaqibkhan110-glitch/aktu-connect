@@ -1,0 +1,33 @@
+.lb-row{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:14px 10px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.lb-rank{
+    width:36px;
+    text-align:center;
+    font-weight:bold;
+    font-size:18px;
+}
+.lb-rank.gold{ color:#facc15; }
+.lb-rank.silver{ color:#cbd5e1; }
+.lb-rank.bronze{ color:#f97316; }
+.lb-name{
+    flex:1;
+    font-size:17px;
+}
+.lb-level{
+    font-size:13px;
+    opacity:0.7;
+    margin-right:15px;
+}
+.lb-xp{
+    font-weight:bold;
+    color:#22c55e;
+}
+.lb-row.me{
+    background:rgba(56,189,248,0.12);
+    border-radius:10px;
+}

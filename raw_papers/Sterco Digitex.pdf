@@ -1,0 +1,2632 @@
+
+		<!DOCTYPE html>
+
+		<html lang="en-IN">
+
+		<head>
+
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+
+			<!--START SEO -->
+
+		<title>Sterco Digitex | Digital Marketing & Web Development Company</title>
+
+		<meta name="description" content="Sterco Digitex is a leading digital marketing and web development company offering SEO, website design, ecommerce, branding, and performance-driven digital solutions." />
+
+		<meta name="keywords" content="top digital marketing company in india, best digital marketing company in india, digital marketing company in india, Full Service Digital Agency" />
+
+		<!-- Open Graph / Facebook -->
+
+		<meta property="og:type" content="website">
+
+		<meta property="og:url" content="https://www.stercodigitex.com/">
+
+		<meta property="og:title" content="Sterco Digitex | Digital Marketing & Web Development Company">
+
+		<meta property="og:description" content="Sterco Digitex is a leading digital marketing and web development company offering SEO, website design, ecommerce, branding, and performance-driven digital solutions.">
+
+		<meta property="og:image" content="https://www.stercodigitex.com/siteassets/images/stercologo1.png">
+
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
+		<!-- Twitter -->
+
+		<meta property="twitter:card" content="summary">
+
+		<meta name="twitter:domain" content="https://www.stercodigitex.com/" />
+
+		<meta property="twitter:url" content="@StercoDigitex">
+
+		<meta property="twitter:title" content="Sterco Digitex | Digital Marketing & Web Development Company">
+
+		<meta property="twitter:description" content="Sterco Digitex is a leading digital marketing and web development company offering SEO, website design, ecommerce, branding, and performance-driven digital solutions.">
+
+		<meta property="twitter:image" content="https://www.stercodigitex.com/siteassets/images/stercologo1.png">
+
+		<link rel="canonical" href="https://www.stercodigitex.com/" />
+
+		<meta name="robots" content="index,follow">
+
+		<meta name="google-site-verification" content="t8RzElkPBWrXK0oAY4W-SLhq2OKnV5FmJKQv1K4JiRg" />
+
+			
+			<link rel="preconnect" href="https://www.stercodigitex.com/">
+
+		    <link rel="dns-prefetch" href="https://www.stercodigitex.com/">
+
+			
+
+			
+
+			
+
+			
+
+			<link rel="preconnect" href="https://www.google.com">
+
+			<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+
+		<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+			
+
+			
+
+			<link rel="shortcut icon" href="https://www.stercodigitex.com/favicon.ico" />
+
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+
+			<link rel="preload"
+
+				href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
+
+				as="style" crossorigin>
+
+			
+
+			
+
+			<style type="text/css">@font-face {font-family:'DM Sans';font-style:normal;font-weight:100 1000;src:url(/cf-fonts/v/dm-sans/5.2.8/latin-ext/opsz/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'DM Sans';font-style:normal;font-weight:100 1000;src:url(/cf-fonts/v/dm-sans/5.2.8/latin/opsz/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'DM Sans';font-style:italic;font-weight:100 1000;src:url(/cf-fonts/v/dm-sans/5.2.8/latin-ext/opsz/italic.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'DM Sans';font-style:italic;font-weight:100 1000;src:url(/cf-fonts/v/dm-sans/5.2.8/latin/opsz/italic.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'DM Serif Display';font-style:normal;font-weight:400;src:url(/cf-fonts/s/dm-serif-display/5.2.8/latin-ext/400/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'DM Serif Display';font-style:normal;font-weight:400;src:url(/cf-fonts/s/dm-serif-display/5.2.8/latin/400/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'DM Serif Display';font-style:italic;font-weight:400;src:url(/cf-fonts/s/dm-serif-display/5.2.8/latin/400/italic.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'DM Serif Display';font-style:italic;font-weight:400;src:url(/cf-fonts/s/dm-serif-display/5.2.8/latin-ext/400/italic.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'Montserrat';font-style:normal;font-weight:100 900;src:url(/cf-fonts/v/montserrat/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'Montserrat';font-style:normal;font-weight:100 900;src:url(/cf-fonts/v/montserrat/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'Montserrat';font-style:normal;font-weight:100 900;src:url(/cf-fonts/v/montserrat/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:'Montserrat';font-style:normal;font-weight:100 900;src:url(/cf-fonts/v/montserrat/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:'Montserrat';font-style:normal;font-weight:100 900;src:url(/cf-fonts/v/montserrat/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:'Montserrat';font-style:italic;font-weight:100 900;src:url(/cf-fonts/v/montserrat/5.2.8/latin-ext/wght/italic.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'Montserrat';font-style:italic;font-weight:100 900;src:url(/cf-fonts/v/montserrat/5.2.8/cyrillic-ext/wght/italic.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:'Montserrat';font-style:italic;font-weight:100 900;src:url(/cf-fonts/v/montserrat/5.2.8/latin/wght/italic.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'Montserrat';font-style:italic;font-weight:100 900;src:url(/cf-fonts/v/montserrat/5.2.8/cyrillic/wght/italic.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:'Montserrat';font-style:italic;font-weight:100 900;src:url(/cf-fonts/v/montserrat/5.2.8/vietnamese/wght/italic.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}</style>
+
+			<link rel="preload" href="https://www.stercodigitex.com/siteassets/css/bootstrap.min.css" as="style">
+
+			<link rel="preload" href="https://www.stercodigitex.com/siteassets/css/owl.carousel.min.css" as="style">
+
+			<link rel="preload" href="https://www.stercodigitex.com/siteassets/css/font-awesome.min.css" as="style">
+
+			
+
+			<link rel="stylesheet" href="https://www.stercodigitex.com/siteassets/css/aos.css" as="style">
+
+			<link rel="stylesheet" href="https://www.stercodigitex.com/siteassets/css/common.css" as="style">
+
+			<link rel="stylesheet" href="https://www.stercodigitex.com/siteassets/css/style.css?ver=1.49" as="style">
+
+			<link rel="preload" href="https://www.stercodigitex.com/siteassets/css/responsive.css" as="style">
+
+			<link rel="stylesheet" media="all" type="text/css" href="https://www.stercodigitex.com/siteassets/css/bootstrap.min.css">
+
+			<link rel="stylesheet" media="all" type="text/css"
+
+				href="https://www.stercodigitex.com/siteassets/css/owl.carousel.min.css">
+
+			<link rel="stylesheet" media="all" type="text/css"
+
+				href="https://www.stercodigitex.com/siteassets/css/font-awesome.min.css">			
+
+			<link rel="stylesheet" media="all" type="text/css" href="https://www.stercodigitex.com/siteassets/css/style.css?ver=1.49">
+
+			<link rel="stylesheet" media="all" type="text/css"
+
+				href="https://www.stercodigitex.com/siteassets/css/responsive.css">
+
+			<link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" media="all"
+
+				type="text/css">
+
+			<script src="https://www.stercodigitex.com/siteassets/js/custom.js" defer></script>
+
+			<style>
+
+				.error {
+
+					border: 2px solid red !important;
+
+			}
+
+            .rbox-overlay {
+
+    display: none;
+
+}
+
+			</style>
+
+			<!-- Google Tag Manager -->
+
+			<script defer type="text/javascript">
+
+				(function (c, l, a, r, i, t, y) {
+
+					c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+
+					t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+
+					y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+
+			})(window, document, "clarity", "script", "o1dabwiq3n");
+
+			</script>
+
+			<script defer>
+
+				if (navigator.userAgent.indexOf("Chrome-Lighthouse") == -1) {
+
+					(function (w, d, s, l, i) {
+
+						w[l] = w[l] || []; w[l].push({
+
+							'gtm.start':
+
+								new Date().getTime(), event: 'gtm.js'
+
+					}); var f = d.getElementsByTagName(s)[0],
+
+							j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+
+								'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+
+				})(window, document, 'script', 'dataLayer', 'GTM-NS4MDW4');
+
+			}
+
+			</script>
+
+			<!-- <script async defer>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+
+	})(window,document,'script','dataLayer','GTM-NS4MDW4');</script> -->
+
+			<!-- End Google Tag Manager -->
+
+			<!-- Global site tag (gtag.js) - Google Ads: 961633507 -->
+
+			<script defer async src="https://www.googletagmanager.com/gtag/js?id=AW-961633507"></script>
+
+			<script defer>
+
+				window.dataLayer = window.dataLayer || [];
+
+				function gtag() { dataLayer.push(arguments); }
+
+				gtag('js', new Date());
+
+				gtag('config', 'AW-961633507');
+
+			</script>
+
+			<script type="application/ld+json">
+
+		{
+
+		  "@context": "https://schema.org/",
+
+		  "@type": "WebSite",
+
+		  "name": "Sterco Digitex",
+
+		  "url": "https://www.stercodigitex.com/",
+
+		  "potentialAction": {
+
+		    "@type": "SearchAction",
+
+		    "target": "{search_term_string}",
+
+		    "query-input": "required name=search_term_string"
+
+	  }
+
+	}
+
+		</script>
+
+
+<script type="application/ld+json">
+
+		  [
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Company",
+
+		        "url": "https://www.stercodigitex.com/company"
+
+	    },
+
+		       {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Digital Marketing Solutions",
+
+		        "url": "https://www.stercodigitex.com/digital-marketing-agency"
+
+	    },
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Search Engine Optimization",
+
+		        "url": "https://www.stercodigitex.com/seo-services-india"
+
+	    },
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Social Media Management",
+
+		        "url": "https://www.stercodigitex.com/social-media-management"
+
+	    },
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Search Engine Marketing",
+
+		        "url": "https://www.stercodigitex.com/search-engine-marketing"
+
+	    },
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Web Design & Development",
+
+		        "url": "https://www.stercodigitex.com/web-design-development"
+
+	    },
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Ecommerce",
+
+		        "url": "https://www.stercodigitex.com/ecommerce-web-development"
+
+	    },
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Mobile App",
+
+		        "url": "https://www.stercodigitex.com/mobile-app-development"
+
+	    },
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Enterprise Application",
+
+		        "url": "https://www.stercodigitex.com/enterprise-application"
+
+	    },
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "New Media",
+
+		        "url": "https://www.stercodigitex.com/new-media"
+
+	        },
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Interactive Media",
+
+		        "url": "https://www.stercodigitex.com/interactive-media"
+
+	        },
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Video Services",
+
+		        "url": "https://www.stercodigitex.com/video"},
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Branding Solutions",
+
+		        "url": "https://www.stercodigitex.com/branding-services"},
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Enterprise Application",
+
+		        "url": "https://www.stercodigitex.com/enterprise-application"},
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Strategy",
+
+		        "url": "https://www.stercodigitex.com/strategy"},
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Portfolio",
+
+		        "url": "https://www.stercodigitex.com/all-portfolio"},
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Clients",
+
+		        "url": "https://www.stercodigitex.com/clients"},
+
+		    {
+
+		        "@context": "https://schema.org/",
+
+		        "@type": "SiteNavigationElement",
+
+		        "name": "Contact Us",
+
+		        "url": "https://www.stercodigitex.com/contact-us"
+
+	    }
+
+		  ]
+
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Sterco Digitex",
+  "alternateName": "Sterco Digitex Digital Agency",
+  "url": "https://www.stercodigitex.com/",
+  "image": "https://www.stercodigitex.com/siteassets/images/logo.svg",
+  "telephone": "+91-9315581875",
+  "email": "info@stercodigitex.com",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "C-120, Sector 2",
+    "addressLocality": "Noida",
+    "addressRegion": "Uttar Pradesh",
+    "postalCode": "201301",
+    "addressCountry": "IN"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "3.9",
+    "reviewCount": "147",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "09:30",
+      "closes": "18:30"
+    }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/stercodigitex",
+    "https://www.linkedin.com/company/sterco-digitex"
+  ],
+  "foundingDate": "1998",
+  "founders": [
+    {
+      "@type": "Person",
+      "name": "Amandip Arora"
+    }
+  ],
+  "numberOfEmployees": "150+",
+  "knowsAbout": [
+    "Web Design & Development",
+    "Digital Marketing",
+    "Mobile App Development",
+    "Branding Services",
+    "Interactive Media",
+    "Video Production"
+  ],
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  }
+}
+</script>
+
+		
+			<style>
+
+				.work_page div#collapsibleNavbar li.nav-item.project-button {
+
+					margin-right: 40px;
+
+					padding: 0 15px;
+
+			}
+
+
+
+			</style>
+
+		</head>
+
+		<body class="home_page">
+
+			<!-- Google Tag Manager (noscript) -->
+
+			<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NS4MDW4" height="0" width="0"
+
+					style="display:none;visibility:hidden"></iframe></noscript>
+
+			<!-- End Google Tag Manager (noscript) -->
+
+			<div class="wrapper">
+
+				<div class="header_section section">
+
+					<!--Mobile Start Here-->
+
+					<div class="mobile_device2">
+
+						<div class="container-fluid shadow-sm" id="global-top-nav">
+
+							<nav class="navbar navbar-expand-lg navbar-light"> <a class="navbar-brand"
+
+									href="https://www.stercodigitex.com"><img
+
+										src="https://www.stercodigitex.com/siteassets/images/logo.svg" alt="logo" loading="lazy"></a>
+
+								<div class="mobile-menu-nav" onClick="openNav()">
+
+									<img class="hemburger_icon" src="https://www.stercodigitex.com/siteassets/images/hemburgure.svg"
+
+										alt="icon">
+
+									<img class="cross_icon" src="https://www.stercodigitex.com/siteassets/images/hemburgure-close.svg"
+
+										alt="icon">
+
+								</div>
+
+							</nav>
+
+						</div>
+
+						<div id="global-side-nav" class="sidenav">
+
+							<div class="container-fluid">
+
+								<div class="row">
+
+									<div class="col-lg-12">
+
+										<div class="logo"> <a class="navbar-brand" href="https://www.stercodigitex.com"><img
+
+													src="https://www.stercodigitex.com/siteassets/images/logo.svg" alt="logo"
+
+													loading="lazy"></a> </div>
+
+										<div class="services_menu">
+
+											<h5>Services</h5>
+
+											<ul class="service_link">
+
+												<li>Web Services</li>
+
+												<li><a href="https://www.stercodigitex.com/web-design-development">Web Design &
+
+														Development</a></li>
+
+												<li><a href="https://www.stercodigitex.com/ecommerce-web-development">Ecommerce
+
+														Development</a></li>
+
+														<li><a href="https://www.stercodigitex.com/web-design-development">Maintenance Services</a></li>
+
+											</ul>
+
+											<ul class="service_link">
+
+												<li>Digital Marketing</li>
+
+												<li><a href="https://www.stercodigitex.com/seo-services-india">Search Engine
+
+														Optimization</a></li>
+
+												<li><a href="https://www.stercodigitex.com/social-media-management">Social Media
+
+														Management</a></li>
+
+														<li><a href="https://www.stercodigitex.com/search-engine-marketing">Search Engine Marketing</a></li>
+
+											</ul>
+
+											<ul class="service_link">
+
+												<li>Media Services</li>
+
+												<li><a href="https://www.stercodigitex.com/interactive-media">Interactive Media</a>
+
+												</li>
+
+												<li><a href="https://www.stercodigitex.com/video">Video Services</a></li>
+
+												<li><a href="https://www.stercodigitex.com/branding-services">Branding Services</a>
+
+												</li>
+
+											</ul>
+
+											<ul class="service_link">
+
+												<li>Enterprise Application</li>
+
+												<li><a href="https://www.stercodigitex.com/enterprise-application">Custom Web
+
+														Applications</a></li>
+
+											</ul>
+
+											<div class="common_link">
+
+												<li><a href="https://www.stercodigitex.com/portfolio">Work</a></li>
+
+												<li><a href="https://www.stercodigitex.com/clients">Clients</a></li>
+
+												<li><a href="https://www.stercodigitex.com/company">Company</a></li>
+
+												<li><a href="https://www.stercodigitex.com/contact-us">Contact Us</a></li>
+
+											</div>
+
+											<ul class="contact_link">
+
+												<li><a href="tel:919315581875" class="cta_number"><img src="https://www.stercodigitex.com/siteassets/images/phone-icon.svg" alt="Phone Icon"></a></li>
+
+													<li><a class="cta_whatsapp whatsapp-link" href="javascript:void(0)"><img src="https://www.stercodigitex.com/siteassets/images/whatsapp-icon.png" alt="Whatsapp Icon"></a></li>												
+
+												<li><a href="mailto:info@stercodigitex.com" class="cta_info_mail"><img src="https://www.stercodigitex.com/siteassets/images/message-icon.svg" alt="Message Icon"></a></li>
+
+											</ul>
+
+										</div>
+
+
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<!--Mobile End Here-->
+
+					<div class="container-fluid d-none">
+
+						<nav class="navbar navbar-expand-md">
+
+							<!-- Brand --><a class="navbar-brand" href="https://www.stercodigitex.com"><img
+
+									src="https://www.stercodigitex.com/siteassets/images/logo-w.svg" alt="Logo"></a>
+
+							<!-- Toggler/collapsibe Button -->
+
+							<button class="navbar-toggler" type="button" data-toggle="collapse"
+
+								data-target="#collapsibleNavbar"> <span class="navbar-toggler-icon"><i class="fa fa-bars"
+
+										aria-hidden="true"></i></span> </button>
+
+							<!-- Navbar links -->
+
+							<div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+								<ul class="navbar-nav ml-auto">
+
+									<li class="nav-item menu-hover"> <a class="nav-link" href="javascript:void(0);">Services</a>
+
+										<div class="menu-pos">
+
+											<div class="container-fluid">
+
+												<div class="row">
+
+													<div class="col-md-3"></div>
+
+													<div class="col-md-9">
+
+														<div class="row">
+
+															<div class="col-md-4">
+
+																<div class="menu_service">
+
+																	<h3><a href="https://www.stercodigitex.com/strategy">Strategy</a>
+
+																	</h3>
+
+																	<p>We’re called Sterco for one simple
+
+																		reason – ability to lead the next generation enterprises
+
+																		in the digital-first business era.</p>
+
+																	<h3><a
+
+																			href="https://www.stercodigitex.com/digital-marketing-agency">Digital<br>
+
+																			Marketing</a></h3>
+
+																	<ul>
+
+																		<li><a
+
+																				href="https://www.stercodigitex.com/seo-services-india">Search
+
+																				Engine Optimization (SEO)</a></li>
+
+																		<li><a
+
+																				href="https://www.stercodigitex.com/social-media-management">Social
+
+																				Media Management (SMM)</a></li>
+
+																		<li><a
+
+																				href="https://www.stercodigitex.com/search-engine-marketing">Search
+
+																				Engine Marketing (SEM)</a></li>
+
+																	</ul>
+
+																</div>
+
+															</div>
+
+															<div class="col-md-4">
+
+																<div class="menu_service two-menu">
+
+																	<h3><a
+
+																			href="https://www.stercodigitex.com/web-design-development">Web
+
+																			Design & <br> Development</a></h3>
+
+																	<h3><a
+
+																			href="https://www.stercodigitex.com/ecommerce-web-development">Ecommerce<br>
+
+																			Development</a></h3>
+
+																	<h3><a
+
+																			href="https://www.stercodigitex.com/mobile-app-development">Mobile
+
+																			App<br> Development</a></h3>
+
+																	<h3><a
+
+																			href="https://www.stercodigitex.com/enterprise-application">Enterprise
+
+																			<br>Applications</a></h3>
+
+																</div>
+
+															</div>
+
+															<div class="col-md-4">
+
+																<div class="menu_service three-menu">
+
+																	<h3><a href="https://www.stercodigitex.com/new-media">Media <br>
+
+																			Services</a></h3>
+
+																	<ul>
+
+																		<li><a href="https://www.stercodigitex.com/interactive-media">Interactive
+
+																				Presentations</a>
+
+																		<li><a href="https://www.stercodigitex.com/interactive-media">Corporate
+
+																				Presentations</a></li>
+
+																		<li><a href="https://www.stercodigitex.com/interactive-media">PowerPoint
+
+																				Presentations</a></li>
+
+																		<li><a href="https://www.stercodigitex.com/video">Video
+
+																				Services</a></li>
+
+																		<li><a href="https://www.stercodigitex.com/video">Corporate
+
+																				AVs</a></li>
+
+																		<li><a href="https://www.stercodigitex.com/video">White Board
+
+																				Animations</a></li>
+
+																		<li><a href="https://www.stercodigitex.com/video">Motion
+
+																				Graphics</a></li>
+
+																		<li><a href="https://www.stercodigitex.com/branding-services">Branding
+
+																				Services</a></li>
+
+																	</ul>
+
+																</div>
+
+															</div>
+
+														</div>
+
+													</div>
+
+												</div>
+
+											</div>
+
+										</div>
+
+									</li>
+
+									<li class="nav-item"> <a class="nav-link" href="https://www.stercodigitex.com/portfolio">Work</a>
+
+									</li>
+
+									<li class="nav-item"><a class="nav-link" href="https://www.stercodigitex.com/clients">Clients</a>
+
+									</li>
+
+									<li class="nav-item"><a class="nav-link" href="https://www.stercodigitex.com/company">Company</a>
+
+									</li>
+
+									<li class="nav-item"> <a class="nav-link" href="https://www.stercodigitex.com/contact-us">Contact
+
+											Us</a> </li>
+
+									<li class="nav-item project-button" id="project-button">
+
+										<a class="nav-link getaquote headergetquote" href="#project_form">GET A QUOTE</a>
+
+									</li>
+
+									<li class="nav-item">
+
+										<div class="menu"> <span></span> </div>
+
+										<div class="sideMenu">
+
+											<div class="humburger-slide">
+
+												<ul class="main">
+
+													<li class="nav-item"><a class="nav-link"
+
+															href="https://www.stercodigitex.com/news">News</a></li>
+
+													<li class="nav-item"><a class="nav-link"
+
+															href="https://www.stercodigitex.com/testimonials">Testimonials</a></li>
+
+													<li class="nav-item"><a class="nav-link"
+
+															href="https://www.stercodigitex.com/case-studies">Case Studies</a></li>
+
+													<li class="nav-item"><a class="nav-link"
+
+															href="https://www.stercodigitex.com/career">Careers</a></li>
+
+													<li class="nav-item"><a class="nav-link"
+
+															href="https://www.stercodigitex.com/blog">Blog</a></li>
+
+													<li class="nav-item"><a class="nav-link"
+
+															href="https://www.stercodigitex.com/contact-us">Contact
+
+															Us</a></li>
+
+												</ul>
+
+											</div>
+
+											<div class="humburger-location">
+
+												<div class="reash-us">
+
+													<h4>Reach Us</h4>
+
+													<p><a href="tel:+91-120-4857333" class="cta_landline">IN +91-120-4857333</a>
+
+													</p>
+
+													<p><a href="tel:+91-9315581875" class="cta_number">IN +91-9315581875</a></p>
+
+													<p><span class="whatsapp-icon"><img src="https://www.stercodigitex.com/siteassets/images/whatsapp-icon.png" alt="Whatsapp Icon"></span><span><a
+
+																class="cta_whatsapp whatsapp-link"  href="javascript:void(0)">+91-9310720206</a></span>
+
+													</p>													
+
+													<p class="e_mail"><a href="mailto:info@stercodigitex.com"
+
+															class="cta_info_mail">info@stercodigitex.com</a></p>
+
+													<div class="slide-project">
+
+														<div class="nav-item project_button"> <a class="nav-link getaquote"
+
+																href="#project_form">GET A QUOTE</a> </div>
+
+													</div>
+
+												</div>
+
+											</div>
+
+										</div>
+
+									</li>
+
+								</ul>
+
+							</div>
+
+						</nav>
+
+					</div>
+
+				</div>
+
+				<div class="clear"></div>
+
+				<div class="top_nav for-desktop home_header">
+
+					<div class="container-fluid">
+
+						<div class="menu_block">
+
+							<div class="slide_left_menu">
+
+								<button class="c-hamburger c-hamburger--htx">
+
+								<img class="hemburger_icon" src="https://www.stercodigitex.com/siteassets/images/banner/icon-ham.svg"
+
+										alt="icon">
+
+								<img class="cross_icon" src="https://www.stercodigitex.com/siteassets/images/banner/close-icon.svg"
+
+										alt="icon">
+
+									<!-- <span>toggle menu</span> -->
+
+								</button>
+
+								<nav class="sub-menu open">
+
+									<div class="menu_nav hembbgr_wrap">
+
+										<div class="row">
+
+
+
+											<div class="col-lg-7">
+
+												<div class="menu_service">
+
+													<div class="stratgy_block1">
+
+													<h3>Strategy</h3>
+
+													<p><b>We’re called Sterco for one simple reason – </b></p>
+
+													<blockquote><img class="quote_icon1" src="https://www.stercodigitex.com/siteassets/images/banner/Icon-quote-left.svg"alt="icon"> We empower brands to shine online, <br> through our cutting edge digital solutions. <img class="quote_icon2" src="https://www.stercodigitex.com/siteassets/images/banner/Icon-quote-right.svg"alt="icon"> </blockquote>
+
+													<a href="https://www.stercodigitex.com/strategy" class="read_btn"> Know More </a>
+
+													</div>
+
+													<div class="stratgy_block2">
+
+		<div class="row">
+
+		<div class="col-md-6"><h3>Web Services</h3>
+
+													<ul>
+
+													<li><a href="https://www.stercodigitex.com/web-design-development">Web Design & Development</a></li>
+
+		                                            <li><a href="https://www.stercodigitex.com/ecommerce-web-development">Ecommerce Development</a></li>
+
+													</ul></div>
+
+		<div class="col-md-6"><h3><a href="https://www.stercodigitex.com/digital-marketing-agency">Digital Marketing</a></h3>
+
+													<ul>
+
+													<li><a href="https://www.stercodigitex.com/seo-services-india">Search Engine Optimization (SEO)</a></li>
+
+		                                            <li><a href="https://www.stercodigitex.com/social-media-management">Social Media Management (SMM)</a></li>
+
+													<li><a href="https://www.stercodigitex.com/search-engine-marketing">Search Engine Marketing (SEM)</a></li>
+
+													</ul></div>
+
+		<div class="col-md-6"><h3><a href="https://www.stercodigitex.com/new-media">Media Services</a></h3>
+
+													<ul>
+
+													<li><a href="https://www.stercodigitex.com/interactive-media">Interactive Presentations</a></li>
+
+		                                            <li><a href="https://www.stercodigitex.com/video">Video Services</a></li>
+
+													<li><a href="https://www.stercodigitex.com/branding-services">Branding Services</a></li>
+
+													</ul></div>
+
+		<div class="col-md-6"><h3><a href="https://www.stercodigitex.com/enterprise-application">Enterprise Applications</a></h3>
+
+													<ul>
+
+													<li><a href="https://www.stercodigitex.com/enterprise-application">Custom Web Applications</a></li>
+
+
+
+													</ul></div>
+
+		</div></div>
+
+
+
+												</div>
+
+
+
+											</div>
+
+
+
+											<div class="col-lg-5">
+
+												<div class="menu_service two-menu">
+
+													<div class="other_menu_link">
+
+		<ul class="list_menu1">
+
+		<li><a href="https://www.stercodigitex.com/company">Company</a></li>
+
+		<li><a href="https://www.stercodigitex.com/portfolio">Work</a></li>
+
+		<li><a href="https://www.stercodigitex.com/clients">Clients</a></li>
+
+		<li><a href="https://www.stercodigitex.com/testimonials">Testimonials</a></li>
+
+		<li><a href="https://www.stercodigitex.com/case-studies">Case Studies</a></li>
+
+		<li><a href="https://www.stercodigitex.com/career">Careers</a></li>
+
+		<li><a href="https://www.stercodigitex.com/news">News</a></li>
+
+		<li><a href="https://www.stercodigitex.com/blog">Blog</a></li>
+
+		</ul>
+
+		</div>
+
+		<div class="contact_b1">
+
+		<h3><a href="https://www.stercodigitex.com/contact-us">Contact Us</a></h3>
+
+		<ul class="list_menu2">
+
+		<li><img src="https://www.stercodigitex.com/siteassets/images/banner/Icon-awesome-phone.svg"alt="icon"> <a href="tel:+91-9315581875">+91-9315581875</a></li>
+
+		<li><img src="https://www.stercodigitex.com/siteassets/images/banner/Icon-material-email.svg"alt="icon"> <a href="mailto:info@stercodigitex.com" class="cta_info_mail">info@stercodigitex.com</a></li>
+
+
+
+		<li><img src="https://www.stercodigitex.com/siteassets/images/whatsapp-icon.svg"alt="icon"> <a class="cta_whatsapp whatsapp-link" href="javascript:void(0)">+91-9310720206</a></li>
+
+		
+
+		
+		</div>
+
+												</div>
+
+											</div>
+
+										</div>
+
+									</div>
+
+								</nav>
+
+							</div>
+
+							<div class="logo_box">
+
+								<a class="navbar-brand" href="https://www.stercodigitex.com"><img
+
+										src="https://www.stercodigitex.com/siteassets/images/logo.svg" alt="Logo"></a>
+
+							</div>
+
+							<div class="start_project">
+
+								<a href="https://www.stercodigitex.com/portfolio" class="getaquote view2">View Portfolio</a>
+
+								<a href="#project_form" class="getaquote">GET A QUOTE</a>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<script>
+
+					// Anchor Smooth Scroll
+
+					$(function () {
+
+						$('a[href*="#"]:not([href="#"])').click(function () {
+
+							if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+
+								var target = $(this.hash);
+
+								target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+
+								if (target.length) {
+
+									$('html, body').animate({
+
+										scrollTop: target.offset().top
+
+								}, 1000);
+
+									return false;
+
+							}
+
+						}
+
+					});
+
+				});
+
+				</script>
+<!-------------------new home banner html start here 27-12-2024--------------------->
+<section class="creating_digital">
+    <div class="container">
+      <h1>Creating Digital Experiences</h1>
+	                <div class="digi_wrap">
+                <p>Web Services</p>
+                   <ul>
+                      <li><a href="https://www.stercodigitex.com/web-design-development">Web Design & Development</a></li>
+                      <li><a href="https://www.stercodigitex.com/ecommerce-web-development">Ecommerce Development</a></li>
+                  </ul>              </div>
+	                <div class="digi_wrap">
+                <p>Digital Marketing</p>
+                   <ul>
+                    <li><a href="https://www.stercodigitex.com/seo-services-india">Search Engine Optimization</a></li>
+                    <li><a href="https://www.stercodigitex.com/social-media-management">Social Media Management</a></li>
+                  </ul>              </div>
+	                <div class="digi_wrap">
+                <p>Media Services</p>
+                   <ul>
+                      <li><a href="https://www.stercodigitex.com/interactive-media">Interactive Media</a></li>
+                       <li><a href="https://www.stercodigitex.com/video">Video Services</a></li>
+                       <li><a href="https://www.stercodigitex.com/branding-services">Branding Services</a></li>
+                  </ul>              </div>
+	                <div class="digi_wrap">
+                <p>Enterprise Application</p>
+                   <ul>
+                    <li><a href="https://www.stercodigitex.com/enterprise-application">Custom Web Applications</a></li>
+                  </ul>              </div>
+	  
+              <!--servise-end-->
+              <!-- <div class="line_panel">
+                <span class="side-line image reveal-image">&nbsp;</span>
+              </div> -->
+    </div>
+  </section>
+<section class="new_home_banner">
+  <div class="container-fluid">
+    <div class="slideshow-custom">
+      <div class="slideshow-container page-width">
+        <div class="swiper slideshow-main js-main-slideshow">
+          <div class="swiper-custom-pagination">
+            <h2 data-aos="fade-up"  data-aos-delay="100">Creating Digital Experiences</h2>
+            <span class="vertical-line"></span>
+            <ul>
+			              <li class="collection-title active">
+			<h2 data-aos="fade-up" data-aos-delay="200"> <a href="javascript:void(0)"> Web Services</a></h2>
+                <div class="link_name" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400"><a href="https://www.stercodigitex.com/web-design-development">Web Design &amp; Development</a> <a href="https://www.stercodigitex.com/ecommerce-web-development">Ecommerce Development</a> <a href="https://www.stercodigitex.com/web-design-development">Maintenance Services</a></div>              </li>
+			              <li class="collection-title ">
+			<h2 data-aos="fade-up" data-aos-delay="200"> <a href="javascript:void(0)"> Digital Marketing</a></h2>
+                <div class="link_name" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400"><a href="https://www.stercodigitex.com/seo-services-india">Search Engine Optimization</a> <a href="https://www.stercodigitex.com/social-media-management">Social Media Management</a></div>              </li>
+			              <li class="collection-title ">
+			<h2 data-aos="fade-up" data-aos-delay="200"> <a href="javascript:void(0)"> Media Services</a></h2>
+                <div class="link_name" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400"><a href="https://www.stercodigitex.com/interactive-media">Interactive Media</a> <a href="https://www.stercodigitex.com/video">Video Services</a> <a href="https://www.stercodigitex.com/branding-services">Branding Services</a></div>              </li>
+			              <li class="collection-title ">
+			<h2 data-aos="fade-up" data-aos-delay="200"> <a href="javascript:void(0)"> Enterprise Application</a></h2>
+                <div class="link_name" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400"><a href="https://www.stercodigitex.com/enterprise-application">Custom Web Applications</a></div>              </li>
+			
+            </ul>
+            <div class="line_panel">
+              <span class="side-line image">&nbsp;</span>
+            </div>
+
+			<div class="data_group">
+<div class="data-num data-num1  home_web_service active">
+<div class="hom_num" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="650">
+<h2>1500+</h2>
+<p>Websites Launched</p>
+<div class="view_work d-none"><a href="https://www.stercodigitex.com/portfolio/website-design">View Our Work</a></div>
+</div>
+</div>
+<div class="data-num data-num2 home_digital_maketing">
+<div class="hom_num" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="650">
+<h2>90+</h2>
+<p>Clients</p>
+<div class="view_work d-none"><a href="https://www.stercodigitex.com/portfolio/digital-marketing">View Our Work</a></div>
+</div>
+</div>
+<div class="data-num data-num3 home_media_service">
+<div class="hom_num" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="650">
+<h2>550+</h2>
+<p>Projects Delivered</p>
+<div class="view_work d-none"><a href="https://www.stercodigitex.com/portfolio/media">View Our Work</a></div>
+</div>
+</div>
+<div class="data-num data-num4 home_enterprise_services">
+<div class="hom_num" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="650">
+<h2>45+</h2>
+<p>Clients</p>
+<div class="view_work d-none"><a href="https://www.stercodigitex.com/enterprise-application">View Our Work</a></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <div class="swiper-wrapper">
+
+			            <div class="swiper-slide">
+              <div class="top_banner_group">
+
+                <div class="slide-image-wrap">
+                  <picture>
+                    <source media="(min-width:992px)" srcset="https://www.stercodigitex.com/uploads/home/banner_images/1735636834_a3416b5d0279e6b1dbe3.webp" alt="desktop banner" class="desktop-image">
+                    <img src="https://www.stercodigitex.com/uploads/home/banner_images/1736246347_aebea0ce138f9fdfe7f6.webp" alt="mobile banner" class="img-fluid w-100">
+                  </picture>
+
+                </div>
+                 <div class="banner_caption">
+<p>We Create Imposing <b> Web Experiences</b> <br>That Empower Your Online Presence</p>
+</div>                <div class="line_panel">
+                  <span class="side-line image reveal-image">&nbsp;</span>
+                </div>
+              </div>
+            </div>
+			            <div class="swiper-slide">
+              <div class="top_banner_group">
+
+                <div class="slide-image-wrap">
+                  <picture>
+                    <source media="(min-width:992px)" srcset="https://www.stercodigitex.com/uploads/home/banner_images/1735636861_954406521215da931fba.webp" alt="desktop banner" class="desktop-image">
+                    <img src="https://www.stercodigitex.com/uploads/home/banner_images/1736246280_26b42d1edd8b9c6f0f02.webp" alt="mobile banner" class="img-fluid w-100">
+                  </picture>
+
+                </div>
+                 <div class="banner_caption">
+<p>Accelerate Your <b> Brand Ambitions</b> <br>with us</p>
+</div>                <div class="line_panel">
+                  <span class="side-line image reveal-image">&nbsp;</span>
+                </div>
+              </div>
+            </div>
+			            <div class="swiper-slide">
+              <div class="top_banner_group">
+
+                <div class="slide-image-wrap">
+                  <picture>
+                    <source media="(min-width:992px)" srcset="https://www.stercodigitex.com/uploads/home/banner_images/1735636879_9afbdb772caed09df652.webp" alt="desktop banner" class="desktop-image">
+                    <img src="https://www.stercodigitex.com/uploads/home/banner_images/1736246411_c6f8d2464f0e4f1fbe8b.webp" alt="mobile banner" class="img-fluid w-100">
+                  </picture>
+
+                </div>
+                 <div class="banner_caption">
+<p>We Bring <b> Your Story to Life,</b> and <br><b> Life to Your Story</b></p>
+</div>                <div class="line_panel">
+                  <span class="side-line image reveal-image">&nbsp;</span>
+                </div>
+              </div>
+            </div>
+			            <div class="swiper-slide">
+              <div class="top_banner_group">
+
+                <div class="slide-image-wrap">
+                  <picture>
+                    <source media="(min-width:992px)" srcset="https://www.stercodigitex.com/uploads/home/banner_images/1735636900_ef92d6857b97ea393aaf.webp" alt="desktop banner" class="desktop-image">
+                    <img src="https://www.stercodigitex.com/uploads/home/banner_images/1736246480_dd83f068c93785dfed97.webp" alt="mobile banner" class="img-fluid w-100">
+                  </picture>
+
+                </div>
+                 <div class="banner_caption">
+<p>Our solutions: your path to <br><b> business excellence</b></p>
+<div class="logo_group">
+<ul>
+<li><img class="desktop-image" src=" https://www.stercodigitex.com/siteassets/images/banner/microsoft-net-logo-white@2x.webp" loading="lazy" alt=""></li>
+<li><img class="desktop-image" src=" https://www.stercodigitex.com/siteassets/images/banner/microsoft-sql-server-logo-white@2x.webp" loading="lazy" alt=""></li>
+</ul>
+</div>
+</div>                <div class="line_panel">
+                  <span class="side-line image reveal-image">&nbsp;</span>
+                </div>
+              </div>
+            </div>
+			
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
+
+
+<div class="experience_years section">
+<div class="container">
+<div class="digital5 desktop-view">
+<div class="row">
+<div class="col-md-5">
+<div class="owl-carousel owl-theme">
+<div class="item">
+<div class="brand_images">
+<div class="text_wrapper">
+<h2>27+</h2>
+<h4>Years experience</h4>
+</div>
+</div>
+</div>
+<div class="item">
+<div class="brand_images">
+<div class="text_wrapper">
+<h2>150+</h2>
+<h4>People</h4>
+</div>
+</div>
+</div>
+<div class="item">
+<div class="brand_images">
+<div class="text_wrapper">
+<h2>1200+</h2>
+<h4>Customers</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-7">
+<div class="digital_contennt">
+<h2><span>Full-Service Digital Agency </span> providing growth driven solutions.</h2>
+<div class="digital5 mobile-view">
+<div class="row">
+<div class="col-md-3">
+<div class="owl-carousel owl-theme">
+<div class="item">
+<div class="brand_images">
+<div class="text_wrapper">
+<h2>27+</h2>
+<h4>Years experience</h4>
+</div>
+</div>
+</div>
+<div class="item">
+<div class="brand_images">
+<div class="text_wrapper">
+<h2>150+</h2>
+<h4>People</h4>
+</div>
+</div>
+</div>
+<div class="item">
+<div class="brand_images">
+<div class="text_wrapper">
+<h2>1200+</h2>
+<h4>Customers</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>We are one of the most trusted digital media companies in India, owing to our successful track record of <span>27+ years</span> in serving our clients with innovative and specialized solutions.</p>
+<a href="https://www.stercodigitex.com/company">Know More <img src="https://www.stercodigitex.com/siteassets/images/more.svg" alt="Know More" loading="lazy" width="10" height="10" /> </a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+   <div class="home_profoilo">
+<h2>Our Portfolio Clients</h2>
+
+      </div>
+<div class="project_images section">
+	<div class="more_testimonials">
+		<div class="our_work btn">Our Work</div>
+		<ul> 			<li>
+				<div class="img_box1">
+					<figure><img src="https://www.stercodigitex.com/uploads/portfolio/webp/1623771022_731eb0c55effdcd5b05e.webp" alt="Parle Products" width="100%" height="405" loading="lazy" /></figure>
+				</div>
+			</li>
+					<li>
+				<div class="img_box1">
+					<figure><img src="https://www.stercodigitex.com/uploads/portfolio/webp/1623771381_66bf4cd31014aec86f18.webp" alt="Jubilant FoodWorks" width="100%" height="405" loading="lazy" /></figure>
+				</div>
+			</li>
+					<li>
+				<div class="img_box1">
+					<figure><img src="https://www.stercodigitex.com/uploads/portfolio/webp/1623771112_c57bef6052b42e601aea.webp" alt="Amity University " width="100%" height="405" loading="lazy" /></figure>
+				</div>
+			</li>
+					<li>
+				<div class="img_box1">
+					<figure><img src="https://www.stercodigitex.com/uploads/portfolio/webp/1623776214_2332077ee01cf78654c4.webp" alt="Little Tags Luxury" width="100%" height="405" loading="lazy" /></figure>
+				</div>
+			</li>
+					<li>
+				<div class="img_box1">
+					<figure><img src="https://www.stercodigitex.com/uploads/portfolio/webp/1654080868_636ee792caefadaa13b1.webp" alt=" AIS Glass" width="100%" height="405" loading="lazy" /></figure>
+				</div>
+			</li>
+					<li>
+				<div class="img_box1">
+					<figure><img src="https://www.stercodigitex.com/uploads/portfolio/webp/1626343816_85fdd85a87bb5cfc68b5.webp" alt="CP  Plus" width="100%" height="405" loading="lazy" /></figure>
+				</div>
+			</li>
+		
+		</ul>
+	</div>
+	<div class="load_more_btn clearfix"><a href="https://www.stercodigitex.com/portfolio" class="view_btn">View Portfolio</a></div>
+</div>
+
+<div class="our_clients section">
+<div class="container">
+<div class="clients_logo">
+<h2>Our Clients</h2>
+<div class="more_testimonials">
+<ul>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/logo-1.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/logo-2.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/logo-3.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/ais_window.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/logo-4.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/logo-5.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/logo-6.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/logo-7.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/logo-8.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/logo-9.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/windseild.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/logo-10.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/logo-11.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/logo-12.webp" alt="client logo" width="100%" loading="lazy" /></li>
+<li><img src="https://www.stercodigitex.com/siteassets/images/logo/logo-13.webp" alt="client logo" width="100%" loading="lazy" /></li>
+</ul>
+</div>
+<div class="load_more_btn clearfix"><a href="https://www.stercodigitex.com/clients" class="view_btn">View Clients</a></div>
+</div>
+</div>
+</div>
+<div class="our_Diary section desktop-dairy">
+<div class="container">
+<div class="our_diary_text">
+<h2>From Our Diary</h2>
+<p>We work hard to craft the best digital strategies and solutions for our business partners, and share what we learn with our community.</p>
+</div>
+<div class="row">
+<div class="col-md-6 remove_padding">
+<div class="our_Diary_box"><img src="https://www.stercodigitex.com/siteassets/images/ais_window.webp" alt="ais_window" width="100%" height="551" loading="lazy" />
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/ais_logo.webp" class="img-fluid" alt="ais_logo" width="100%" height="68" loading="lazy" /></div>
+<div class="home-news-title">News</div>
+<div class="our_Diary_date"><strong>Nov 01, 2021</strong>
+<p>Website launched for India&rsquo;s leading glass manufacturer</p>
+</div>
+</div>
+</div>
+<div class="col-md-6 left_contents">
+<div class="row">
+<div class="col-md-6">
+<div class="diary_box_left"><strong>July 08, 2022</strong>
+<p>6 Small but Important Things to Observe in Web Design</p>
+</div>
+</div>
+<div class="col-md-6">
+<div class="diary_box_right">
+<div class="home-news-title">Blog</div>
+<img src="https://www.stercodigitex.com/siteassets/images/right_image.webp" alt="image" width="100%" height="177" loading="lazy" /></div>
+</div>
+</div>
+<div class="full_image"><a> <img src="https://www.stercodigitex.com/siteassets/images/ais_wind.webp" alt="ais_window" width="100%" height="319" loading="lazy" /></a>
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/ais_wind_logo.webp" class="img-fluid" alt="ais_wind_logo" width="100%" height="68" loading="lazy" /></div>
+<div class="home-news-title">News</div>
+<div class="little_tag_content text-black"><strong>May 11, 2022</strong>
+<p>New Website launched for India&rsquo;s largest automotive glass repair and replacement company.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6 remove_padding">
+<div class="our_Diary_box"><img src="https://www.stercodigitex.com/siteassets/images/news5.webp" alt="news_image" width="100%" height="501" loading="lazy" />
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/parle.svg" class="img-fluid" alt="parle_image" width="100%" height="61" loading="lazy" /></div>
+<div class="home-news-title">Case Study</div>
+<div class="our_Diary_date"><strong>Jan 21, 2020</strong>
+<p>New Website launched for India&rsquo;s number 1 biscuit brand</p>
+</div>
+</div>
+</div>
+<div class="col-md-6 left_contents">
+<div class="row">
+<div class="col-md-6">
+<div class="diary_box_left"><strong>June 06, 2021</strong>
+<p>Livestream shopping &ndash; is it the next big thing in retail?</p>
+</div>
+</div>
+<div class="col-md-6">
+<div class="diary_box_right">
+<div class="home-news-title">Blog</div>
+<img src="https://www.stercodigitex.com/siteassets/images/right_image.webp" alt="news_image" width="100%" height="177" loading="lazy" /></div>
+</div>
+</div>
+<div class="full_image"><a href="https://www.stercodigitex.com/case-studies/little-tags-peminum-ecommerce-website-launched
+"> <img src="https://www.stercodigitex.com/siteassets/images/rightImg2.webp" alt="news_image" width="100%" height="319" loading="lazy" /></a>
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/little-tag.svg" class="img-fluid" alt="news_image" width="100%" height="63" loading="lazy" /></div>
+<div class="home-news-title">Case Study</div>
+<div class="little_tag_content"><strong>NOV 27, 2020</strong>
+<p>Multi-brands luxury garments ecommerce site launched</p>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6 business_help">
+<div class="row">
+<div class="col-md-6">
+<div class="diary_box_left"><strong>June 03, 2021</strong>
+<p>How AI as a service will help your business grow?</p>
+</div>
+</div>
+<div class="col-md-6">
+<div class="diary_box_right red_Section">
+<div class="home-news-title">Blog</div>
+<img src="https://www.stercodigitex.com/siteassets/images/right_image3.webp" alt="news_image" width="100%" height="178" loading="lazy" /></div>
+</div>
+</div>
+<div class="full_image"><a href="https://www.stercodigitex.com/case-studies/dr-lal-path-labs-health-connect-app
+"> <img src="https://www.stercodigitex.com/siteassets/images/drlal.webp" alt="lab_image" width="100%" height="318" loading="lazy" /></a>
+<div class="home-news-title">Case Study</div>
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/dr-lal.svg" class="img-fluid" alt="lab_image" width="100%" height="55" loading="lazy" /></div>
+<div class="little_tag_content doctorLal"><strong>JULY 12, 2020</strong>
+<p>App to connect all doctors Pan India</p>
+</div>
+</div>
+</div>
+<div class="col-md-6 right_contents">
+<div class="our_Diary_box"><img src="https://www.stercodigitex.com/siteassets/images/testing.webp" alt="jubilant_image" width="100%" height="498" loading="lazy" />
+<div class="home-news-title">Case Study</div>
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/jubilant.svg" class="img-fluid" alt="jubilant_image" width="100%" height="69" loading="lazy" /></div>
+<div class="our_Diary_date"><strong>AUG 21, 2020</strong>
+<p>18 Websites launched for Jubilant Lifesciences</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="view-portfolio"><a href="https://www.stercodigitex.com/news">View News</a> <a href="https://www.stercodigitex.com/blog">View Blog</a></div>
+</div>
+<div class="our_Diary section mobile-dairy">
+<div class="container">
+<div class="our_diary_text">
+<h2>From Our Diary</h2>
+<p>We work hard to craft the best digital strategies and solutions for our business partners, and share what we learn with our community.</p>
+</div>
+<div class="row">
+<div class="col-md-12">
+<div class="dairy_mobile">
+<div class="swiper dirary_slider mobile_portfolio">
+<div class="swiper-wrapper">
+<div class="swiper-slide">
+<div class="our_Diary_box"><img src="https://www.stercodigitex.com/siteassets/images/news5.webp" alt="news_image" width="100%" height="293" loading="lazy" />
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/parle.svg" class="img-fluid" alt="news_image" width="100%" height="293" loading="lazy" /></div>
+<div class="home-news-title">Case Study</div>
+<div class="our_Diary_date"><strong>Jan 21, 2021</strong>
+<p>New Website launched for India&rsquo;s number 1 biscuit brand</p>
+</div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="our_Diary_box wh-clr"><img src="https://www.stercodigitex.com/siteassets/images/jnu_launch_news1.webp" alt="news_image" width="100%" height="293" loading="lazy" />
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/jnu-logo.webp" class="img-fluid" alt="news_image" width="100%" height="293" loading="lazy" /></div>
+<div class="home-news-title">News</div>
+<div class="our_Diary_date"><strong>APR 21, 2021</strong>
+<p>JNU Launch</p>
+</div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="our_Diary_box wh-clr "><img src="https://www.stercodigitex.com/siteassets/images/pebble-news1.webp" alt="news_image" width="100%" height="293" loading="lazy" />
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/pebble-icon1.svg" class="img-fluid" alt="news_image" width="100%" height="293" loading="lazy" /></div>
+<div class="home-news-title">News</div>
+<div class="our_Diary_date"><strong>DEC 21, 2020</strong>
+<p>Pebble Website launched</p>
+</div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="our_Diary_box wh-clr "><img src="https://www.stercodigitex.com/siteassets/images/little-tag-news.webp" alt="news_image" width="100%" height="293" loading="lazy" />
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/little-tag.svg" class="img-fluid" alt="news_image" width="100%" height="293" loading="lazy" /></div>
+<div class="home-news-title">Case Study</div>
+<div class="our_Diary_date"><strong>NOV 27, 2020</strong>
+<p>Little Tags Peminum eCommerce Website launched</p>
+</div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="our_Diary_box"><img src="https://www.stercodigitex.com/siteassets/images/jubliant_news.webp" alt="news_image" width="100%" height="293" loading="lazy" />
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/jubilant.svg" class="img-fluid" alt="news_image" width="100%" height="293" loading="lazy" /></div>
+<div class="home-news-title">Case Study</div>
+<div class="our_Diary_date"><strong>AUG 21, 2020</strong>
+<p>18 Websites launched for Jubilant Lifesciences</p>
+</div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="our_Diary_box wh-clr lal-bg"><img src="https://www.stercodigitex.com/siteassets/images/lal-path-news.webp" alt="news_image" width="100%" height="293" loading="lazy" />
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/dr-lal.svg" class="img-fluid" alt="news_image" width="100%" height="293" loading="lazy" /></div>
+<div class="home-news-title">Case Study</div>
+<div class="our_Diary_date"><strong>JULY 12, 2020</strong>
+<p>Dr. Lal Path Labs Health Connect APP</p>
+</div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="our_Diary_box wh-clr"><img src="https://www.stercodigitex.com/siteassets/images/ais_mobile.webp" alt="news_image" width="100%" height="293" loading="lazy" />
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/ais_logo.webp" class="img-fluid" alt="news_image" width="100%" height="293" loading="lazy" /></div>
+<div class="home-news-title">News</div>
+<div class="our_Diary_date"><strong>Nov 01, 2021</strong>
+<p>Website launched for India&rsquo;s leading glass manufacturer.</p>
+</div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="our_Diary_box wh-clr"><img src="https://www.stercodigitex.com/siteassets/images/ais_wind_mobile.webp" alt="news_image" width="100%" height="293" loading="lazy" />
+<div class="logo_brand"><img src="https://www.stercodigitex.com/siteassets/images/ais_wind_logo.webp" class="img-fluid" alt="news_image" width="100%" height="293" loading="lazy" /></div>
+<div class="home-news-title">News</div>
+<div class="our_Diary_date"><strong>May 11, 2021</strong>
+<p>New Website launched for India&rsquo;s largest automotive glass repair and replacement company.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="swiper-pagination"></div>
+</div>
+<div class="view-portfolio"><a href="https://www.stercodigitex.com/news">View News</a> <a href="https://www.stercodigitex.com/blog">View Blog</a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Footer Start Here... -->
+
+<div class="footer section">
+
+	
+	<div class="container">
+
+		<div class="digital2">
+
+			<h2>Finding an agency who understands <br>your digital needs is hard.</h2>
+
+			<p>Let our amazing team help you craft your digital strategy today.</p>
+
+			<a href="https://www.stercodigitex.com/contact-us">Contact us <img
+
+					src="https://www.stercodigitex.com/siteassets/images/more.svg" alt="Know More" loading="lazy" width="10"
+
+					height="10"></a>
+
+
+
+		</div>
+
+
+
+
+
+	</div>
+
+	<div id="project_form" class="project-form formbg_grey" >
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="request-quote position-relative">
+					<h4>Please fill the form below:</h4>
+					<div class="contact_form">					
+						<form method="post" id="startproject_header">
+				    <input type="hidden" name="curr_URL" id="curr_URL" value="https://www.stercodigitex.com/" />
+				    <p id="form_error"></p>
+					<div class="row">
+        				    <div class="col-md-6 form-group"><input type="text" class="form-control validation_required " name="name" placeholder="Name" id="usr" required></div>
+        					<div class="col-md-6 form-group"><input type="text" name="Company"  class="form-control validation_required " placeholder="Company Name" id="usr" required> </div>
+        				    <div class="col-md-6 form-group"><input type="tel" name="mobile"  class="form-control validation_required " placeholder="Mobile Number" id="phone" required>
+        				        <p id="startproject_header_phone_error"></p>
+        				    </div>
+        				    <div class="col-md-6 form-group"><input type="email" name="email"  class="form-control validation_required " placeholder="Email Address" id="email" required>
+        				        <p id="startproject_header_email_error"></p>
+        				    </div>
+
+
+            				<div class="col-md-12 form-group"> <textarea class="form-control" name="Description"  rows="2" placeholder="Description" id="comment"></textarea></div>
+            				<div class="col-md-12 form-group">
+            				<div class="service-col">
+            				        <h5>Web</h5>
+
+            				        <label class="css-label"><input type="checkbox" name="LEADCF5[]" id="" class="css-checkbox" value="Website Design &amp; Development">
+            				        <span>Website Design &amp; Development</span></label>
+            				        <label class="css-label"><input type="checkbox" name="LEADCF5[]" id="" class="css-checkbox" value="Ecommerce">
+            				        <span>Ecommerce Development</span></label>
+            				        <!-- <label class="css-label"><input type="checkbox" name="LEADCF5[]" id="" class="css-checkbox" value="Mobile APP Development">
+            				        <span>Mobile APP Development</span></label> -->
+            				        <label class="css-label"><input type="checkbox" name="LEADCF5[]" id="" class="css-checkbox" value="Custom Web Application ">
+            				        <span>Custom Web Applications </span></label>
+
+
+            				    </div>
+            				    <div class="service-col">
+                                 <h5>Digital Marketing</h5>
+                                <label class="css-label"><input type="checkbox" name="LEADCF5[]" id="" class="css-checkbox" value="SEO : Search Engine Optimisation">
+                                <span>SEO : Search Engine Optimisation</span></label>
+                                <label class="css-label"><input type="checkbox" name="LEADCF5[]" id="" class="css-checkbox" value="SMO : Social Media Optimisation">
+                                <span>SMO : Social Media Optimisation</span></label>
+                                <label class="css-label"><input type="checkbox" name="LEADCF5[]" id="" class="css-checkbox" value="SEM : Search Engine Marketing">
+                                 <span>SEM : Search Engine Marketing</span></label>
+                                </div>
+                                 <div class="service-col d-none">
+                                <h5>Elearning</h5>
+                            	<label class="css-label"><input type="checkbox" name="LEADCF5[]" id="" class="css-checkbox" value="K12 Development">
+                                <span>K12 Development</span></label>
+                                <label class="css-label"><input type="checkbox" name="LEADCF5[]" id="" class="css-checkbox" value="Corporate Development">
+                                <span>Corporate Development</span></label>
+                                </div>
+                                <div class="service-col">
+                                <h5>Media Services</h5>
+                                 <label class="css-label"><input type="checkbox" name="LEADCF5[]" id="" class="css-checkbox" value="Intrective Presentations">
+                                 <span>Interactive Presentations</span></label>
+                                 <label class="css-label"><input type="checkbox" name="LEADCF5[]" id="" class="css-checkbox" value="Video Services">
+                                 <span>Video Services</span></label>
+                                  <label class="css-label"><input type="checkbox" name="LEADCF5[]" id="" class="css-checkbox" value="Branding Services">
+                                 <span>Branding Services</span></label>
+
+                                </div>
+            		        	<p id="startproject_header_service_error"></p>
+            				  </div>
+
+            				  <div class="col-md-12 i-human">
+            				      <input type="hidden" name="form_fill"  value="Start Project" />
+            				      <input type="hidden" name="Prev_URL" id="Prev_URL" value="" />
+            				      	<div class="g-recaptcha" data-sitekey="6Lc-K7whAAAAAH_qedQqNcqH6ey934b0ecDqeQV0"></div>
+            				      </div>
+            				  <div class="col-md-12">
+            				 
+            				  <button id="enquire_course_sub" type="button" class="btn btn-primary -submit">Submit</button>
+            				  <img class="loader" src="https://www.stercodigitex.com/siteassets/images/loader.gif" style="display:none" alt="loader">
+            				  </div>
+				    </div>
+			    </form>
+	
+					</div>
+				</div>
+	
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<style>
+	.usa-tel a {
+		color: #fff;
+	}
+
+	.usa-tel a:hover {
+		color: #fff;
+		text-decoration: none;
+	}
+	.project-form{ padding:6rem 0 0;  }
+	
+</style>
+	<!--faq-start-->
+
+	
+
+
+
+
+	<!-- Footer Start Here-UI14041994... -->
+
+	<footer>
+
+
+
+		<div class="container">
+
+		
+
+			<div class="copyright">
+
+				<div class="row">
+
+					<div class="col-lg-7">
+
+						<ul>
+
+							<li>© All Rights Reserved</li>
+
+							<!-- <li><a href="https://www.stercodigitex.com/contact-us">Contact Us</a></li> -->
+
+							<li><a href="https://www.stercodigitex.com/privacy-policy">Privacy Policy</a></li>
+
+							<li><a href="https://www.stercodigitex.com/sitemap">Sitemap</a></li>
+
+							<li><a href="https://www.stercodigitex.com/blog">Blog</a></li>
+
+
+
+						</ul>
+
+					</div>
+
+					<div class="col-lg-5">
+
+						<ul class="ftsocial_icons">
+
+							<li><a href="https://www.facebook.com/sdigitex" rel="nofollow noopener" target="_blank"><img
+
+										src="https://www.stercodigitex.com/siteassets/images/facebook.png" class="img-fluid"
+
+										alt="facebook icon"></a></li>
+
+							<li><a href="https://x.com/stercodigitex" target="_blank" rel="nofollow noopener"><img
+
+										src="https://www.stercodigitex.com/siteassets/images/twitter-x.png" class="img-fluid"
+
+										alt="twitter x icon"></a></li>
+
+							<!-- <li><a href="javascript:void(0);"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li> -->
+
+							<li><a href="https://www.linkedin.com/company/sterco-digitex-pvt-limited"
+
+									rel="nofollow noopener" target="_blank"><img
+
+										src="https://www.stercodigitex.com/siteassets/images/linked-in.png" class="img-fluid"
+
+										alt="twitter x icon"></a></li>
+
+						</ul>
+
+					</div>
+
+				</div>
+
+			</div><!-- copy-right... -->
+
+	</footer>
+
+	<!-- Footer Start End-UI14041994... -->
+
+	<div class="footer_details d-none">
+
+		<div class="container-fluid">
+
+			<div class="row">
+
+				<div class="col-md-6 col-sm-6">
+
+					<div class="copy_wright">
+
+						<ul>
+
+							<li>© All Rights Reserved</li>
+
+							<li><a href="https://www.stercodigitex.com/privacy-policy">Privacy Policy</a></li>
+
+							<li><a href="https://www.stercodigitex.com/sitemap">Sitemap</a></li>
+
+						</ul>
+
+					</div>
+
+				</div>
+
+				<div class="col-md-6 col-sm-6">
+
+					<div class="social_icons d-none">
+
+						<ul class="pull-right">
+
+							<li><a href="https://www.facebook.com/sdigitex" rel="" target="_blank"><i
+
+										class="fa fa-facebook" aria-hidden="true"></i></a></li>
+
+							<li><a href="https://twitter.com/stercodigitex" target="_blank" rel=""><img
+
+										src="https://www.stercodigitex.com/siteassets/images/twitter-x.png" class="img-fluid"
+
+										alt="twitter x icon"></a></li>
+
+							<li class="d-none"><a href="javascript:void(0);"><i class="fa fa-google-plus"
+
+										aria-hidden="true"></i></a></li>
+
+							<li><a href="https://www.linkedin.com/company/sterco-digitex-pvt-limited"
+
+									rel="" target="_blank"><i class="fa fa-linkedin"
+
+										aria-hidden="true"></i></a></li>
+
+						</ul>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+</div>
+
+
+
+<!--mobile slide up -->
+
+
+
+<div class="mobile-slide-menu">
+
+	<div class="mobile-admission-link d-none">
+
+		<div class="start-project">
+
+			<a class="ad-slide getaquote" href="javascript:void(0)">GET A QUOTE</a>
+
+		</div>
+
+		<div class="or">
+
+			<p>or</p>
+
+		</div>
+
+		<div class="number-slide">
+
+			<a href="tel:+91 9315581875" class="mobile_cta_number">Call +91 9315581875</a>
+
+		</div>
+
+	</div>
+
+	<div class="d-flex d-lg-none mobile-buttons">
+
+		<a class="ad-slide getaquote flex-grow-1" href="javascript:void(0)"><span>GET A QUOTE</span></a>
+
+		<p>OR</p>
+
+		<a href="tel:+91 9315581875" class="mobile_cta_number flex-grow-1"><span>Call +919315581875</span></a>
+
+		<!-- <a class="whatsapp-link flex-grow-1" target="_blank" href="https://wa.me/919310720206?text=Hi"><span><img src="https://www.stercodigitex.com/siteassets/images/whatsapp-icon.png" alt="Whatsapp Icon"></span></a>
+
+		<div class=" flex-grow-1">&nbsp;</div> -->
+
+	</div>
+
+
+
+	<div class="adm-popup">
+
+		<div class="contact_form">
+
+			<a class="close_icon"></a>
+
+			<h2>Please fill the form below:</h2>
+
+			<form method="post" id="startproject_footer">
+
+				<input type="hidden" name="curr_URL" id="curr_URL" value="https://www.stercodigitex.com/" />
+
+				<p id="form_error_footer"></p>
+
+				<div class="form-group"><input type="text" class="form-control validation_required" name="name"
+
+						placeholder="Name" id="usr" required></div>
+
+				<div class="form-group"><input type="text" name="Company" class="form-control validation_required"
+
+						placeholder="Company Name" id="usr" required> </div>
+
+
+
+				<div class="form-group"><input type="number" name="mobile" class="form-control validation_required"
+
+						placeholder="Mobile Number" id="phone_foot" required>
+
+					<p id="startproject_footer_phone_error"></p>
+
+				</div>
+
+				<div class="form-group"><input type="email" name="email" class="form-control validation_required"
+
+						placeholder="Email Address" id="email_foot" required>
+
+					<p id="startproject_footer_email_error"></p>
+
+				</div>
+
+
+
+
+
+				
+
+				<div class="form-group mainservice_wrap">
+
+					<div class="service-col dropdown_wrap">
+
+						<h5>Select Services <svg xmlns="http://www.w3.org/2000/svg" width="12.35" height="6.882" viewBox="0 0 12.35 6.882"><defs><style>.a{fill:none;stroke:"";stroke-miterlimit:10;}</style></defs><path class="a" d="M2319.828,302.1l-5.821,5.821-5.821-5.821" transform="translate(-2307.832 -301.746)"/></svg></h5>
+
+						<div class="service_dropmenu">
+
+							<h5> Web</h5>
+
+						<label class="css-label"><input type="checkbox" name="LEADCF5[]" class="css-checkbox"
+
+								value="Website Design &amp; Development">
+
+							<span>Website Design &amp; Development</span></label>
+
+						<label class="css-label"><input type="checkbox" name="LEADCF5[]" class="css-checkbox"
+
+								value="Ecommerce">
+
+							<span>Ecommerce Development</span></label>
+
+						<label class="css-label"><input type="checkbox" name="LEADCF5[]" class="css-checkbox"
+
+								value="Mobile APP Development">
+
+							<span>Mobile APP Development</span></label>
+
+						<label class="css-label"><input type="checkbox" name="LEADCF5[]" class="css-checkbox"
+
+								value="Custom Web Application ">
+
+							<span>Custom Web Applications </span></label>
+
+							<!--Web Services End-->
+
+							<h5 class="mt5"> Digital Marketing</h5>
+
+							<label class="css-label"><input type="checkbox" name="LEADCF5[]" class="css-checkbox"
+
+								value="SEO : Search Engine Optimisation">
+
+							<span>SEO : Search Engine Optimisation</span></label>
+
+						<label class="css-label"><input type="checkbox" name="LEADCF5[]" class="css-checkbox"
+
+								value="SMO : Social Media Optimisation">
+
+							<span>SMO : Social Media Optimisation</span></label>
+
+						<label class="css-label"><input type="checkbox" name="LEADCF5[]" class="css-checkbox"
+
+								value="SEM : Search Engine Marketing">
+
+							<span>SEM : Search Engine Marketing</span></label>
+
+							<!--Digital Marketing Services End-->
+
+							<!-- <h5 class="mt5"> Elearning</h5>
+
+							<label class="css-label"><input type="checkbox" name="LEADCF5[]" class="css-checkbox"
+
+								value="K12 Development">
+
+							<span>K12 Development</span></label>
+
+						<label class="css-label"><input type="checkbox" name="LEADCF5[]" class="css-checkbox"
+
+								value="Corporate Development">
+
+							<span>Corporate Development</span></label> -->
+
+							<!--Elearning Services End-->
+
+							<h5 class="mt5"> Media Services</h5>
+
+							<label class="css-label"><input type="checkbox" name="LEADCF5[]" class="css-checkbox"
+
+								value="Intrective Presentations">
+
+							<span>Interactive Presentations</span></label>
+
+						<label class="css-label"><input type="checkbox" name="LEADCF5[]" class="css-checkbox"
+
+								value="Video Services">
+
+							<span>Video Services</span></label>
+
+						<label class="css-label"> <input type="checkbox" name="LEADCF5[]" class="css-checkbox"
+
+								value="Branding Services">
+
+							<span>Branding Services</span></label>
+
+							<!--Media Services End-->
+
+						</div>
+
+
+
+					</div>
+
+					
+					<p id="startproject_footer_service_error"></p>
+
+				</div>
+
+                <div class="form-group"> <textarea class="form-control" name="Description" rows="2"
+
+						placeholder="Description" id="comment"></textarea></div>
+
+				<div class="col-md-12 i-human">
+
+					<input type="hidden" name="form_fill" value="Start Project footer" />
+
+					<input type="hidden" name="Prev_URL" id="Prev_URL"
+
+						value="" />
+
+					<div class="g-recaptcha" data-sitekey="6Lc-K7whAAAAAH_qedQqNcqH6ey934b0ecDqeQV0"></div>
+
+				</div>
+
+				<div class="col-md-12">
+
+					<button id="enquire_course_sub_footer" type="button" class="btn btn-primary"
+
+						style="margin-bottom:110px;margin-top:-5px">Submit</button>
+
+					<img class="loader_footer" src="https://www.stercodigitex.com/siteassets/images/loader.gif"
+
+						style="display:none" alt="loader">
+
+				</div>
+
+
+
+			</form>
+
+		</div>
+
+
+
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+<style>
+
+	.modal-header i {
+
+		font-size: 2rem;
+
+	}
+
+</style>
+
+<!--mobile slide up end here -->
+
+<input type="hidden" id="current_url" value="https://www.stercodigitex.com/" />
+
+<input type="hidden" id="prev_url"
+
+	value="" />
+
+<input type="hidden" id="browser" value="Chrome 120.0.0.0 windows Desktop" />
+
+<input type="hidden" id="ipaddress" value="2401:4900:8842:2b8f:8c5:ccc5:a4bc:72a7" />
+
+<input type="hidden" id="iplocation" value="" />
+
+<input type="hidden" id="location_city" value="" />
+
+<a class="floating whatsapp-link cta_whatsapp" aria-label="Whatsapp"  href="javascript:void(0)"><span
+
+		class="whatsapp-icon"><img width="23" height="23" loading="lazy" src="https://www.stercodigitex.com/siteassets/images/whatsapp-icon.webp" alt="Whatsapp"></span></a>
+
+
+
+<script async defer src="https://www.google.com/recaptcha/api.js"></script>
+
+<!--<script src="siteassets/js/jquery-migrate-3.0.1.min.js"></script>-->
+
+
+
+<script  src="https://www.stercodigitex.com/siteassets/js/bootstrap.min.js"></script>
+
+<script src="https://www.stercodigitex.com/siteassets/js/owl.carousel.min.js"></script>
+
+
+
+<!-- <script src="https://www.stercodigitex.com/siteassets/js/bootstrap.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js"></script>
+
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"></script>-->
+
+<script src="https://www.stercodigitex.com/siteassets/js/jquery-rbox.js"></script>
+
+<script src="https://www.stercodigitex.com/siteassets/js/main.js"></script>
+
+<script src="https://www.stercodigitex.com/siteassets/js/main2.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script defer src="https://www.stercodigitex.com/siteassets/js/SmoothScroll.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/ScrollTrigger.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
+
+<script src="https://www.stercodigitex.com/siteassets/js/aos.js"></script>
+
+<script src="https://www.stercodigitex.com/siteassets/js/new_main.js"></script>
+
+
+
+
+<script>
+
+
+
+$(document).ready(function() {
+
+	if (window.innerWidth <= 768) {
+
+       $('.btn.getaquote').click(function() {
+
+		 event.preventDefault();
+
+        $('.adm-popup').toggleClass('menuopened1');
+
+    });
+
+    } else {
+
+      console.log('Device is not mobile. No class added.');
+
+    }
+
+  
+
+});
+
+ for(var toggle,toggles=document.querySelectorAll(".c-hamburger"),i=toggles.length-1;i>=0;i--)toggleHandler(toggles[i]);function toggleHandler(e){e.addEventListener("click",function(e){e.preventDefault(),!0===this.classList.contains("is-active")?(this.classList.remove("is-active"),$(".open").removeClass("oppenned")):(this.classList.add("is-active"),$(".open").addClass("oppenned"))})}$(".sub-menu li a").click(function(e){$(".open").removeClass("oppenned"),$(".c-hamburger").removeClass("is-active")});
+
+</script>
+
+
+
+
+
+
+
+<script defer>
+
+	$(document).ready(function () {
+
+		var storage = window.sessionStorage;
+
+		if (storage.getItem('agreed') === null) {
+
+			$('#popupmodal').modal('hide');
+
+			storage.setItem('agreed', 10);
+
+		} else {
+
+			$('#popupmodal').hide();
+
+		}
+
+
+
+		$('.btn-close').click(function () {
+
+			$('#popupmodal').modal('hide');
+
+		});
+
+	});
+
+
+
+</script>
+
+
+
+<script>
+
+	$(document).ready(function () {
+
+		var storage = window.sessionStorage;
+
+		var currUrl = window.location.href;
+
+
+
+		/*if(currUrl.includes("utm_")){
+
+			storage.setItem('cta_number','+91-9555223721');
+
+		}
+
+
+
+		if (storage.getItem("cta_number") !== null) {
+
+			$('a.cta_number').text("IN "+storage.getItem('cta_number'));
+
+			$('a.cta_number').attr('href',storage.getItem('cta_number'));
+
+		}*/
+
+
+
+		//console.log("http://ipinfo.io/2401:4900:8842:2b8f:8c5:ccc5:a4bc:72a7/json");
+
+		var site_url = 'https://www.stercodigitex.com/';
+
+
+
+		var prev_prev_url = JSON.parse(storage.getItem("prev_prev_url"));
+
+		if (prev_prev_url == null) prev_prev_url = [];
+
+		prev_prev_url.push(currUrl);
+
+		storage.setItem("prev_prev_url", JSON.stringify(prev_prev_url));
+
+
+
+		$.ajax({
+
+			method: 'post',
+
+			url: site_url + 'updateanalytics',
+
+			data: { site_url: site_url, current_url: $('#current_url').val(), prev_url: $('#prev_url').val(), prev_prev_url: storage.getItem("prev_prev_url"), browser: $('#browser').val(), ipaddress: $('#ipaddress').val(), iplocation: $('#iplocation').val(), location_city: $('#location_city').val() },
+
+			success: function (res) { }
+
+		});
+
+
+
+
+
+		var url = window.location.href;
+
+		$('.custom-navbar a').each(function () {
+
+			if (url == $(this).attr('href')) {
+
+				$(this).parent('li').addClass('active');
+
+			}
+
+		});
+
+
+
+		$('[data-toggle="tooltip"]').tooltip();
+
+		$('img').each(function () {
+
+			var $img = $(this);
+
+			//var imgPath = $img.attr('data-src'); //For Data-src
+
+			if ($img.attr('alt') == '') {
+
+				var imgPath = $img.prop('src'); //For only src
+
+				var breakPath = imgPath.split('/');
+
+				var getImageExtension = breakPath[breakPath.length - 1];
+
+				var imgName = getImageExtension.split('.')[0];
+
+				$(this).attr('alt', imgName);
+
+			}
+
+		});
+
+	});
+
+
+
+	$(function () {
+
+		$(".solutions_box").slice(0, 0).show();
+
+		$("#load_more").click(function (e) {
+
+			e.preventDefault();
+
+			$(".solutions_box:hidden").slice(0, 3).show("slow");
+
+			if ($(".solutions_box:hidden").length == 0) {
+
+				alert("No More Company")
+
+			}
+
+		});
+
+	});
+
+
+
+
+
+	$(document).ready(function () {
+
+		var inputValue = $('body').attr('class');
+
+		if (inputValue == 'work_page contact_hide') { $('.headergetquote').text('CONTACT US'); } else { $('.headergetquote').text('GET A QUOTE'); }
+
+        
+
+         $(document).on("click", ".whatsapp-link", function(b) {
+
+        var c = window.location.href;
+
+        if (c) {
+
+            $.ajax({
+
+                url: "https://www.stercodigitex.com/enquire/whatsapp_enquire",
+
+                method: "POST",
+
+                data: {
+
+                    current_url: c
+
+                },
+
+                async: true,
+
+                dataType: "json",
+
+                success: function(a) {
+
+                    var url_open = "https://api.whatsapp.com/send/?phone=919310720206&text=Hi";
+
+					window.open(url_open, '_blank');
+
+                }
+
+            });
+
+          }
+
+        });
+
+	});
+
+
+
+</script>
+
+
+
+
+
+<script>
+
+	$(document).ready(function(){
+
+    $(".dropdown_wrap h5").click(function(){
+
+        var $this = $(this);
+
+        var $dropdownMenu = $this.next(".service_dropmenu");
+
+        // Check if the dropdown is already open
+
+        if ($dropdownMenu.is(":visible")) {
+
+            // Close the dropdown and remove the 'active' class
+
+            $dropdownMenu.slideUp();
+
+            $this.removeClass('active');
+
+        } else {
+
+            // Close all other dropdowns and remove 'active' class from all h5 elements
+
+            $(".service_dropmenu").slideUp();
+
+            $(".dropdown_wrap h5").removeClass('active');
+
+            // Open the clicked dropdown and add 'active' class
+
+            $dropdownMenu.stop(true, true).slideToggle();
+
+            $this.addClass('active');
+
+        }
+
+    });
+
+        $(".btn-getaquote").click(function() {
+
+            $(".adm-popup").addClass("menuopened1");
+
+        });
+
+    });
+
+</script>
+
+</body>
+
+
+
+</html>
