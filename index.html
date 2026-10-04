@@ -6,7 +6,6 @@
   <title>AKTU Connect - Student Portal</title> 
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- REAL EMAILJS ENGINE -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script type="text/javascript">
     (function(){
@@ -34,7 +33,6 @@
       overflow-x: hidden;
     }
 
-    /* Master Mockup Frame (Laptop: Exactly same as your preferred UI) */
     .master-mockup-frame {
       position: relative;
       width: 100%;
@@ -77,7 +75,7 @@
       line-height: normal;
     }
 
-    /* Laptop Whiteboard Placement */
+    /* Laptop Whiteboard */
     .whiteboard-active-area {
       position: absolute;
       top: 50%;
@@ -149,7 +147,7 @@
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
 
-    /* PHONE / MOBILE VIEW (Zero Glitch Alignment) */
+    /* PHONE ADJUSTMENT: EXACT CENTER ON MASCOT BOARD */
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 375px;
@@ -165,32 +163,32 @@
         pointer-events: none;
         user-select: none;
       }
-      /* Clean center lock over whiteboard */
       .whiteboard-active-area {
-        top: 48% !important;
-        left: 24.5% !important;
-        width: 51% !important;
-        height: 41% !important;
-        padding: 5px 6px 4px !important;
+        top: 47.8% !important;
+        left: 26% !important;
+        width: 48% !important;
+        height: 38% !important;
+        padding: 4px 6px 3px !important;
+        border-radius: 0.65rem !important;
       }
       .board-input {
-        font-size: 0.65rem;
-        padding: 0.25rem 0.45rem;
+        font-size: 0.62rem;
+        padding: 0.2rem 0.4rem;
       }
       .board-btn-primary {
-        font-size: 0.7rem;
-        padding: 0.32rem 0.5rem;
+        font-size: 0.68rem;
+        padding: 0.28rem 0.4rem;
       }
       .board-tab {
-        font-size: 0.65rem;
-        padding: 0.18rem 0;
+        font-size: 0.62rem;
+        padding: 0.16rem 0;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- 1. GOOGLE MODAL -->
+  <!-- GOOGLE MODAL -->
   <div id="google-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
@@ -208,7 +206,7 @@
     </div>
   </div>
 
-  <!-- 2. FORGOT PASSWORD MODAL -->
+  <!-- FORGOT PASSWORD MODAL -->
   <div id="forgot-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100 text-left">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100 mb-3">
@@ -228,7 +226,7 @@
     </div>
   </div>
 
-  <!-- 3. OTP MODAL -->
+  <!-- OTP MODAL -->
   <div id="otp-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100 text-center">
       <div class="w-12 h-12 bg-emerald-50 text-emerald-700 rounded-2xl flex items-center justify-center text-xl mx-auto mb-2.5">✉</div>
@@ -252,7 +250,7 @@
     </div>
   </div>
 
-  <!-- 4. SET PASSWORD MODAL -->
+  <!-- SET PASSWORD MODAL -->
   <div id="set-pwd-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100 text-left">
       <h3 class="text-base font-extrabold text-slate-900 mb-1" id="pwd-modal-title">Create Password</h3>
@@ -386,12 +384,10 @@
     }
     function closeForgotModal() { document.getElementById('forgot-modal').classList.add('hidden'); }
 
-    // Bulletproof User Finder (No hardcoded trap passwords)
     function findSavedUser(email) {
       const cleanEmail = (email || '').toLowerCase().trim();
       if (!cleanEmail) return null;
 
-      // 1. Check registered_students array
       const accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
       let user = accounts.find(acc => {
         const accId = (acc.id || acc.email || '').toLowerCase().trim();
@@ -405,7 +401,6 @@
         };
       }
 
-      // 2. Check direct key user_${cleanEmail}
       const direct = localStorage.getItem(`user_${cleanEmail}`);
       if (direct) {
         try {
@@ -421,7 +416,6 @@
         } catch(e) {}
       }
 
-      // 3. Check simple password key pwd_${cleanEmail}
       const simplePwd = localStorage.getItem(`pwd_${cleanEmail}`);
       if (simplePwd) {
         return {
@@ -585,7 +579,6 @@
       const email = pendingAccountData.id.trim().toLowerCase();
       const name = pendingAccountData.name.trim();
 
-      // Save cleanly in all storage registries
       let accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
       accounts = accounts.filter(acc => {
         const idCheck = (acc.id || acc.email || '').toLowerCase().trim();
@@ -620,7 +613,6 @@
         return;
       }
 
-      // Safe clean string comparison
       if (user.pwd === enteredPwd) {
         setAllAuthSessionKeys(id, user.name, enteredPwd);
         window.location.href = "study.html";

@@ -2,24 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>AKTU Connect - Study Hub</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
-  <!-- Original project data script if available -->
   <script src="study-data.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
     * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
     body { background-color: #f0f7f4; color: #132a13; min-height: 100vh; margin: 0; }
+
+    .avatar-circle, #top-user-avatar, #side-user-avatar {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar-circle img, #top-user-avatar img, #side-user-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 9999px;
+    }
   </style>
 </head>
 <body>
 
+  <!-- MOBILE DRAWER OVERLAY -->
+  <div id="drawer-overlay" class="mobile-drawer-overlay" onclick="toggleSidebar()"></div>
+
   <div class="app-container">
     
     <!-- LEFT SIDEBAR -->
-    <aside class="sidebar-menu-card">
+    <aside id="main-sidebar" class="sidebar-menu-card">
       <div class="menu-brand">
         <div class="brand-badge">AC</div>
         <div>
@@ -54,7 +69,7 @@
         <div class="flex items-center gap-2.5 overflow-hidden">
           <div id="side-user-avatar" class="avatar-circle">S</div>
           <div class="truncate">
-            <p id="side-user-name" class="text-xs font-bold text-white truncate">Student</p>
+            <p id="side-user-name" class="text-xs font-bold text-white truncate">Saqib Khan</p>
             <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">student@aktu.ac.in</p>
           </div>
         </div>
@@ -65,10 +80,26 @@
     </aside>
 
     <!-- MAIN STUDY HUB CONTENT -->
-    <main class="space-y-5 pb-10">
+    <main class="space-y-4 pb-10">
       
-      <!-- Top Title Bar with Profile & XP Widget -->
-      <header class="flex items-center justify-between">
+      <!-- MOBILE TOP BAR WITH HAMBURGER BUTTON (Visible only on phone/tablet) -->
+      <div class="flex items-center justify-between p-3 bg-white/90 backdrop-blur rounded-2xl border border-emerald-100 lg:hidden shadow-xs">
+        <div class="flex items-center gap-2.5">
+          <button type="button" onclick="toggleSidebar()" class="w-9 h-9 rounded-xl bg-emerald-50 text-[#1b4332] font-black text-lg flex items-center justify-center border border-emerald-200 cursor-pointer">
+            ☰
+          </button>
+          <div class="flex items-center gap-1.5">
+            <div class="w-6 h-6 rounded-md bg-[#1b4332] text-white text-[9px] font-black flex items-center justify-center">AC</div>
+            <span class="text-xs font-black text-slate-800">AKTU Connect</span>
+          </div>
+        </div>
+        <a href="profile.html" class="flex items-center gap-1.5">
+          <div id="top-user-avatar" class="w-7 h-7 rounded-full bg-emerald-800 text-white font-extrabold text-[10px] flex items-center justify-center overflow-hidden">S</div>
+        </a>
+      </div>
+
+      <!-- DESKTOP TOP HEADER (Hidden on mobile) -->
+      <header class="hidden lg:flex items-center justify-between">
         <div>
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 mb-1">
             ★ Academic Repository
@@ -77,269 +108,218 @@
           <p class="text-xs text-slate-500 font-medium">Access unit-wise video lectures and track syllabus progress with real-time XP.</p>
         </div>
 
-        <!-- Top Right Profile Widget -->
         <a href="profile.html" class="top-user-widget">
-          <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center">S</div>
-          <div class="text-left hidden sm:block">
-            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Student</p>
-            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">0 XP</p>
+          <div id="desktop-header-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center overflow-hidden shrink-0">S</div>
+          <div class="text-left">
+            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Saqib Khan</p>
+            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">180 XP</p>
           </div>
         </a>
       </header>
 
-      <!-- BRANCH, SEMESTER (1 TO 8) & SUBJECT SELECTORS -->
-      <section class="portal-card p-5">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          
+      <!-- BRANCH / SEMESTER / SUBJECT SELECTOR CARD -->
+      <section class="portal-card p-4 sm:p-5">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">Select Branch</label>
-            <select id="branch-select" onchange="handleSelectionChange()" class="theme-select cursor-pointer">
-              <option value="CSE" selected>Computer Science & Engineering</option>
-              <option value="AIML">CSE (AI & ML)</option>
-              <option value="IT">Information Technology</option>
-              <option value="ECE">Electronics & Communication</option>
-              <option value="ME">Mechanical Engineering</option>
-              <option value="CE">Civil Engineering</option>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">Select Branch</label>
+            <select id="branch-select" onchange="handleBranchChange()" class="theme-select cursor-pointer">
+              <option value="CSE (AI & ML)">CSE (AI & ML)</option>
+              <option value="CSE Core">Computer Science & Engineering</option>
+              <option value="Information Technology">Information Technology</option>
             </select>
           </div>
-
           <div>
-            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">Select Semester</label>
-            <select id="sem-select" onchange="handleSelectionChange()" class="theme-select cursor-pointer">
-              <option value="1">Semester 1</option>
-              <option value="2">Semester 2</option>
-              <option value="3">Semester 3</option>
-              <option value="4">Semester 4</option>
-              <option value="5" selected>Semester 5</option>
-              <option value="6">Semester 6</option>
-              <option value="7">Semester 7</option>
-              <option value="8">Semester 8</option>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">Select Semester</label>
+            <select id="sem-select" onchange="handleSemChange()" class="theme-select cursor-pointer">
+              <option value="Semester 3">Semester 3</option>
+              <option value="Semester 4">Semester 4</option>
+              <option value="Semester 5">Semester 5</option>
             </select>
           </div>
-
           <div>
-            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">Select Subject</label>
-            <select id="subject-select" onchange="renderSubjectUnits()" class="theme-select cursor-pointer">
-              <!-- Dynamically Populated -->
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">Select Subject</label>
+            <select id="subject-select" onchange="handleSubjectChange()" class="theme-select cursor-pointer">
+              <!-- Dynamically populated -->
             </select>
           </div>
-
         </div>
       </section>
 
-      <!-- ACTIVE SUBJECT BANNER (RED-BOX HIGHLIGHTED AREA) -->
-      <section class="portal-card p-6 bg-gradient-to-r from-[#1b4332] via-[#2d6a4f] to-[#1e4535] text-white relative overflow-hidden shadow-lg border-none">
-        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-5">
-          <div class="max-w-2xl">
-            <div class="flex flex-wrap items-center gap-2 mb-2">
-              <span id="subject-code-tag" class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-white/20 border border-white/20 text-emerald-200">BCS501</span>
-              <span class="text-xs text-emerald-200 font-bold" id="branch-sem-tag">CSE • Semester 5</span>
+      <!-- CURRENT SUBJECT BANNER WITH DYNAMIC PROGRESS GRAPH -->
+      <section class="portal-card p-5 sm:p-6 bg-gradient-to-br from-[#1b4332] to-[#0f281e] text-white">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-emerald-400/20 text-emerald-200 border border-emerald-400/30 uppercase" id="subject-code-tag">BCS302</span>
+              <span class="text-xs text-emerald-100 font-semibold" id="subject-sem-tag">AIML • Semester 3</span>
             </div>
-            <h2 id="active-subject-title" class="text-xl sm:text-2xl font-black mb-1.5 tracking-tight">Database Management Systems</h2>
-            <p class="text-xs text-emerald-100/90 leading-relaxed font-normal" id="subject-desc">Comprehensive 5-unit curriculum including video playlists, theoretical breakdowns, and university exam questions.</p>
+            <h2 class="text-lg sm:text-2xl font-black tracking-tight" id="active-subject-title">Computer Organization & Architecture</h2>
+            <p class="text-xs text-emerald-200/80 mt-1 max-w-2xl font-medium" id="active-subject-desc">Bus Architecture, Microprogrammed Control, Instruction Pipelining, Cache Memory, I/O Organization.</p>
           </div>
 
-          <div class="bg-black/25 backdrop-blur-sm p-4 rounded-2xl border border-white/10 text-center min-w-[150px] shrink-0 self-start md:self-auto">
-            <p class="text-[10px] font-black text-emerald-200 uppercase tracking-wider">Subject Progress</p>
-            <p class="text-2xl sm:text-3xl font-black text-white my-0.5" id="progress-percent">0%</p>
-            <p class="text-[10.5px] text-emerald-300 font-semibold" id="completed-units-count">0 of 5 Units Completed</p>
+          <!-- DYNAMIC PROGRESS GRAPH (Small on Phone, Wide on Desktop) -->
+          <div class="bg-black/30 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl border border-white/10 shrink-0 w-full sm:w-64">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[10px] font-black uppercase tracking-wider text-emerald-200">Subject Progress</span>
+              <span class="text-sm font-black text-emerald-300" id="progress-percent-label">0%</span>
+            </div>
+            
+            <!-- Progress Bar Graph -->
+            <div class="w-full h-2.5 bg-black/40 rounded-full overflow-hidden mb-2">
+              <div id="subject-progress-fill" class="h-full bg-gradient-to-r from-emerald-400 to-teal-300 rounded-full transition-all duration-300" style="width: 0%;"></div>
+            </div>
+
+            <!-- Unit completion tracker dots -->
+            <div class="flex justify-between items-center text-[9px] text-emerald-100/70 font-bold" id="unit-dots-container">
+              <span>U1</span><span>U2</span><span>U3</span><span>U4</span><span>U5</span>
+            </div>
+            <p class="text-[10px] text-emerald-200/60 font-semibold text-center mt-1" id="completed-units-count">0 of 5 Units Completed</p>
           </div>
         </div>
       </section>
 
-      <!-- 5 UNITS LIST: WATCH VIDEO & MARK COMPLETE -->
-      <section class="space-y-3.5" id="units-container">
-        <!-- Rendered Dynamically -->
+      <!-- SYLLABUS UNITS LIST -->
+      <section class="space-y-3" id="units-list-container">
+        <!-- Dynamically rendered -->
       </section>
 
     </main>
   </div>
 
+  <script src="nav.js"></script>
   <script>
-    // COMPLETE 1ST TO 8TH SEMESTER AKTU SUBJECT DATASET
-    const FALLBACK_AKTU_SYLLABUS = {
-      "1": [
-        { code: "BAS103", name: "Engineering Mathematics-I", desc: "Matrices, Differential Calculus, Beta & Gamma Functions, Vector Calculus." },
-        { code: "BAS101", name: "Engineering Physics", desc: "Relativistic Mechanics, Electromagnetic Field Theory, Quantum Mechanics, Wave Optics." },
-        { code: "BCS101", name: "Programming for Problem Solving (C)", desc: "Basics of C, Control Structures, Arrays, Functions, Pointers, Structures & File Handling." },
-        { code: "BEE101", name: "Basic Electrical Engineering", desc: "DC Circuits, Steady State Analysis of Single Phase AC, Transformers, Electrical Machines." }
-      ],
-      "2": [
-        { code: "BAS203", name: "Engineering Mathematics-II", desc: "Ordinary Differential Equations, Multivariable Calculus, Sequences & Series, Complex Analysis." },
-        { code: "BAS202", name: "Engineering Chemistry", desc: "Atomic & Molecular Structure, Spectroscopic Techniques, Electrochemistry, Polymers." },
-        { code: "BEC201", name: "Basic Electronics Engineering", desc: "PN Junction Diode, Bipolar Junction Transistor, Field Effect Transistors, Operational Amplifiers." },
-        { code: "BCE201", name: "Engineering Graphics & Design", desc: "Orthographic Projections, Isometric Projections, Section of Solids, Computer Aided Drafting." }
-      ],
-      "3": [
-        { code: "BCS301", name: "Data Structures", desc: "Arrays, Linked Lists, Stacks, Queues, Binary Trees, AVL Trees, Graphs, Sorting Algorithms." },
-        { code: "BCS302", name: "Computer Organization & Architecture", desc: "Bus Architecture, Microprogrammed Control, Instruction Pipelining, Cache Memory, I/O Organization." },
-        { code: "BCS303", name: "Discrete Structures & Graph Theory", desc: "Set Theory, Relations, Functions, Posets, Lattices, Group Theory, Graph Theory, Trees." },
-        { code: "BAS301", name: "Technical Communication", desc: "Technical Writing, Communication Barriers, Presentation Skills, Professional Ethics." }
-      ],
-      "4": [
-        { code: "BCS401", name: "Operating Systems", desc: "Process Synchronization, CPU Scheduling, Deadlocks, Memory Management, Virtual Memory, File Systems." },
-        { code: "BCS402", name: "Theory of Automata & Formal Languages", desc: "DFA, NFA, Regular Expressions, Context-Free Grammars, Pushdown Automata, Turing Machines." },
-        { code: "BCS403", name: "Object Oriented Programming with Java", desc: "OOP Concepts, Inheritance, Polymorphism, Exception Handling, Multithreading, Java Collections." },
-        { code: "BAS401", name: "Maths-IV (PDE & Probability)", desc: "Partial Differential Equations, Statistical Techniques, Probability Distributions, Sampling." }
-      ],
-      "5": [
-        { code: "BCS501", name: "Database Management Systems", desc: "ER Model, Relational Algebra, SQL, Normalization (1NF to BCNF), Transaction Processing, Concurrency Control." },
-        { code: "BCS502", name: "Design & Analysis of Algorithms", desc: "Asymptotic Notation, Divide & Conquer, Greedy Techniques, Dynamic Programming, Backtracking, NP-Complete." },
-        { code: "BCS503", name: "Compiler Design", desc: "Lexical Analysis, Top-Down & Bottom-Up Parsing, Syntax Directed Translation, Intermediate Code Gen, Optimization." },
-        { code: "BCS504", name: "Web Technology", desc: "HTML5, CSS3, JavaScript, PHP, XML, AJAX, Client-Server Architecture & Web Services." }
-      ],
-      "6": [
-        { code: "BCS601", name: "Software Engineering", desc: "Software Development Life Cycle, Agile Methodology, SRS, Software Design, Testing Techniques, Maintenance." },
-        { code: "BCS602", name: "Computer Networks", desc: "OSI & TCP/IP Reference Models, Data Link Layer Protocols, Routing Algorithms, TCP/UDP, Application Layer." },
-        { code: "BCS603", name: "Cloud Computing", desc: "Cloud Service Models (IaaS, PaaS, SaaS), Virtualization, Cloud Storage, AWS/Azure Basics, Cloud Security." }
-      ],
-      "7": [
-        { code: "BCS701", name: "Artificial Intelligence & Machine Learning", desc: "State Space Search, Heuristic Search, Knowledge Representation, Neural Networks, Supervised & Unsupervised Learning." },
-        { code: "BCS702", name: "Cyber Security & Digital Forensics", desc: "Cryptography, Network Attacks, Firewalls, Digital Signatures, Cyber Laws, IT Act 2000." }
-      ],
-      "8": [
-        { code: "BCS801", name: "Internet of Things (IoT)", desc: "IoT Architecture, Sensor Interfacing, Arduino & Raspberry Pi, IoT Networking Protocols, Cloud IoT." },
-        { code: "BCS802", name: "Deep Learning & NLP", desc: "Convolutional Neural Networks (CNN), Recurrent Neural Networks (RNN), Attention Mechanisms, Transformers." }
+    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'student@aktu.ac.in').toLowerCase().trim();
+
+    const sampleCurriculum = {
+      "Semester 3": [
+        {
+          code: "BCS301",
+          name: "Data Structures",
+          desc: "Arrays, Linked Lists, Stacks, Queues, Trees, Binary Search Trees, Graphs, Sorting & Hashing.",
+          units: [
+            { id: 1, title: "Unit 1: Introduction to Data Structures, Arrays & Stacks", videoUrl: "https://www.youtube.com/results?search_query=aktu+data+structures+unit+1+one+shot" },
+            { id: 2, title: "Unit 2: Queues & Recursion Analysis", videoUrl: "https://www.youtube.com/results?search_query=aktu+data+structures+unit+2+one+shot" },
+            { id: 3, title: "Unit 3: Linked Lists & Multi-linked Structures", videoUrl: "https://www.youtube.com/results?search_query=aktu+data+structures+unit+3+one+shot" },
+            { id: 4, title: "Unit 4: Trees, BST, AVL & B-Trees", videoUrl: "https://www.youtube.com/results?search_query=aktu+data+structures+unit+4+one+shot" },
+            { id: 5, title: "Unit 5: Graphs, Sorting Techniques & Hashing", videoUrl: "https://www.youtube.com/results?search_query=aktu+data+structures+unit+5+one+shot" }
+          ]
+        },
+        {
+          code: "BCS302",
+          name: "Computer Organization & Architecture",
+          desc: "Bus Architecture, Microprogrammed Control, Instruction Pipelining, Cache Memory, I/O Organization.",
+          units: [
+            { id: 1, title: "Unit 1: Fundamentals, Architecture & Mathematical Foundations", videoUrl: "https://www.youtube.com/results?search_query=aktu+coa+unit+1+one+shot" },
+            { id: 2, title: "Unit 2: Core Constructs, Intermediate Modeling & Principles", videoUrl: "https://www.youtube.com/results?search_query=aktu+coa+unit+2+one+shot" },
+            { id: 3, title: "Unit 3: Structural Analysis, System Design & Advanced Methods", videoUrl: "https://www.youtube.com/results?search_query=aktu+coa+unit+3+one+shot" },
+            { id: 4, title: "Unit 4: Transaction Handling, Optimization & Execution", videoUrl: "https://www.youtube.com/results?search_query=aktu+coa+unit+4+one+shot" },
+            { id: 5, title: "Unit 5: System Reliability, Security, Standards & Applications", videoUrl: "https://www.youtube.com/results?search_query=aktu+coa+unit+5+one+shot" }
+          ]
+        }
       ]
     };
 
-    // Use project's study-data.js if available, otherwise fallback
-    const DATA_SOURCE = (typeof window.studyData !== 'undefined' && window.studyData) ? window.studyData : FALLBACK_AKTU_SYLLABUS;
+    let activeSubject = sampleCurriculum["Semester 3"][1];
 
-    const UNIT_NAMES = [
-      "Unit 1: Fundamentals, Architecture & Mathematical Foundations",
-      "Unit 2: Core Constructs, Intermediate Modeling & Principles",
-      "Unit 3: Structural Analysis, System Design & Advanced Methods",
-      "Unit 4: Transaction Handling, Optimization & Execution",
-      "Unit 5: System Reliability, Security, Standards & Applications"
-    ];
-
-    // Auth & User Session
-    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'student@aktu.ac.in').toLowerCase();
-    const currentName = localStorage.getItem('user_name') || currentEmail.split('@')[0];
-
-    document.getElementById('side-user-name').innerText = currentName;
-    document.getElementById('side-user-email').innerText = currentEmail;
-    document.getElementById('top-user-name').innerText = currentName;
-    const initial = currentName.charAt(0).toUpperCase();
-    document.getElementById('side-user-avatar').innerText = initial;
-    document.getElementById('top-user-avatar').innerText = initial;
-
-    function getUserXP() {
-      return parseInt(localStorage.getItem(`akt_xp_${currentEmail}`) || "0", 10);
+    function populateSubjects() {
+      const select = document.getElementById('subject-select');
+      const list = sampleCurriculum["Semester 3"] || [];
+      select.innerHTML = list.map((sub, idx) => `<option value="${idx}">${sub.name} (${sub.code})</option>`).join('');
+      select.value = "1";
+      renderActiveSubject(list[1]);
     }
 
-    function updateUserXP(amount) {
-      const newXP = Math.max(0, getUserXP() + amount);
-      localStorage.setItem(`akt_xp_${currentEmail}`, newXP.toString());
-      document.getElementById('top-user-xp').innerText = newXP + " XP";
+    function handleSubjectChange() {
+      const idx = document.getElementById('subject-select').value;
+      activeSubject = sampleCurriculum["Semester 3"][idx];
+      renderActiveSubject(activeSubject);
     }
 
-    function getCompletedUnits() {
-      return JSON.parse(localStorage.getItem(`akt_completed_units_${currentEmail}`) || "[]");
+    function renderActiveSubject(sub) {
+      document.getElementById('active-subject-title').innerText = sub.name;
+      document.getElementById('active-subject-desc').innerText = sub.desc;
+      document.getElementById('subject-code-tag').innerText = sub.code;
+
+      updateSubjectProgressGraph(sub);
+      renderUnitsList(sub);
     }
 
-    function toggleUnitStatus(unitKey) {
-      let completed = getCompletedUnits();
-      if (completed.includes(unitKey)) {
-        completed = completed.filter(id => id !== unitKey);
-        updateUserXP(-20);
+    function getCompletedUnits(subjectCode) {
+      const stored = localStorage.getItem(`completed_units_${currentEmail}_${subjectCode}`);
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function updateSubjectProgressGraph(sub) {
+      const completed = getCompletedUnits(sub.code);
+      const count = completed.length;
+      const pct = Math.round((count / 5) * 100);
+
+      document.getElementById('progress-percent-label').innerText = `${pct}%`;
+      document.getElementById('subject-progress-fill').style.width = `${pct}%`;
+      document.getElementById('completed-units-count').innerText = `${count} of 5 Units Completed`;
+
+      // Update unit dots
+      const dots = [1, 2, 3, 4, 5].map(uNum => {
+        const isDone = completed.includes(uNum);
+        return `<span class="${isDone ? 'text-teal-300 font-black' : 'text-emerald-100/50'}">U${uNum} ${isDone ? '✓' : ''}</span>`;
+      }).join('');
+      document.getElementById('unit-dots-container').innerHTML = dots;
+    }
+
+    function toggleUnitDone(uNum, subCode) {
+      let completed = getCompletedUnits(subCode);
+      let userXP = parseInt(localStorage.getItem(`akt_xp_${currentEmail}`) || "180", 10);
+
+      if (completed.includes(uNum)) {
+        completed = completed.filter(n => n !== uNum);
+        userXP = Math.max(0, userXP - 20);
       } else {
-        completed.push(unitKey);
-        updateUserXP(20);
+        completed.push(uNum);
+        userXP += 20;
       }
-      localStorage.setItem(`akt_completed_units_${currentEmail}`, JSON.stringify(completed));
-      renderSubjectUnits();
+
+      localStorage.setItem(`completed_units_${currentEmail}_${subCode}`, JSON.stringify(completed));
+      localStorage.setItem(`akt_xp_${currentEmail}`, userXP.toString());
+
+      updateSubjectProgressGraph(activeSubject);
+      renderUnitsList(activeSubject);
+      if (typeof syncGlobalAvatars === 'function') syncGlobalAvatars();
     }
 
-    function openYouTubeLecture(subjectName, unitIndex) {
-      const query = encodeURIComponent(`AKTU ${subjectName} Unit ${unitIndex + 1} One Shot Lecture`);
-      window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank');
-    }
+    function renderUnitsList(sub) {
+      const container = document.getElementById('units-list-container');
+      const completed = getCompletedUnits(sub.code);
 
-    function handleSelectionChange() {
-      const sem = document.getElementById('sem-select').value;
-      const subSelect = document.getElementById('subject-select');
-      const subjects = DATA_SOURCE[sem] || DATA_SOURCE["5"];
-
-      subSelect.innerHTML = subjects.map((s, idx) => 
-        `<option value="${s.code}" ${idx === 0 ? 'selected' : ''}>${s.name} (${s.code})</option>`
-      ).join('');
-
-      renderSubjectUnits();
-    }
-
-    function renderSubjectUnits() {
-      const sem = document.getElementById('sem-select').value;
-      const branch = document.getElementById('branch-select').value;
-      const subCode = document.getElementById('subject-select').value;
-      const subjects = DATA_SOURCE[sem] || DATA_SOURCE["5"];
-      const activeSubject = subjects.find(s => s.code === subCode) || subjects[0];
-
-      document.getElementById('subject-code-tag').innerText = activeSubject.code;
-      document.getElementById('branch-sem-tag').innerText = `${branch} • Semester ${sem}`;
-      document.getElementById('active-subject-title').innerText = activeSubject.name;
-      document.getElementById('subject-desc').innerText = activeSubject.desc;
-
-      const completed = getCompletedUnits();
-      let doneCount = 0;
-
-      const unitsHTML = UNIT_NAMES.map((name, index) => {
-        const unitNum = index + 1;
-        const unitKey = `${activeSubject.code}_U${unitNum}`;
-        const isDone = completed.includes(unitKey);
-        if (isDone) doneCount++;
+      container.innerHTML = sub.units.map(u => {
+        const isDone = completed.includes(u.id);
 
         return `
-          <div class="portal-card p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 ${isDone ? 'border-emerald-500 bg-emerald-50/20' : 'hover:border-emerald-300'} transition">
-            
-            <!-- Left Info -->
-            <div class="flex items-start gap-3.5">
-              <span class="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-black shrink-0 ${isDone ? 'bg-emerald-600 text-white shadow-sm' : 'bg-emerald-100 text-emerald-900'}">
-                ${isDone ? '✓' : 'U' + unitNum}
+          <div class="portal-card p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${isDone ? 'bg-emerald-50/50 border-emerald-300' : 'bg-white'}">
+            <div class="flex items-start gap-3">
+              <span class="w-8 h-8 rounded-xl ${isDone ? 'bg-emerald-600 text-white' : 'bg-emerald-100 text-emerald-900'} text-xs font-black flex items-center justify-center shrink-0">
+                U${u.id}
               </span>
               <div>
-                <h4 class="text-sm font-bold text-slate-900 leading-snug">${name}</h4>
-                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Quantum Key Points • Important Derivations • Exam Questions</p>
+                <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-snug">${u.title}</h4>
+                <p class="unit-subtitle-details text-[11px] text-slate-400 font-medium mt-0.5">Quantum Key Points • Important Derivations • Exam Questions</p>
               </div>
             </div>
 
-            <!-- Right Action Buttons -->
-            <div class="flex items-center gap-2.5 self-end md:self-auto shrink-0">
-              
-              <!-- Watch Video on YouTube Button -->
-              <button onclick="openYouTubeLecture('${activeSubject.name}', ${index})" class="px-3.5 py-2 rounded-xl border border-red-200 bg-red-50 hover:bg-red-100 text-red-700 text-xs font-bold flex items-center gap-1.5 transition cursor-pointer">
+            <div class="flex items-center gap-2 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+              <a href="${u.videoUrl}" target="_blank" class="px-3.5 py-1.5 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold flex items-center gap-1 transition">
                 <span>▶</span> Watch Video
+              </a>
+              <button onclick="toggleUnitDone(${u.id}, '${sub.code}')" class="px-3.5 py-1.5 rounded-xl ${isDone ? 'bg-emerald-700 text-white' : 'bg-[#1b4332] text-white hover:bg-[#2d6a4f]'} text-xs font-bold transition flex items-center gap-1 cursor-pointer">
+                <span>${isDone ? '✓ Completed' : '○ Mark Done (+20 XP)'}</span>
               </button>
-
-              <!-- Mark Done / Completed Toggle Button -->
-              <button onclick="toggleUnitStatus('${unitKey}')" class="px-4 py-2 rounded-xl text-xs font-extrabold cursor-pointer transition flex items-center gap-1.5 ${isDone ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200 border border-emerald-300' : 'bg-[#1b4332] text-white hover:bg-[#2d6a4f] shadow-sm'}">
-                ${isDone ? '<span>✓</span> Completed (+20 XP)' : '<span>○</span> Mark Done (+20 XP)'}
-              </button>
-
             </div>
-
           </div>
         `;
       }).join('');
-
-      document.getElementById('units-container').innerHTML = unitsHTML;
-      const pct = Math.round((doneCount / 5) * 100);
-      document.getElementById('progress-percent').innerText = `${pct}%`;
-      document.getElementById('completed-units-count').innerText = `${doneCount} of 5 Units Completed`;
-      document.getElementById('top-user-xp').innerText = getUserXP() + " XP";
     }
 
-    function handleLogout() {
-      localStorage.removeItem('isLoggedIn');
-      localStorage.removeItem('current_user_email');
-      sessionStorage.clear();
-      window.location.href = 'index.html';
-    }
-
-    // Initialize
-    handleSelectionChange();
+    // Init
+    populateSubjects();
   </script>
-  <script src="nav.js"></script>
 </body>
 </html>
