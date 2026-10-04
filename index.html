@@ -6,6 +6,7 @@
   <title>AKTU Connect - Student Portal</title> 
   <script src="https://cdn.tailwindcss.com"></script>
   
+  <!-- REAL EMAILJS ENGINE -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script type="text/javascript">
     (function(){
@@ -16,7 +17,13 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
     body {
       background: radial-gradient(circle at 50% 30%, #1e4535 0%, #133024 60%, #0a1c14 100%) !important;
       min-height: 100vh;
@@ -27,6 +34,7 @@
       overflow-x: hidden;
     }
 
+    /* Master Mockup Frame */
     .master-mockup-frame {
       position: relative;
       width: 100%;
@@ -35,7 +43,7 @@
       background: #f7ede2;
       box-shadow: 0 30px 70px -10px rgba(0, 0, 0, 0.75), 0 0 0 3px rgba(255, 255, 255, 0.2);
       overflow: hidden;
-      line-height: 0;
+      display: block;
     }
 
     .desktop-bg-img {
@@ -45,6 +53,7 @@
       user-select: none;
       pointer-events: none;
     }
+
     .mobile-bg-img {
       display: none;
     }
@@ -66,9 +75,9 @@
       color: #1b4332;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       z-index: 20;
-      line-height: normal;
     }
 
+    /* Whiteboard Area (Laptop Default) */
     .whiteboard-active-area {
       position: absolute;
       top: 50%;
@@ -80,7 +89,6 @@
       flex-direction: column;
       justify-content: space-between;
       padding: 6px 10px 4px;
-      line-height: normal;
       background: #ffffff;
       border-radius: 0.85rem;
     }
@@ -97,6 +105,7 @@
       outline: none;
       transition: all 0.2s ease;
     }
+
     .board-input:focus {
       border-color: #2d6a4f;
       background: #ffffff;
@@ -117,6 +126,10 @@
       transition: all 0.15s ease;
     }
 
+    .board-btn-primary:hover {
+      transform: translateY(-1px);
+    }
+
     .board-tab {
       flex: 1;
       text-align: center;
@@ -130,6 +143,7 @@
       background: transparent;
       transition: all 0.15s ease;
     }
+
     .board-tab.active {
       background: #ffffff;
       color: #1b4332;
@@ -137,27 +151,48 @@
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
 
-    /* PHONE VIEW - EXACT CO-ORDINATES (Zero bottom gap, perfectly centered) */
+    /* Mobile adjustments */
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 375px;
         border-radius: 2.25rem;
       }
-      .desktop-bg-img { display: none !important; }
-      .mobile-bg-img { display: block !important; width: 100%; height: auto; }
+      .desktop-bg-img {
+        display: none !important;
+      }
+      .mobile-bg-img {
+        display: block !important;
+        width: 100%;
+        height: auto;
+        user-select: none;
+        pointer-events: none;
+      }
       .whiteboard-active-area {
-        top: 48.2% !important;
+        top: 48% !important;
         left: 24.5% !important;
         width: 51% !important;
-        height: 42.8% !important; /* Perfect height to cover the mascot board cleanly */
+        height: 42.5% !important;
         padding: 5px 6px 3px !important;
         border-radius: 0.75rem !important;
       }
-      .board-input { font-size: 0.62rem; padding: 0.22rem 0.4rem; }
-      .board-btn-primary { font-size: 0.68rem; padding: 0.28rem 0.4rem; }
-      .board-tab { font-size: 0.62rem; padding: 0.16rem 0; }
+      .board-input {
+        font-size: 0.62rem;
+        padding: 0.22rem 0.4rem;
+      }
+      .board-btn-primary {
+        font-size: 0.68rem;
+        padding: 0.28rem 0.4rem;
+      }
+      .board-tab {
+        font-size: 0.62rem;
+        padding: 0.16rem 0;
+      }
     }
-  <!-- MODALS (Google, Forgot, OTP, Set Password) -->
+  </style>
+</head>
+<body>
+
+  <!-- MODALS -->
   <div id="google-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
@@ -211,9 +246,14 @@
   <!-- MAIN FRAME -->
   <div class="master-mockup-frame">
     <div class="top-floating-badge">🎓 AKTU Connect</div>
-    <img src="boy-board - Copy.png" onerror="this.src='boy-board.png'" alt="Mascot Desktop" class="desktop-bg-img" />
+
+    <!-- Desktop Image -->
+    <img src="boy-board - Copy.png" onerror="this.src='boy-board.png'; this.onerror=function(){this.src='boy-board.jpg';}" alt="Mascot Desktop" class="desktop-bg-img" />
+
+    <!-- Mobile Image -->
     <img src="phoneboy.png" onerror="this.src='boy-board - Copy.png'" alt="Mascot Mobile" class="mobile-bg-img" />
 
+    <!-- Whiteboard Area -->
     <div class="whiteboard-active-area">
       <div class="flex bg-[#e8f3ec] p-0.5 rounded-lg border border-[#c8e2d2]">
         <button id="tab-signin-btn" onclick="switchAuthTab('signin')" class="board-tab active">Sign In</button>
@@ -222,6 +262,7 @@
 
       <div id="auth-error-banner" class="hidden p-0.5 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center"></div>
 
+      <!-- Sign In Form -->
       <form id="signin-form" onsubmit="handleSignIn(event)" class="space-y-1">
         <input type="email" id="signin-id" required placeholder="Email Address" class="board-input" />
         <div>
@@ -234,12 +275,14 @@
         <button type="submit" class="board-btn-primary">Login 🚀</button>
       </form>
 
+      <!-- Sign Up Form -->
       <form id="signup-form" onsubmit="initiateStandardSignUp(event)" class="space-y-1 hidden">
         <input type="text" id="signup-name" required placeholder="Full Name" class="board-input" />
         <input type="email" id="signup-id" required placeholder="Email Address" class="board-input" />
         <button type="submit" class="board-btn-primary">Send OTP 🔒</button>
       </form>
 
+      <!-- Google & Footer -->
       <div class="pt-0.5 border-t border-slate-200 flex items-center justify-between">
         <button type="button" onclick="openGoogleModal()" class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white border border-slate-200 text-[8px] font-bold text-slate-700 cursor-pointer">
           <span>Google</span>
@@ -273,19 +316,16 @@
     }
     function closeForgotModal() { document.getElementById('forgot-modal').classList.add('hidden'); }
 
-    // UNIVERSAL USER REGISTRY ENGINE (Zero false negatives)
     function findSavedUser(email) {
       const cleanEmail = (email || '').toLowerCase().trim();
       if (!cleanEmail) return null;
 
-      // 1. Array
       const accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
       let user = accounts.find(a => (a.id && a.id.toLowerCase().trim() === cleanEmail) || (a.email && a.email.toLowerCase().trim() === cleanEmail));
       if (user && (user.pwd || user.password)) {
         return { id: cleanEmail, name: user.name || cleanEmail.split('@')[0], pwd: String(user.pwd || user.password).trim() };
       }
 
-      // 2. Direct JSON key
       const direct = localStorage.getItem(`user_${cleanEmail}`);
       if (direct) {
         try {
@@ -295,7 +335,6 @@
         } catch(e) {}
       }
 
-      // 3. String password
       const simple = localStorage.getItem(`pwd_${cleanEmail}`);
       if (simple) {
         return { id: cleanEmail, name: localStorage.getItem(`user_name_${cleanEmail}`) || cleanEmail.split('@')[0], pwd: String(simple).trim() };
@@ -312,7 +351,6 @@
 
       const user = findSavedUser(id);
 
-      // Auto-register first-time admin if fresh browser
       if (!user && id === 'sksaqibkhan110@gmail.com') {
         const adminPass = enteredPwd;
         localStorage.setItem(`pwd_${id}`, adminPass);
