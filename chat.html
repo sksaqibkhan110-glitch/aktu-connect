@@ -9,31 +9,37 @@
 </head>
 <body>
 
-  <!-- Phone Header (Clean & Roomy, Small Avatar) -->
+  <!-- Backdrop for Mobile Drawer -->
+  <div id="mobile-drawer-overlay" class="mobile-drawer-overlay" onclick="toggleMobileMenu()"></div>
+
+  <!-- Mobile Top Header -->
   <header class="md:hidden sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 py-2.5 flex justify-between items-center shadow-sm">
-    <div class="flex items-center gap-2">
-      <div class="w-8 h-8 rounded-xl bg-blue-600 text-amber-400 font-black text-xs flex items-center justify-center shadow-sm">AC</div>
-      <div>
-        <h1 class="text-xs font-extrabold text-slate-900 leading-tight">AKTU Connect</h1>
-        <p class="text-[9px] text-slate-400 font-semibold">Zen AI Tutor</p>
+    <div class="flex items-center gap-2.5">
+      <button onclick="toggleMobileMenu()" class="p-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-sm font-bold flex items-center justify-center cursor-pointer">
+        ☰
+      </button>
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-blue-600 text-amber-400 font-black text-xs flex items-center justify-center">AC</div>
+        <span class="text-xs font-extrabold text-slate-900">AKTU Connect</span>
       </div>
     </div>
-    <a href="profile.html">
-      <img id="phone-avatar-img" class="w-7 h-7 rounded-full object-cover border border-blue-600 hidden" />
-      <div id="phone-avatar-fallback" class="w-7 h-7 rounded-full bg-blue-600 text-amber-300 font-bold text-[10px] flex items-center justify-center">SK</div>
+    <a href="profile.html" class="flex items-center">
+      <img id="phone-avatar-img" class="w-8 h-8 rounded-full object-cover border border-blue-600 hidden" />
+      <div id="phone-avatar-fallback" class="w-8 h-8 rounded-full bg-blue-600 text-amber-300 font-bold text-xs flex items-center justify-center">SK</div>
     </a>
   </header>
 
   <div class="app-container">
     
-    <!-- Left Menu Card (Desktop Permanent) -->
-    <aside class="sidebar-menu-card">
+    <!-- Left Menu Card (Desktop Permanent + Mobile Slide-in) -->
+    <aside id="sidebar-card" class="sidebar-menu-card">
       <div class="menu-brand">
         <div class="w-10 h-10 rounded-2xl bg-amber-400 text-amber-950 font-black flex items-center justify-center text-sm shadow-sm">AC</div>
         <div>
           <span class="font-extrabold text-base leading-tight block text-white">AKTU Connect</span>
           <span class="text-[11px] text-blue-200 font-semibold block">Student Dashboard</span>
         </div>
+        <button onclick="toggleMobileMenu()" class="md:hidden ml-auto text-white/80 hover:text-white text-lg font-bold p-1 cursor-pointer">✕</button>
       </div>
 
       <nav class="flex-1">
@@ -60,19 +66,20 @@
       
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div class="portal-pill portal-pill-amber mb-1.5">🤖 24x7 Academic Assistant</div>
+          <div class="portal-pill portal-pill-amber mb-1.5">🤖 Zen Academic AI Engine</div>
           <h2 class="text-xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
             Zen - Your AI Study Mentor
           </h2>
           <p class="text-xs text-slate-500">Ask questions, paste derivations, or upload exam photos for instant solutions.</p>
         </div>
 
-        <a href="profile.html" class="top-user-chip hidden sm:flex">
+        <!-- Top Right Mini Chip (Desktop) -->
+        <a href="profile.html" class="top-user-chip hidden sm:inline-flex">
           <img id="top-avatar-img" class="avatar-img-round hidden" />
           <div id="top-avatar-fallback" class="avatar-fallback-round">SK</div>
-          <div class="text-left">
+          <div class="text-left pr-1">
             <span class="block text-xs font-extrabold text-slate-900 leading-tight" id="top-user-name">Saqib Khan</span>
-            <span class="block text-[10px] font-bold text-amber-600 font-mono" id="top-user-xp">0 XP</span>
+            <span class="block text-[10px] font-bold text-amber-600 font-mono leading-tight" id="top-user-xp">0 XP</span>
           </div>
         </a>
       </div>
@@ -82,7 +89,7 @@
           <div class="flex items-start gap-3">
             <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-blue-600 text-amber-300 font-black text-xs flex items-center justify-center shrink-0">Zen</div>
             <div class="p-3.5 sm:p-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-xs sm:text-sm text-slate-800 leading-relaxed max-w-[85%] font-medium">
-              Hey! Main Zen hoon. AKTU exam prep, derivation, ya Section-A question solve karwana ho toh batao! Photo bhi bhej sakte ho 🚀
+              Hey! Main Zen hoon. AKTU syllabus, PYQ doubts, ya koi conceptual topic discuss karna ho toh batao! Photo bhi bhej sakte ho 🚀
             </div>
           </div>
         </div>
@@ -107,30 +114,15 @@
     </main>
   </div>
 
-  <!-- Mobile Bottom Dock -->
-  <nav class="md:hidden fixed bottom-3 left-4 right-4 z-50 bg-[#0f172a] text-white rounded-2xl px-4 py-2.5 flex justify-between items-center shadow-2xl">
-    <a href="study.html" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-white">
-      <span class="text-base">📖</span><span class="text-[10px] font-bold">Study</span>
-    </a>
-    <a href="pyq.html" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-white">
-      <span class="text-base">📄</span><span class="text-[10px] font-bold">PYQs</span>
-    </a>
-    <a href="quest.html" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-white">
-      <span class="text-base">🎯</span><span class="text-[10px] font-bold">Quests</span>
-    </a>
-    <a href="leaderboard.html" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-white">
-      <span class="text-base">🏆</span><span class="text-[10px] font-bold">Ranks</span>
-    </a>
-    <a href="chat.html" class="flex flex-col items-center gap-0.5 text-amber-400">
-      <span class="text-base">🤖</span><span class="text-[10px] font-extrabold">Zen AI</span>
-    </a>
-    <a href="profile.html" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-white">
-      <span class="text-base">👤</span><span class="text-[10px] font-bold">Profile</span>
-    </a>
-  </nav>
-
   <script src="config.js"></script>
   <script>
+    function toggleMobileMenu() {
+      const sidebar = document.getElementById('sidebar-card');
+      const overlay = document.getElementById('mobile-drawer-overlay');
+      sidebar.classList.toggle('mobile-open');
+      overlay.classList.toggle('active');
+    }
+
     let selectedImageBase64 = null;
     let selectedImageMimeType = null;
 
@@ -163,17 +155,16 @@
       document.getElementById('top-user-xp').innerText = `${xp} XP`;
 
       if (savedAvatar) {
-        document.getElementById('top-avatar-img').src = savedAvatar;
-        document.getElementById('top-avatar-img').classList.remove('hidden');
-        document.getElementById('top-avatar-fallback').classList.add('hidden');
+        const topImg = document.getElementById('top-avatar-img');
+        const topFb = document.getElementById('top-avatar-fallback');
+        const phoneImg = document.getElementById('phone-avatar-img');
+        const phoneFb = document.getElementById('phone-avatar-fallback');
+        const navImg = document.getElementById('nav-avatar-img');
+        const navFb = document.getElementById('nav-avatar-fallback');
 
-        document.getElementById('phone-avatar-img').src = savedAvatar;
-        document.getElementById('phone-avatar-img').classList.remove('hidden');
-        document.getElementById('phone-avatar-fallback').classList.add('hidden');
-
-        document.getElementById('nav-avatar-img').src = savedAvatar;
-        document.getElementById('nav-avatar-img').classList.remove('hidden');
-        document.getElementById('nav-avatar-fallback').classList.add('hidden');
+        if (topImg && topFb) { topImg.src = savedAvatar; topImg.classList.remove('hidden'); topFb.classList.add('hidden'); }
+        if (phoneImg && phoneFb) { phoneImg.src = savedAvatar; phoneImg.classList.remove('hidden'); phoneFb.classList.add('hidden'); }
+        if (navImg && navFb) { navImg.src = savedAvatar; navImg.classList.remove('hidden'); navFb.classList.add('hidden'); }
       }
     });
 
@@ -241,8 +232,11 @@
       `;
       container.scrollTop = container.scrollHeight;
 
+      const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+      const apiUrl = isLocal ? "https://aktu-connect.vercel.app/api/chat" : "/api/chat";
+
       try {
-        const response = await fetch("/api/chat", {
+        const response = await fetch(apiUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -252,8 +246,20 @@
           })
         });
 
-        const data = await response.json();
-        const reply = data.reply || (data.error ? "Error: " + data.error : "No response.");
+        // SAFE PARSING FIX: prevents "Unexpected end of JSON"
+        const rawText = await response.text();
+        let reply = "No response from AI.";
+
+        try {
+          const data = JSON.parse(rawText);
+          reply = data.reply || (data.error ? "Error: " + data.error : rawText);
+        } catch (jsonErr) {
+          if (!response.ok) {
+            reply = `Server status ${response.status}. Ensure Vercel deployment has GEMINI_API_KEY set.`;
+          } else {
+            reply = rawText || "Response was received in non-JSON format.";
+          }
+        }
 
         document.getElementById(loadingId).innerHTML = `
           <div class="w-8 h-8 rounded-xl bg-blue-600 text-amber-300 font-black text-xs shrink-0 flex items-center justify-center">Zen</div>
@@ -265,7 +271,7 @@
         document.getElementById(loadingId).innerHTML = `
           <div class="w-8 h-8 rounded-xl bg-blue-600 text-amber-300 font-black text-xs shrink-0 flex items-center justify-center">Zen</div>
           <div class="p-3.5 sm:p-4 rounded-2xl bg-red-50 border border-red-200 text-xs sm:text-sm text-red-700">
-            Error: ${escapeHtml(err.message)}
+            Network Error: ${escapeHtml(err.message)}
           </div>
         `;
       }
