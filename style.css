@@ -137,3 +137,78 @@ select:focus, input:focus {
   background: #1e293b !important;
   transform: translateY(-1px);
 }
+/* Dashboard Two-Column Layout */
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Left Sidebar (Blue Accent like E-Skool Reference) */
+.portal-sidebar {
+  width: 250px;
+  background: #1d4ed8;
+  color: #ffffff;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  border-top-right-radius: 28px;
+  border-bottom-right-radius: 28px;
+  box-shadow: 4px 0 24px rgba(29, 78, 216, 0.18);
+  z-index: 40;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 0.5rem 1.5rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.2s ease;
+  text-decoration: none;
+  margin-bottom: 6px;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.sidebar-link.active {
+  background: #ffffff;
+  color: #1d4ed8;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Main Content Area next to Sidebar */
+.dashboard-main {
+  flex: 1;
+  padding: 2rem 2.5rem;
+  max-width: 1200px;
+}
+
+@media (max-width: 768px) {
+  .portal-sidebar {
+    display: none; /* Mobile par clean bottom dock handle karega */
+  }
+  .dashboard-main {
+    padding: 1rem;
+  }
+}

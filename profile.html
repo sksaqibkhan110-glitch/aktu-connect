@@ -2,140 +2,220 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AKTU Connect - Student Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>AKTU Connect - Student Profile & Analytics</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config = { darkMode: 'class' };</script>
   <link rel="stylesheet" href="style.css" />
   <script src="theme.js"></script>
 </head>
-<body class="min-h-screen flex flex-col bg-zinc-950 text-zinc-100">
+<body class="min-h-screen">
 
-  <!-- Permanent Top Navigation Bar -->
-  <nav class="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center h-16">
-      <div class="flex items-center gap-6 sm:gap-8">
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">AC</div>
-          <span class="font-bold text-lg tracking-tight hidden sm:inline">AKTU Connect</span>
-        </div>
-        <div class="flex items-center gap-1 sm:gap-2">
-          <a href="study.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📖 Study Hub</a>
-          <a href="pyq.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📄 PYQs</a>
-          <a href="quest.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🎯 Quests</a>
-          <a href="leaderboard.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🏆 Leaderboard</a>
-          <a href="chat.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🤖 AI Tutor</a>
-          <a href="profile.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/40">👤 Profile</a>
-        </div>
-      </div>
-      <div class="flex items-center gap-3">
-        <button onclick="toggleGlobalTheme()" class="theme-toggle-btn ui-btn-secondary text-xs px-3 py-1.5 rounded-md">🌙 Dark</button>
-        <a href="index.html" class="text-xs font-semibold text-rose-500 hover:underline">Logout</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Main Profile Container -->
-  <main class="max-w-4xl mx-auto px-4 flex-1 my-8 w-full">
+  <div class="dashboard-wrapper">
     
-    <!-- Page Header -->
-    <div class="mb-6">
-      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">Student Profile</h1>
-      <p class="text-sm text-zinc-400 mt-1">Manage your academic credentials, goals, and track your AKTU exam readiness.</p>
-    </div>
-
-    <!-- Student Identity Card -->
-    <div class="ui-card p-6 border border-zinc-800 bg-zinc-900/80 rounded-2xl mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-      <div class="flex items-center gap-4">
-        <div class="w-16 h-16 rounded-2xl bg-indigo-600 flex items-center justify-center text-white font-bold text-2xl shadow-lg">
-          SK
+    <!-- Left Sidebar (E-Skool Style) -->
+    <aside class="portal-sidebar hidden md:flex">
+      <div class="sidebar-brand">
+        <div class="w-10 h-10 rounded-2xl bg-amber-400 text-amber-950 font-black flex items-center justify-center text-sm shadow-sm">
+          AC
         </div>
         <div>
-          <h2 class="text-xl font-bold text-zinc-100">Saqib Khan</h2>
-          <p class="text-xs sm:text-sm text-zinc-400 mt-0.5">B.Tech Computer Science (AI & ML) • <span id="user-display-sem">5th Semester</span></p>
+          <span class="font-extrabold text-base leading-tight block text-white">AKTU Connect</span>
+          <span class="text-[11px] text-blue-200 font-semibold block">Student Dashboard</span>
         </div>
       </div>
-      <div class="text-left sm:text-right">
-        <div class="text-xs text-zinc-400 uppercase font-semibold">Institution</div>
-        <div class="text-sm font-bold text-zinc-200">GNIOT College</div>
-        <div class="text-xs text-indigo-400 mt-1 font-mono">Graduating 2028</div>
-      </div>
-    </div>
 
-    <!-- Academic Goal & Readiness Tracker Card -->
-    <div class="ui-card p-6 border border-zinc-800 bg-zinc-900/80 rounded-2xl mb-6">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
-        <h3 class="text-lg font-bold text-zinc-100">🎯 AKTU Exam Readiness & Goal Tracker</h3>
-        <span id="target-cgpa-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-950/80 text-indigo-400 border border-indigo-800">Target: Loading...</span>
+      <nav class="flex-1">
+        <a href="study.html" class="sidebar-link">
+          <span class="text-lg">📖</span>
+          <span>Study Hub</span>
+        </a>
+        <a href="pyq.html" class="sidebar-link">
+          <span class="text-lg">📄</span>
+          <span>PYQs Vault</span>
+        </a>
+        <a href="quest.html" class="sidebar-link">
+          <span class="text-lg">🎯</span>
+          <span>Exam Arena</span>
+        </a>
+        <a href="leaderboard.html" class="sidebar-link">
+          <span class="text-lg">🏆</span>
+          <span>Leaderboard</span>
+        </a>
+        <a href="chat.html" class="sidebar-link">
+          <span class="text-lg">🤖</span>
+          <span>Zen AI Tutor</span>
+        </a>
+        <a href="profile.html" class="sidebar-link active">
+          <span class="text-lg">👤</span>
+          <span>My Profile</span>
+        </a>
+      </nav>
+
+      <div class="pt-4 border-t border-white/20 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-white text-blue-700 font-bold text-xs flex items-center justify-center">SK</div>
+          <span class="text-xs font-bold text-white">Saqib Khan</span>
+        </div>
+        <a href="index.html" class="text-xs text-rose-200 hover:text-white font-semibold">Logout</a>
       </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="dashboard-main flex-1 pb-24 md:pb-12">
       
-      <p class="text-sm text-zinc-400 mb-4">To achieve your target CGPA and prove your readiness, complete quest tests and focus sessions to reach your required XP milestone.</p>
-
-      <!-- Progress Bar -->
-      <div class="space-y-2">
-        <div class="flex justify-between text-xs font-semibold">
-          <span class="text-zinc-400">Readiness XP Progress</span>
-          <span id="xp-progress-text" class="text-indigo-400 font-mono">0 / 0 XP</span>
+      <!-- Mobile Header -->
+      <div class="md:hidden flex justify-between items-center mb-6">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-2xl bg-blue-600 text-white font-extrabold flex items-center justify-center text-xs">AC</div>
+          <h1 class="text-base font-extrabold text-slate-900">Student Profile</h1>
         </div>
-        <div class="w-full bg-zinc-800 rounded-full h-3 overflow-hidden">
-          <div id="xp-progress-bar" class="bg-indigo-600 h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+        <a href="index.html" class="text-xs font-bold text-rose-600">Logout</a>
+      </div>
+
+      <!-- Welcome Banner Card -->
+      <div class="portal-card p-6 sm:p-8 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded-3xl bg-blue-600 text-amber-400 font-black text-2xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+            SK
+          </div>
+          <div>
+            <div class="portal-pill portal-pill-amber mb-1.5">★ B.Tech CS (AI & ML)</div>
+            <h2 class="text-2xl font-extrabold text-slate-900">Saqib Khan</h2>
+            <p class="text-xs text-slate-500 font-medium">GNIOT College • 5th Semester • Class of 2028</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <div class="bg-slate-50 border border-slate-200 px-4 py-3 rounded-2xl text-center">
+            <span class="block text-[11px] font-bold text-slate-400 uppercase">Target CGPA</span>
+            <span class="text-lg font-black text-slate-900">8.5+</span>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 px-4 py-3 rounded-2xl text-center">
+            <span class="block text-[11px] font-bold text-amber-700 uppercase">Total XP</span>
+            <span class="text-lg font-black text-amber-900 font-mono" id="profile-xp-val">745 XP</span>
+          </div>
         </div>
       </div>
 
-      <!-- Status / Readiness Message -->
-      <div id="readiness-status" class="mt-4 p-3 rounded-lg bg-zinc-950 border border-zinc-800 text-xs text-zinc-300">
-        Loading readiness diagnostics...
+      <!-- Two-Column Grid: Study Bar Graph + Quick Tasks -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Study Bar Graph (Behance Style Performance Chart) -->
+        <div class="portal-card p-6 lg:col-span-2">
+          <div class="flex justify-between items-center pb-4 mb-6 border-b border-slate-100">
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900">Unit Test & CT Readiness</h3>
+              <p class="text-xs text-slate-400">Class Test (CT) & Quest Round Performance Metrics</p>
+            </div>
+            <span class="portal-pill portal-pill-indigo">Live Session Data</span>
+          </div>
+
+          <!-- Vertical Bar Chart -->
+          <div class="pt-6 pb-2">
+            <div class="h-48 flex items-end justify-around gap-4 sm:gap-8 border-b border-slate-200 px-4">
+              
+              <!-- Bar 1: CT-1 -->
+              <div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+                <span class="text-[11px] font-bold text-slate-500 opacity-0 group-hover:opacity-100 transition">88%</span>
+                <div class="w-full bg-blue-600 rounded-t-xl transition-all duration-500 group-hover:bg-blue-700 shadow-sm" style="height: 140px;"></div>
+                <span class="text-xs font-bold text-slate-700 mt-1">CT-1</span>
+              </div>
+
+              <!-- Bar 2: CT-2 -->
+              <div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+                <span class="text-[11px] font-bold text-slate-500 opacity-0 group-hover:opacity-100 transition">76%</span>
+                <div class="w-full bg-blue-500 rounded-t-xl transition-all duration-500 group-hover:bg-blue-600 shadow-sm" style="height: 120px;"></div>
+                <span class="text-xs font-bold text-slate-700 mt-1">CT-2</span>
+              </div>
+
+              <!-- Bar 3: Pre-Sem -->
+              <div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+                <span class="text-[11px] font-bold text-slate-500 opacity-0 group-hover:opacity-100 transition">72%</span>
+                <div class="w-full bg-blue-500 rounded-t-xl transition-all duration-500 group-hover:bg-blue-600 shadow-sm" style="height: 110px;"></div>
+                <span class="text-xs font-bold text-slate-700 mt-1">CT-3</span>
+              </div>
+
+              <!-- Bar 4: Arena Quests (Dynamic XP Bar) -->
+              <div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+                <span class="text-[11px] font-bold text-amber-600 opacity-0 group-hover:opacity-100 transition">94%</span>
+                <div class="w-full bg-amber-400 rounded-t-xl transition-all duration-500 group-hover:bg-amber-500 shadow-md shadow-amber-400/30" style="height: 160px;"></div>
+                <span class="text-xs font-bold text-amber-900 mt-1">Arena</span>
+              </div>
+
+            </div>
+
+            <div class="flex justify-between items-center pt-4 text-[11px] text-slate-400 font-medium">
+              <span>● Blue: College Internal CT Exams</span>
+              <span class="text-amber-600 font-bold">● Amber: AKTU Connect Quest Master</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Syllabus Readiness & Goals -->
+        <div class="space-y-6">
+          <div class="portal-card p-6">
+            <h4 class="text-sm font-extrabold text-slate-900 mb-3">Weekly Target</h4>
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs font-bold mb-1">
+                  <span class="text-slate-600">DAA (Unit 1 & 2)</span>
+                  <span class="text-blue-600">80% Done</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                  <div class="bg-blue-600 h-full rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-bold mb-1">
+                  <span class="text-slate-600">DBMS (Normalization)</span>
+                  <span class="text-amber-500">60% Done</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                  <div class="bg-amber-400 h-full rounded-full" style="width: 60%"></div>
+                </div>
+              </div>
+            </div>
+
+            <a href="quest.html" class="portal-btn-primary block text-center w-full py-3 text-xs mt-6 cursor-pointer">
+              Launch Today's Quests 🎯
+            </a>
+          </div>
+        </div>
+
       </div>
-    </div>
 
-    <!-- Quick Actions -->
-    <div class="flex justify-between items-center">
-      <a href="goal-setup.html" class="px-4 py-2.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 transition">
-        ⚙️ Update Academic Goals
-      </a>
-      <a href="study.html" class="px-6 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md transition">
-        Resume Studying →
-      </a>
-    </div>
+    </main>
+  </div>
 
-  </main>
+  <!-- Mobile Bottom Dock (Thumb-friendly on phone) -->
+  <nav class="md:hidden fixed bottom-3 left-4 right-4 z-50 bg-[#0f172a] text-white rounded-2xl px-4 py-2.5 flex justify-between items-center shadow-2xl">
+    <a href="study.html" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-white">
+      <span class="text-base">📖</span>
+      <span class="text-[10px] font-bold">Study</span>
+    </a>
+    <a href="pyq.html" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-white">
+      <span class="text-base">📄</span>
+      <span class="text-[10px] font-bold">PYQs</span>
+    </a>
+    <a href="quest.html" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-white">
+      <span class="text-base">🎯</span>
+      <span class="text-[10px] font-bold">Arena</span>
+    </a>
+    <a href="leaderboard.html" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-white">
+      <span class="text-base">🏆</span>
+      <span class="text-[10px] font-bold">Ranks</span>
+    </a>
+    <a href="chat.html" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-white">
+      <span class="text-base">🤖</span>
+      <span class="text-[10px] font-bold">Zen AI</span>
+    </a>
+  </nav>
 
   <script>
-    window.addEventListener("DOMContentLoaded", () => {
-      const targetCgpa = parseFloat(localStorage.getItem('akt_target_cgpa')) || 8.0;
-      const currentSem = localStorage.getItem('akt_sem') || '5';
-      const currentXP = parseInt(localStorage.getItem('akt_xp')) || 620;
-
-      document.getElementById('user-display-sem').innerText = `${currentSem}th Semester`;
-
-      let requiredXP = 1200;
-      let cgpaLabel = `8 CGPA (Honors)`;
-
-      if (targetCgpa >= 9.0) {
-        requiredXP = 1500;
-        cgpaLabel = `9 CGPA (Topper Target 🚀)`;
-      } else if (targetCgpa >= 8.0) {
-        requiredXP = 1200;
-        cgpaLabel = `8 CGPA (Honors)`;
-      } else if (targetCgpa <= 7.5) {
-        requiredXP = 800;
-        cgpaLabel = `${targetCgpa} CGPA`;
-      }
-
-      document.getElementById('target-cgpa-badge').innerText = `Target: ${cgpaLabel}`;
-
-      const percentage = Math.min(Math.round((currentXP / requiredXP) * 100), 100);
-      document.getElementById('xp-progress-text').innerText = `${currentXP} / ${requiredXP} XP (${percentage}%)`;
-      document.getElementById('xp-progress-bar').style.width = `${percentage}%`;
-
-      const statusBox = document.getElementById('readiness-status');
-      if (percentage >= 100) {
-        statusBox.innerHTML = `🎉 <b>AKTU Exam Ready!</b> You have crushed your XP target for your goal. You are fully prepared to secure top marks in your semester!`;
-        statusBox.className = "mt-4 p-3 rounded-lg bg-emerald-950/40 border border-emerald-800 text-xs text-emerald-300";
-      } else {
-        let testsNeeded = Math.ceil((requiredXP - currentXP) / 50);
-        statusBox.innerHTML = `💡 <b>Readiness Insight:</b> You need approximately <b>${testsNeeded} more test vaults</b> or study sessions to hit your elite readiness mark and master your subjects!`;
-      }
+    document.addEventListener("DOMContentLoaded", () => {
+      const xp = localStorage.getItem('akt_xp') || 745;
+      const el = document.getElementById('profile-xp-val');
+      if (el) el.innerText = `${xp} XP`;
     });
   </script>
 </body>
