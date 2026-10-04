@@ -1,56 +1,84 @@
-# AKTU Connect — Setup Guide
+# 🎓 AKTU Connect (Student Academic Portal)
 
-Backend real hai ab (Supabase), Silver Guide jaisi hi game logic ke saath:
-- Level formula: `level = floor(total_xp / 2000) + 1` (same as Silver Guide)
-- Focus session: victory pe **+2 XP/minute**, beech me tab chhodne pe **-20 XP** penalty
-- Quest tasks complete karne pe wahi XP/level sync jo Silver Guide ke QuestContext me hai
-- Badges same conditions pe unlock hote hain (streak, XP, quests completed, focus time)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-emerald?style=for-the-badge&logo=vercel)](https://aktu-connect.vercel.app)
+[![Tech Stack](https://img.shields.io/badge/Stack-HTML5%20%7C%20TailwindCSS%20%7C%20JS%20%7C%20Gemini_AI-1b4332?style=for-the-badge)]()
+[![AKTU Curriculum](https://img.shields.io/badge/Curriculum-AKTU_Sem_1--8-amber?style=for-the-badge)](https://aktu.ac.in)
+[![Status](https://img.shields.io/badge/Status-Production_Ready-brightgreen?style=for-the-badge)]()
 
-## Step 1 — Supabase project banao
-1. https://supabase.com pe jao, free account bana lo (agar nahi hai)
-2. "New Project" — naam do, database password set karo, region choose karo (Mumbai/Singapore closest)
-3. Project ban jaane ke baad, **Project Settings → API** pe jao
-4. Yahan se `Project URL` aur `anon public` key copy kar lo
+> **AKTU Connect** is a centralized, gamified, and AI-powered academic platform custom-tailored for engineering students affiliated with Dr. A.P.J. Abdul Kalam Technical University (AKTU). From comprehensive unit-wise notes to real-time Gemini AI tutoring and exam simulations, AKTU Connect transforms semester preparation into an interactive, structured experience.
 
-## Step 2 — Database schema run karo
-1. Supabase dashboard me left sidebar se **SQL Editor** kholo
-2. `supabase-schema.sql` file ka pura content copy-paste karo
-3. **Run** dabao — ye 2 tables (`player_stats`, `quests`) aur `leaderboard` view bana dega, saath me security policies bhi
+---
 
-## Step 3 — Auth settings check karo
-1. Supabase dashboard me **Authentication → Providers** pe jao
-2. "Email" provider already enabled hoga by default — ye kaafi hai
-3. Agar tum chahte ho users bina email confirm kiye seedha login ho jaayein (testing ke liye easy), to **Authentication → Settings** me "Confirm email" ka toggle **OFF** kar do. (Production me ON rakhna better hai.)
+## 🌟 Key Features
 
-## Step 4 — Apna URL/Key config.js me daalo
-`config.js` file kholo aur ye do lines apni values se replace karo:
+### 📖 1. Study Hub & Syllabus Tracker
+- **Complete Academic Matrix:** Covers **Semesters 1 through 8** across 5 core engineering streams (`CSE`, `CSE AI & ML`, `AIDS`, `IT`, `ECE`).
+- **Interactive Unit Progress:** Visual progress rings and dynamic indicators tracking 5 units per subject.
+- **Curated Learning Resources:** Instant one-click links to verified syllabus summaries and curated video lectures.
+- **Real-Time XP Rewards:** Complete units to earn `+20 XP` with synchronized local persistence.
 
-```js
-const SUPABASE_URL = "https://xxxxx.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOi...";
-```
+### 📄 2. PYQ Trend & Repetition Analyser
+- **Predictive Frequency Engine:** Analyzes past university question papers (2021–2024 sessions) to identify recurring 7-mark and 10-mark questions.
+- **High-Yield Tags:** Real-time probability ratings (e.g., *95% Probable*, *Repeated 4 Times*).
+- **Direct AI Integration:** Instant "Ask Zen to Solve" redirects questions directly to the tutor for structured solutions.
 
-## Step 5 — Run karo
-Koi build step nahi chahiye — plain HTML/CSS/JS hai. Bas:
-- VS Code me "Live Server" extension se `index.html` open karo, YA
-- `python -m http.server` chala ke browser me `index.html` kholo
+### 🎯 3. Exam Arena & Dynamic Practice Quests
+- **Powered by Gemini Flash AI:** Generates real-time, context-aware Section-A MCQs (2 Marks) and Section-B/C Subjective questions (7 Marks) for any selected subject & unit.
+- **Dynamic Asynchronous Fallback Pool:** Resilient question banks ensuring zero screen downtime during network latency.
+- **Gamified XP Scoring:** Instant feedback evaluation awarding `+10 XP` on correct attempts.
 
-⚠️ Seedha `file://` se double-click karke mat kholna — kuch browsers CORS block kar dete hain. Local server se hi chalao.
+### 🏆 4. University Leaderboard
+- **Olympic-Style Podium:** Responsive, elevated podium highlighting top student performers.
+- **Live XP Benchmarks:** Real-time synchronization of student XP ranks against peer benchmarks.
+- **Adaptive Mobile Layout:** Clean horizontal podium card grid built to prevent unnecessary vertical scrolling on mobile viewports.
 
-## Kya bana hai
-| Page | Kaam |
-|---|---|
-| `index.html` | Real signup/login (Supabase Auth) |
-| `goal-setup.html` | Onboarding — semester, branch, target CGPA |
-| `dashboard.html` | XP, level, streak, quest summary, exam countdown |
-| `quest.html` | Quest Log — quests banao, tasks complete karke XP kamao |
-| `focus.html` | Focus Arena — Pomodoro timer, victory/flee XP |
-| `profile.html` | Stats + badges, name/goal edit |
-| `leaderboard.html` | Sabse zyada XP wale players (real-time DB se) |
+### 🤖 5. Zen – AI Academic Mentor
+- **Conversational Tutor:** Step-by-step mathematical proofs, derivation breakdowns, and exam presentation hacks.
+- **Markdown & Code Rendering:** Formatted response rendering via `marked.js` supporting code blocks, mathematical formulations, and lists.
+- **Contextual Suggestions:** Quick-prompt chips for repetitive AKTU high-score concepts (DBMS Normalization, Master Theorem, DAA algorithms).
 
-## Aage kya add kar sakte ho (Silver Guide me hai, yahan nahi hai abhi)
-- AI Chat/Game Master (Silver Guide me bhi abhi sirf UI shell hai)
-- Clan/social features
-- Syllabus-based auto quest generation
+### 👤 6. Profile & Identity System
+- **Custom Avatar Management:** Instant photo uploads (`Base64`) synchronized instantly across navigation bars and dashboard cards.
+- **Gamified Badges:** Dynamic milestones (*Bronze*, *Silver*, *Gold*, *Diamond*, *Conqueror*).
+- **Authentication:** Integrated with EmailJS for 6-digit OTP verification and in-browser state handling.
 
-Inko bhi banana ho to bata dena, alag se add kar denge.
+---
+
+## 🛠️ Technology Stack
+
+| Component | Technology | Description |
+| :--- | :--- | :--- |
+| **Frontend Core** | HTML5, JavaScript (ES6+) | Semantic layout and dynamic DOM manipulation |
+| **Styling & Design** | Tailwind CSS, Custom CSS3 | Modern responsive design with custom glassmorphism and animations |
+| **AI Engine** | Google Gemini API (Gemini Flash) | Live question generation and academic query resolution |
+| **Authentication & Mail** | EmailJS, Web Storage API | Client-side OTP verification and local state synchronization |
+| **Markdown Parsing** | Marked.js | Formatted rendering of AI tutor explanations |
+| **Typography** | Plus Jakarta Sans | Modern typography tailored for dashboard interfaces |
+| **Deployment** | Vercel | Production-grade hosting and CI/CD pipelines |
+
+---
+
+## 📱 Device Optimization & Architecture
+
+AKTU Connect features strict layout parity between desktop workstations and mobile screens:
+
+- **Desktop Experience:** Expanded two-column dashboard with fixed navigation, persistent sidebar stats, and widescreen curriculum matrices.
+- **Mobile Experience:** 
+  - Dynamic slide-out navigation drawer with quick-access logout functionality.
+  - Whiteboard authentication frame optimized for touchscreens.
+  - Single-tier mobile action headers with unified hamburger navigation (`☰`).
+
+---
+
+## 🚀 Getting Started Locally
+
+### Prerequisites
+- Modern web browser (Chrome, Edge, Firefox, Brave)
+- A local HTTP server (Live Server extension on VS Code or Python HTTP server)
+
+### Installation Steps
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd aktu-connect
