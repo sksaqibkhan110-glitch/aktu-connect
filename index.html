@@ -159,7 +159,7 @@
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
 
-    /* PHONE VIEW ONLY (<640px) */
+    /* PHONE VIEW ONLY (<640px) - Perfectly Lowered to Fill the Board */
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 360px;
@@ -175,15 +175,17 @@
         user-select: none;
         pointer-events: none;
       }
-      /* Centered on phoneboy.png board */
+
+      /* Side wahi locked hai, bas thoda neeche shift + bottom tak fill */
       .whiteboard-active-area {
-        top: 46.5% !important;
-        left: 26.5% !important;
-        width: 47% !important;
-        height: 38.5% !important;
+        top: 49.5% !important;   /* Thoda neeche shift kiya */
+        left: 26.5% !important;  /* Perfect side match wahi rakha */
+        width: 47% !important;   /* Perfect width wahi rakhi */
+        height: 41% !important;  /* Bottom frame tak pura cover karega */
         padding: 5px 6px 3px !important;
         border-radius: 0.75rem !important;
       }
+
       .board-input {
         font-size: 0.62rem;
         padding: 0.22rem 0.4rem;
@@ -197,10 +199,6 @@
         padding: 0.16rem 0;
       }
     }
-  </style>
-</head>
-<body>
-
   <!-- MODALS -->
   <div id="google-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100">
