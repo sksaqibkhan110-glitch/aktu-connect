@@ -6,12 +6,16 @@
   <title>AKTU Connect - Student Portal</title> 
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- REAL EMAILJS ENGINE -->
+  <!-- REAL EMAILJS ENGINE (Protected with Safe Init) -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script type="text/javascript">
-    (function(){
-      emailjs.init("CRIh5ljNqNGVV8GC7");
-    })();
+    document.addEventListener("DOMContentLoaded", function() {
+      try {
+        if (typeof emailjs !== 'undefined') {
+          emailjs.init("CRIh5ljNqNGVV8GC7");
+        }
+      } catch(e) {}
+    });
   </script>
 
   <style>
@@ -34,24 +38,31 @@
       overflow-x: hidden;
     }
 
-    /* Master Mockup Frame */
+    /* Master Mockup Frame: Guaranteed aspect-ratio so it NEVER collapses */
     .master-mockup-frame {
       position: relative;
       width: 100%;
-      max-width: 580px;
+      max-width: 540px;
+      min-height: 600px;
+      aspect-ratio: 540 / 640;
       border-radius: 2.75rem;
       background: #f7ede2;
       box-shadow: 0 30px 70px -10px rgba(0, 0, 0, 0.75), 0 0 0 3px rgba(255, 255, 255, 0.2);
       overflow: hidden;
-      display: block;
+      display: flex;
+      flex-direction: column;
     }
 
     .desktop-bg-img {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       display: block;
       user-select: none;
       pointer-events: none;
+      z-index: 1;
     }
 
     .mobile-bg-img {
@@ -62,7 +73,7 @@
       position: absolute;
       top: 18px;
       left: 20px;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.95);
       border-radius: 9999px;
@@ -77,20 +88,21 @@
       z-index: 20;
     }
 
-    /* Whiteboard Area (Laptop Default) */
+    /* Whiteboard Form Overlay (Laptop Placement) */
     .whiteboard-active-area {
       position: absolute;
-      top: 50%;
-      left: 24%;
-      width: 52%;
-      height: 42.5%;
+      top: 50.5%;
+      left: 24.5%;
+      width: 51%;
+      height: 42%;
       z-index: 10;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 6px 10px 4px;
+      padding: 8px 12px 6px;
       background: #ffffff;
       border-radius: 0.85rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     }
 
     .board-input {
@@ -100,7 +112,7 @@
       border-radius: 0.55rem;
       font-size: 0.72rem;
       font-weight: 600;
-      padding: 0.32rem 0.55rem;
+      padding: 0.35rem 0.55rem;
       width: 100%;
       outline: none;
       transition: all 0.2s ease;
@@ -116,7 +128,7 @@
       background: linear-gradient(180deg, #2d6a4f 0%, #1b4332 100%);
       color: #ffffff;
       border-radius: 0.55rem;
-      padding: 0.38rem 0.55rem;
+      padding: 0.4rem 0.55rem;
       font-size: 0.75rem;
       font-weight: 800;
       width: 100%;
@@ -133,7 +145,7 @@
     .board-tab {
       flex: 1;
       text-align: center;
-      padding: 0.24rem 0;
+      padding: 0.25rem 0;
       font-size: 0.7rem;
       font-weight: 700;
       color: #52796f;
@@ -150,27 +162,54 @@
       font-weight: 800;
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
-/* Phone Mascot Board 100% Fit (Zero Bottom Gap) */
+
+    /* PHONE VIEW ONLY (<640px) */
     @media (max-width: 640px) {
       .master-mockup-frame {
-        max-width: 375px;
+        max-width: 360px;
+        min-height: 520px;
+        aspect-ratio: 360 / 580;
         border-radius: 2.25rem;
       }
-      .desktop-bg-img { display: none !important; }
-      .mobile-bg-img { display: block !important; width: 100%; height: auto; }
+      .desktop-bg-img {
+        display: none !important;
+      }
+      .mobile-bg-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block !important;
+        user-select: none;
+        pointer-events: none;
+        z-index: 1;
+      }
       .whiteboard-active-area {
         top: 48.0% !important;
         left: 24.5% !important;
         width: 51% !important;
-        height: 44.2% !important; /* Fully touches the bottom frame without spilling */
+        height: 44.5% !important; /* Zero bottom gap on phone */
         padding: 5px 6px 3px !important;
         border-radius: 0.75rem !important;
       }
-      .board-input { font-size: 0.62rem; padding: 0.22rem 0.4rem; }
-      .board-btn-primary { font-size: 0.68rem; padding: 0.28rem 0.4rem; }
-      .board-tab { font-size: 0.62rem; padding: 0.16rem 0; }
+      .board-input {
+        font-size: 0.62rem;
+        padding: 0.22rem 0.4rem;
+      }
+      .board-btn-primary {
+        font-size: 0.68rem;
+        padding: 0.28rem 0.4rem;
+      }
+      .board-tab {
+        font-size: 0.62rem;
+        padding: 0.16rem 0;
+      }
     }
-    
+  </style>
+</head>
+<body>
+
   <!-- MODALS -->
   <div id="google-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100">
@@ -222,15 +261,15 @@
     </div>
   </div>
 
-  <!-- MAIN FRAME -->
+  <!-- MASTER MOCKUP FRAME -->
   <div class="master-mockup-frame">
     <div class="top-floating-badge">🎓 AKTU Connect</div>
 
-    <!-- Desktop Image -->
-    <img src="boy-board - Copy.png" onerror="this.src='boy-board.png'; this.onerror=function(){this.src='boy-board.jpg';}" alt="Mascot Desktop" class="desktop-bg-img" />
+    <!-- Desktop Image with automatic multi-path fallbacks -->
+    <img src="boy-board - Copy.png" onerror="this.onerror=null; this.src='boy-board.png'; if(!this.complete){this.src='boy-board.jpg';}" alt="Mascot Desktop" class="desktop-bg-img" />
 
     <!-- Mobile Image -->
-    <img src="phoneboy.png" onerror="this.src='boy-board - Copy.png'" alt="Mascot Mobile" class="mobile-bg-img" />
+    <img src="phoneboy.png" onerror="this.onerror=null; this.src='boy-board.png';" alt="Mascot Mobile" class="mobile-bg-img" />
 
     <!-- Whiteboard Area -->
     <div class="whiteboard-active-area">
@@ -395,7 +434,9 @@
       document.getElementById('otp-modal').classList.remove('hidden');
 
       try {
-        await emailjs.send(SERVICE_ID, TEMPLATE_ID, { to_email: email, email: email, otp: expectedOtp, passcode: expectedOtp }, PUBLIC_KEY);
+        if (typeof emailjs !== 'undefined') {
+          await emailjs.send(SERVICE_ID, TEMPLATE_ID, { to_email: email, email: email, otp: expectedOtp, passcode: expectedOtp }, PUBLIC_KEY);
+        }
       } catch(e) {}
     }
 
