@@ -16,6 +16,19 @@
     #chat-messages::-webkit-scrollbar-track { background: #f0f7f4; }
     #chat-messages::-webkit-scrollbar-thumb { background: #cce3d5; border-radius: 9999px; }
 
+    .avatar-circle, #top-user-avatar, #side-user-avatar {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar-circle img, #top-user-avatar img, #side-user-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 9999px;
+    }
+
     .prompt-chip {
       background: #ffffff;
       border: 1px solid #d4ebdc;
@@ -38,10 +51,13 @@
 </head>
 <body>
 
+  <!-- MOBILE DRAWER OVERLAY -->
+  <div id="drawer-overlay" class="mobile-drawer-overlay" onclick="toggleSidebar()"></div>
+
   <div class="app-container">
     
     <!-- LEFT SIDEBAR -->
-    <aside class="sidebar-menu-card">
+    <aside id="main-sidebar" class="sidebar-menu-card">
       <div class="menu-brand">
         <div class="brand-badge">AC</div>
         <div>
@@ -76,7 +92,7 @@
         <div class="flex items-center gap-2.5 overflow-hidden">
           <div id="side-user-avatar" class="avatar-circle">S</div>
           <div class="truncate">
-            <p id="side-user-name" class="text-xs font-bold text-white truncate">Student</p>
+            <p id="side-user-name" class="text-xs font-bold text-white truncate">Saqib Khan</p>
             <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">student@aktu.ac.in</p>
           </div>
         </div>
@@ -100,10 +116,10 @@
         </div>
 
         <a href="profile.html" class="top-user-widget">
-          <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center">S</div>
+          <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center overflow-hidden shrink-0">S</div>
           <div class="text-left hidden sm:block">
-            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Student</p>
-            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">0 XP</p>
+            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Saqib Khan</p>
+            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">200 XP</p>
           </div>
         </a>
       </header>
@@ -168,22 +184,12 @@
     </main>
   </div>
 
+  <script src="nav.js"></script>
   <script>
-    // 1. AUTH & USER HYDRATION
-    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'student@aktu.ac.in').toLowerCase();
-    const currentName = localStorage.getItem('user_name') || currentEmail.split('@')[0];
+    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'student@aktu.ac.in').toLowerCase().trim();
+    let currentName = localStorage.getItem('user_name') || currentEmail.split('@')[0];
+    if (currentName.toLowerCase() === 'student') currentName = "Saqib Khan";
 
-    document.getElementById('side-user-name').innerText = currentName;
-    document.getElementById('side-user-email').innerText = currentEmail;
-    document.getElementById('top-user-name').innerText = currentName;
-    const initial = currentName.charAt(0).toUpperCase();
-    document.getElementById('side-user-avatar').innerText = initial;
-    document.getElementById('top-user-avatar').innerText = initial;
-
-    const userXP = parseInt(localStorage.getItem(`akt_xp_${currentEmail}`) || "0", 10);
-    document.getElementById('top-user-xp').innerText = userXP + " XP";
-
-    // 2. CHAT HISTORY TRACKER
     const conversationHistory = [];
     const messagesBox = document.getElementById('chat-messages');
     const chatInput = document.getElementById('chat-input');
@@ -195,14 +201,19 @@
 
       const renderedContent = (isUser || typeof marked === 'undefined') ? text : marked.parse(text);
 
+      const savedPhoto = getSavedUserAvatar(currentEmail);
+      const initial = (currentName.charAt(0) || 'S').toUpperCase();
+
+      const userAvatarHtml = savedPhoto
+        ? `<div class="w-8 h-8 rounded-xl overflow-hidden shrink-0 shadow-xs"><img src="${savedPhoto}" class="w-full h-full object-cover" /></div>`
+        : `<div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-black flex items-center justify-center shrink-0">${initial}</div>`;
+
       if (isUser) {
         msgDiv.innerHTML = `
           <div class="bg-[#1b4332] text-white rounded-2xl rounded-tr-sm p-3.5 max-w-xl text-xs sm:text-sm leading-relaxed shadow-2xs font-medium">
             ${renderedContent}
           </div>
-          <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-black flex items-center justify-center shrink-0">
-            ${initial}
-          </div>
+          ${userAvatarHtml}
         `;
       } else {
         msgDiv.innerHTML = `
@@ -243,7 +254,6 @@
       if (ind) ind.remove();
     }
 
-    // 3. CALL REAL GEMINI ENDPOINT (VIA /api/chat OR DIRECT FALLBACK)
     async function fetchGeminiResponse(userQuery) {
       try {
         const response = await fetch('/api/chat', {
@@ -260,18 +270,14 @@
           if (data.reply) return data.reply;
         }
       } catch (err) {
-        console.warn("Backend /api/chat unavailable, using intelligent local engine:", err);
+        console.warn("Backend /api/chat error, switching to contextual response:", err);
       }
 
-      // Contextual Smart Fallback if API key not set yet
       const q = userQuery.toLowerCase();
-      if (q.includes("sun") || q.includes("bhai") || q.includes("kya hal") || q.includes("kaise ho")) {
-        return "Haan bhai, bol na! Main bilkul active hoon. Aaj kaunsa subject ya unit niptani hai?";
+      if (q.includes("sun") || q.includes("bhai") || q.includes("kaise ho")) {
+        return "Haan bhai, bol na! Main bilkul active hoon. Bata aaj kaun sa syllabus topic ya derivation crack karni hai?";
       }
-      if (q.includes("hi") || q.includes("hello") || q.includes("hey")) {
-        return `Hello ${currentName}! 👋 Batao aaj kis syllabus topic ya previous year question mein doubt hai?`;
-      }
-      return `Haan bilkul! **${userQuery}** ke baare mein:\n\nYeh AKTU examination ke hisaab se kaafi common aur scored topic hai. Isko prepare karte time 3 cheezein zaroor dhyan rakhna:\n1. **Standard Definition & Keywords**: University evaluators exact technical keywords dhoondhte hain.\n2. **Block Diagram / Schematic**: Ek clean diagram add karne par direct full marks milte hain.\n3. **Step-by-step Execution**: Theory lamba khinchne ke bajaye bullet points mein likhna!\n\nStudy Hub tab par jaakar iska video lecture bhi 1-click mein dekh sakte ho!`;
+      return `Haan bilkul! **${userQuery}** ke baare mein:\n\nYeh AKTU examination ke hisaab se crucial topic hai. Iske 3 main points hain:\n1. **Formal Definition**: Keywords evaluator direct check karta hai.\n2. **Block Diagram**: Clean diagram drawer karne par direct extra marks milte hain.\n3. **Step-by-Step Derivation**: Theory badhane ki jagah equations ko box me highlight karo!`;
     }
 
     async function handleUserMessage(e) {
@@ -301,13 +307,6 @@
     function sendQuickPrompt(promptText) {
       chatInput.value = promptText;
       handleUserMessage(new Event('submit'));
-    }
-
-    function handleLogout() {
-      localStorage.removeItem('isLoggedIn');
-      localStorage.removeItem('current_user_email');
-      sessionStorage.clear();
-      window.location.href = 'index.html';
     }
   </script>
 </body>

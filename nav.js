@@ -1,139 +1,127 @@
-// Universal Navigation & Multi-User State Isolation
+// ========================================================
+// AKTU Connect - Centralized Navigation & Global Avatar Engine
+// ========================================================
 
-function toggleMobileMenu() {
-  const sidebar = document.getElementById('sidebar-card');
-  const overlay = document.getElementById('mobile-drawer-overlay');
-  if (sidebar && overlay) {
-    sidebar.classList.toggle('mobile-open');
-    overlay.classList.toggle('active');
+function getSavedUserAvatar(email) {
+  const cleanEmail = (email || '').toLowerCase().trim();
+  const keys = [
+    `user_avatar_${cleanEmail}`,
+    'user_avatar',
+    'profile_picture',
+    `akt_avatar_${cleanEmail}`
+  ];
+
+  for (const k of keys) {
+    const val = localStorage.getItem(k);
+    if (val && val.startsWith('data:image')) {
+      return val;
+    }
   }
+  return null;
+}
+
+function clearAllUserAvatarKeys(email) {
+  const cleanEmail = (email || '').toLowerCase().trim();
+  const keys = [
+    `user_avatar_${cleanEmail}`,
+    'user_avatar',
+    'profile_picture',
+    `akt_avatar_${cleanEmail}`
+  ];
+  keys.forEach(k => localStorage.removeItem(k));
+}
+
+function syncGlobalAvatars() {
+  const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'student@aktu.ac.in').toLowerCase().trim();
+  let userName = localStorage.getItem('user_name') || currentEmail.split('@')[0];
+  if (userName.toLowerCase() === 'student') userName = "Saqib Khan";
+
+  const initial = (userName.charAt(0) || 'S').toUpperCase();
+  const savedPhoto = getSavedUserAvatar(currentEmail);
+
+  // Sync Names & Emails across all DOM elements
+  const nameTargets = ['side-user-name', 'top-user-name', 'sidebar-username', 'welcome-name', 'profile-header-name'];
+  nameTargets.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerText = userName;
+  });
+
+  const emailTargets = ['side-user-email', 'sidebar-useremail'];
+  emailTargets.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerText = currentEmail;
+  });
+
+  // Target all avatar slots in header, sidebar & drawer
+  const avatarSlots = [
+    document.getElementById('top-user-avatar'),
+    document.getElementById('side-user-avatar'),
+    document.getElementById('sidebar-avatar'),
+    document.getElementById('header-avatar')
+  ];
+
+  avatarSlots.forEach(slot => {
+    if (!slot) return;
+    slot.style.overflow = 'hidden';
+    slot.style.display = 'flex';
+    slot.style.alignItems = 'center';
+    slot.style.justifyContent = 'center';
+
+    if (savedPhoto) {
+      slot.innerHTML = `<img src="${savedPhoto}" alt="Avatar" class="w-full h-full object-cover rounded-full pointer-events-none" />`;
+      slot.style.padding = '0';
+    } else {
+      slot.innerHTML = initial;
+      slot.style.padding = '';
+      if (!slot.classList.contains('bg-emerald-800') && !slot.classList.contains('avatar-circle')) {
+        slot.classList.add('bg-emerald-800', 'text-white', 'font-black');
+      }
+    }
+  });
+
+  // Sync Live XP across all headers
+  const userXP = localStorage.getItem(`akt_xp_${currentEmail}`) || "200";
+  const xpTargets = ['top-user-xp', 'stat-xp', 'profile-card-xp'];
+  xpTargets.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerText = userXP + " XP";
+  });
+}
+
+function toggleSidebar() {
+  const sb = document.getElementById('main-sidebar') || document.querySelector('.sidebar-menu-card');
+  let overlay = document.getElementById('drawer-overlay');
+
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'drawer-overlay';
+    overlay.className = 'mobile-drawer-overlay';
+    overlay.onclick = toggleSidebar;
+    document.body.appendChild(overlay);
+  }
+
+  if (sb) sb.classList.toggle('mobile-open');
+  overlay.classList.toggle('active');
 }
 
 function handleLogout() {
-  if (confirm("Are you sure you want to logout?")) {
-    localStorage.removeItem('user_name');
-    localStorage.removeItem('user_email');
-    window.location.href = "index.html";
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('current_user_email');
+  sessionStorage.clear();
+  window.location.href = 'index.html';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  syncGlobalAvatars();
+
+  if (!document.getElementById('drawer-overlay')) {
+    const overlay = document.createElement('div');
+    overlay.id = 'drawer-overlay';
+    overlay.className = 'mobile-drawer-overlay';
+    overlay.onclick = toggleSidebar;
+    document.body.appendChild(overlay);
   }
-}
-
-// FIRST + LAST NAME LOGO MAKER (e.g. Saqib Khan -> SK, Aman Verma -> AV)
-function getInitials(name) {
-  if (!name || typeof name !== 'string' || name.trim() === "" || name.trim().toLowerCase() === "student") {
-    return "ST";
-  }
-  const parts = name.trim().split(/\s+/);
-  if (parts.length === 1) {
-    return parts[0].substring(0, 2).toUpperCase();
-  }
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-}
-
-function getCurrentUserEmail() {
-  return (localStorage.getItem('user_email') || 'default_student').trim().toLowerCase();
-}
-
-function getUserXP() {
-  const email = getCurrentUserEmail();
-  const val = localStorage.getItem(`akt_xp_${email}`);
-  return val !== null ? parseInt(val) : 0;
-}
-
-function setUserXP(newXp) {
-  const email = getCurrentUserEmail();
-  localStorage.setItem(`akt_xp_${email}`, newXp.toString());
-  syncGlobalProfile();
-}
-function removeUserAvatar() {
-  const email = getCurrentUserEmail();
-  localStorage.removeItem(`user_avatar_${email}`);
-  localStorage.removeItem('user_avatar'); // global clean
-  syncGlobalProfile();
-}
-function getUserAvatar() {
-  const email = getCurrentUserEmail();
-  return localStorage.getItem(`user_avatar_${email}`) || null;
-}
-
-function setUserAvatar(dataUri) {
-  const email = getCurrentUserEmail();
-  localStorage.setItem(`user_avatar_${email}`, dataUri);
-  syncGlobalProfile();
-}
-
-function getUserCompletedUnits() {
-  const email = getCurrentUserEmail();
-  return JSON.parse(localStorage.getItem(`akt_completed_units_${email}`) || '[]');
-}
-
-function setUserCompletedUnits(unitsArray) {
-  const email = getCurrentUserEmail();
-  localStorage.setItem(`akt_completed_units_${email}`, JSON.stringify(unitsArray));
-}
-
-// FORCE REMOVE ANY ROGUE INJECTED BACKGROUND IMAGES
-function killRogueBackgroundImages() {
-  document.querySelectorAll('.main-viewport > img, body > img:not(#logo), main > img').forEach(img => {
-    img.remove();
-  });
-  if (document.body) {
-    document.body.style.backgroundImage = "none";
-  }
-  const vp = document.querySelector('.main-viewport');
-  if (vp) {
-    vp.style.backgroundImage = "none";
-  }
-}
-
-function syncGlobalProfile() {
-  killRogueBackgroundImages();
-
-  const email = getCurrentUserEmail();
-  const savedName = localStorage.getItem('user_name') || 'Student';
-  const xp = getUserXP();
-  const avatar = getUserAvatar();
-  const initials = getInitials(savedName);
-
-  // Sync Names
-  document.querySelectorAll('#top-user-name, #nav-user-name, #display-user-name').forEach(el => {
-    if (el) el.innerText = savedName;
-  });
-
-  const lbUser = document.getElementById('lb-user-name');
-  if (lbUser) lbUser.innerText = `${savedName} (You)`;
-
-  // Sync XP
-  document.querySelectorAll('#top-user-xp, #profile-xp-val, #lb-user-xp').forEach(el => {
-    if (el) el.innerText = `${xp} XP`;
-  });
-
-  // JAB TAK PHOTO NAHI HOTI, FIRST+LAST NAME INITIALS LOGO RENDER HOGA
-  document.querySelectorAll('.single-avatar-slot').forEach(slot => {
-    if (avatar) {
-      slot.innerHTML = `<img src="${avatar}" alt="${savedName}" class="w-full h-full object-cover rounded-full" />`;
-    } else {
-      slot.innerHTML = `<span>${initials}</span>`;
-    }
-  });
-
-  const bannerAvatar = document.getElementById('profile-banner-avatar');
-  if (bannerAvatar) {
-    if (avatar) {
-      bannerAvatar.innerHTML = `<img src="${avatar}" class="w-full h-full object-cover rounded-2xl" />`;
-    } else {
-      bannerAvatar.innerHTML = `<span class="font-black text-xl text-amber-300">${initials}</span>`;
-    }
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const currentEmail = localStorage.getItem('user_email');
-  const isAuthPage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '';
-  
-  if (!currentEmail && !isAuthPage) {
-    window.location.href = "index.html";
-    return;
-  }
-
-  syncGlobalProfile();
 });
+
+// Run once immediately
+syncGlobalAvatars();

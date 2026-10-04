@@ -34,7 +34,7 @@
       overflow-x: hidden;
     }
 
-    /* Master Mockup Frame */
+    /* Master Mockup Frame (Laptop: Exactly same as your preferred UI) */
     .master-mockup-frame {
       position: relative;
       width: 100%;
@@ -77,6 +77,7 @@
       line-height: normal;
     }
 
+    /* Laptop Whiteboard Placement */
     .whiteboard-active-area {
       position: absolute;
       top: 50%;
@@ -148,9 +149,10 @@
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
 
+    /* PHONE / MOBILE ADJUSTMENTS */
     @media (max-width: 640px) {
       .master-mockup-frame {
-        max-width: 380px;
+        max-width: 375px;
         border-radius: 2.25rem;
       }
       .desktop-bg-img {
@@ -163,19 +165,32 @@
         pointer-events: none;
         user-select: none;
       }
+      /* Halka sa upar shift for phone mascot alignment */
       .whiteboard-active-area {
-        top: 51%;
-        left: 24.5%;
-        width: 51%;
-        height: 41%;
-        padding: 5px 6px 6px;
+        top: 48% !important;
+        left: 24.5% !important;
+        width: 51% !important;
+        height: 41% !important;
+        padding: 5px 6px 4px !important;
+      }
+      .board-input {
+        font-size: 0.65rem;
+        padding: 0.25rem 0.45rem;
+      }
+      .board-btn-primary {
+        font-size: 0.7rem;
+        padding: 0.32rem 0.5rem;
+      }
+      .board-tab {
+        font-size: 0.65rem;
+        padding: 0.18rem 0;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- GOOGLE MODAL -->
+  <!-- 1. GOOGLE MODAL -->
   <div id="google-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
@@ -193,7 +208,7 @@
     </div>
   </div>
 
-  <!-- FORGOT PASSWORD MODAL -->
+  <!-- 2. FORGOT PASSWORD MODAL -->
   <div id="forgot-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100 text-left">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100 mb-3">
@@ -213,7 +228,7 @@
     </div>
   </div>
 
-  <!-- OTP MODAL -->
+  <!-- 3. OTP MODAL -->
   <div id="otp-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100 text-center">
       <div class="w-12 h-12 bg-emerald-50 text-emerald-700 rounded-2xl flex items-center justify-center text-xl mx-auto mb-2.5">✉</div>
@@ -237,7 +252,7 @@
     </div>
   </div>
 
-  <!-- SET PASSWORD MODAL -->
+  <!-- 4. SET PASSWORD MODAL -->
   <div id="set-pwd-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100 text-left">
       <h3 class="text-base font-extrabold text-slate-900 mb-1" id="pwd-modal-title">Create Password</h3>
@@ -246,11 +261,11 @@
       <form onsubmit="finalizePasswordAndRegister(event)" class="space-y-3">
         <div>
           <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">New Password</label>
-          <input type="password" id="new-reg-pwd" required minlength="6" placeholder="Min 6 characters" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none" />
+          <input type="password" id="new-reg-pwd" required minlength="4" placeholder="Enter password" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none" />
         </div>
         <div>
           <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Confirm Password</label>
-          <input type="password" id="new-reg-pwd-confirm" required minlength="6" placeholder="Re-enter password" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none" />
+          <input type="password" id="new-reg-pwd-confirm" required minlength="4" placeholder="Re-enter password" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none" />
         </div>
         <p id="pwd-match-error" class="text-[11px] text-rose-600 font-bold hidden"></p>
         <button type="submit" id="pwd-modal-btn" class="w-full py-2.5 board-btn-primary text-xs">
@@ -260,7 +275,7 @@
     </div>
   </div>
 
-  <!-- THE MASTER MOCKUP WRAPPER -->
+  <!-- MASTER MOCKUP FRAME -->
   <div class="master-mockup-frame">
     <div class="top-floating-badge">
       <span>🎓</span>
@@ -273,7 +288,7 @@
     <!-- Mobile Image -->
     <img src="phoneboy.png" onerror="this.src='boy-board - Copy.png'" alt="AKTU Mascot Mobile" class="mobile-bg-img" />
 
-    <!-- THE WHITEBOARD OVERLAY -->
+    <!-- WHITEBOARD FORM OVERLAY -->
     <div class="whiteboard-active-area">
       <div class="flex bg-[#e8f3ec] p-0.5 rounded-lg border border-[#c8e2d2]">
         <button id="tab-signin-btn" onclick="switchAuthTab('signin')" class="board-tab active">Sign In</button>
@@ -285,7 +300,7 @@
       <!-- SIGN IN FORM -->
       <form id="signin-form" onsubmit="handleSignIn(event)" class="space-y-1">
         <div>
-          <input type="email" id="signin-id" required placeholder="Email or Username" class="board-input" />
+          <input type="email" id="signin-id" required placeholder="Email Address" class="board-input" />
         </div>
 
         <div>
@@ -318,7 +333,7 @@
         </button>
       </form>
 
-      <!-- Bottom Google & Branding -->
+      <!-- BOTTOM GOOGLE & FOOTER -->
       <div class="pt-0.5 border-t border-slate-200 flex items-center justify-between">
         <button type="button" onclick="openGoogleModal()" class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white hover:bg-slate-50 border border-slate-200 text-[8px] font-bold text-slate-700 cursor-pointer shadow-2xs">
           <svg class="w-2.5 h-2.5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
@@ -371,6 +386,41 @@
     }
     function closeForgotModal() { document.getElementById('forgot-modal').classList.add('hidden'); }
 
+    // Helper: Find user from any storage format
+    function findSavedUser(email) {
+      const cleanEmail = email.toLowerCase().trim();
+      
+      // 1. Check registered_students array
+      const accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
+      let user = accounts.find(acc => acc.id && acc.id.toLowerCase().trim() === cleanEmail);
+      if (user) return user;
+
+      // 2. Check direct key user_${cleanEmail}
+      const direct = localStorage.getItem(`user_${cleanEmail}`);
+      if (direct) {
+        try {
+          const parsed = JSON.parse(direct);
+          return {
+            id: cleanEmail,
+            name: parsed.name || cleanEmail.split('@')[0],
+            pwd: parsed.pwd || parsed.pass || parsed.password
+          };
+        } catch(e) {}
+      }
+
+      // 3. Check simple password key
+      const simplePwd = localStorage.getItem(`pwd_${cleanEmail}`);
+      if (simplePwd) {
+        return {
+          id: cleanEmail,
+          name: localStorage.getItem(`user_name_${cleanEmail}`) || cleanEmail.split('@')[0],
+          pwd: simplePwd
+        };
+      }
+
+      return null;
+    }
+
     function handleForgotPasswordRequest(e) {
       e.preventDefault();
       const email = document.getElementById('forgot-email').value.trim().toLowerCase();
@@ -382,8 +432,7 @@
         return;
       }
 
-      const accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
-      const user = accounts.find(acc => acc.id.toLowerCase() === email);
+      const user = findSavedUser(email);
 
       if (!user) {
         errEl.innerText = "❌ No account found with this email!";
@@ -392,9 +441,9 @@
       }
 
       authMode = "forgot_password";
-      pendingAccountData = { name: user.name, id: email };
+      pendingAccountData = { name: user.name || email.split('@')[0], id: email };
       closeForgotModal();
-      sendRealEmailOtp(email, user.name);
+      sendRealEmailOtp(email, pendingAccountData.name);
     }
 
     function handleGoogleInputSubmit() {
@@ -405,10 +454,9 @@
       }
       closeGoogleModal();
 
-      const accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
-      const existing = accounts.find(acc => acc.id.toLowerCase() === email);
+      const existing = findSavedUser(email);
 
-      if (existing) {
+      if (existing && existing.pwd) {
         switchAuthTab('signin');
         document.getElementById('signin-id').value = email;
         document.getElementById('signin-pwd').value = "";
@@ -433,10 +481,9 @@
         return;
       }
 
-      const accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
-      const existing = accounts.find(acc => acc.id.toLowerCase() === id);
+      const existing = findSavedUser(id);
 
-      if (existing) {
+      if (existing && existing.pwd) {
         errBanner.className = "p-0.5 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center block";
         errBanner.innerText = "❌ Account already exists. Please Sign In.";
         return;
@@ -496,16 +543,21 @@
       document.getElementById('set-pwd-modal').classList.remove('hidden');
     }
 
+    // Comprehensive session setter
     function setAllAuthSessionKeys(email, name, pwd) {
-      const userObj = { email, name, pwd, xp: 120 };
-      localStorage.setItem('user_name', name);
-      localStorage.setItem(`user_name_${email}`, name);
-      localStorage.setItem('user_email', email);
-      localStorage.setItem('current_user_email', email);
+      const cleanEmail = email.toLowerCase().trim();
+      const cleanName = name || cleanEmail.split('@')[0];
+      const userObj = { email: cleanEmail, name: cleanName, pwd: pwd, xp: 720 };
+
+      localStorage.setItem('user_name', cleanName);
+      localStorage.setItem(`user_name_${cleanEmail}`, cleanName);
+      localStorage.setItem('user_email', cleanEmail);
+      localStorage.setItem('current_user_email', cleanEmail);
       localStorage.setItem('currentUser', JSON.stringify(userObj));
       localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('aktu_user', email);
-      sessionStorage.setItem('user_email', email);
+      localStorage.setItem('aktu_user', cleanEmail);
+      sessionStorage.setItem('user_email', cleanEmail);
+      sessionStorage.setItem('current_user_email', cleanEmail);
       sessionStorage.setItem('isLoggedIn', 'true');
     }
 
@@ -524,19 +576,19 @@
       const email = pendingAccountData.id.trim().toLowerCase();
       const name = pendingAccountData.name.trim();
 
+      // 1. Save in registered_students array
       let accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
+      accounts = accounts.filter(acc => acc.id && acc.id.toLowerCase().trim() !== email);
+      accounts.push({ name: name, id: email, pwd: p1 });
+      localStorage.setItem('registered_students', JSON.stringify(accounts));
 
-      if (authMode === "forgot_password") {
-        const userIndex = accounts.findIndex(acc => acc.id.toLowerCase() === email);
-        if (userIndex !== -1) {
-          accounts[userIndex].pwd = p1;
-          localStorage.setItem('registered_students', JSON.stringify(accounts));
-        }
-      } else {
-        accounts = accounts.filter(acc => acc.id.toLowerCase() !== email);
-        accounts.push({ name: name, id: email, pwd: p1 });
-        localStorage.setItem('registered_students', JSON.stringify(accounts));
-        localStorage.setItem(`akt_xp_${email}`, "120");
+      // 2. Direct key storage for 100% fail-safe retrieval
+      localStorage.setItem(`user_${email}`, JSON.stringify({ name: name, email: email, pwd: p1, pass: p1 }));
+      localStorage.setItem(`pwd_${email}`, p1);
+
+      // 3. Ensure baseline XP
+      if (!localStorage.getItem(`akt_xp_${email}`)) {
+        localStorage.setItem(`akt_xp_${email}`, "720");
       }
 
       setAllAuthSessionKeys(email, name, p1);
@@ -550,26 +602,24 @@
       const pwd = document.getElementById('signin-pwd').value.trim();
       const errBanner = document.getElementById('auth-error-banner');
 
-      let accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
-      const directUser = localStorage.getItem(`user_${id}`);
-      let user = accounts.find(acc => acc.id.toLowerCase() === id && acc.pwd === pwd);
-
-      if (!user && directUser) {
-        const parsed = JSON.parse(directUser);
-        if (parsed.pass === pwd || parsed.pwd === pwd) {
-          user = { name: parsed.name || id.split('@')[0], id: id, pwd: pwd };
-        }
-      }
+      const user = findSavedUser(id);
 
       if (!user) {
         errBanner.className = "p-1 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center block";
-        errBanner.innerText = "❌ Incorrect Password or User Not Found!";
+        errBanner.innerText = "❌ No account found with this email. Please Sign Up!";
         return;
       }
 
-      setAllAuthSessionKeys(user.id.toLowerCase(), user.name, user.pwd);
-      window.location.href = "study.html";
+      // Exact password comparison
+      if (user.pwd && user.pwd.trim() === pwd) {
+        setAllAuthSessionKeys(id, user.name, pwd);
+        window.location.href = "study.html";
+      } else {
+        errBanner.className = "p-1 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center block";
+        errBanner.innerText = "❌ Incorrect Password! Try again or click Forgot?";
+      }
     }
   </script>
+  <script src="nav.js"></script>
 </body>
 </html>
