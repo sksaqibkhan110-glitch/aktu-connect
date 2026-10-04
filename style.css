@@ -2,7 +2,6 @@
 
 :root {
   --portal-navy: #0f172a;
-  --portal-slate: #334155;
   --portal-blue: #2563eb;
   --portal-amber: #f59e0b;
   --border-subtle: #e2e8f0;
@@ -10,15 +9,12 @@
 
 * {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  -webkit-tap-highlight-color: transparent;
   box-sizing: border-box;
 }
 
-/* Warm Yellowish-White Gradient Background */
 body {
   margin: 0;
   padding: 0;
-  color: var(--portal-navy) !important;
   min-height: 100vh;
   background-color: #fdfbf7 !important;
   background-image: 
@@ -26,61 +22,87 @@ body {
     radial-gradient(at 5% 90%, rgba(253, 230, 138, 0.25) 0px, transparent 50%),
     radial-gradient(at 50% 30%, rgba(255, 251, 235, 0.8) 0px, transparent 70%) !important;
   background-attachment: fixed !important;
+  color: var(--portal-navy) !important;
 }
 
-/* Global Portal Header (White Clean Navbar) */
-.portal-navbar {
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
+/* Dashboard Shell */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
 }
 
-.portal-nav-link {
-  color: #475569 !important;
-  font-weight: 600 !important;
-  font-size: 13px !important;
-  padding: 8px 14px !important;
-  border-radius: 12px !important;
-  transition: all 0.2s ease !important;
+/* Left Blue Floating Menu Card */
+.sidebar-menu-card {
+  width: 250px;
+  background: #1d4ed8;
+  color: #ffffff;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 1rem;
+  height: calc(100vh - 2rem);
+  margin: 1rem 0 1rem 1rem;
+  border-radius: 28px;
+  box-shadow: 0 20px 40px -10px rgba(29, 78, 216, 0.35);
+  z-index: 50;
+  flex-shrink: 0;
 }
 
-.portal-nav-link:hover {
-  color: #0f172a !important;
-  background: rgba(0, 0, 0, 0.04) !important;
+.menu-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 1.25rem;
 }
 
-.portal-nav-link.active {
-  color: #0f172a !important;
-  background: #fef3c7 !important;
-  border: 1px solid #fde68a !important;
-  font-weight: 700 !important;
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 6px;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.menu-item.active {
+  background: #ffffff !important;
+  color: #1d4ed8 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.15);
+}
+
+/* Right Content Main Frame */
+.main-viewport {
+  flex: 1;
+  padding: 1.5rem 2rem 5rem 2rem;
+  max-width: 1280px;
+  width: calc(100% - 270px);
 }
 
 /* Behance Portal Rich White Cards */
-.portal-card, .ui-card {
+.portal-card {
   background: #ffffff !important;
   border: 1px solid rgba(226, 232, 240, 0.9) !important;
   box-shadow: 0 12px 30px -6px rgba(15, 23, 42, 0.05), 0 4px 10px -2px rgba(245, 158, 11, 0.03) !important;
   border-radius: 24px !important;
-  color: #0f172a !important;
 }
 
-/* Force dark text inside all cards */
-.portal-card h1, .portal-card h2, .portal-card h3, .portal-card h4,
-.ui-card h1, .ui-card h2, .ui-card h3, .ui-card h4 {
-  color: #0f172a !important;
-}
-
-.portal-card p, .ui-card p {
-  color: #475569 !important;
-}
-
-/* Global Headings */
-h1, h2, h3, h4 {
-  color: #0f172a !important;
-}
-
-/* Badges */
+/* Pill Badges */
 .portal-pill {
   border-radius: 9999px;
   font-weight: 700;
@@ -91,38 +113,9 @@ h1, h2, h3, h4 {
   align-items: center;
   gap: 6px;
 }
-
-.portal-pill-amber {
-  background: #fef3c7 !important;
-  color: #b45309 !important;
-  border: 1px solid #fde68a !important;
-}
-
-.portal-pill-navy {
-  background: #0f172a !important;
-  color: #ffffff !important;
-}
-
-.portal-pill-indigo {
-  background: #eff6ff !important;
-  color: #1d4ed8 !important;
-  border: 1px solid #bfdbfe !important;
-}
-
-/* Form Controls */
-select, input[type="text"], input[type="search"] {
-  background: #ffffff !important;
-  border: 1.5px solid #e2e8f0 !important;
-  color: #0f172a !important;
-  font-weight: 600 !important;
-  border-radius: 16px !important;
-}
-
-select:focus, input:focus {
-  border-color: #f59e0b !important;
-  outline: none !important;
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.18) !important;
-}
+.portal-pill-amber { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+.portal-pill-navy { background: #0f172a; color: #ffffff; }
+.portal-pill-indigo { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
 
 /* Buttons */
 .portal-btn-primary {
@@ -132,83 +125,18 @@ select:focus, input:focus {
   font-weight: 700 !important;
   transition: all 0.2s ease !important;
 }
-
 .portal-btn-primary:hover {
   background: #1e293b !important;
   transform: translateY(-1px);
 }
-/* Dashboard Two-Column Layout */
-.dashboard-wrapper {
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-}
 
-/* Left Sidebar (Blue Accent like E-Skool Reference) */
-.portal-sidebar {
-  width: 250px;
-  background: #1d4ed8;
-  color: #ffffff;
-  padding: 1.5rem 1rem;
-  display: flex;
-  flex-direction: column;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  border-top-right-radius: 28px;
-  border-bottom-right-radius: 28px;
-  box-shadow: 4px 0 24px rgba(29, 78, 216, 0.18);
-  z-index: 40;
-}
-
-.sidebar-brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0 0.5rem 1.5rem 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  margin-bottom: 1.5rem;
-}
-
-.sidebar-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  font-weight: 600;
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.85);
-  transition: all 0.2s ease;
-  text-decoration: none;
-  margin-bottom: 6px;
-}
-
-.sidebar-link:hover {
-  background: rgba(255, 255, 255, 0.14);
-  color: #ffffff;
-  transform: translateX(4px);
-}
-
-.sidebar-link.active {
-  background: #ffffff;
-  color: #1d4ed8;
-  font-weight: 700;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-}
-
-/* Main Content Area next to Sidebar */
-.dashboard-main {
-  flex: 1;
-  padding: 2rem 2.5rem;
-  max-width: 1200px;
-}
-
-@media (max-width: 768px) {
-  .portal-sidebar {
-    display: none; /* Mobile par clean bottom dock handle karega */
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+  .sidebar-menu-card {
+    display: none;
   }
-  .dashboard-main {
-    padding: 1rem;
+  .main-viewport {
+    width: 100%;
+    padding: 1rem 1rem 6rem 1rem;
   }
 }

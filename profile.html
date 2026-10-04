@@ -8,13 +8,13 @@
   <link rel="stylesheet" href="style.css" />
   <script src="theme.js"></script>
 </head>
-<body class="min-h-screen">
+<body>
 
-  <div class="dashboard-wrapper">
+  <div class="app-container">
     
-    <!-- Left Sidebar (E-Skool Style) -->
-    <aside class="portal-sidebar hidden md:flex">
-      <div class="sidebar-brand">
+    <!-- Left Menu Card -->
+    <aside class="sidebar-menu-card">
+      <div class="menu-brand">
         <div class="w-10 h-10 rounded-2xl bg-amber-400 text-amber-950 font-black flex items-center justify-center text-sm shadow-sm">
           AC
         </div>
@@ -25,27 +25,27 @@
       </div>
 
       <nav class="flex-1">
-        <a href="study.html" class="sidebar-link">
+        <a href="study.html" class="menu-item">
           <span class="text-lg">📖</span>
           <span>Study Hub</span>
         </a>
-        <a href="pyq.html" class="sidebar-link">
+        <a href="pyq.html" class="menu-item">
           <span class="text-lg">📄</span>
           <span>PYQs Vault</span>
         </a>
-        <a href="quest.html" class="sidebar-link">
+        <a href="quest.html" class="menu-item">
           <span class="text-lg">🎯</span>
           <span>Exam Arena</span>
         </a>
-        <a href="leaderboard.html" class="sidebar-link">
+        <a href="leaderboard.html" class="menu-item">
           <span class="text-lg">🏆</span>
           <span>Leaderboard</span>
         </a>
-        <a href="chat.html" class="sidebar-link">
+        <a href="chat.html" class="menu-item">
           <span class="text-lg">🤖</span>
           <span>Zen AI Tutor</span>
         </a>
-        <a href="profile.html" class="sidebar-link active">
+        <a href="profile.html" class="menu-item active">
           <span class="text-lg">👤</span>
           <span>My Profile</span>
         </a>
@@ -60,19 +60,10 @@
       </div>
     </aside>
 
-    <!-- Main Content Area -->
-    <main class="dashboard-main flex-1 pb-24 md:pb-12">
+    <!-- Main Viewport -->
+    <main class="main-viewport">
       
-      <!-- Mobile Header -->
-      <div class="md:hidden flex justify-between items-center mb-6">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-2xl bg-blue-600 text-white font-extrabold flex items-center justify-center text-xs">AC</div>
-          <h1 class="text-base font-extrabold text-slate-900">Student Profile</h1>
-        </div>
-        <a href="index.html" class="text-xs font-bold text-rose-600">Logout</a>
-      </div>
-
-      <!-- Welcome Banner Card -->
+      <!-- Student Profile Card -->
       <div class="portal-card p-6 sm:p-8 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div class="flex items-center gap-4">
           <div class="w-16 h-16 rounded-3xl bg-blue-600 text-amber-400 font-black text-2xl flex items-center justify-center shadow-lg shadow-blue-500/20">
@@ -91,103 +82,50 @@
           </div>
           <div class="bg-amber-50 border border-amber-200 px-4 py-3 rounded-2xl text-center">
             <span class="block text-[11px] font-bold text-amber-700 uppercase">Total XP</span>
-            <span class="text-lg font-black text-amber-900 font-mono" id="profile-xp-val">745 XP</span>
+            <span class="text-lg font-black text-amber-900 font-mono" id="profile-xp-val">0 XP</span>
           </div>
         </div>
       </div>
 
-      <!-- Two-Column Grid: Study Bar Graph + Quick Tasks -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-        <!-- Study Bar Graph (Behance Style Performance Chart) -->
-        <div class="portal-card p-6 lg:col-span-2">
-          <div class="flex justify-between items-center pb-4 mb-6 border-b border-slate-100">
-            <div>
-              <h3 class="text-base font-extrabold text-slate-900">Unit Test & CT Readiness</h3>
-              <p class="text-xs text-slate-400">Class Test (CT) & Quest Round Performance Metrics</p>
-            </div>
-            <span class="portal-pill portal-pill-indigo">Live Session Data</span>
+      <!-- Real Dynamic Syllabus Bar Graph -->
+      <div class="portal-card p-6 sm:p-8 mb-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-slate-100 gap-4">
+          <div>
+            <div class="portal-pill portal-pill-indigo mb-1.5">📊 Live Unit Progress</div>
+            <h3 class="text-xl font-extrabold text-slate-900">Semester Unit Coverage Progress</h3>
+            <p class="text-xs text-slate-500">Real progress based on lectures marked 'Done' in Study Hub.</p>
           </div>
-
-          <!-- Vertical Bar Chart -->
-          <div class="pt-6 pb-2">
-            <div class="h-48 flex items-end justify-around gap-4 sm:gap-8 border-b border-slate-200 px-4">
-              
-              <!-- Bar 1: CT-1 -->
-              <div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
-                <span class="text-[11px] font-bold text-slate-500 opacity-0 group-hover:opacity-100 transition">88%</span>
-                <div class="w-full bg-blue-600 rounded-t-xl transition-all duration-500 group-hover:bg-blue-700 shadow-sm" style="height: 140px;"></div>
-                <span class="text-xs font-bold text-slate-700 mt-1">CT-1</span>
-              </div>
-
-              <!-- Bar 2: CT-2 -->
-              <div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
-                <span class="text-[11px] font-bold text-slate-500 opacity-0 group-hover:opacity-100 transition">76%</span>
-                <div class="w-full bg-blue-500 rounded-t-xl transition-all duration-500 group-hover:bg-blue-600 shadow-sm" style="height: 120px;"></div>
-                <span class="text-xs font-bold text-slate-700 mt-1">CT-2</span>
-              </div>
-
-              <!-- Bar 3: Pre-Sem -->
-              <div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
-                <span class="text-[11px] font-bold text-slate-500 opacity-0 group-hover:opacity-100 transition">72%</span>
-                <div class="w-full bg-blue-500 rounded-t-xl transition-all duration-500 group-hover:bg-blue-600 shadow-sm" style="height: 110px;"></div>
-                <span class="text-xs font-bold text-slate-700 mt-1">CT-3</span>
-              </div>
-
-              <!-- Bar 4: Arena Quests (Dynamic XP Bar) -->
-              <div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
-                <span class="text-[11px] font-bold text-amber-600 opacity-0 group-hover:opacity-100 transition">94%</span>
-                <div class="w-full bg-amber-400 rounded-t-xl transition-all duration-500 group-hover:bg-amber-500 shadow-md shadow-amber-400/30" style="height: 160px;"></div>
-                <span class="text-xs font-bold text-amber-900 mt-1">Arena</span>
-              </div>
-
-            </div>
-
-            <div class="flex justify-between items-center pt-4 text-[11px] text-slate-400 font-medium">
-              <span>● Blue: College Internal CT Exams</span>
-              <span class="text-amber-600 font-bold">● Amber: AKTU Connect Quest Master</span>
-            </div>
+          
+          <div class="flex items-center gap-3">
+            <label class="text-xs font-bold text-slate-500 uppercase">Semester:</label>
+            <select id="graph-sem-select" onchange="renderSubjectBarGraph()" class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 outline-none cursor-pointer">
+              <option value="1">Semester 1</option>
+              <option value="2">Semester 2</option>
+              <option value="3">Semester 3</option>
+              <option value="4">Semester 4</option>
+              <option value="5" selected>Semester 5</option>
+              <option value="6">Semester 6</option>
+            </select>
           </div>
         </div>
 
-        <!-- Right Side: Syllabus Readiness & Goals -->
-        <div class="space-y-6">
-          <div class="portal-card p-6">
-            <h4 class="text-sm font-extrabold text-slate-900 mb-3">Weekly Target</h4>
-            <div class="space-y-3">
-              <div>
-                <div class="flex justify-between text-xs font-bold mb-1">
-                  <span class="text-slate-600">DAA (Unit 1 & 2)</span>
-                  <span class="text-blue-600">80% Done</span>
-                </div>
-                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-                  <div class="bg-blue-600 h-full rounded-full" style="width: 80%"></div>
-                </div>
-              </div>
+        <!-- Dynamic Bar Chart Container -->
+        <div class="pt-4 pb-2">
+          <div class="h-64 flex items-end justify-around gap-2 sm:gap-6 border-b border-slate-200 px-2 sm:px-6" id="bars-track">
+            <!-- Dynamically populated from real localStorage data -->
+          </div>
 
-              <div>
-                <div class="flex justify-between text-xs font-bold mb-1">
-                  <span class="text-slate-600">DBMS (Normalization)</span>
-                  <span class="text-amber-500">60% Done</span>
-                </div>
-                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-                  <div class="bg-amber-400 h-full rounded-full" style="width: 60%"></div>
-                </div>
-              </div>
-            </div>
-
-            <a href="quest.html" class="portal-btn-primary block text-center w-full py-3 text-xs mt-6 cursor-pointer">
-              Launch Today's Quests 🎯
-            </a>
+          <div class="flex flex-wrap justify-between items-center pt-4 text-[11px] text-slate-500 font-medium">
+            <span>● 5 Units = 100% Syllabus Completed</span>
+            <span class="text-blue-600 font-bold">Go to Study Hub and click 'Mark Done' or 'Watch' to fill these bars!</span>
           </div>
         </div>
-
       </div>
 
     </main>
   </div>
 
-  <!-- Mobile Bottom Dock (Thumb-friendly on phone) -->
+  <!-- Mobile Bottom Dock -->
   <nav class="md:hidden fixed bottom-3 left-4 right-4 z-50 bg-[#0f172a] text-white rounded-2xl px-4 py-2.5 flex justify-between items-center shadow-2xl">
     <a href="study.html" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-white">
       <span class="text-base">📖</span>
@@ -209,13 +147,66 @@
       <span class="text-base">🤖</span>
       <span class="text-[10px] font-bold">Zen AI</span>
     </a>
+    <a href="profile.html" class="flex flex-col items-center gap-0.5 text-amber-400">
+      <span class="text-base">👤</span>
+      <span class="text-[10px] font-extrabold">Profile</span>
+    </a>
   </nav>
 
+  <script src="subjectsData.js"></script>
   <script>
+    function renderSubjectBarGraph() {
+      const sem = document.getElementById("graph-sem-select").value;
+      const track = document.getElementById("bars-track");
+      track.innerHTML = "";
+
+      let subjects = [];
+      if (typeof aktuMasterDatabase !== 'undefined') {
+        if (sem === "1") subjects = aktuMasterDatabase["COMMON_1"] || [];
+        else if (sem === "2") subjects = aktuMasterDatabase["COMMON_2"] || [];
+        else subjects = aktuMasterDatabase["CSE_AIML"]?.[sem] || [];
+      }
+
+      if (!subjects || subjects.length === 0) {
+        subjects = [
+          { name: "Design & Analysis of Algorithms", id: "BCS503" },
+          { name: "Database Management Systems", id: "BCS501" },
+          { name: "Artificial Intelligence", id: "BCAI501" },
+          { name: "Data Analytics", id: "BCS052" },
+          { name: "Constitution of India", id: "BNC501" }
+        ];
+      }
+
+      subjects.forEach((sub, idx) => {
+        const subId = sub.id || sub.code || `SUB${idx+1}`;
+        // REAL DATA: strictly read from localStorage, default is 0 (NO FAKE DATA)
+        const completedUnits = parseInt(localStorage.getItem(`progress_${subId}`)) || 0;
+        const totalUnits = 5;
+        const percentage = Math.round((completedUnits / totalUnits) * 100);
+        
+        // Minimum visual bar height so 0% is also visible as an empty slot
+        const barHeightPx = completedUnits === 0 ? 8 : Math.round((percentage / 100) * 190);
+
+        const barCol = document.createElement("div");
+        barCol.className = "flex flex-col items-center gap-2 group cursor-pointer flex-1 max-w-[85px]";
+        barCol.innerHTML = `
+          <span class="text-[10px] sm:text-[11px] font-extrabold ${completedUnits > 0 ? 'text-blue-600' : 'text-slate-400'} transition">
+            ${completedUnits}/5 (${percentage}%)
+          </span>
+          <div class="w-full ${completedUnits > 0 ? 'bg-gradient-to-t from-blue-600 to-indigo-500 group-hover:from-blue-700 group-hover:to-indigo-600' : 'bg-slate-200'} rounded-t-xl transition-all duration-500 shadow-sm" style="height: ${barHeightPx}px;"></div>
+          <span class="text-[11px] sm:text-xs font-bold text-slate-800 mt-1 truncate max-w-full text-center" title="${sub.name || sub.title}">
+            ${subId}
+          </span>
+        `;
+        track.appendChild(barCol);
+      });
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
-      const xp = localStorage.getItem('akt_xp') || 745;
+      const xp = localStorage.getItem('akt_xp') || 0;
       const el = document.getElementById('profile-xp-val');
       if (el) el.innerText = `${xp} XP`;
+      renderSubjectBarGraph();
     });
   </script>
 </body>
