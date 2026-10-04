@@ -10,8 +10,8 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'GEMINI_API_KEY is not configured on Vercel.' });
   }
 
-  // Model hierarchy: gemini-2.5-flash (fast, robust & latest stable flash)
-  const MODEL_NAME = "gemini-2.5-flash";
+  // Model ID set to Gemini 3.8 Flash
+const MODEL_NAME = "gemini-3.8-flash";
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
 
   const systemInstruction = `You are Zen, an energetic, highly knowledgeable, and friendly AI academic mentor specifically designed for Dr. A.P.J. Abdul Kalam Technical University (AKTU) B.Tech engineering students.
