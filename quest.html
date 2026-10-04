@@ -11,10 +11,12 @@
 
   <div class="app-container">
     
-    <!-- Left Menu Card (Permanent) -->
+    <!-- Left Menu Card (Permanent E-Skool Style) -->
     <aside class="sidebar-menu-card">
       <div class="menu-brand">
-        <div class="w-10 h-10 rounded-2xl bg-amber-400 text-amber-950 font-black flex items-center justify-center text-sm shadow-sm">AC</div>
+        <div class="w-10 h-10 rounded-2xl bg-amber-400 text-amber-950 font-black flex items-center justify-center text-sm shadow-sm">
+          AC
+        </div>
         <div>
           <span class="font-extrabold text-base leading-tight block text-white">AKTU Connect</span>
           <span class="text-[11px] text-blue-200 font-semibold block">Student Dashboard</span>
@@ -57,9 +59,10 @@
       </div>
     </aside>
 
-    <!-- Main Viewport -->
+    <!-- Main Content Viewport -->
     <main class="main-viewport space-y-6">
       
+      <!-- Top Header & Level Badge -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div class="portal-pill portal-pill-amber mb-2">🎯 Real AKTU Exam Mode</div>
@@ -67,7 +70,7 @@
             Section-A Exam Arena
           </h2>
           <p class="text-xs sm:text-sm text-slate-500">
-            5 high-yield 2-mark conceptual questions per round. Earn +1 XP per correct answer!
+            5 conceptual questions per round. Earn +1 XP per correct answer!
           </p>
         </div>
         <div class="portal-pill portal-pill-amber font-mono font-bold" id="level-display">Loading...</div>
@@ -80,6 +83,7 @@
           <select id="filter-branch" onchange="updateSubjects()" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-3.5 py-3 text-sm font-semibold outline-none cursor-pointer">
             <option value="CSE_AIML">Computer Science (AI & ML)</option>
             <option value="CSE_CORE">Computer Science (Core)</option>
+            <option value="CSE_AIDS">Computer Science (AI & DS)</option>
             <option value="IT">Information Technology</option>
             <option value="ECE">Electronics (ECE)</option>
           </select>
@@ -93,6 +97,8 @@
             <option value="4">Semester 4</option>
             <option value="5" selected>Semester 5</option>
             <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
           </select>
         </div>
         <div>
@@ -109,7 +115,7 @@
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h3 class="text-lg font-extrabold text-slate-900" id="round-status">Round 1 (5 Questions • 10 Marks)</h3>
-          <p class="text-xs text-slate-500">Submit this set to proceed to the next round.</p>
+          <p class="text-xs text-slate-500">Complete this set to proceed to the next 5 questions.</p>
         </div>
         <button id="generate-btn" onclick="startNewTestRound()" class="portal-btn-primary px-6 py-3 text-sm cursor-pointer flex items-center gap-2">
           <span>⚡ Start Round 1</span>
@@ -142,13 +148,24 @@
     }
 
     function getSubjectSpecificFallback(subTitle, unitTitle) {
-      return [
-        { q: "Which asymptotic notation provides a tight bound on the running time of an algorithm?", options: ["Big-O (O)", "Big-Omega (Ω)", "Theta (Θ)", "Little-o (o)"], ans: 2 },
-        { q: "What is the worst-case time complexity of Quick Sort?", options: ["O(n log n)", "O(n^2)", "O(n)", "O(log n)"], ans: 1 },
-        { q: "Which algorithm design paradigm does 0/1 Knapsack problem follow for an optimal solution?", options: ["Greedy approach", "Dynamic Programming", "Divide and conquer", "Branch and Bound"], ans: 1 },
-        { q: "What is the time complexity of solving a recurrence T(n) = 2T(n/2) + O(n)?", options: ["O(n)", "O(n log n)", "O(n^2)", "O(log n)"], ans: 1 },
-        { q: "Which of the following sorting algorithms is stable and guaranteed O(n log n)?", options: ["Quick Sort", "Heap Sort", "Merge Sort", "Selection Sort"], ans: 2 }
-      ];
+      const titleLower = (subTitle + " " + unitTitle).toLowerCase();
+      if (titleLower.includes("physics") || titleLower.includes("relativistic")) {
+        return [
+          { q: "According to Einstein's special theory of relativity, the speed of light in vacuum is:", options: ["Dependent on the source frame", "Constant in all inertial frames", "Infinite in moving frames", "Variable with frequency"], ans: 1 },
+          { q: "What happens to the length of an object measured by a stationary observer when moving at relativistic speed v?", options: ["It expands", "It remains unchanged", "It contracts by factor sqrt(1 - v^2/c^2)", "It becomes zero"], ans: 2 },
+          { q: "The relativistic kinetic energy of a particle of rest mass m0 is given by:", options: ["(m - m0)c^2", "1/2 m v^2", "m0 c^2", "m v c"], ans: 0 },
+          { q: "In the Michelson-Morley experiment, what was the observed fringe shift?", options: ["0.4 fringes", "Zero fringe shift (null result)", "1 complete fringe", "Infinite shift"], ans: 1 },
+          { q: "A frame of reference in which Newton's first law of motion holds true is called:", options: ["Non-inertial frame", "Accelerated frame", "Inertial frame", "Rotating frame"], ans: 2 }
+        ];
+      } else {
+        return [
+          { q: "Which asymptotic notation provides a tight bound on the running time of an algorithm?", options: ["Big-O (O)", "Big-Omega (Ω)", "Theta (Θ)", "Little-o (o)"], ans: 2 },
+          { q: "What is the worst-case time complexity of Quick Sort?", options: ["O(n log n)", "O(n^2)", "O(n)", "O(log n)"], ans: 1 },
+          { q: "Which algorithm design paradigm does 0/1 Knapsack problem follow for an optimal solution?", options: ["Greedy approach", "Dynamic Programming", "Divide and conquer", "Branch and Bound"], ans: 1 },
+          { q: "What is the time complexity of solving a recurrence T(n) = 2T(n/2) + O(n)?", options: ["O(n)", "O(n log n)", "O(n^2)", "O(log n)"], ans: 1 },
+          { q: "Which of the following sorting algorithms is stable and guaranteed O(n log n)?", options: ["Quick Sort", "Heap Sort", "Merge Sort", "Selection Sort"], ans: 2 }
+        ];
+      }
     }
 
     function updateSubjects() {
