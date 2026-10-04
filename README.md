@@ -82,3 +82,29 @@ AKTU Connect features strict layout parity between desktop workstations and mobi
    ```bash
    git clone <repository-url>
    cd aktu-connect
+   Launch with a local server:
+
+Using Python 3:
+
+Bash
+python -m http.server 5500
+Using VS Code: Right-click index.html and click "Open with Live Server".
+
+Access the portal:
+Open your browser and navigate to:
+
+[http://127.0.0.1:5500/index.html](http://127.0.0.1:5500/index.html)
+📂 Project Structure
+aktu-connect/
+├── index.html          # Authentication portal (Sign In / Sign Up interactive board)
+├── study.html          # Study Hub, unit syllabus tracker & lecture links
+├── pyq.html            # PYQ Vault & recurring question analyser
+├── quest.html          # Exam Arena powered by Gemini AI
+├── leaderboard.html    # State-wide university standings & dynamic podium
+├── chat.html           # Zen AI Tutor conversational interface
+├── profile.html        # Student credentials, custom avatar & achievements
+├── nav.js              # Global state manager, avatar synchronizer & mobile drawer
+├── style.css           # Global color themes, glassmorphism, responsive media queries
+└── study-data.js       # Master academic curriculum database (Sem 1-8)
+📄 License
+This project is open-source and available under the MIT License.
