@@ -163,7 +163,7 @@
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
 
-    /* PHONE VIEW ONLY (<640px) */
+    /* PHONE VIEW ONLY (<640px) - Thoda Neeche + Halka Wide */
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 360px;
@@ -185,31 +185,30 @@
         pointer-events: none;
         z-index: 1;
       }
+
+      /* Perfect alignment: Thoda neeche shift + halka wide */
       .whiteboard-active-area {
-        top: 48.0% !important;
-        left: 24.5% !important;
-        width: 51% !important;
-        height: 44.5% !important; /* Zero bottom gap on phone */
-        padding: 5px 6px 3px !important;
-        border-radius: 0.75rem !important;
+        top: 51.8% !important;   /* Thoda neeche shift kiya mascot ke haath ke theek neeche */
+        left: 20.5% !important;  /* Center align wider box */
+        width: 59% !important;   /* Halka wide kiya taaki side me board cover ho sake */
+        height: 42.5% !important; /* Bottom frame tak proper stretch */
+        padding: 6px 9px 4px !important;
+        border-radius: 0.85rem !important;
       }
+
       .board-input {
-        font-size: 0.62rem;
-        padding: 0.22rem 0.4rem;
+        font-size: 0.65rem;
+        padding: 0.25rem 0.45rem;
       }
       .board-btn-primary {
-        font-size: 0.68rem;
-        padding: 0.28rem 0.4rem;
+        font-size: 0.72rem;
+        padding: 0.32rem 0.45rem;
       }
       .board-tab {
-        font-size: 0.62rem;
-        padding: 0.16rem 0;
+        font-size: 0.65rem;
+        padding: 0.18rem 0;
       }
     }
-  </style>
-</head>
-<body>
-
   <!-- MODALS -->
   <div id="google-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100">
