@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>AKTU Connect - Student Portal</title>
+  <title>AKTU Connect - Student Portal</title> 
   <script src="https://cdn.tailwindcss.com"></script>
-
+  
   <!-- REAL EMAILJS ENGINE -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script type="text/javascript">
@@ -160,7 +160,7 @@
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
 
-    /* PHONE VIEW ONLY (<640px) - form sits exactly inside the tablet screen */
+    /* PHONE VIEW ONLY (<640px) - EXACT USER LOCKED VALUES */
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 360px;
@@ -283,11 +283,65 @@
   <div id="set-pwd-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100 text-left">
       <h3 class="text-base font-extrabold text-slate-900 mb-1">Set Account Password</h3>
-      <form onsubmit="finalizePasswordAndRegister(event)" class="space-y-3">
+      <form onsubmit="finalizePasswordAndOpenOnboarding(event)" class="space-y-3">
         <input type="password" id="new-reg-pwd" required minlength="4" placeholder="Enter password" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none" />
         <input type="password" id="new-reg-pwd-confirm" required minlength="4" placeholder="Confirm password" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none" />
         <p id="pwd-match-error" class="text-[11px] text-rose-600 font-bold hidden"></p>
-        <button type="submit" class="w-full py-2.5 board-btn-primary text-xs">Complete Setup 🚀</button>
+        <button type="submit" class="w-full py-2.5 board-btn-primary text-xs">Next: Setup Profile 🎓</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- NEW STUDENT ACADEMIC ONBOARDING MODAL -->
+  <div id="onboarding-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-5 sm:p-6 max-w-md w-full shadow-2xl border border-emerald-200 text-left">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100 mb-3">
+        <div>
+          <span class="text-[9px] font-black uppercase text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">New Student Setup</span>
+          <h3 class="text-base font-black text-slate-900 mt-1">Setup Your Academic Profile</h3>
+        </div>
+        <span class="text-2xl">🎓</span>
+      </div>
+      <p class="text-xs text-slate-500 mb-3">Enter your details so AKTU Connect can tailor your semester curriculum, PYQs and leaderboard standing.</p>
+
+      <form onsubmit="finishStudentOnboarding(event)" class="space-y-3">
+        <div>
+          <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">Student Full Name</label>
+          <input type="text" id="onboard-name" required placeholder="e.g. Pixel Sharma" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none focus:border-emerald-600" />
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">College Name</label>
+          <input type="text" id="onboard-college" required placeholder="e.g. GNIOT / KIET / Galgotias / ABES" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none focus:border-emerald-600" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">Branch</label>
+            <select id="onboard-branch" class="w-full px-2.5 py-2 text-xs border border-slate-200 rounded-xl outline-none bg-white">
+              <option value="Computer Science & Engineering">CSE Core</option>
+              <option value="CSE (AI & ML)">CSE (AI & ML)</option>
+              <option value="Artificial Intelligence & Data Science (AIDS)">AIDS</option>
+              <option value="Information Technology">IT</option>
+              <option value="Electronics & Communication (ECE)">ECE</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">Current Semester</label>
+            <select id="onboard-sem" class="w-full px-2.5 py-2 text-xs border border-slate-200 rounded-xl outline-none bg-white">
+              <option value="Semester 1">Semester 1</option>
+              <option value="Semester 2">Semester 2</option>
+              <option value="Semester 3">Semester 3</option>
+              <option value="Semester 4">Semester 4</option>
+              <option value="Semester 5" selected>Semester 5</option>
+              <option value="Semester 6">Semester 6</option>
+              <option value="Semester 7">Semester 7</option>
+              <option value="Semester 8">Semester 8</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-2.5 board-btn-primary text-xs mt-2">Enter Dashboard 🚀</button>
       </form>
     </div>
   </div>
@@ -348,6 +402,7 @@
 
     let pendingAccountData = null;
     let expectedOtp = "";
+    let temporaryPassword = "";
 
     function switchAuthTab(tab) {
       document.getElementById('signin-form').classList.toggle('hidden', tab !== 'signin');
@@ -371,7 +426,11 @@
 
       const simple = localStorage.getItem(`pwd_${cleanEmail}`);
       if (simple) {
-        return { id: cleanEmail, name: localStorage.getItem(`user_name_${cleanEmail}`) || cleanEmail.split('@')[0], pwd: String(simple).trim() };
+        return { 
+          id: cleanEmail, 
+          name: localStorage.getItem(`user_name_${cleanEmail}`) || cleanEmail.split('@')[0], 
+          pwd: String(simple).trim() 
+        };
       }
 
       const direct = localStorage.getItem(`user_${cleanEmail}`);
@@ -398,34 +457,27 @@
       const enteredPwd = String(document.getElementById('signin-pwd').value).trim();
       const errBanner = document.getElementById('auth-error-banner');
 
-      // Primary account instant auto-sync & bypass
-      if (id.includes('saqib') || id === 'sksaqibkhan110@gmail.com') {
-        localStorage.setItem(`pwd_${id}`, enteredPwd);
-        localStorage.setItem(`user_${id}`, JSON.stringify({ name: 'Saqib Khan', email: id, pwd: enteredPwd }));
-        setSession(id, 'Saqib Khan', enteredPwd);
-        window.location.href = 'study.html';
-        return;
-      }
-
       const user = findSavedUser(id);
 
       if (!user) {
+        // Agar naya user bina signup ke direct sign in try kar raha hai
         errBanner.className = "p-1 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center block";
-        errBanner.innerText = "❌ No account found! Click Sign Up.";
+        errBanner.innerText = "❌ Account not found! Please click Sign Up.";
         return;
       }
 
+      // Check Password Match
       if (user.pwd === enteredPwd || !user.pwd) {
-        setSession(id, user.name, enteredPwd);
+        setSession(id, user.name);
         window.location.href = 'study.html';
       } else {
-        localStorage.setItem(`pwd_${id}`, enteredPwd);
-        setSession(id, user.name, enteredPwd);
-        window.location.href = 'study.html';
+        errBanner.className = "p-1 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center block";
+        errBanner.innerText = "❌ Incorrect Password! Click Forgot?";
       }
     }
 
-    function setSession(email, name, pwd) {
+    // Set Clean Session without polluting with other users' data
+    function setSession(email, name) {
       const cleanEmail = email.toLowerCase().trim();
       const cleanName = name || cleanEmail.split('@')[0];
       localStorage.setItem('user_name', cleanName);
@@ -438,7 +490,7 @@
       e.preventDefault();
       const email = document.getElementById('forgot-email').value.trim().toLowerCase();
       closeForgotModal();
-      pendingAccountData = { name: email.split('@')[0], id: email };
+      pendingAccountData = { name: email.split('@')[0], id: email, isReset: true };
       sendOtp(email);
     }
 
@@ -446,14 +498,14 @@
       e.preventDefault();
       const name = document.getElementById('signup-name').value.trim();
       const email = document.getElementById('signup-id').value.trim().toLowerCase();
-      pendingAccountData = { name: name, id: email };
+      pendingAccountData = { name: name, id: email, isReset: false };
       sendOtp(email);
     }
 
     function handleGoogleInputSubmit() {
       const email = document.getElementById('custom-google-email').value.trim().toLowerCase();
       closeGoogleModal();
-      pendingAccountData = { name: email.split('@')[0], id: email };
+      pendingAccountData = { name: email.split('@')[0], id: email, isReset: false };
       sendOtp(email);
     }
 
@@ -482,25 +534,70 @@
       }
     }
 
-    function finalizePasswordAndRegister(e) {
+    // Password set karne ke baad seedha ONBOARDING MODAL khulega
+    function finalizePasswordAndOpenOnboarding(e) {
       e.preventDefault();
       const p1 = String(document.getElementById('new-reg-pwd').value).trim();
       const p2 = String(document.getElementById('new-reg-pwd-confirm').value).trim();
-      if (p1 !== p2) return;
+      const err = document.getElementById('pwd-match-error');
 
-      const email = pendingAccountData.id;
-      const name = pendingAccountData.name;
+      if (p1 !== p2) {
+        err.innerText = "Passwords do not match!";
+        err.classList.remove('hidden');
+        return;
+      }
 
+      temporaryPassword = p1;
+      document.getElementById('set-pwd-modal').classList.add('hidden');
+
+      // Agar password reset tha toh direct login karo
+      if (pendingAccountData.isReset) {
+        const email = pendingAccountData.id;
+        const name = pendingAccountData.name;
+        saveUserRecord(email, name, temporaryPassword);
+        setSession(email, name);
+        window.location.href = 'study.html';
+        return;
+      }
+
+      // Naya user hai toh Onboarding Profile Details maango
+      document.getElementById('onboard-name').value = pendingAccountData.name || '';
+      document.getElementById('onboarding-modal').classList.remove('hidden');
+    }
+
+    function finishStudentOnboarding(e) {
+      e.preventDefault();
+      const fullName = document.getElementById('onboard-name').value.trim();
+      const college = document.getElementById('onboard-college').value.trim();
+      const branch = document.getElementById('onboard-branch').value;
+      const sem = document.getElementById('onboard-sem').value;
+      const email = pendingAccountData.id.toLowerCase().trim();
+
+      // Save user record
+      saveUserRecord(email, fullName, temporaryPassword);
+
+      // Save student specific onboarding settings
+      localStorage.setItem(`user_name_${email}`, fullName);
+      localStorage.setItem(`user_college_${email}`, college);
+      localStorage.setItem(`user_branch_${email}`, branch);
+      localStorage.setItem(`user_sem_${email}`, sem);
+      localStorage.setItem(`akt_xp_${email}`, "100"); // Fresh signup bonus XP
+
+      // Clean default avatar so it doesn't leak old user's picture
+      localStorage.removeItem(`user_avatar_${email}`);
+
+      setSession(email, fullName);
+      document.getElementById('onboarding-modal').classList.add('hidden');
+      window.location.href = 'study.html';
+    }
+
+    function saveUserRecord(email, name, pwd) {
       let accs = JSON.parse(localStorage.getItem('registered_students') || '[]');
       accs = accs.filter(a => (a.id || a.email || '').toLowerCase().trim() !== email);
-      accs.push({ name: name, id: email, email: email, pwd: p1 });
+      accs.push({ name: name, id: email, email: email, pwd: pwd });
       localStorage.setItem('registered_students', JSON.stringify(accs));
-      localStorage.setItem(`user_${email}`, JSON.stringify({ name: name, email: email, pwd: p1 }));
-      localStorage.setItem(`pwd_${email}`, p1);
-
-      setSession(email, name, p1);
-      document.getElementById('set-pwd-modal').classList.add('hidden');
-      window.location.href = 'study.html';
+      localStorage.setItem(`user_${email}`, JSON.stringify({ name: name, email: email, pwd: pwd }));
+      localStorage.setItem(`pwd_${email}`, pwd);
     }
   </script>
 </body>
