@@ -6,7 +6,7 @@
   <title>AKTU Connect - Student Portal</title> 
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- REAL EMAILJS ENGINE (Protected with Safe Init) -->
+  <!-- REAL EMAILJS ENGINE -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
@@ -38,31 +38,25 @@
       overflow-x: hidden;
     }
 
-    /* Master Mockup Frame: Guaranteed aspect-ratio so it NEVER collapses */
+    /* Master Mockup Frame: Natural Image Flow (Never Collapses) */
     .master-mockup-frame {
       position: relative;
       width: 100%;
       max-width: 540px;
-      min-height: 600px;
-      aspect-ratio: 540 / 640;
       border-radius: 2.75rem;
       background: #f7ede2;
       box-shadow: 0 30px 70px -10px rgba(0, 0, 0, 0.75), 0 0 0 3px rgba(255, 255, 255, 0.2);
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      line-height: 0;
     }
 
+    /* Natural block image sets the exact container height on laptop */
     .desktop-bg-img {
-      position: absolute;
-      inset: 0;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
       display: block;
       user-select: none;
       pointer-events: none;
-      z-index: 1;
     }
 
     .mobile-bg-img {
@@ -86,6 +80,7 @@
       color: #1b4332;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       z-index: 20;
+      line-height: normal;
     }
 
     /* Whiteboard Form Overlay (Laptop Placement) */
@@ -102,6 +97,7 @@
       padding: 8px 12px 6px;
       background: #ffffff;
       border-radius: 0.85rem;
+      line-height: normal;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     }
 
@@ -163,31 +159,23 @@
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
 
-    /* PHONE VIEW ONLY (<640px) - Thoda Neeche + Halka Wide */
-   /* PHONE VIEW ONLY (<640px) - Aligned with resized phoneboy.png */
+    /* PHONE VIEW ONLY (<640px) */
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 360px;
-        min-height: 520px;
-        aspect-ratio: 360 / 580;
         border-radius: 2.25rem;
       }
       .desktop-bg-img {
         display: none !important;
       }
       .mobile-bg-img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: contain !important; /* image aspect ratio maintain rahegi */
         display: block !important;
+        width: 100%;
+        height: auto;
         user-select: none;
         pointer-events: none;
-        z-index: 1;
       }
-
-      /* Naye resized board ke according exact position */
+      /* Centered on phoneboy.png board */
       .whiteboard-active-area {
         top: 46.5% !important;
         left: 26.5% !important;
@@ -196,7 +184,6 @@
         padding: 5px 6px 3px !important;
         border-radius: 0.75rem !important;
       }
-
       .board-input {
         font-size: 0.62rem;
         padding: 0.22rem 0.4rem;
@@ -210,6 +197,10 @@
         padding: 0.16rem 0;
       }
     }
+  </style>
+</head>
+<body>
+
   <!-- MODALS -->
   <div id="google-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100">
@@ -265,11 +256,11 @@
   <div class="master-mockup-frame">
     <div class="top-floating-badge">🎓 AKTU Connect</div>
 
-    <!-- Desktop Image with automatic multi-path fallbacks -->
+    <!-- Desktop Image -->
     <img src="boy-board - Copy.png" onerror="this.onerror=null; this.src='boy-board.png'; if(!this.complete){this.src='boy-board.jpg';}" alt="Mascot Desktop" class="desktop-bg-img" />
 
     <!-- Mobile Image -->
-    <img src="phoneboy.png" onerror="this.onerror=null; this.src='boy-board.png';" alt="Mascot Mobile" class="mobile-bg-img" />
+    <img src="phoneboy.png" onerror="this.onerror=null; this.src='boy-board - Copy.png';" alt="Mascot Mobile" class="mobile-bg-img" />
 
     <!-- Whiteboard Area -->
     <div class="whiteboard-active-area">
