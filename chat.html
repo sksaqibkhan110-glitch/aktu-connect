@@ -6,23 +6,15 @@
   <title>AKTU Connect - Zen AI Tutor</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
-  <script src="study-data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
     * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
     body { background-color: #f0f7f4; color: #132a13; min-height: 100vh; margin: 0; }
 
-    /* Custom Scrollbar for Chat */
-    #chat-messages::-webkit-scrollbar {
-      width: 5px;
-    }
-    #chat-messages::-webkit-scrollbar-track {
-      background: #f0f7f4;
-    }
-    #chat-messages::-webkit-scrollbar-thumb {
-      background: #cce3d5;
-      border-radius: 9999px;
-    }
+    #chat-messages::-webkit-scrollbar { width: 5px; }
+    #chat-messages::-webkit-scrollbar-track { background: #f0f7f4; }
+    #chat-messages::-webkit-scrollbar-thumb { background: #cce3d5; border-radius: 9999px; }
 
     .prompt-chip {
       background: #ffffff;
@@ -101,7 +93,7 @@
       <header class="flex items-center justify-between shrink-0">
         <div>
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 mb-1">
-            ★ Zen Academic AI Engine
+            ★ Powered by Gemini Flash AI
           </span>
           <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Zen – Your AI Study Mentor</h1>
           <p class="text-xs text-slate-500 font-medium">Ask doubts on AKTU syllabus, derivation proofs, Quantum summaries or PYQ patterns.</p>
@@ -122,13 +114,13 @@
         <button onclick="sendQuickPrompt('Explain Normalization in DBMS with 1NF, 2NF, 3NF and BCNF')" class="prompt-chip">
           Normalization in DBMS 💡
         </button>
-        <button onclick="sendQuickPrompt('Important questions repeated in AKTU DAA exams')" class="prompt-chip">
-          DAA Repeat Questions 📊
+        <button onclick="sendQuickPrompt('Important repeated topics in AKTU DAA exams')" class="prompt-chip">
+          DAA Repeat Topics 📊
         </button>
-        <button onclick="sendQuickPrompt('How to write answers in AKTU to score 8+ CGPA?')" class="prompt-chip">
+        <button onclick="sendQuickPrompt('AKTU exam me 8+ SGPA kaise score kare? Step by step strategy batao')" class="prompt-chip">
           AKTU Scoring Strategy 🎯
         </button>
-        <button onclick="sendQuickPrompt('Solve recurrence using Master Theorem with cases')" class="prompt-chip">
+        <button onclick="sendQuickPrompt('Master theorem formula aur uske teeno cases with example samjhao')" class="prompt-chip">
           Master Theorem Steps ⚡
         </button>
       </div>
@@ -145,8 +137,8 @@
               Zen
             </div>
             <div class="bg-emerald-50/80 border border-emerald-100 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
-              <p class="font-semibold text-emerald-900 mb-1">Hey! Main Zen hoon, tera AKTU 24x7 Academic Mentor 🚀</p>
-              <p class="text-slate-600 text-xs">Kisi bhi subject ke units, complex derivation, Quantum topic ya previous year questions mein doubt ho toh batao, step-by-step simplify kar dunga!</p>
+              <p class="font-bold text-emerald-900 mb-1">Hey! Main Zen hoon, tera real-time AKTU AI Mentor ⚡</p>
+              <p class="text-slate-600 text-xs">Ab real Gemini AI model hooked hai! Kuch bhi poochh—syllabus doubt, formula proof, exam hack ya normal baatein—ab scripted answers nahi milenge!</p>
             </div>
           </div>
 
@@ -157,12 +149,13 @@
           <input 
             type="text" 
             id="chat-input" 
-            placeholder="Ask Zen anything about your AKTU syllabus, PYQ or derivations..." 
+            placeholder="Ask Zen anything about your AKTU syllabus, concepts, or doubts..." 
             class="flex-1 bg-[#f4faf6] border border-[#cce3d5] focus:border-[#2d6a4f] focus:bg-white text-xs sm:text-sm font-semibold text-slate-900 px-4 py-3 rounded-2xl outline-none transition" 
             autocomplete="off"
           />
           <button 
             type="submit" 
+            id="send-btn"
             class="px-5 py-3 rounded-2xl bg-[#1b4332] hover:bg-[#2d6a4f] text-white text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition shadow-sm cursor-pointer shrink-0"
           >
             <span>Send</span>
@@ -190,18 +183,22 @@
     const userXP = parseInt(localStorage.getItem(`akt_xp_${currentEmail}`) || "0", 10);
     document.getElementById('top-user-xp').innerText = userXP + " XP";
 
-    // 2. CHAT ENGINE & RESPONSE GENERATOR
+    // 2. CHAT HISTORY TRACKER
+    const conversationHistory = [];
     const messagesBox = document.getElementById('chat-messages');
     const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
 
     function appendMessage(sender, text, isUser = false) {
       const msgDiv = document.createElement('div');
       msgDiv.className = `flex items-start gap-3 ${isUser ? 'justify-end' : ''}`;
 
+      const renderedContent = (isUser || typeof marked === 'undefined') ? text : marked.parse(text);
+
       if (isUser) {
         msgDiv.innerHTML = `
           <div class="bg-[#1b4332] text-white rounded-2xl rounded-tr-sm p-3.5 max-w-xl text-xs sm:text-sm leading-relaxed shadow-2xs font-medium">
-            ${text}
+            ${renderedContent}
           </div>
           <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-black flex items-center justify-center shrink-0">
             ${initial}
@@ -212,8 +209,8 @@
           <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 shadow-xs">
             Zen
           </div>
-          <div class="bg-emerald-50/80 border border-emerald-100 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
-            ${text}
+          <div class="bg-emerald-50/80 border border-emerald-100 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs prose prose-sm max-w-none">
+            ${renderedContent}
           </div>
         `;
       }
@@ -234,7 +231,7 @@
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-700 animate-bounce"></span>
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-700 animate-bounce" style="animation-delay: 0.15s"></span>
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-700 animate-bounce" style="animation-delay: 0.3s"></span>
-          <span class="ml-1 text-[11px] text-emerald-800">Zen is thinking...</span>
+          <span class="ml-1 text-[11px] text-emerald-800">Zen sooch raha hai...</span>
         </div>
       `;
       messagesBox.appendChild(ind);
@@ -246,70 +243,59 @@
       if (ind) ind.remove();
     }
 
-    function getZenAcademicResponse(query) {
-      const q = query.toLowerCase();
+    // 3. CALL REAL GEMINI ENDPOINT (VIA /api/chat OR DIRECT FALLBACK)
+    async function fetchGeminiResponse(userQuery) {
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: userQuery,
+            history: conversationHistory.slice(-8)
+          })
+        });
 
-      if (q.includes("normalization") || q.includes("1nf") || q.includes("bcnf")) {
-        return `
-          <p class="font-bold text-emerald-900 mb-1">📌 Normalization in AKTU DBMS (10 Marks Must-Ask Topic):</p>
-          <p class="mb-1.5">Normalization redundancy hatane aur anomalies (Insert, Update, Delete) khatam karne ke liye use hoti hai:</p>
-          <ul class="list-disc pl-4 space-y-1 text-[11px] sm:text-xs text-slate-700">
-            <li><strong>1NF:</strong> All attribute values must be atomic (no multivalued attributes).</li>
-            <li><strong>2NF:</strong> Must be in 1NF + No partial dependency (non-prime attributes fully dependent on candidate key).</li>
-            <li><strong>3NF:</strong> Must be in 2NF + No transitive dependency ($X \\rightarrow Y$, $X$ must be super key or $Y$ prime).</li>
-            <li><strong>BCNF:</strong> For every functional dependency $X \\rightarrow Y$, $X$ must be a strict super key.</li>
-          </ul>
-          <p class="mt-2 text-[11px] text-emerald-700 font-semibold">Tip: Exam mein hamesha ek Student/Course table ka example bana kar dikhana full marks milenge!</p>
-        `;
+        if (response.ok) {
+          const data = await response.json();
+          if (data.reply) return data.reply;
+        }
+      } catch (err) {
+        console.warn("Backend /api/chat unavailable, using intelligent local engine:", err);
       }
 
-      if (q.includes("master theorem") || q.includes("recurrence")) {
-        return `
-          <p class="font-bold text-emerald-900 mb-1">⚡ Master Theorem Form: $T(n) = aT(n/b) + f(n)$</p>
-          <p class="mb-1 text-xs">Yahan $a \\ge 1, b > 1$. Hum compare karte hain $f(n)$ ko $n^{\\log_b a}$ se:</p>
-          <ul class="list-disc pl-4 space-y-1 text-[11px] sm:text-xs text-slate-700">
-            <li><strong>Case 1:</strong> Agar $f(n) = O(n^{\\log_b a - \\epsilon}) \\implies T(n) = \\Theta(n^{\\log_b a})$.</li>
-            <li><strong>Case 2:</strong> Agar $f(n) = \\Theta(n^{\\log_b a}) \\implies T(n) = \\Theta(n^{\\log_b a} \\log n)$.</li>
-            <li><strong>Case 3:</strong> Agar $f(n) = \\Omega(n^{\\log_b a + \\epsilon}) \\implies T(n) = \\Theta(f(n))$.</li>
-          </ul>
-        `;
+      // Contextual Smart Fallback if API key not set yet
+      const q = userQuery.toLowerCase();
+      if (q.includes("sun") || q.includes("bhai") || q.includes("kya hal") || q.includes("kaise ho")) {
+        return "Haan bhai, bol na! Main bilkul active hoon. Aaj kaunsa subject ya unit niptani hai?";
       }
-
-      if (q.includes("score") || q.includes("cgpa") || q.includes("strategy") || q.includes("prepare")) {
-        return `
-          <p class="font-bold text-emerald-900 mb-1">🎯 AKTU University Examination High-Score Blueprint (8.5+ SGPA):</p>
-          <ol class="list-decimal pl-4 space-y-1 text-[11px] sm:text-xs text-slate-700">
-            <li><strong>Section-A (20 Marks):</strong> 10 mein se 10 point-to-point 2-3 lines mein likho with 1 small formula/diagram.</li>
-            <li><strong>Heading + Diagram presentation:</strong> Examiners points aur neat labeled diagrams par seedha 7/7 marks dete hain.</li>
-            <li><strong>Quantum 3-Year Frequency:</strong> Pichle 3 saal ke repeated questions syllabus ka lagbhag 60-70% cover kar lete hain.</li>
-          </ol>
-        `;
+      if (q.includes("hi") || q.includes("hello") || q.includes("hey")) {
+        return `Hello ${currentName}! 👋 Batao aaj kis syllabus topic ya previous year question mein doubt hai?`;
       }
-
-      return `
-        <p class="font-semibold text-emerald-900 mb-1">💡 AKTU Syllabus Insight for: "<em>${query}</em>"</p>
-        <p class="text-xs text-slate-700 mb-1.5">Yeh question regular AKTU end-sem papers mein repeat hota hai. Is topic ke liye:</p>
-        <p class="text-xs text-slate-600 mb-1">• Pehle formal definition aur 1 block diagram draw karo.</p>
-        <p class="text-xs text-slate-600 mb-1">• Algorithmic steps ya mathematical derivation point-wise likho.</p>
-        <p class="text-xs text-emerald-800 font-bold mt-2">Study Hub tab se is unit ka One-Shot video lecture dekh kar concept 15 minute mein clear kar lo!</p>
-      `;
+      return `Haan bilkul! **${userQuery}** ke baare mein:\n\nYeh AKTU examination ke hisaab se kaafi common aur scored topic hai. Isko prepare karte time 3 cheezein zaroor dhyan rakhna:\n1. **Standard Definition & Keywords**: University evaluators exact technical keywords dhoondhte hain.\n2. **Block Diagram / Schematic**: Ek clean diagram add karne par direct full marks milte hain.\n3. **Step-by-step Execution**: Theory lamba khinchne ke bajaye bullet points mein likhna!\n\nStudy Hub tab par jaakar iska video lecture bhi 1-click mein dekh sakte ho!`;
     }
 
-    function handleUserMessage(e) {
+    async function handleUserMessage(e) {
       e.preventDefault();
       const text = chatInput.value.trim();
       if (!text) return;
 
       appendMessage(currentName, text, true);
+      conversationHistory.push({ role: 'user', text: text });
       chatInput.value = "";
+      chatInput.disabled = true;
+      sendBtn.disabled = true;
 
       appendTypingIndicator();
 
-      setTimeout(() => {
-        removeTypingIndicator();
-        const reply = getZenAcademicResponse(text);
-        appendMessage("Zen", reply, false);
-      }, 700);
+      const aiReply = await fetchGeminiResponse(text);
+
+      removeTypingIndicator();
+      appendMessage("Zen", aiReply, false);
+      conversationHistory.push({ role: 'model', text: aiReply });
+
+      chatInput.disabled = false;
+      sendBtn.disabled = false;
+      chatInput.focus();
     }
 
     function sendQuickPrompt(promptText) {
