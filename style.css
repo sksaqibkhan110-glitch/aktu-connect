@@ -184,7 +184,6 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
-
 /* ========================================================
    PHONE & TABLET RESPONSIVE RULES (Max 1024px)
    ======================================================== */
@@ -197,25 +196,41 @@ body {
     min-height: 100vh;
   }
 
-  /* Phone me sidebar slide-over drawer */
+  /* Universal Slide-over Drawer for all pages */
   .sidebar-menu-card {
     position: fixed !important;
     top: 0 !important;
     left: -100% !important;
-    width: 280px !important;
-    max-width: 82vw !important;
-    height: 100vh !important;
+    width: 290px !important;
+    max-width: 84vw !important;
+    height: 100dvh !important; /* Mobile dynamic viewport safe */
     border-radius: 0 1.75rem 1.75rem 0 !important;
     transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     z-index: 9999 !important;
     box-shadow: 15px 0 40px rgba(0, 0, 0, 0.55) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    padding: 1.25rem 1rem !important;
+    overflow-y: auto !important;
   }
 
   .sidebar-menu-card.mobile-open {
     left: 0 !important;
   }
 
-  /* Hide Unit subtitle grey details on phone */
+  /* Footer & Logout Pill always visible at bottom on all pages */
+  .sidebar-user-pill {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.65rem !important;
+    padding-top: 0.85rem !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+    margin-top: auto !important;
+    shrink: 0 !important;
+  }
+
+  /* Hide Unit subtitle details on phone for clean view */
   .unit-subtitle-details {
     display: none !important;
   }
