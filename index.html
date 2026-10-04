@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>AKTU Connect - Student Portal</title> 
+  <title>AKTU Connect - Student Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <!-- REAL EMAILJS ENGINE -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script type="text/javascript">
@@ -160,7 +160,7 @@
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
 
-    /* PHONE VIEW ONLY (<640px) - Exact Screen Integration */
+    /* PHONE VIEW ONLY (<640px) - form sits exactly inside the tablet screen */
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 360px;
@@ -184,34 +184,52 @@
         z-index: 1;
       }
 
-      /* Image ke tablet screen ke upar clean seamless fit */
       .whiteboard-active-area {
-        top: 51.5% !important;
+        top: 56.6% !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-        width: 55% !important;
-        height: 32% !important;
+        width: 57% !important;
+        height: 33.4% !important;
         min-height: unset !important;
         max-height: unset !important;
         background: transparent !important;
         box-shadow: none !important;
         border: none !important;
-        padding: 4px 6px !important;
-        justify-content: space-between !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        justify-content: flex-start !important;
+        gap: 8px;
+        overflow: hidden;
+      }
+
+      .whiteboard-active-area > .pt-1 {
+        margin-top: auto;
+      }
+
+      .whiteboard-active-area form:not(.hidden) {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .whiteboard-active-area form > * {
+        margin: 0 !important;
       }
 
       .board-input {
         background: #ffffff !important;
         border: 1.5px solid #cce3d5 !important;
         font-size: 0.65rem !important;
-        padding: 0.3rem 0.45rem !important;
+        padding: 0 0.45rem !important;
         border-radius: 0.45rem !important;
+        height: 26px;
       }
 
       .board-btn-primary {
-        font-size: 0.72rem !important;
-        padding: 0.35rem 0.45rem !important;
+        font-size: 0.7rem !important;
+        padding: 0 0.45rem !important;
         border-radius: 0.45rem !important;
+        height: 27px;
       }
 
       .board-tab {
