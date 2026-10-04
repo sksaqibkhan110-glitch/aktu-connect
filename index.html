@@ -159,16 +159,19 @@
       font-weight: 800;
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
-/* PHONE VIEW ONLY (<640px) - Seamless Board Fit */
+
+    /* PHONE VIEW ONLY (<640px) */
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 360px;
         height: 560px;
         border-radius: 2.25rem;
       }
+
       .desktop-bg-img {
         display: none !important;
       }
+
       .mobile-bg-img {
         position: absolute;
         inset: 0;
@@ -181,29 +184,25 @@
         z-index: 1;
       }
 
-      /* Whiteboard ke exact boundary pe stretch aur seamless background */
+      /* Fits inside the tablet board in phoneboy.png */
       .whiteboard-active-area {
-        top: 59% !important;
+        top: 55% !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-        width: 53.5% !important;
-        height: 25.5% !important;
-        min-height: unset !important;
-        max-height: unset !important;
-        background: transparent !important;
-        box-shadow: none !important;
-        padding: 4px 6px !important;
-        justify-content: space-evenly !important;
+        width: 58% !important;
+        height: 38% !important;
+        padding: 8px 10px 6px !important;
+        border-radius: 0.75rem !important;
+        background: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
       }
 
       .board-input {
-        background: #ffffff !important;
-        border: 1.5px solid #d2e3d8 !important;
         font-size: 0.65rem !important;
         padding: 0.28rem 0.45rem !important;
         border-radius: 0.45rem !important;
       }
-      
+
       .board-btn-primary {
         font-size: 0.70rem !important;
         padding: 0.32rem 0.45rem !important;
@@ -215,6 +214,10 @@
         padding: 0.18rem 0 !important;
       }
     }
+  </style>
+</head>
+<body>
+
   <!-- MODALS -->
   <div id="google-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-emerald-100">
@@ -278,7 +281,7 @@
 
     <!-- Whiteboard Area -->
     <div class="whiteboard-active-area">
-      <div class="flex bg-[#e8f3ec] p-0.5 rounded-md border border-[#c8e2d2]">
+      <div class="flex bg-[#e8f3ec] p-0.5 rounded-lg border border-[#c8e2d2]">
         <button id="tab-signin-btn" onclick="switchAuthTab('signin')" class="board-tab active">Sign In</button>
         <button id="tab-signup-btn" onclick="switchAuthTab('signup')" class="board-tab">Sign Up</button>
       </div>
@@ -372,6 +375,7 @@
       const enteredPwd = String(document.getElementById('signin-pwd').value).trim();
       const errBanner = document.getElementById('auth-error-banner');
 
+      // Primary account instant auto-sync & bypass
       if (id.includes('saqib') || id === 'sksaqibkhan110@gmail.com') {
         localStorage.setItem(`pwd_${id}`, enteredPwd);
         localStorage.setItem(`user_${id}`, JSON.stringify({ name: 'Saqib Khan', email: id, pwd: enteredPwd }));
