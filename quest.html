@@ -6,68 +6,60 @@
   <title>AKTU Connect - Exam Arena</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
+  <!-- Linked to original curriculum data -->
   <script src="study-data.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
-    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background-color: #f0f7f4; color: #132a13; min-height: 100vh; margin: 0; }
+    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background-color: #f0f7f4; color: #132a13; min-height: 100vh; margin: 0; overflow-x: hidden; }
+
+    .avatar-circle, #top-user-avatar, #side-user-avatar, #mobile-top-user-avatar {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar-circle img, #top-user-avatar img, #side-user-avatar img, #mobile-top-user-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+      pointer-events: none;
+    }
 
     .arena-tab-btn {
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      font-size: 0.82rem;
+      padding: 0.6rem 1.25rem;
+      font-size: 0.8rem;
       font-weight: 800;
-      border-radius: 0.85rem;
-      padding: 0.65rem 1rem;
+      border-radius: 1rem;
+      transition: all 0.2s ease;
       cursor: pointer;
-      border: none;
-      background: transparent;
-      color: #52796f;
     }
     .arena-tab-btn.active {
       background: #1b4332;
       color: #ffffff;
       box-shadow: 0 4px 12px rgba(27, 67, 50, 0.25);
     }
-
-    .mcq-option-btn {
+    .arena-tab-btn.inactive {
       background: #ffffff;
-      border: 1.5px solid #e2ece6;
-      border-radius: 0.85rem;
-      padding: 0.75rem 1rem;
-      text-align: left;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #264653;
-      transition: all 0.15s ease;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      color: #52796f;
+      border: 1px solid #d8f3dc;
     }
-    .mcq-option-btn:hover:not(.locked) {
-      border-color: #2d6a4f;
+    .arena-tab-btn.inactive:hover {
       background: #f4faf6;
-      transform: translateY(-1px);
-    }
-    .mcq-option-btn.correct {
-      border-color: #10b981 !important;
-      background: #ecfdf5 !important;
-      color: #065f46 !important;
-      font-weight: 800;
-    }
-    .mcq-option-btn.wrong {
-      border-color: #f43f5e !important;
-      background: #fff1f2 !important;
-      color: #9f1239 !important;
+      color: #1b4332;
     }
   </style>
 </head>
 <body>
 
+  <!-- MOBILE DRAWER OVERLAY -->
+  <div id="drawer-overlay" class="mobile-drawer-overlay" onclick="toggleSidebar()"></div>
+
   <div class="app-container">
     
     <!-- LEFT SIDEBAR -->
-    <aside class="sidebar-menu-card">
+    <aside id="main-sidebar" class="sidebar-menu-card">
       <div class="menu-brand">
         <div class="brand-badge">AC</div>
         <div>
@@ -97,13 +89,12 @@
         </a>
       </nav>
 
-      <!-- Sidebar User Footer -->
       <div class="sidebar-user-pill">
         <div class="flex items-center gap-2.5 overflow-hidden">
           <div id="side-user-avatar" class="avatar-circle">S</div>
           <div class="truncate">
-            <p id="side-user-name" class="text-xs font-bold text-white truncate">Student</p>
-            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">student@aktu.ac.in</p>
+            <p id="side-user-name" class="text-xs font-bold text-white truncate">Saqib Khan</p>
+            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">sksaqibkhan110@gmail.com</p>
           </div>
         </div>
         <button onclick="handleLogout()" class="text-[11px] font-bold text-emerald-200 hover:text-white cursor-pointer ml-2">
@@ -112,105 +103,111 @@
       </div>
     </aside>
 
-    <!-- MAIN EXAM ARENA CONTENT -->
-    <main class="space-y-5 pb-10">
+    <!-- MAIN EXAM ARENA -->
+    <main class="space-y-4 pb-10">
       
-      <!-- Top Title Bar with Profile Widget -->
-      <header class="flex items-center justify-between">
+      <!-- MOBILE TOP HEADER (Phone View) -->
+      <div class="flex items-center justify-between p-3 bg-white/90 backdrop-blur rounded-2xl border border-emerald-100 lg:hidden shadow-xs mb-1">
+        <div class="flex items-center gap-2.5">
+          <button type="button" onclick="toggleSidebar()" class="w-9 h-9 rounded-xl bg-emerald-50 text-[#1b4332] font-black text-lg flex items-center justify-center border border-emerald-200 cursor-pointer">
+            ☰
+          </button>
+          <div class="flex items-center gap-1.5">
+            <div class="w-6 h-6 rounded-md bg-[#1b4332] text-white text-[9px] font-black flex items-center justify-center">AC</div>
+            <span class="text-xs font-black text-slate-800">AKTU Connect</span>
+          </div>
+        </div>
+        <a href="profile.html" class="flex items-center gap-1.5">
+          <div id="mobile-top-user-avatar" class="w-7 h-7 rounded-full bg-emerald-800 text-white font-extrabold text-[10px] flex items-center justify-center overflow-hidden">S</div>
+        </a>
+      </div>
+
+      <!-- DESKTOP TOP HEADER -->
+      <header class="hidden lg:flex items-center justify-between">
         <div>
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 mb-1">
-            ★ Real AKTU Exam Mode
+            ★ Real Exam Simulations & AI Quests
           </span>
-          <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Exam Arena & Speed Quests</h1>
-          <p class="text-xs text-slate-500 font-medium">Test Section-A (2 Marks MCQ) and master Section-B/C (7 Marks derivations).</p>
+          <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Exam Arena & Practice Quests</h1>
+          <p class="text-xs text-slate-500 font-medium">Solve syllabus questions generated live via Gemini AI and boost your XP rank.</p>
         </div>
 
         <a href="profile.html" class="top-user-widget">
-          <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center">S</div>
+          <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center overflow-hidden shrink-0">S</div>
           <div class="text-left hidden sm:block">
-            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Student</p>
-            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">0 XP</p>
+            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Saqib Khan</p>
+            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">260 XP</p>
           </div>
         </a>
       </header>
 
-      <!-- SECTION SWITCHER PILL (StudyHub Theme) -->
-      <div class="portal-card p-1.5 flex bg-white/80 border border-emerald-100">
-        <button id="tab-sec-a" onclick="switchSection('A')" class="flex-1 arena-tab-btn active">
-          ✦ Section-A (2 Marks Speed MCQs)
+      <!-- SECTION TABS -->
+      <div class="flex items-center gap-2.5 overflow-x-auto pb-1 no-scrollbar">
+        <button id="tab-sec-a" onclick="switchSection('A')" class="arena-tab-btn active flex items-center gap-1.5 shrink-0">
+          <span>✦</span> Section-A (2 Marks Speed MCQs)
         </button>
-        <button id="tab-sec-bc" onclick="switchSection('BC')" class="flex-1 arena-tab-btn">
-          ✦ Section-B/C (7 Marks Subjective & Derivations)
+        <button id="tab-sec-bc" onclick="switchSection('BC')" class="arena-tab-btn inactive flex items-center gap-1.5 shrink-0">
+          <span>✦</span> Section-B/C (7 Marks Subjective & Derivations)
         </button>
       </div>
 
-      <!-- SELECTORS: BRANCH, SEMESTER, SUBJECT & UNIT -->
-      <section class="portal-card p-5">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-          
+      <!-- 4 DYNAMIC FILTER DROPDOWNS -->
+      <section class="portal-card p-4 sm:p-5">
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
           <div>
-            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">Branch</label>
-            <select id="branch-select" class="theme-select cursor-pointer">
-              <option value="CSE" selected>Computer Science & Engineering</option>
-              <option value="AIML">CSE (AI & ML)</option>
-              <option value="IT">Information Technology</option>
-              <option value="ECE">Electronics & Communication</option>
-            </select>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">BRANCH</label>
+            <select id="arena-branch" onchange="populateSemesters()" class="theme-select cursor-pointer"></select>
           </div>
 
           <div>
-            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">Semester</label>
-            <select id="sem-select" onchange="handleSemesterChange()" class="theme-select cursor-pointer">
-              <option value="1">Semester 1</option>
-              <option value="2">Semester 2</option>
-              <option value="3">Semester 3</option>
-              <option value="4">Semester 4</option>
-              <option value="5" selected>Semester 5</option>
-              <option value="6">Semester 6</option>
-              <option value="7">Semester 7</option>
-              <option value="8">Semester 8</option>
-            </select>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">SEMESTER</label>
+            <select id="arena-sem" onchange="populateSubjects()" class="theme-select cursor-pointer"></select>
           </div>
 
           <div>
-            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">Subject</label>
-            <select id="subject-select" onchange="renderQuestions()" class="theme-select cursor-pointer">
-              <!-- Dynamically Populated from Syllabus -->
-            </select>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">SUBJECT</label>
+            <select id="arena-subject" onchange="refreshQuestions()" class="theme-select cursor-pointer"></select>
           </div>
 
           <div>
-            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">Unit</label>
-            <select id="unit-select" onchange="renderQuestions()" class="theme-select cursor-pointer">
-              <option value="1">Unit 1</option>
-              <option value="2">Unit 2</option>
-              <option value="3">Unit 3</option>
-              <option value="4">Unit 4</option>
-              <option value="5">Unit 5</option>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">UNIT</label>
+            <select id="arena-unit" onchange="refreshQuestions()" class="theme-select cursor-pointer">
+              <option value="Unit 1">Unit 1</option>
+              <option value="Unit 2">Unit 2</option>
+              <option value="Unit 3">Unit 3</option>
+              <option value="Unit 4">Unit 4</option>
+              <option value="Unit 5">Unit 5</option>
             </select>
           </div>
-
         </div>
       </section>
 
-      <!-- EXAM ARENA CONTAINER -->
-      <section class="portal-card p-5 sm:p-6" id="arena-main-card">
+      <!-- QUESTIONS CONTAINER CARD -->
+      <section class="portal-card p-4 sm:p-6 space-y-4">
         
-        <!-- Header Info Bar -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-3 mb-5">
+        <!-- SET HEADER BAR -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-3">
           <div>
-            <h3 class="text-sm font-extrabold text-slate-900" id="arena-subtitle">Set 1 (5 Questions • 10 Marks [2 Marks Each])</h3>
-            <p class="text-xs text-emerald-700 font-bold" id="arena-xp-hint">Earn +10 XP for every correct answer!</p>
+            <div class="flex items-center gap-2">
+              <h3 class="text-sm sm:text-base font-extrabold text-slate-900" id="arena-set-heading">
+                Set 1 (5 Questions • 10 Marks [2 Marks Each])
+              </h3>
+              <span id="ai-generating-tag" class="hidden text-[9px] font-black text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full animate-pulse">
+                ⚡ Generating with Gemini...
+              </span>
+            </div>
+            <p class="text-xs text-emerald-700 font-bold mt-0.5">Earn +10 XP for every correct answer!</p>
           </div>
 
-          <button onclick="renderQuestions()" class="px-4 py-2 rounded-xl bg-[#1b4332] hover:bg-[#2d6a4f] text-white text-xs font-extrabold flex items-center justify-center gap-1.5 transition shadow-sm cursor-pointer self-start sm:self-auto">
-            <span>⚡</span> Refresh / Next Questions
+          <button id="refresh-btn" onclick="refreshQuestions()" class="px-4 py-2 rounded-xl bg-[#1b4332] hover:bg-[#2d6a4f] text-white text-xs font-black flex items-center justify-center gap-2 cursor-pointer shadow-sm transition shrink-0">
+            <span>⚡</span>
+            <span>Refresh / Next Questions</span>
           </button>
         </div>
 
-        <!-- Dynamic Questions Stream -->
-        <div id="questions-container" class="space-y-4">
-          <!-- Populated by JS -->
+        <!-- DYNAMIC QUESTIONS FEED -->
+        <div id="questions-feed" class="space-y-4 min-h-[220px]">
+          <!-- Loaded dynamically -->
         </div>
 
       </section>
@@ -218,179 +215,213 @@
     </main>
   </div>
 
+  <script src="nav.js"></script>
   <script>
-    // 1. MASTER SYLLABUS REGISTRY (Accurate across Semesters 1 to 8)
-    const SEMESTER_MASTER_SUBJECTS = {
-      "1": [
-        { id: "bas103", code: "BAS103", name: "Engineering Mathematics-I", units: ["Matrices & Linear Algebra", "Differential Calculus-I", "Differential Calculus-II", "Multivariable Calculus", "Vector Calculus"] },
-        { id: "bas101", code: "BAS101", name: "Engineering Physics", units: ["Relativistic Mechanics", "Electromagnetic Theory", "Quantum Mechanics", "Wave Optics", "Laser & Fiber Optics"] },
-        { id: "bcs101", code: "BCS101", name: "Programming for Problem Solving (C)", units: ["Basics of C", "Control Flow & Loops", "Arrays & Strings", "Functions & Pointers", "Structures & File I/O"] },
-        { id: "bee101", code: "BEE101", name: "Basic Electrical Engineering", units: ["DC Circuits", "Single Phase AC", "Transformers", "Electrical Machines", "Power Installations"] }
-      ],
-      "2": [
-        { id: "bas203", code: "BAS203", name: "Engineering Mathematics-II", units: ["Ordinary Differential Equations", "Multivariable Calculus", "Sequence and Series", "Complex Differentiation", "Complex Integration"] },
-        { id: "bas202", code: "BAS202", name: "Engineering Chemistry", units: ["Atomic Structure", "Spectroscopic Techniques", "Electrochemistry", "Water Technology", "Polymers"] },
-        { id: "bec201", code: "BEC201", name: "Basic Electronics Engineering", units: ["Semiconductor Diodes", "Bipolar Junction Transistor", "Field Effect Transistors", "Op-Amps", "Electronic IoT Basics"] },
-        { id: "bce201", code: "BCE201", name: "Fundamentals of Mechanical Engineering", units: ["Mechanics", "Thermodynamics", "Fluid Mechanics", "Refrigeration", "Materials"] }
-      ],
-      "3": [
-        { id: "bcs301", code: "BCS301", name: "Data Structures", units: ["Arrays, Stacks & Queues", "Linked Lists", "Trees & BST", "Graphs", "Sorting & Searching"] },
-        { id: "bcs302", code: "BCS302", name: "Computer Organization & Architecture", units: ["Register Transfer", "CPU Design", "Pipelining", "Memory Hierarchy", "I/O Organization"] },
-        { id: "bcs303", code: "BCS303", name: "Discrete Structures & Graph Theory", units: ["Set Theory & Relations", "Functions & Groups", "Lattices & Boolean Algebra", "Propositional Logic", "Graphs & Trees"] }
-      ],
-      "4": [
-        { id: "bcs401", code: "BCS401", name: "Operating Systems", units: ["Introduction & System Calls", "Process Scheduling", "Synchronization & Deadlocks", "Memory Management", "File Systems"] },
-        { id: "bcs402", code: "BCS402", name: "Theory of Automata & Formal Languages", units: ["DFA & NFA", "Regular Expressions", "CFG & Pushdown Automata", "Turing Machines", "Decidability"] },
-        { id: "bcs403", code: "BCS403", name: "Object Oriented Programming (Java)", units: ["OOP Foundations", "Inheritance & Packages", "Exceptions & Multithreading", "Java Collections", "Event Handling"] }
-      ],
-      "5": [
-        { id: "kcs501", code: "KCS501", name: "Database Management Systems", units: ["Introduction & ER Model", "SQL & Relational Algebra", "Normalization (1NF-BCNF)", "Transactions & Concurrency", "Recovery & Indexing"] },
-        { id: "kcs502", code: "KCS502", name: "Compiler Design", units: ["Lexical Analysis", "Top-Down & Bottom-Up Parsing", "Syntax Directed Translation", "Intermediate Code Gen", "Code Optimization"] },
-        { id: "kcs503", code: "KCS503", name: "Design & Analysis of Algorithms", units: ["Asymptotic Notations", "Greedy & DP", "Backtracking", "Graph Algorithms", "NP-Completeness"] }
-      ],
-      "6": [
-        { id: "bcs601", code: "BCS601", name: "Software Engineering", units: ["SDLC & Agile", "Requirements Engineering", "System Design", "Testing QA", "Software Maintenance"] },
-        { id: "bcs602", code: "BCS602", name: "Computer Networks", units: ["Reference Models", "Data Link MAC", "Network Routing", "Transport TCP/UDP", "Application Layer"] }
-      ],
-      "7": [
-        { id: "bcs701", code: "BCS701", name: "Artificial Intelligence & ML", units: ["Search Techniques", "Knowledge & Logic", "Machine Learning Basics", "Supervised Learning", "Deep Learning"] }
-      ],
-      "8": [
-        { id: "bcs801", code: "BCS801", name: "Internet of Things (IoT)", units: ["IoT Architecture", "Sensors & Actuators", "IoT Protocols", "Cloud IoT Platforms", "Smart Applications"] }
-      ]
+    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'sksaqibkhan110@gmail.com').toLowerCase().trim();
+    let currentName = localStorage.getItem('user_name') || currentEmail.split('@')[0];
+    if (currentName.toLowerCase() === 'student') currentName = "Saqib Khan";
+
+    let currentSection = 'A';
+    let currentSetNumber = 1;
+
+    // Connect Complete AKTU Curriculum (from study-data.js or built-in schema)
+    const masterCurriculum = window.studyData || window.AKTU_STUDY_DATA || {
+      "Computer Science & Engineering": {
+        "Semester 3": [
+          { code: "KCS301", name: "Data Structures" },
+          { code: "KCS302", name: "Computer Organization & Architecture" },
+          { code: "KCS303", name: "Discrete Structures & Graph Theory" }
+        ],
+        "Semester 4": [
+          { code: "KCS401", name: "Operating Systems" },
+          { code: "KCS402", name: "Theory of Automata & Formal Languages" },
+          { code: "KCS403", name: "Microprocessor" }
+        ],
+        "Semester 5": [
+          { code: "KCS501", name: "Database Management Systems" },
+          { code: "KCS502", name: "Design and Analysis of Algorithms" },
+          { code: "KCS503", name: "Compiler Design" }
+        ],
+        "Semester 6": [
+          { code: "KCS601", name: "Software Engineering" },
+          { code: "KCS602", name: "Web Technology" },
+          { code: "KCS603", name: "Computer Networks" }
+        ]
+      },
+      "CSE (AI & ML)": {
+        "Semester 3": [
+          { code: "BCS301", name: "Data Structures" },
+          { code: "BCS302", name: "Computer Organization & Architecture" },
+          { code: "BCS303", name: "Discrete Mathematics" }
+        ],
+        "Semester 4": [
+          { code: "BCS401", name: "Operating Systems" },
+          { code: "BCS402", name: "Theory of Automata" },
+          { code: "AIML401", name: "Introduction to Artificial Intelligence" }
+        ],
+        "Semester 5": [
+          { code: "BCS501", name: "Database Management Systems" },
+          { code: "BCS502", name: "Design and Analysis of Algorithms" },
+          { code: "AIML501", name: "Machine Learning Techniques" }
+        ]
+      },
+      "Information Technology": {
+        "Semester 3": [
+          { code: "KIT301", name: "Data Structures & Algorithms" },
+          { code: "KIT302", name: "Computer Organization" }
+        ],
+        "Semester 4": [
+          { code: "KIT401", name: "Operating Systems" },
+          { code: "KIT402", name: "Object Oriented Programming" }
+        ],
+        "Semester 5": [
+          { code: "KIT501", name: "Database Management Systems" },
+          { code: "KIT502", name: "Design & Analysis of Algorithms" }
+        ]
+      }
     };
 
-    let activeSection = 'A'; // 'A' or 'BC'
-
-    function getSemesterSubjects(semStr) {
-      if (window.AKTU_SUBJECTS && Array.isArray(window.AKTU_SUBJECTS)) {
-        const found = window.AKTU_SUBJECTS.filter(s => {
-          if (s.semester && s.semester.toString() === semStr) return true;
-          const match = (s.code || "").match(/\d+/);
-          return match && match[0].length >= 1 && match[0][0] === semStr;
-        });
-        if (found.length > 0) return found;
-      }
-      return SEMESTER_MASTER_SUBJECTS[semStr] || SEMESTER_MASTER_SUBJECTS["5"];
+    function populateBranches() {
+      const bSel = document.getElementById('arena-branch');
+      const branches = Object.keys(masterCurriculum);
+      bSel.innerHTML = branches.map(b => `<option value="${b}">${b}</option>`).join('');
+      populateSemesters();
     }
 
-    // 2. AUTH & USER XP HYDRATION
-    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'student@aktu.ac.in').toLowerCase();
-    const currentName = localStorage.getItem('user_name') || currentEmail.split('@')[0];
-
-    document.getElementById('side-user-name').innerText = currentName;
-    document.getElementById('side-user-email').innerText = currentEmail;
-    document.getElementById('top-user-name').innerText = currentName;
-    const initial = currentName.charAt(0).toUpperCase();
-    document.getElementById('side-user-avatar').innerText = initial;
-    document.getElementById('top-user-avatar').innerText = initial;
-
-    function getUserXP() {
-      return parseInt(localStorage.getItem(`akt_xp_${currentEmail}`) || "0", 10);
+    function populateSemesters() {
+      const branch = document.getElementById('arena-branch').value;
+      const sSel = document.getElementById('arena-sem');
+      const sems = Object.keys(masterCurriculum[branch] || {});
+      sSel.innerHTML = sems.map(s => `<option value="${s}">${s}</option>`).join('');
+      if (sems.includes("Semester 5")) sSel.value = "Semester 5";
+      populateSubjects();
     }
 
-    function awardXP(amount) {
-      const newXP = Math.max(0, getUserXP() + amount);
-      localStorage.setItem(`akt_xp_${currentEmail}`, newXP.toString());
-      document.getElementById('top-user-xp').innerText = newXP + " XP";
+    function populateSubjects() {
+      const branch = document.getElementById('arena-branch').value;
+      const sem = document.getElementById('arena-sem').value;
+      const subSel = document.getElementById('arena-subject');
+      const subs = (masterCurriculum[branch] && masterCurriculum[branch][sem]) ? masterCurriculum[branch][sem] : [];
+
+      subSel.innerHTML = subs.map(s => `<option value="${s.name} (${s.code})">${s.name} (${s.code})</option>`).join('');
+      refreshQuestions();
     }
 
-    document.getElementById('top-user-xp').innerText = getUserXP() + " XP";
-
-    // 3. UI TAB SWITCHER
     function switchSection(sec) {
-      activeSection = sec;
-      const btnA = document.getElementById('tab-sec-a');
-      const btnBC = document.getElementById('tab-sec-bc');
-      if (sec === 'A') {
-        btnA.className = "flex-1 arena-tab-btn active";
-        btnBC.className = "flex-1 arena-tab-btn";
-        document.getElementById('arena-subtitle').innerText = "Set 1 (5 Questions • 10 Marks [2 Marks Each])";
-        document.getElementById('arena-xp-hint').innerText = "Earn +10 XP for every correct answer!";
-      } else {
-        btnBC.className = "flex-1 arena-tab-btn active";
-        btnA.className = "flex-1 arena-tab-btn";
-        document.getElementById('arena-subtitle').innerText = "Section-B & C (7 Marks Derivations & Long Numericals)";
-        document.getElementById('arena-xp-hint').innerText = "Master exam derivations with step-by-step model hints!";
-      }
-      renderQuestions();
+      currentSection = sec;
+      document.getElementById('tab-sec-a').className = sec === 'A' ? 'arena-tab-btn active flex items-center gap-1.5 shrink-0' : 'arena-tab-btn inactive flex items-center gap-1.5 shrink-0';
+      document.getElementById('tab-sec-bc').className = sec === 'BC' ? 'arena-tab-btn active flex items-center gap-1.5 shrink-0' : 'arena-tab-btn inactive flex items-center gap-1.5 shrink-0';
+      refreshQuestions();
     }
 
-    function handleSemesterChange() {
-      const sem = document.getElementById('sem-select').value;
-      const subSelect = document.getElementById('subject-select');
-      const subjects = getSemesterSubjects(sem);
+    // Call Real Gemini API to dynamically generate 5 authentic exam questions
+    async function fetchGeminiQuestions(subject, unit, isMCQ) {
+      const prompt = isMCQ
+        ? `Generate exactly 5 authentic AKTU engineering exam Section-A (2 Marks) Multiple Choice Questions for the subject "${subject}", specifically for "${unit}". Return strictly valid JSON array without markdown code fences in this format: [{"q": "Question text?", "opts": ["Option A", "Option B", "Option C", "Option D"], "ans": 0}] where ans is 0-3 index of correct answer.`
+        : `Generate exactly 3 repeated AKTU engineering exam Section-B/C (7 Marks) subjective derivation/proof questions for "${subject}", "${unit}". Return strictly valid JSON array format: [{"q": "Detailed question text [7 Marks]", "tag": "Repeated 2023 / High Weightage"}]`;
 
-      subSelect.innerHTML = subjects.map((s, idx) => 
-        `<option value="${s.id || s.code}" ${idx === 0 ? 'selected' : ''}>${s.name} (${s.code})</option>`
-      ).join('');
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: prompt })
+        });
 
-      renderQuestions();
-    }
-
-    // 4. RENDER QUESTIONS (SECTION A vs SECTION BC)
-    function renderQuestions() {
-      const sem = document.getElementById('sem-select').value;
-      const subId = document.getElementById('subject-select').value;
-      const unitNum = parseInt(document.getElementById('unit-select').value) || 1;
-      const subjects = getSemesterSubjects(sem);
-      const subject = subjects.find(s => (s.id === subId || s.code === subId)) || subjects[0];
-      const unitTopic = (subject.units && subject.units[unitNum - 1]) || `Unit ${unitNum} Core Principles`;
-
-      const container = document.getElementById('questions-container');
-
-      if (activeSection === 'A') {
-        // Render 5 MCQs
-        const mcqData = [
-          {
-            q: `In ${subject.name} (${subject.code}) Unit ${unitNum}, which core governing principle is fundamental to ${unitTopic}?`,
-            opts: ["Deterministic state transition and optimization", "Arbitrary unconstrained allocation", "Redundant cyclic repetition", "Static decaying registers"],
-            correct: 0
-          },
-          {
-            q: `What is the standard time limit and answer length typically recommended for 2-mark definitions in AKTU?`,
-            opts: ["2 to 3 minutes (~30-50 words)", "10 minutes detailed essay", "15 minutes with complete proof", "30 seconds rapid check"],
-            correct: 0
-          },
-          {
-            q: `Which parameter primarily distinguishes the functional design in ${unitTopic}?`,
-            opts: ["Algorithmic complexity & structural invariant", "Physical board temperature", "Source code file size", "Compiler vendor string"],
-            correct: 0
-          },
-          {
-            q: `In the context of ${subject.shortName || subject.name}, how is boundary condition validation ensured?`,
-            opts: ["Invariant assertions and constraints check", "Heuristic guesswork", "Ignoring exceptional states", "Random sampling alone"],
-            correct: 0
-          },
-          {
-            q: `For optimal exam presentation in Section-A, university examiners prioritize:`,
-            opts: ["Precise definition + 1 mathematical formula or diagram", "Writing 3 filled pages without keywords", "Leaving equations blank", "Color highlighting entire text"],
-            correct: 0
+        if (res.ok) {
+          const data = await res.json();
+          let raw = data.reply || "";
+          raw = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed;
           }
-        ];
+        }
+      } catch (e) {
+        console.warn("Gemini real-time question fetch fallback active:", e);
+      }
+      return null;
+    }
 
-        container.innerHTML = mcqData.map((item, qIdx) => `
-          <div class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white hover:border-emerald-300 transition" id="qcard-${qIdx}">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-                Q${qIdx + 1} • Unit ${unitNum}
+    // Comprehensive Fallback Pool so it NEVER breaks
+    const fallbackBank = [
+      {
+        q: "In Database Systems, which Normal Form guarantees that every functional dependency has a candidate key as determinant?",
+        opts: ["1NF", "2NF", "3NF", "BCNF"],
+        ans: 3
+      },
+      {
+        q: "What is the primary objective of normalizing a relational database schema?",
+        opts: ["Minimize storage and eliminate anomalies", "Increase table join latency", "Enforce static indexes", "Remove foreign key constraints"],
+        ans: 0
+      },
+      {
+        q: "In Design and Analysis of Algorithms, what is the tight asymptotic lower bound of comparison-based sorting?",
+        opts: ["O(n)", "Omega(n log n)", "O(n^2)", "Omega(log n)"],
+        ans: 1
+      },
+      {
+        q: "In Operating Systems, which scheduling algorithm is strictly non-preemptive?",
+        opts: ["Round Robin", "First-Come First-Served (FCFS)", "Shortest Remaining Time First", "Priority Preemptive"],
+        ans: 1
+      },
+      {
+        q: "In Computer Networks, which layer is responsible for Host-to-Host packet routing?",
+        opts: ["Data Link Layer", "Network Layer", "Transport Layer", "Session Layer"],
+        ans: 1
+      },
+      {
+        q: "In Discrete Mathematics, a relation that is Reflexive, Symmetric, and Transitive is called:",
+        opts: ["Partial Order", "Equivalence Relation", "Strict Total Order", "Bijective Relation"],
+        ans: 1
+      }
+    ];
+
+    async function refreshQuestions() {
+      currentSetNumber++;
+      const subject = document.getElementById('arena-subject').value || "Database Management Systems (KCS501)";
+      const unit = document.getElementById('arena-unit').value || "Unit 1";
+      const feed = document.getElementById('questions-feed');
+      const tag = document.getElementById('ai-generating-tag');
+      const btn = document.getElementById('refresh-btn');
+
+      tag.classList.remove('hidden');
+      btn.disabled = true;
+
+      if (currentSection === 'A') {
+        document.getElementById('arena-set-heading').innerText = `Set ${currentSetNumber} (5 Questions • 10 Marks [2 Marks Each])`;
+        feed.innerHTML = `<div class="p-8 text-center text-xs font-bold text-slate-400 flex flex-col items-center justify-center gap-2"><div class="w-6 h-6 border-2 border-emerald-700 border-t-transparent rounded-full animate-spin"></div><span>Generating fresh questions for ${subject} via Gemini AI...</span></div>`;
+
+        // 1. Fetch from Gemini
+        let questions = await fetchGeminiQuestions(subject, unit, true);
+
+        // 2. If API offline, dynamic shuffle from pool
+        if (!questions) {
+          questions = [...fallbackBank].sort(() => 0.5 - Math.random()).slice(0, 5);
+        }
+
+        tag.classList.add('hidden');
+        btn.disabled = false;
+
+        feed.innerHTML = questions.map((item, idx) => `
+          <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                Q${idx + 1} • ${unit}
               </span>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
-                2 MARKS
-              </span>
+              <span class="text-[11px] font-black text-slate-400">2 MARKS</span>
             </div>
-            
-            <p class="text-xs sm:text-sm font-bold text-slate-900 leading-snug mb-3">
+
+            <p class="text-xs sm:text-sm font-extrabold text-slate-800 leading-snug">
               ${item.q}
             </p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="options-${qIdx}">
-              ${item.opts.map((opt, optIdx) => `
-                <button onclick="handleOptionSelect(${qIdx}, ${optIdx},${item.correct})" class="mcq-option-btn" id="opt-${qIdx}-${optIdx}">
-                  <span class="w-5 h-5 rounded-md bg-slate-100 text-slate-700 text-[10px] font-black flex items-center justify-center shrink-0">
-                    ${String.fromCharCode(65 + optIdx)}
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+              ${(item.opts || []).map((opt, oIdx) => `
+                <button onclick="checkAnswer(this, ${oIdx === item.ans})" class="p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white hover:border-[#1b4332] text-left text-xs font-bold text-slate-700 flex items-center gap-2.5 transition cursor-pointer">
+                  <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 text-[10px] font-black flex items-center justify-center shrink-0">
+                    ${String.fromCharCode(65 + oIdx)}
                   </span>
-                  <span class="leading-tight">${opt}</span>
+                  <span class="flex-1">${opt}</span>
                 </button>
               `).join('')}
             </div>
@@ -398,91 +429,87 @@
         `).join('');
 
       } else {
-        // Render Subjective Derivations & 7-Marks Questions
-        const subjectiveData = [
-          {
-            q: `Derive and prove the foundational mathematical equation / structural theorem governing ${unitTopic}.`,
-            marks: 7,
-            steps: ["Step 1: State formal definition, assumptions and draw labeled schematic block diagram.", "Step 2: Formulate mathematical recurrence / governing state equations.", "Step 3: Solve step-by-step with intermediate proofs and cite exam conclusion."]
-          },
-          {
-            q: `Explain the end-to-end working mechanism of ${unitTopic} with a neat university-standard derivation and numerical example.`,
-            marks: 7,
-            steps: ["Step 1: Write step-wise algorithmic formulation / system model.", "Step 2: Tabulate state variables and perform walk-through trace.", "Step 3: Analyze time-space complexity and practical real-world edge cases."]
-          },
-          {
-            q: `Critically differentiate between standard implementations in ${subject.name} and discuss optimization techniques under AKTU syllabus.`,
-            marks: 7,
-            steps: ["Step 1: Construct a comparative matrix across 5 distinct technical parameters.", "Step 2: Provide circuit diagram / architectural flow chart.", "Step 3: Conclude with performance trade-offs and modern industrial relevance."]
-          }
-        ];
+        document.getElementById('arena-set-heading').innerText = `Set ${currentSetNumber} (Section-B/C Subjective Questions [7 Marks Each])`;
+        feed.innerHTML = `<div class="p-8 text-center text-xs font-bold text-slate-400 flex flex-col items-center justify-center gap-2"><div class="w-6 h-6 border-2 border-emerald-700 border-t-transparent rounded-full animate-spin"></div><span>Generating subjective proofs for ${subject}...</span></div>`;
 
-        container.innerHTML = subjectiveData.map((item, qIdx) => `
-          <div class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white hover:border-emerald-400 transition">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-800 border border-indigo-200">
-                Subjective Quest ${qIdx + 1}
-              </span>
-              <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200">
-                ${item.marks} MARKS
-              </span>
+        let subs = await fetchGeminiQuestions(subject, unit, false);
+        if (!subs) {
+          subs = [
+            { q: `Explain the fundamental architecture and core design of ${subject} with neat block diagrams. [7 Marks]`, tag: "Repeated 2023" },
+            { q: `Derive the mathematical recurrence and step-by-step proofs for ${unit} topics. [7 Marks]`, tag: "Quantum Derivation" },
+            { q: `Discuss the comparative analysis, edge cases, and practical implementation scenarios in ${subject}. [7 Marks]`, tag: "High Probability" }
+          ];
+        }
+
+        tag.classList.add('hidden');
+        btn.disabled = false;
+
+        feed.innerHTML = subs.map((item, idx) => `
+          <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-black uppercase text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-200">
+                  Q${idx + 1} • Long Answer
+                </span>
+                <span class="text-[9px] font-black text-amber-900 bg-amber-100 px-2 py-0.5 rounded-full">${item.tag || 'Quantum Repeated'}</span>
+              </div>
+              <span class="text-[11px] font-black text-slate-400">7 MARKS</span>
             </div>
 
-            <p class="text-xs sm:text-sm font-bold text-slate-900 leading-relaxed mb-3">
+            <p class="text-xs sm:text-sm font-extrabold text-slate-800 leading-snug">
               ${item.q}
             </p>
 
-            <div class="p-3 bg-emerald-50/50 rounded-xl border border-emerald-100 mb-3 space-y-1">
-              <p class="text-[10px] font-black text-emerald-900 uppercase">AKTU Model Answer Breakdown:</p>
-              ${item.steps.map(s => `<p class="text-[11px] text-emerald-800 font-semibold">• ${s}</p>`).join('')}
-            </div>
-
-            <div class="flex items-center justify-between pt-2 border-t border-slate-100">
-              <span class="text-[10.5px] font-bold text-slate-500">Frequently repeated in Odd/Even Sem AKTU Papers</span>
-              <button onclick="watchSubjectiveSolution('${subject.name}', '${item.q}')" class="px-3 py-1.5 rounded-lg bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold transition flex items-center gap-1 cursor-pointer">
-                <span>▶ Watch Solution Video</span>
-              </button>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] text-slate-400 font-semibold">Length: 2.5 to 3 pages with diagrams</span>
+              <a href="chat.html" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#1b4332] text-xs font-bold transition flex items-center gap-1">
+                <span>🤖</span> Ask Zen to Solve
+              </a>
             </div>
           </div>
         `).join('');
       }
     }
 
-    // 5. MCQ SELECTION & XP REWARD
-    function handleOptionSelect(qIdx, selectedIdx, correctIdx) {
-      const optionsBox = document.getElementById(`options-${qIdx}`);
-      const buttons = optionsBox.querySelectorAll('.mcq-option-btn');
-      
-      // Prevent multiple clicks
-      buttons.forEach(b => b.classList.add('locked'));
+    function checkAnswer(btn, isCorrect) {
+      const parent = btn.parentElement;
+      const allButtons = parent.querySelectorAll('button');
+      allButtons.forEach(b => b.disabled = true);
 
-      const selectedBtn = document.getElementById(`opt-${qIdx}-${selectedIdx}`);
-      const correctBtn = document.getElementById(`opt-${qIdx}-${correctIdx}`);
-
-      if (selectedIdx === correctIdx) {
-        selectedBtn.classList.add('correct');
-        awardXP(10);
+      if (isCorrect) {
+        btn.classList.add('bg-emerald-100', 'border-emerald-600', 'text-emerald-900');
+        let currentXP = parseInt(localStorage.getItem(`akt_xp_${currentEmail}`) || "260", 10);
+        currentXP += 10;
+        localStorage.setItem(`akt_xp_${currentEmail}`, currentXP.toString());
+        if (typeof syncGlobalAvatars === 'function') syncGlobalAvatars();
+        alert("Correct Answer! +10 XP added to your profile! 🎯");
       } else {
-        selectedBtn.classList.add('wrong');
-        correctBtn.classList.add('correct');
+        btn.classList.add('bg-rose-100', 'border-rose-600', 'text-rose-900');
+        alert("Incorrect! Review this concept in Study Hub.");
       }
     }
 
-    function watchSubjectiveSolution(subName, queryText) {
-      const q = encodeURIComponent(`AKTU ${subName} ${queryText.substring(0, 45)}`);
-      window.open(`https://www.youtube.com/results?search_query=${q}`, '_blank');
+    // Avatar Sync
+    function syncArenaAvatars() {
+      const savedPhoto = localStorage.getItem(`user_avatar_${currentEmail}`) 
+                      || localStorage.getItem('user_avatar') 
+                      || localStorage.getItem('profile_picture');
+
+      const initial = (currentName.charAt(0) || 'S').toUpperCase();
+      ['top-user-avatar', 'side-user-avatar', 'mobile-top-user-avatar'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.style.overflow = 'hidden';
+        if (savedPhoto && savedPhoto.startsWith('data:image')) {
+          el.innerHTML = `<img src="${savedPhoto}" class="w-full h-full object-cover rounded-full" alt="Profile" />`;
+        } else {
+          el.innerHTML = initial;
+        }
+      });
     }
 
-    function handleLogout() {
-      localStorage.removeItem('isLoggedIn');
-      localStorage.removeItem('current_user_email');
-      sessionStorage.clear();
-      window.location.href = 'index.html';
-    }
-
-    // Initial Load
-    handleSemesterChange();
+    populateBranches();
+    syncArenaAvatars();
   </script>
-  <script src="nav.js"></script>
 </body>
 </html>
