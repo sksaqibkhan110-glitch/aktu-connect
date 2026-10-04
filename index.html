@@ -160,7 +160,7 @@
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
 
-    /* PHONE VIEW ONLY (<640px) */
+    /* PHONE VIEW ONLY (<640px) - Exact Screen Integration */
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 360px;
@@ -184,37 +184,39 @@
         z-index: 1;
       }
 
-      /* Tablet Screen Exact Bounds */
+      /* Image ke tablet screen ke upar clean seamless fit */
       .whiteboard-active-area {
-        top: 51.8% !important;
+        top: 51.5% !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-        width: 56.5% !important;
-        height: 23.8% !important;
+        width: 55% !important;
+        height: 32% !important;
         min-height: unset !important;
         max-height: unset !important;
-        padding: 5px 8px 4px !important;
-        border-radius: 0.85rem !important;
-        background: #ffffff !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06) !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 4px 6px !important;
         justify-content: space-between !important;
       }
 
       .board-input {
-        font-size: 0.62rem !important;
-        padding: 0.22rem 0.42rem !important;
+        background: #ffffff !important;
+        border: 1.5px solid #cce3d5 !important;
+        font-size: 0.65rem !important;
+        padding: 0.3rem 0.45rem !important;
         border-radius: 0.45rem !important;
       }
 
       .board-btn-primary {
-        font-size: 0.66rem !important;
-        padding: 0.26rem 0.42rem !important;
+        font-size: 0.72rem !important;
+        padding: 0.35rem 0.45rem !important;
         border-radius: 0.45rem !important;
       }
 
       .board-tab {
-        font-size: 0.62rem !important;
-        padding: 0.14rem 0 !important;
+        font-size: 0.65rem !important;
+        padding: 0.2rem 0 !important;
       }
     }
   </style>
@@ -312,8 +314,8 @@
       </form>
 
       <!-- Google & Footer -->
-      <div class="pt-0.5 border-t border-slate-200 flex items-center justify-between">
-        <button type="button" onclick="openGoogleModal()" class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white border border-slate-200 text-[8px] font-bold text-slate-700 cursor-pointer">
+      <div class="pt-1 border-t border-slate-200 flex items-center justify-between">
+        <button type="button" onclick="openGoogleModal()" class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white border border-slate-200 text-[8px] font-bold text-slate-700 cursor-pointer shadow-sm">
           <span>Google</span>
         </button>
         <span class="text-[7.5px] text-slate-400 font-bold">AKTU 2026</span>
