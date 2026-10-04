@@ -69,11 +69,28 @@ function handleLogout() {
   window.location.href = 'index.html';
 }
 
-// NOTE: Auto-injection of extra mobile bar is disabled to PREVENT DUPLICATE NAVBARS!
+// YAHAN LAGEGA (Sabhi pages ke drawer me Logout Button lagane ka auto-engine)
 document.addEventListener('DOMContentLoaded', () => {
-  // Remove any duplicate header if previously injected
+  // Duplicate mobile bar remove karo
   const autoBar = document.getElementById('mobile-top-nav-bar');
   if (autoBar) autoBar.remove();
+
+  // Sabhi pages ke sidebar me Logout Button auto-inject karo
+  const userPill = document.querySelector('.sidebar-user-pill');
+  if (userPill) {
+    userPill.className = "sidebar-user-pill flex flex-col gap-2.5 pt-3 border-t border-white/10 mt-auto";
+    
+    // Check if logout button already exists, nahi hai toh inject karo
+    if (!userPill.querySelector('button[onclick*="handleLogout"]')) {
+      const btn = document.createElement('button');
+      btn.type = "button";
+      btn.onclick = handleLogout;
+      btn.className = "w-full py-2 rounded-xl bg-white/10 hover:bg-rose-600/80 text-rose-200 hover:text-white text-xs font-extrabold transition flex items-center justify-center gap-1.5 cursor-pointer mt-1";
+      btn.innerHTML = `<span>🚪</span> Logout Account`;
+      userPill.appendChild(btn);
+    }
+  }
+
   syncGlobalAvatars();
 });
 
