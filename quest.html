@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AKTU Connect - Infinite PYQ Test Vault</title>
+  <title>AKTU Connect - Section-A Exam Arena</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config = { darkMode: 'class' };</script>
   <link rel="stylesheet" href="style.css" />
@@ -19,14 +19,14 @@
           <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">AC</div>
           <span class="font-bold text-lg tracking-tight hidden sm:inline">AKTU Connect</span>
         </div>
-     <div class="flex items-center gap-1 sm:gap-2">
-  <a href="study.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📖 Study Hub</a>
-  <a href="pyq.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📄 PYQs</a>
-  <a href="quest.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🎯 Quests</a>
-  <a href="leaderboard.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🏆 Leaderboard</a>
-  <a href="chat.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🤖 AI Tutor</a>
-  <a href="profile.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">👤 Profile</a>
-</div>
+        <div class="flex items-center gap-1 sm:gap-2">
+          <a href="study.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📖 Study Hub</a>
+          <a href="pyq.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">📄 PYQs</a>
+          <a href="quest.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/50 transition">🎯 Quests</a>
+          <a href="leaderboard.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🏆 Leaderboard</a>
+          <a href="chat.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">🤖 AI Tutor</a>
+          <a href="profile.html" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition">👤 Profile</a>
+        </div>
       </div>
       <div class="flex items-center gap-3">
         <button onclick="toggleGlobalTheme()" class="theme-toggle-btn ui-btn-secondary text-xs px-3 py-1.5 rounded-md">🌙 Dark</button>
@@ -38,15 +38,14 @@
   <!-- Main Content Container -->
   <main class="max-w-6xl mx-auto px-4 sm:px-6 mt-8 flex-1 w-full">
     
-    <!-- Page Header & Level Badge -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
       <div>
-        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">Infinite PYQ Test Vault</h1>
-        <p class="text-sm text-zinc-400 mt-1">Select any branch, semester, subject, and real syllabus unit to generate a fresh 30-question set!</p>
+        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">🎯 AKTU Section-A Arena</h1>
+        <p class="text-sm text-zinc-400 mt-1">5 conceptual questions per round. Solve accurately to earn XP (+1 XP per correct answer)!</p>
       </div>
-      <div class="ui-card px-4 py-2.5 flex items-center gap-3 w-fit bg-zinc-900 border border-zinc-800">
-        <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Level Status</span>
-        <span class="text-sm font-bold text-indigo-400 font-mono" id="level-display">Level 6 (620 XP)</span>
+      <div class="ui-card px-4 py-2.5 flex items-center gap-3 w-fit bg-zinc-900 border border-zinc-800 rounded-xl">
+        <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Player Status</span>
+        <span class="text-sm font-bold text-indigo-400 font-mono" id="level-display">Loading...</span>
       </div>
     </div>
 
@@ -54,7 +53,7 @@
     <div class="ui-card p-5 mb-6 grid grid-cols-1 sm:grid-cols-4 gap-4 bg-zinc-900 border border-zinc-800 rounded-xl">
       <div>
         <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-1.5">Branch</label>
-        <select id="filter-branch" onchange="updateSubjects()" class="ui-input font-medium w-full bg-zinc-950 border border-zinc-700 text-zinc-100 rounded-lg px-3 py-2 text-sm">
+        <select id="filter-branch" onchange="updateSubjects()" class="ui-input font-medium w-full bg-zinc-950 border border-zinc-700 text-zinc-100 rounded-lg px-3 py-2 text-sm outline-none">
           <option value="CSE_AIML">Computer Science (AI & ML)</option>
           <option value="CSE_CORE">Computer Science (Core)</option>
           <option value="CSE_AIDS">Computer Science (AI & DS)</option>
@@ -64,7 +63,7 @@
       </div>
       <div>
         <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-1.5">Semester</label>
-        <select id="filter-sem" onchange="updateSubjects()" class="ui-input font-medium w-full bg-zinc-950 border border-zinc-700 text-zinc-100 rounded-lg px-3 py-2 text-sm">
+        <select id="filter-sem" onchange="updateSubjects()" class="ui-input font-medium w-full bg-zinc-950 border border-zinc-700 text-zinc-100 rounded-lg px-3 py-2 text-sm outline-none">
           <option value="1">Semester 1 (Group A)</option>
           <option value="2">Semester 2 (Group B)</option>
           <option value="3">Semester 3</option>
@@ -77,30 +76,31 @@
       </div>
       <div>
         <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-1.5">Subject</label>
-        <select id="filter-subject" onchange="updateUnits()" class="ui-input font-medium w-full bg-zinc-950 border border-zinc-700 text-zinc-100 rounded-lg px-3 py-2 text-sm">
-          <!-- Dynamically populated -->
+        <select id="filter-subject" onchange="updateUnits()" class="ui-input font-medium w-full bg-zinc-950 border border-zinc-700 text-zinc-100 rounded-lg px-3 py-2 text-sm outline-none">
         </select>
       </div>
       <div>
         <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-1.5">Unit</label>
-        <select id="filter-unit" class="ui-input font-medium w-full bg-zinc-950 border border-zinc-700 text-zinc-100 rounded-lg px-3 py-2 text-sm">
-          <!-- Dynamically populated from actual subject units -->
+        <select id="filter-unit" class="ui-input font-medium w-full bg-zinc-950 border border-zinc-700 text-zinc-100 rounded-lg px-3 py-2 text-sm outline-none">
         </select>
       </div>
     </div>
 
     <!-- Action Launch Bar -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-      <h2 class="text-lg font-bold text-zinc-200" id="vault-status">Ready to Launch Test (30 Fresh Questions)</h2>
-      <button onclick="launchRandomizedTest()" class="px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-sm transition cursor-pointer">
-        🎲 Generate New Test Paper (+50 XP)
+      <div>
+        <h2 class="text-lg font-bold text-zinc-200" id="round-status">Round 1 (5 Questions • 10 Marks)</h2>
+        <p class="text-xs text-zinc-400">Complete this set to proceed to the next 5 questions.</p>
+      </div>
+      <button id="generate-btn" onclick="startNewTestRound()" class="px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-sm transition cursor-pointer flex items-center gap-2">
+        <span>⚡ Start Round 1</span>
       </button>
     </div>
 
     <!-- Dynamic Test Workspace -->
     <div id="quiz-workspace" class="ui-card p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
       <div class="text-center py-12 text-zinc-400">
-        <p class="text-base font-medium">Click <b class="text-indigo-400">"Generate New Test Paper"</b> to load your randomized 30-question 2-Marks AKTU set!</p>
+        <p class="text-base font-medium">Click <b class="text-indigo-400">"Start Round 1"</b> to load 5 verified questions!</p>
       </div>
     </div>
 
@@ -112,6 +112,44 @@
     let activeQuestions = [];
     let userAnswers = {};
     let currentSubjectsList = [];
+    let currentRound = 1;
+    let timerInterval = null;
+    let secondsRemaining = 300;
+
+    function updateLevelBadge() {
+      const calculatedLevel = Math.floor(currentXP / 100);
+      document.getElementById('level-display').innerText = `Level ${calculatedLevel} (${currentXP} XP)`;
+    }
+
+    function getSubjectSpecificFallback(subTitle, unitTitle) {
+      const titleLower = (subTitle + " " + unitTitle).toLowerCase();
+
+      if (titleLower.includes("physics") || titleLower.includes("relativistic")) {
+        return [
+          { q: "According to Einstein's special theory of relativity, the speed of light in vacuum is:", options: ["Dependent on the source frame", "Constant in all inertial frames", "Infinite in moving frames", "Variable with frequency"], ans: 1 },
+          { q: "What happens to the length of an object measured by a stationary observer when moving at relativistic speed v?", options: ["It expands", "It remains unchanged", "It contracts by factor sqrt(1 - v^2/c^2)", "It becomes zero"], ans: 2 },
+          { q: "The relativistic kinetic energy of a particle of rest mass m0 is given by:", options: ["(m - m0)c^2", "1/2 m v^2", "m0 c^2", "m v c"], ans: 0 },
+          { q: "In the Michelson-Morley experiment, what was the observed fringe shift?", options: ["0.4 fringes", "Zero fringe shift (null result)", "1 complete fringe", "Infinite shift"], ans: 1 },
+          { q: "A frame of reference in which Newton's first law of motion holds true is called:", options: ["Non-inertial frame", "Accelerated frame", "Inertial frame", "Rotating frame"], ans: 2 }
+        ];
+      } else if (titleLower.includes("algorithm") || titleLower.includes("daa")) {
+        return [
+          { q: "Which asymptotic notation provides a tight bound on the running time of an algorithm?", options: ["Big-O (O)", "Big-Omega (Ω)", "Theta (Θ)", "Little-o (o)"], ans: 2 },
+          { q: "What is the worst-case time complexity of Quick Sort?", options: ["O(n log n)", "O(n^2)", "O(n)", "O(log n)"], ans: 1 },
+          { q: "Which algorithm design paradigm does 0/1 Knapsack problem follow for an optimal solution?", options: ["Greedy approach", "Dynamic Programming", "Divide and conquer", "Branch and Bound"], ans: 1 },
+          { q: "What is the time complexity of solving a recurrence T(n) = 2T(n/2) + O(n)?", options: ["O(n)", "O(n log n)", "O(n^2)", "O(log n)"], ans: 1 },
+          { q: "Which of the following sorting algorithms is stable and guaranteed O(n log n)?", options: ["Quick Sort", "Heap Sort", "Merge Sort", "Selection Sort"], ans: 2 }
+        ];
+      } else {
+        return [
+          { q: `Which of the following is a primary conceptual foundation of ${subTitle}?`, options: ["System modularity & abstraction", "Arbitrary state retention", "Static pointer aliasing", "Linear branch saturation"], ans: 0 },
+          { q: `What is the primary evaluation parameter in ${unitTitle}?`, options: ["Operational throughput & latency", "Physical cable impedance", "Uncontrolled recursion", "Random bit inversion"], ans: 0 },
+          { q: `In standard AKTU 2-mark theory for ${subTitle}, how is efficiency primarily classified?`, options: ["Time and Space Complexity", "Cost per kilowatt hour", "Transistor count only", "Physical layout topology"], ans: 0 },
+          { q: `Which design principle is essential when analyzing ${unitTitle}?`, options: ["Optimal Substructure", "Randomized Execution", "Unchecked memory access", "Monolithic compilation"], ans: 0 },
+          { q: `What is the primary objective of studying Unit ${unitTitle}?`, options: ["Formal problem specification and solution proofs", "Syntax memorization", "Operating system reinstallation", "Hardware soldering"], ans: 0 }
+        ];
+      }
+    }
 
     function updateSubjects() {
       const branch = document.getElementById("filter-branch").value;
@@ -120,7 +158,8 @@
       subjectSelect.innerHTML = "";
 
       if (typeof aktuMasterDatabase === 'undefined') {
-        subjectSelect.innerHTML = `<option value="">Database loading error</option>`;
+        subjectSelect.innerHTML = `<option value="BAS101">Engineering Physics (BAS101)</option><option value="BCS503">Design & Analysis of Algorithms (BCS503)</option>`;
+        updateUnits();
         return;
       }
 
@@ -130,23 +169,14 @@
       } else if (sem === "2") {
         subjects = aktuMasterDatabase["COMMON_2"] || aktuMasterDatabase["2"] || [];
       } else {
-        if (aktuMasterDatabase[branch] && aktuMasterDatabase[branch][sem]) {
-          subjects = aktuMasterDatabase[branch][sem];
-        } else {
-          let fallbackBranch = Object.keys(aktuMasterDatabase).find(b => b !== "COMMON_1" && b !== "COMMON_2" && aktuMasterDatabase[b][sem]);
-          if (fallbackBranch) {
-            subjects = aktuMasterDatabase[fallbackBranch][sem];
-          } else {
-            subjects = aktuMasterDatabase["CSE_AIML"]?.[sem] || [];
-          }
-        }
+        subjects = (aktuMasterDatabase[branch] && aktuMasterDatabase[branch][sem]) || aktuMasterDatabase["CSE_AIML"]?.[sem] || [];
       }
 
       currentSubjectsList = subjects;
 
       if (!subjects || subjects.length === 0) {
-        subjectSelect.innerHTML = `<option value="">No subjects available</option>`;
-        document.getElementById("filter-unit").innerHTML = `<option value="">No units</option>`;
+        subjectSelect.innerHTML = `<option value="BAS101">Engineering Physics (BAS101)</option>`;
+        document.getElementById("filter-unit").innerHTML = `<option value="1">Unit 1: Relativistic Mechanics</option>`;
         return;
       }
 
@@ -171,7 +201,7 @@
         for (let i = 1; i <= 5; i++) {
           const opt = document.createElement("option");
           opt.value = i;
-          opt.textContent = `Unit ${i}: Core Syllabus Topics`;
+          opt.textContent = `Unit ${i}`;
           unitSelect.appendChild(opt);
         }
         return;
@@ -180,63 +210,119 @@
       selectedSub.units.forEach(u => {
         const opt = document.createElement("option");
         opt.value = u.unit;
-        opt.textContent = `Unit ${u.unit}: ${u.title}`;
+        opt.textContent = `Unit ${u.unit}: ${u.title || "Core Syllabus"}`;
         unitSelect.appendChild(opt);
       });
     }
 
-    function generateLargePool(subjectId, unitNum) {
-      let pool = [];
-      const selectedSub = currentSubjectsList.find(s => (s.id || s.code) === subjectId);
-      const subName = selectedSub ? (selectedSub.name || selectedSub.title) : subjectId;
-
-      for (let i = 1; i <= 45; i++) {
-        pool.push({
-          id: `${subjectId}-U${unitNum}-Q${i}`,
-          q: `[AKTU PYQ 2-Marks] (${subName} - Unit ${unitNum}) What is core conceptual principle #${i} regarding system analysis, workflow implementation, and evaluation metrics?`,
-          options: [
-            `Standard design protocol variant ${i}`,
-            `Optimized algorithmic procedure version ${i}`,
-            `Legacy fallback framework structure ${i}`,
-            `Theoretical abstraction layer component ${i}`
-          ],
-          ans: i % 4
-        });
-      }
-      return pool;
+    function startTimer() {
+      clearInterval(timerInterval);
+      secondsRemaining = 300;
+      timerInterval = setInterval(() => {
+        secondsRemaining--;
+        const mins = Math.floor(secondsRemaining / 60);
+        const secs = secondsRemaining % 60;
+        const timerEl = document.getElementById("quiz-timer");
+        if (timerEl) {
+          timerEl.innerText = `⏱️ ${mins}:${secs < 10 ? '0' : ''}${secs}`;
+          if (secondsRemaining <= 60) {
+            timerEl.className = "text-sm font-mono font-bold text-rose-400 bg-rose-950/60 px-3 py-1 rounded border border-rose-800/40 animate-pulse";
+          }
+        }
+        if (secondsRemaining <= 0) {
+          clearInterval(timerInterval);
+          alert("Time's up for this round! Evaluating your answers.");
+          submitRoundTest();
+        }
+      }, 1000);
     }
 
-    function shuffleArray(array) {
-      let currentIndex = array.length, randomIndex;
-      while (currentIndex != 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-      }
-      return array;
-    }
+    async function startNewTestRound() {
+      const subjectSelect = document.getElementById("filter-subject");
+      const unitSelect = document.getElementById("filter-unit");
+      const subjectId = subjectSelect.value || "BAS101";
+      const subTitle = subjectSelect.options[subjectSelect.selectedIndex]?.text || subjectId;
+      const unitNum = unitSelect.value || "1";
+      const unitTitle = unitSelect.options[unitSelect.selectedIndex]?.text || `Unit ${unitNum}`;
 
-    function launchRandomizedTest() {
-      const subjectId = document.getElementById("filter-subject").value || "SUBJECT";
-      const unitNum = document.getElementById("filter-unit").value;
-      const selectedSub = currentSubjectsList.find(s => (s.id || s.code) === subjectId);
-      const subTitle = selectedSub ? selectedSub.name || selectedSub.title : subjectId;
       const workspace = document.getElementById("quiz-workspace");
+      const btn = document.getElementById("generate-btn");
 
-      let fullPool = generateLargePool(subjectId, unitNum);
-      let shuffled = shuffleArray([...fullPool]);
-      activeQuestions = shuffled.slice(0, 30);
+      btn.disabled = true;
+      btn.innerHTML = `<span class="animate-spin inline-block">⚡</span> Fetching Round ${currentRound} Questions...`;
+      workspace.innerHTML = `
+        <div class="text-center py-12 text-zinc-400 space-y-3">
+          <div class="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p class="text-sm font-medium">Generating 5 accurate AKTU exam questions for <b class="text-indigo-400">${subTitle} (${unitTitle})</b> [Round ${currentRound}]...</p>
+        </div>
+      `;
+
+      let questions = [];
+
+      try {
+        const prompt = `You are an AKTU Engineering Exam Paper Setter. Generate exactly 5 real multiple-choice questions (MCQs) strictly on:
+SUBJECT: "${subTitle}"
+UNIT/TOPIC: "${unitTitle}"
+Round Set: ${currentRound} (ensure questions are unique from previous sets).
+
+STRICT RULES:
+1. Questions MUST directly test definitions, formulas, laws, theorems, or numerical conceptual bounds belonging to "${subTitle}" and "${unitTitle}".
+2. DO NOT give generic or wrong-subject questions (e.g. if subject is Physics, ask about Lorentz transformation, time dilation, etc. If DAA, ask about Big-O, etc.).
+3. Return ONLY a valid JSON array with 5 objects, no backticks, no markdown, no other words:
+[
+  {
+    "q": "Question text here?",
+    "options": ["Option A", "Option B", "Option C", "Option D"],
+    "ans": 0
+  }
+]`;
+
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: prompt })
+        });
+        const data = await res.json();
+        
+        let cleaned = (data.reply || "").trim();
+        if (cleaned.startsWith("```json")) cleaned = cleaned.replace(/^```json/, "").replace(/```$/, "").trim();
+        else if (cleaned.startsWith("```")) cleaned = cleaned.replace(/^```/, "").replace(/```$/, "").trim();
+        
+        const parsed = JSON.parse(cleaned);
+        if (Array.isArray(parsed) && parsed.length === 5) {
+          questions = parsed;
+        }
+      } catch (e) {
+        console.warn("AI generation fallback:", e);
+      }
+
+      if (!questions || questions.length !== 5) {
+        questions = getSubjectSpecificFallback(subTitle, unitTitle);
+      }
+
+      activeQuestions = questions;
       userAnswers = {};
 
+      btn.disabled = false;
+      btn.innerHTML = `<span>⚡ Restart Round ${currentRound}</span>`;
+      document.getElementById("round-status").innerText = `Round ${currentRound} (5 Questions • 10 Marks)`;
+
+      renderQuizUI(subTitle, unitTitle);
+      startTimer();
+    }
+
+    function renderQuizUI(subTitle, unitTitle) {
+      const workspace = document.getElementById("quiz-workspace");
       let html = `
         <div class="mb-6 pb-4 border-b border-zinc-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <span class="text-xs font-mono font-bold text-indigo-400 bg-indigo-950/60 px-2.5 py-1 rounded border border-indigo-800/50">${subTitle} - UNIT ${unitNum}</span>
-            <h3 class="text-xl font-bold mt-2 text-zinc-100">AKTU 30-Question 2-Marks Challenge</h3>
+            <span class="text-xs font-mono font-bold text-indigo-400 bg-indigo-950/60 px-2.5 py-1 rounded border border-indigo-800/50">${subTitle}</span>
+            <h3 class="text-xl font-bold mt-2 text-zinc-100">Round ${currentRound}: ${unitTitle}</h3>
           </div>
           <div class="flex items-center gap-3">
-            <span id="score-badge" class="text-sm font-semibold text-zinc-300 bg-zinc-800 px-3 py-1 rounded border border-zinc-700">Attempted: 0/30</span>
-            <span class="text-sm font-semibold text-emerald-400 bg-emerald-950/50 px-3 py-1 rounded border border-emerald-800/40">Reward: +50 XP</span>
+            <span id="quiz-timer" class="text-sm font-mono font-semibold text-amber-300 bg-amber-950/60 px-3 py-1 rounded border border-amber-800/40">⏱️ 05:00</span>
+            <span id="score-badge" class="text-sm font-semibold text-zinc-300 bg-zinc-800 px-3 py-1 rounded border border-zinc-700">Attempted: 0/5</span>
+            <span class="text-sm font-semibold text-emerald-400 bg-emerald-950/50 px-3 py-1 rounded border border-emerald-800/40">Reward: +1 XP / Correct</span>
           </div>
         </div>
         <div class="space-y-6 max-h-[600px] overflow-y-auto pr-2" id="question-list">
@@ -250,19 +336,26 @@
         `;
         item.options.forEach((opt, optIdx) => {
           html += `
-            <button type="button" onclick="selectOption(${idx}, ${optIdx})" id="btn-${idx}-${optIdx}" class="text-left px-3.5 py-2 rounded border border-zinc-700 bg-zinc-900 hover:bg-zinc-800 text-xs sm:text-sm transition cursor-pointer text-zinc-300">
+            <button type="button" onclick="selectOption(${idx}, ${optIdx})" id="btn-${idx}-${optIdx}" class="text-left px-3.5 py-2.5 rounded border border-zinc-700 bg-zinc-900 hover:bg-zinc-800 text-xs sm:text-sm transition cursor-pointer text-zinc-300">
               ${String.fromCharCode(65 + optIdx)}. ${opt}
             </button>
           `;
         });
-        html += `</div></div>`;
+        html += `</div>
+          <div id="ai-help-${idx}" class="hidden mt-3 pt-3 border-t border-zinc-800/60 flex items-center justify-between">
+            <span class="text-xs text-rose-400">Incorrect! Correct: <b>Option ${String.fromCharCode(65 + item.ans)}</b></span>
+            <button onclick="askZenDoubt('${encodeURIComponent(item.q)}', '${encodeURIComponent(item.options[item.ans])}')" class="text-xs font-semibold text-indigo-400 hover:text-indigo-300 flex items-center gap-1 cursor-pointer">
+              <span>Ask Zen AI why ↗</span>
+            </button>
+          </div>
+        </div>`;
       });
 
       html += `
         </div>
-        <div class="mt-8 text-center">
-          <button onclick="submitRandomTest()" class="px-8 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg transition cursor-pointer">
-            Submit Test & Evaluate Marks 🎯
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4" id="action-footer">
+          <button id="submit-btn" onclick="submitRoundTest()" class="w-full sm:w-auto px-8 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg transition cursor-pointer">
+            Submit Round ${currentRound} & Check Score 🎯
           </button>
         </div>
       `;
@@ -276,46 +369,81 @@
       const buttons = parent.querySelectorAll("button");
       buttons.forEach((b, i) => {
         if (i === optIdx) {
-          b.className = "text-left px-3.5 py-2 rounded border border-indigo-500 bg-indigo-950/60 text-indigo-200 text-xs sm:text-sm font-semibold cursor-pointer";
+          b.className = "text-left px-3.5 py-2.5 rounded border border-indigo-500 bg-indigo-950/60 text-indigo-200 text-xs sm:text-sm font-semibold cursor-pointer";
         } else {
-          b.className = "text-left px-3.5 py-2 rounded border border-zinc-700 bg-zinc-900 text-xs sm:text-sm text-zinc-300 cursor-pointer";
+          b.className = "text-left px-3.5 py-2.5 rounded border border-zinc-700 bg-zinc-900 text-xs sm:text-sm text-zinc-300 cursor-pointer";
         }
       });
 
       const attemptedCount = Object.keys(userAnswers).length;
-      document.getElementById('score-badge').innerText = `Attempted: ${attemptedCount}/30`;
+      document.getElementById('score-badge').innerText = `Attempted: ${attemptedCount}/5`;
     }
 
-    function submitRandomTest() {
+    function submitRoundTest() {
+      clearInterval(timerInterval);
       let correctCount = 0;
+
       activeQuestions.forEach((item, idx) => {
         const parent = document.getElementById(`q-options-${idx}`);
         const buttons = parent.querySelectorAll("button");
         const userSel = userAnswers[idx];
+        const helpBox = document.getElementById(`ai-help-${idx}`);
 
         buttons.forEach((b, i) => {
           b.disabled = true;
           if (i === item.ans) {
-            b.className = "text-left px-3.5 py-2 rounded border border-emerald-600 bg-emerald-950/60 text-emerald-300 text-xs sm:text-sm font-semibold";
+            b.className = "text-left px-3.5 py-2.5 rounded border border-emerald-600 bg-emerald-950/60 text-emerald-300 text-xs sm:text-sm font-semibold";
           } else if (i === userSel && userSel !== item.ans) {
-            b.className = "text-left px-3.5 py-2 rounded border border-rose-600 bg-rose-950/60 text-rose-300 text-xs sm:text-sm";
+            b.className = "text-left px-3.5 py-2.5 rounded border border-rose-600 bg-rose-950/60 text-rose-300 text-xs sm:text-sm";
           }
         });
 
-        if (userSel === item.ans) correctCount++;
+        if (userSel === item.ans) {
+          correctCount++;
+        } else {
+          if (helpBox) helpBox.classList.remove("hidden");
+        }
       });
 
-      let totalMarks = correctCount * 2;
-      currentXP += 50;
-      localStorage.setItem('akt_xp', currentXP);
-      
-      const calculatedLevel = Math.floor(currentXP / 100);
-      document.getElementById('level-display').innerText = `Level ${calculatedLevel} (${currentXP} XP)`;
+      // Strict balanced economy: strictly 1 XP per correct answer
+      let earnedXP = correctCount * 1;
 
-      alert(`Test Evaluated! 🎉\nCorrect Answers: ${correctCount} / 30\nMarks Obtained: ${totalMarks} / 60\n+50 XP added to your account!`);
+      currentXP += earnedXP;
+      localStorage.setItem('akt_xp', currentXP);
+      updateLevelBadge();
+
+      let totalMarks = correctCount * 2;
+      const footer = document.getElementById('action-footer');
+      footer.innerHTML = `
+        <div class="text-center sm:text-left">
+          <span class="text-sm font-bold text-zinc-200">
+            Score: ${correctCount}/5 (${totalMarks}/10 Marks) • 
+            <span class="text-emerald-400">+${earnedXP} XP Earned</span>
+          </span>
+        </div>
+        <button onclick="goToNextRound()" class="w-full sm:w-auto px-8 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg transition cursor-pointer flex items-center justify-center gap-2">
+          <span>Unlock & Start Round ${currentRound + 1} (Next 5 Questions ⚡)</span>
+        </button>
+      `;
     }
 
-    window.addEventListener("DOMContentLoaded", updateSubjects);
+    function goToNextRound() {
+      currentRound++;
+      startNewTestRound();
+    }
+
+    function askZenDoubt(encodedQuestion, encodedCorrectAnswer) {
+      const q = decodeURIComponent(encodedQuestion);
+      const ans = decodeURIComponent(encodedCorrectAnswer);
+      const query = `In my AKTU test, I got this question wrong: "${q}". The correct answer is "${ans}". Can you explain why this is the correct answer and summarize this concept in simple 2-mark points for my exam?`;
+      sessionStorage.setItem('zen_auto_query', query);
+      window.location.href = "chat.html";
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      updateSubjects();
+      updateLevelBadge();
+    });
   </script>
 </body>
 </html>
