@@ -6,7 +6,6 @@
   <title>AKTU Connect - Study Hub</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
-  <!-- REAL STUDY DATA SCRIPT -->
   <script src="study-data.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
@@ -180,159 +179,190 @@
     const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'sksaqibkhan110@gmail.com').toLowerCase().trim();
     let currentName = localStorage.getItem('user_name') || currentEmail.split('@')[0];
 
-    // Master Curriculum Function (Semester 1 to 8 + Full Branches)
+    // Comprehensive AKTU Curriculum (Exhaustive & Exact Match with Quest & PYQ)
     function getFullCurriculum() {
       const ext = window.studyData || window.AKTU_STUDY_DATA || window.coursesData;
-      if (ext && typeof ext === 'object' && Object.keys(ext).length > 2) {
+      if (ext && typeof ext === 'object' && Object.keys(ext).length > 2 && ext["Computer Science & Engineering"] && ext["Computer Science & Engineering"]["Semester 1"] && ext["Computer Science & Engineering"]["Semester 1"].length >= 5) {
         return ext;
       }
 
-      const commonFirstYear = {
-        "Semester 1": [
-          { code: "BAS101", name: "Engineering Physics", desc: "Relativistic Mechanics, Wave Optics, Laser, Fiber Optics", units: [ {id:1, title:"Unit 1: Relativistic Mechanics"}, {id:2, title:"Unit 2: Wave Optics (Interference & Diffraction)"}, {id:3, title:"Unit 3: Quantum Mechanics"}, {id:4, title:"Unit 4: Lasers"}, {id:5, title:"Unit 5: Fiber Optics"} ] },
-          { code: "BAS103", name: "Engineering Mathematics-I", desc: "Matrices, Differential Calculus, Vector Calculus", units: [ {id:1, title:"Unit 1: Matrices & Rank"}, {id:2, title:"Unit 2: Differential Calculus I"}, {id:3, title:"Unit 3: Differential Calculus II"}, {id:4, title:"Unit 4: Multivariable Calculus"}, {id:5, title:"Unit 5: Vector Calculus"} ] },
-          { code: "BCS101", name: "Programming for Problem Solving (C)", desc: "Basics of C, Control Flow, Arrays, Pointers, Structures", units: [ {id:1, title:"Unit 1: Introduction to Programming"}, {id:2, title:"Unit 2: Operators & Control Structures"}, {id:3, title:"Unit 4: Arrays & Strings"}, {id:4, title:"Unit 4: Functions & Recursion"}, {id:5, title:"Unit 5: Pointers & File Handling"} ] }
-        ],
-        "Semester 2": [
-          { code: "BAS203", name: "Engineering Mathematics-II", desc: "Ordinary Differential Equations, Series Solutions, Laplace Transform", units: [ {id:1, title:"Unit 1: ODE of Higher Order"}, {id:2, title:"Unit 2: Series Solutions & Special Functions"}, {id:3, title:"Unit 3: Laplace Transform"}, {id:4, title:"Unit 4: Fourier Series & PDE"}, {id:5, title:"Unit 5: Applications of PDE"} ] },
-          { code: "BEC201", name: "Basic Electronics Engineering", desc: "Diodes, BJT, FET, Op-Amps, Digital Logic Gates", units: [ {id:1, title:"Unit 1: Semiconductor Diodes"}, {id:2, title:"Unit 2: Bipolar Junction Transistor (BJT)"}, {id:3, title:"Unit 3: Field Effect Transistors (FET/MOSFET)"}, {id:4, title:"Unit 4: Operational Amplifiers"}, {id:5, title:"Unit 5: Digital Electronics Fundamentals"} ] }
-        ]
-      };
+      // AKTU Complete 1st Year Syllabus (Physics group + Chemistry group)
+      const commonSem1 = [
+        { code: "BAS101", name: "Engineering Physics", desc: "Relativistic Mechanics, Wave Optics, Quantum Mechanics, Lasers, Fiber Optics" },
+        { code: "BAS103", name: "Engineering Mathematics-I", desc: "Matrices, Differential Calculus, Vector Calculus, Multiple Integrals" },
+        { code: "BEE101", name: "Basic Electrical Engineering", desc: "DC Circuits, AC Steady State Analysis, Transformers, Electrical Machines" },
+        { code: "BCS101", name: "Programming for Problem Solving (C)", desc: "Basics of C, Control Flow, Arrays, Functions, Pointers, File Handling" },
+        { code: "BAS104", name: "Environment & Ecology", desc: "Ecosystems, Environmental Pollution, Natural Resources, Sustainable Development" },
+        { code: "BAS105", name: "Soft Skills", desc: "Basics of Communication, Technical English, Presentation Skills, Group Discussion" }
+      ];
+
+      const commonSem2 = [
+        { code: "BAS202", name: "Engineering Chemistry", desc: "Atomic Structure, Spectroscopic Techniques, Electrochemistry, Polymers, Water Quality" },
+        { code: "BAS203", name: "Engineering Mathematics-II", desc: "Ordinary Differential Equations, Series Solutions, Laplace Transform, Fourier Series, PDE" },
+        { code: "BEC201", name: "Basic Electronics Engineering", desc: "Semiconductor Diodes, BJT, FET/MOSFET, Op-Amps, Digital Logic & Gates" },
+        { code: "BME201", name: "Fundamentals of Mechanical Engineering", desc: "Thermodynamics, IC Engines, Refrigeration, Fluid Mechanics, Measurements" },
+        { code: "BAS205", name: "Professional Communication", desc: "Language Phonetics, Reading Comprehension, Business Correspondence, Ethics" }
+      ];
 
       return {
         "Computer Science & Engineering": {
-          ...commonFirstYear,
+          "Semester 1": commonSem1,
+          "Semester 2": commonSem2,
           "Semester 3": [
-            { code: "KCS301", name: "Data Structures", desc: "Arrays, Linked Lists, Stacks, Queues, Trees, Graphs, Hashing" },
-            { code: "KCS302", name: "Computer Organization & Architecture", desc: "Instruction Cycle, Pipelining, Cache Memory, I/O Interfacing" },
-            { code: "KCS303", name: "Discrete Structures & Graph Theory", desc: "Sets, Relations, Functions, Propositional Logic, Trees & Graphs" }
+            { code: "KCS301", name: "Data Structures", desc: "Arrays, Stacks, Queues, Linked Lists, Trees, Binary Search Trees, Graphs, Hashing" },
+            { code: "KCS302", name: "Computer Organization & Architecture", desc: "Instruction Cycle, Pipelining, Cache Memory, Virtual Memory, I/O Interfacing" },
+            { code: "KCS303", name: "Discrete Structures & Graph Theory", desc: "Sets, Relations, Functions, Algebraic Structures, Propositional Logic, Trees & Graphs" },
+            { code: "BAS301", name: "Technical Communication", desc: "Technical Reports, Proposals, Research Papers, Workplace Communication" }
           ],
           "Semester 4": [
-            { code: "KCS401", name: "Operating Systems", desc: "Processes, Threads, CPU Scheduling, Deadlocks, Memory Management" },
-            { code: "KCS402", name: "Theory of Automata & Formal Languages", desc: "DFA, NFA, Regular Expressions, CFG, Pushdown Automata, Turing Machines" },
-            { code: "KCS403", name: "Microprocessor", desc: "8085/8086 Architecture, Assembly Language, Interrupts, Interfacing" }
+            { code: "KCS401", name: "Operating Systems", desc: "Processes, Threads, CPU Scheduling, Synchronization, Deadlocks, Memory Management" },
+            { code: "KCS402", name: "Theory of Automata & Formal Languages", desc: "DFA, NFA, Regular Expressions, Context-Free Grammars, Pushdown Automata, Turing Machines" },
+            { code: "KCS403", name: "Microprocessor", desc: "8085/8086 Architecture, Assembly Language, Interrupts, Memory Interfacing" },
+            { code: "KAS401", name: "Universal Human Values", desc: "Self Exploration, Right Understanding, Harmony in Family, Society and Nature" }
           ],
           "Semester 5": [
-            { code: "KCS501", name: "Database Management Systems", desc: "ER Modeling, Relational Algebra, SQL, Normalization, ACID Properties" },
-            { code: "KCS502", name: "Design and Analysis of Algorithms", desc: "Asymptotic Analysis, Divide & Conquer, Greedy, Dynamic Programming, NP-Complete" },
-            { code: "KCS503", name: "Compiler Design", desc: "Lexical Analysis, Parsing, Syntax Directed Translation, Code Generation" }
+            { code: "KCS501", name: "Database Management Systems", desc: "ER Modeling, Relational Algebra, SQL, Normalization (1NF-BCNF), Transactions, ACID" },
+            { code: "KCS502", name: "Design and Analysis of Algorithms", desc: "Asymptotic Notations, Divide & Conquer, Greedy, Dynamic Programming, NP-Completeness" },
+            { code: "KCS503", name: "Compiler Design", desc: "Lexical Analysis, Top-down/Bottom-up Parsing, Syntax Directed Translation, Code Generation" },
+            { code: "KCS054", name: "Object Oriented System Design", desc: "UML Diagrams, Design Patterns, Object Oriented Methodologies" }
           ],
           "Semester 6": [
-            { code: "KCS601", name: "Software Engineering", desc: "SDLC Models, Agile, Requirement Analysis, Software Testing" },
-            { code: "KCS602", name: "Web Technology", desc: "HTML/CSS, JavaScript, XML, Servlets, JSP, Full Stack Architecture" },
-            { code: "KCS603", name: "Computer Networks", desc: "OSI Model, TCP/IP, IP Addressing, Routing Protocols, Congestion Control" }
+            { code: "KCS601", name: "Software Engineering", desc: "SDLC Models, Agile, Requirement Analysis, Software Testing, Metric Analysis" },
+            { code: "KCS602", name: "Web Technology", desc: "HTML5/CSS, JavaScript, DOM, XML, Servlets, JSP, Full Stack Architecture" },
+            { code: "KCS603", name: "Computer Networks", desc: "OSI Model, TCP/IP, IP Addressing, Routing Protocols, Flow & Congestion Control" }
           ],
           "Semester 7": [
-            { code: "KCS701", name: "Artificial Intelligence", desc: "Search Algorithms, Game Playing, Knowledge Representation, Expert Systems" },
-            { code: "KCS702", name: "Cloud Computing", desc: "Virtualization, SaaS, PaaS, IaaS, AWS/Azure Infrastructure" }
+            { code: "KCS701", name: "Artificial Intelligence", desc: "Heuristic Search, Alpha-Beta Pruning, Knowledge Representation, Expert Systems" },
+            { code: "KCS702", name: "Cloud Computing", desc: "Virtualization, SaaS, PaaS, IaaS, AWS/Azure Infrastructure, Cloud Storage" },
+            { code: "KOE074", name: "Renewable Energy Resources", desc: "Solar, Wind, Biomass, Hydro Energy Systems and Applications" }
           ],
           "Semester 8": [
-            { code: "KCS801", name: "Deep Learning", desc: "Neural Networks, CNN, RNN, Transformers, Hyperparameter Tuning" },
-            { code: "KCS802", name: "Big Data Analytics", desc: "Hadoop Architecture, MapReduce, HDFS, Apache Spark, NoSQL" }
+            { code: "KCS801", name: "Deep Learning", desc: "Neural Networks, Backpropagation, CNN, RNN, Transformers, Hyperparameters" },
+            { code: "KCS802", name: "Big Data Analytics", desc: "Hadoop Architecture, MapReduce, HDFS, Apache Spark, NoSQL Systems" }
           ]
         },
         "CSE (AI & ML)": {
-          ...commonFirstYear,
+          "Semester 1": commonSem1,
+          "Semester 2": commonSem2,
           "Semester 3": [
-            { code: "BCS301", name: "Data Structures", desc: "Arrays, Linked Lists, Trees, Graphs, Sorting & Searching" },
-            { code: "BCS302", name: "Computer Organization & Architecture", desc: "Bus Architecture, Control Unit, Pipelining, Memory Hierarchy" },
-            { code: "BCS303", name: "Discrete Mathematics", desc: "Mathematical Logic, Combinatorics, Graph Theory, Recurrence Relations" }
+            { code: "BCS301", name: "Data Structures", desc: "Arrays, Linked Lists, Stacks, Queues, Trees, BST, Graphs, Sorting & Hashing" },
+            { code: "BCS302", name: "Computer Organization & Architecture", desc: "Bus Architecture, Pipelining, Cache Memory, Vector Processing" },
+            { code: "BCS303", name: "Discrete Mathematics", desc: "Mathematical Logic, Combinatorics, Graph Theory, Recurrence Relations" },
+            { code: "BAS301", name: "Technical Communication", desc: "Communication Skills, Technical Presentation, Report Writing" }
           ],
           "Semester 4": [
-            { code: "BCS401", name: "Operating Systems", desc: "Process Synchronization, Virtual Memory, Disk Scheduling" },
-            { code: "BCS402", name: "Theory of Automata", desc: "Regular Languages, Context-Free Grammars, Turing Machines" },
-            { code: "AIML401", name: "Introduction to Artificial Intelligence", desc: "Heuristic Search, Alpha-Beta Pruning, State Space Search" }
+            { code: "BCS401", name: "Operating Systems", desc: "Process Synchronization, CPU Scheduling, Virtual Memory, Disk Management" },
+            { code: "BCS402", name: "Theory of Automata", desc: "Regular Languages, Context-Free Grammars, Pushdown Automata, Turing Machines" },
+            { code: "AIML401", name: "Introduction to Artificial Intelligence", desc: "Heuristic Search, Alpha-Beta Pruning, State Space Search, Knowledge Bases" }
           ],
           "Semester 5": [
-            { code: "BCS501", name: "Database Management Systems", desc: "Relational Calculus, Normal Forms, Indexing, Transaction Recovery" },
-            { code: "BCS502", name: "Design and Analysis of Algorithms", desc: "Greedy Strategies, Dynamic Programming, String Matching Algorithms" },
-            { code: "AIML501", name: "Machine Learning Techniques", desc: "Linear Regression, SVM, Decision Trees, K-Means Clustering" }
+            { code: "BCS501", name: "Database Management Systems", desc: "Relational Calculus, SQL, Normal Forms (1NF, 2NF, 3NF, BCNF), Transaction Recovery" },
+            { code: "BCS502", name: "Design and Analysis of Algorithms", desc: "Greedy Strategies, Dynamic Programming, Backtracking, NP-Complete Theory" },
+            { code: "AIML501", name: "Machine Learning Techniques", desc: "Linear/Logistic Regression, SVM, Decision Trees, K-Means Clustering, PCA" }
           ],
           "Semester 6": [
-            { code: "AIML601", name: "Deep Neural Networks", desc: "Backpropagation, CNNs for Vision, LSTMs for Sequences" },
-            { code: "AIML602", name: "Natural Language Processing", desc: "Word Embeddings, Tokenization, BERT, Transformer Architecture" },
-            { code: "BCS603", name: "Computer Networks", desc: "Data Link Layer, Routing Algorithms, Transport Protocols" }
+            { code: "AIML601", name: "Deep Neural Networks", desc: "Backpropagation, CNNs for Vision, LSTMs for Sequential Data, Autoencoders" },
+            { code: "AIML602", name: "Natural Language Processing", desc: "Word Embeddings, Tokenization, BERT, Transformer Architecture, Attention" },
+            { code: "BCS603", name: "Computer Networks", desc: "Data Link Layer, Routing Algorithms, TCP/UDP Protocols, Network Security" }
           ],
           "Semester 7": [
-            { code: "AIML701", name: "Computer Vision", desc: "Image Filtering, Edge Detection, Object Recognition, YOLO" },
-            { code: "AIML702", name: "Reinforcement Learning", desc: "Markov Decision Processes, Q-Learning, Policy Gradients" }
+            { code: "AIML701", name: "Computer Vision", desc: "Image Filtering, Edge Detection, Object Recognition, YOLO, Segmentation" },
+            { code: "AIML702", name: "Reinforcement Learning", desc: "Markov Decision Processes, Q-Learning, Deep Q-Networks, Policy Gradients" }
           ],
           "Semester 8": [
-            { code: "AIML801", name: "Generative AI & LLMs", desc: "Diffusion Models, Attention Mechanisms, Prompt Engineering" },
-            { code: "AIML802", name: "AI Ethics & Model Deployment", desc: "Model Fairness, Bias Mitigation, MLOps Pipelines" }
+            { code: "AIML801", name: "Generative AI & LLMs", desc: "Diffusion Models, Attention Mechanisms, Prompt Engineering, RAG Pipelines" },
+            { code: "AIML802", name: "AI Ethics & Model Deployment", desc: "Model Fairness, Bias Mitigation, MLOps, Model Monitoring" }
           ]
         },
         "Artificial Intelligence & Data Science (AIDS)": {
-          ...commonFirstYear,
+          "Semester 1": commonSem1,
+          "Semester 2": commonSem2,
           "Semester 3": [
-            { code: "ADS301", name: "Data Structures & Algorithms", desc: "Stacks, Queues, Trees, Graphs, Complexity Analysis" },
-            { code: "ADS302", name: "Statistical Methods for Data Science", desc: "Probability Distributions, Hypothesis Testing, Regression" }
+            { code: "ADS301", name: "Data Structures & Algorithms", desc: "Linear & Non-linear Structures, Trees, Graphs, Complexity Analysis" },
+            { code: "ADS302", name: "Statistical Methods for Data Science", desc: "Probability Distributions, Hypothesis Testing, Estimation, ANOVA" },
+            { code: "ADS303", name: "Computer System Architecture", desc: "Digital Logic, Registers, Instruction Sets, Memory Organization" }
           ],
           "Semester 4": [
-            { code: "ADS401", name: "Database Management & SQL", desc: "Schema Design, Queries, Transactions, Query Optimization" },
-            { code: "ADS402", name: "Foundations of Data Science", desc: "Data Wrangling, Exploratory Data Analysis, Pandas/NumPy" }
+            { code: "ADS401", name: "Database Management & SQL", desc: "Schema Design, Relational Algebra, Complex Queries, Transactions" },
+            { code: "ADS402", name: "Foundations of Data Science", desc: "Data Wrangling, Exploratory Data Analysis, Pandas/NumPy, Data Preprocessing" },
+            { code: "ADS403", name: "Operating Systems", desc: "Process Scheduling, Concurrency, Virtual Memory, File Systems" }
           ],
           "Semester 5": [
-            { code: "ADS501", name: "Machine Learning", desc: "Supervised & Unsupervised Learning, Ensemble Methods" },
-            { code: "ADS502", name: "Data Mining & Warehousing", desc: "ETL Processes, OLAP Cubes, Association Rule Mining" }
+            { code: "ADS501", name: "Machine Learning", desc: "Supervised & Unsupervised Learning, Ensemble Methods, Model Evaluation" },
+            { code: "ADS502", name: "Data Mining & Warehousing", desc: "ETL Processes, OLAP Cubes, Association Rule Mining, Cluster Analysis" },
+            { code: "ADS503", name: "Algorithm Analysis & Design", desc: "Divide & Conquer, Dynamic Programming, Greedy Methods, Graphs" }
           ],
           "Semester 6": [
-            { code: "ADS601", name: "Big Data Analytics", desc: "MapReduce, Spark, Kafka, Distributed Processing" }
+            { code: "ADS601", name: "Big Data Analytics", desc: "Hadoop Ecosystem, MapReduce, Spark Streaming, Distributed File Systems" },
+            { code: "ADS602", name: "Data Visualization & BI", desc: "Tableau, PowerBI, Dashboard Design, Storytelling with Data" }
           ],
           "Semester 7": [
-            { code: "ADS701", name: "Deep Learning & Neural Networks", desc: "Perceptrons, Deep MLPs, CNNs, Optimization Techniques" }
+            { code: "ADS701", name: "Deep Learning & Neural Networks", desc: "Multi-layer Perceptrons, CNNs, Recurrent Models, Training Optimization" },
+            { code: "ADS702", name: "Business Analytics", desc: "Prescriptive Analytics, Customer Segmentation, Market Basket Analysis" }
           ],
           "Semester 8": [
-            { code: "ADS801", name: "Predictive Analytics", desc: "Time Series Forecasting, Risk Assessment Models" }
+            { code: "ADS801", name: "Predictive Analytics", desc: "Time Series Forecasting, ARIMA, Risk Assessment Models" }
           ]
         },
         "Information Technology": {
-          ...commonFirstYear,
+          "Semester 1": commonSem1,
+          "Semester 2": commonSem2,
           "Semester 3": [
-            { code: "KIT301", name: "Data Structures & Algorithms", desc: "Linear & Non-linear Data Structures, Sorting, Searching" },
-            { code: "KIT302", name: "Computer Organization", desc: "CPU Architecture, Memory Interfacing, Data Transfer Schemes" }
+            { code: "KIT301", name: "Data Structures & Algorithms", desc: "Stacks, Queues, Linked Lists, Trees, Graphs, Sorting & Searching" },
+            { code: "KIT302", name: "Computer Organization", desc: "CPU Architecture, Memory Interfacing, Bus Standards, Pipelining" },
+            { code: "KIT303", name: "Discrete Structures", desc: "Sets, Functions, Logic, Groups, Lattices, Graph Theory" }
           ],
           "Semester 4": [
-            { code: "KIT401", name: "Operating Systems", desc: "Process Management, Deadlocks, Virtual Memory Systems" },
-            { code: "KIT402", name: "Object Oriented Programming (Java)", desc: "Classes, Inheritance, Interfaces, Multithreading, Collections" }
+            { code: "KIT401", name: "Operating Systems", desc: "Process Management, Deadlocks, Memory Allocation, I/O Systems" },
+            { code: "KIT402", name: "Object Oriented Programming (Java)", desc: "Classes, Objects, Inheritance, Multithreading, Exception Handling, Collections" },
+            { code: "KIT403", name: "Theory of Automata", desc: "Finite Automata, Regular Languages, CFG, Pushdown Automata, Turing Machines" }
           ],
           "Semester 5": [
-            { code: "KIT501", name: "Database Management Systems", desc: "Relational Models, SQL Queries, Normalization, Recovery" },
-            { code: "KIT502", name: "Design & Analysis of Algorithms", desc: "Divide & Conquer, Greedy, Dynamic Programming, Graphs" }
+            { code: "KIT501", name: "Database Management Systems", desc: "Relational Models, SQL, Normalization, Query Processing, Concurrency Control" },
+            { code: "KIT502", name: "Design & Analysis of Algorithms", desc: "Divide & Conquer, Greedy Algorithms, Dynamic Programming, Branch and Bound" },
+            { code: "KIT503", name: "E-Commerce", desc: "Electronic Payment Systems, Security, Supply Chain Management" }
           ],
           "Semester 6": [
-            { code: "KIT601", name: "Web Technology & Frameworks", desc: "Full Stack Development, Node.js, Express, REST APIs" },
-            { code: "KIT602", name: "Computer Networks", desc: "Routing, Switching, IP Protocols, Transport Layer Security" }
+            { code: "KIT601", name: "Web Technology & Frameworks", desc: "Full Stack Architecture, Node.js, Express, REST APIs, Authentication" },
+            { code: "KIT602", name: "Computer Networks", desc: "Routing, Switching, IP Protocols, Transport Layer Security, Sockets" }
           ],
           "Semester 7": [
-            { code: "KIT701", name: "Cryptography & Network Security", desc: "Symmetric/Asymmetric Ciphers, RSA, Hash Functions" }
+            { code: "KIT701", name: "Cryptography & Network Security", desc: "Symmetric & Asymmetric Ciphers, RSA, Hash Functions, Digital Signatures" },
+            { code: "KIT702", name: "Cloud Computing", desc: "Virtualization, Cloud Storage, Distributed Computing, Scalability" }
           ],
           "Semester 8": [
-            { code: "KIT801", name: "Mobile Computing", desc: "Cellular Networks, GSM, Mobile IP, Wireless Security" }
+            { code: "KIT801", name: "Mobile Computing", desc: "Cellular Networks, GSM, Mobile IP, Wireless Security, Mobile App Architecture" }
           ]
         },
         "Electronics & Communication (ECE)": {
-          ...commonFirstYear,
+          "Semester 1": commonSem1,
+          "Semester 2": commonSem2,
           "Semester 3": [
             { code: "KEC301", name: "Electronic Devices & Circuits", desc: "Semiconductor Physics, BJT/FET Amplifiers, Frequency Response" },
-            { code: "KEC302", name: "Digital System Design", desc: "Boolean Algebra, Combinational & Sequential Circuits, FSM" }
+            { code: "KEC302", name: "Digital System Design", desc: "Boolean Algebra, Combinational Logic, Flip-Flops, Counters, FSM" },
+            { code: "KEC303", name: "Network Analysis & Synthesis", desc: "Network Theorems, Transient Analysis, Two-Port Networks, Filter Synthesis" }
           ],
           "Semester 4": [
-            { code: "KEC401", name: "Communication Engineering", desc: "AM, FM, Modulation Systems, Pulse Modulation" },
-            { code: "KEC402", name: "Analog Circuits", desc: "Feedback Amplifiers, Oscillators, Operational Amplifiers" }
+            { code: "KEC401", name: "Communication Engineering", desc: "AM, FM, Angle Modulation, Pulse Modulation, Noise Analysis" },
+            { code: "KEC402", name: "Analog Circuits", desc: "Feedback Amplifiers, Oscillators, Operational Amplifiers, Waveform Generators" },
+            { code: "KEC403", name: "Signals & Systems", desc: "Continuous & Discrete Signals, Fourier Transform, Z-Transform, LTI Systems" }
           ],
           "Semester 5": [
-            { code: "KEC501", name: "Integrated Circuits", desc: "555 Timer, PLL, Voltage Regulators, Active Filters" },
-            { code: "KEC502", name: "Microprocessor & Microcontroller", desc: "8051 Architecture, Assembly Programming, Interfacing" }
+            { code: "KEC501", name: "Integrated Circuits", desc: "555 Timer, PLL, Voltage Regulators, Active Filters, DAC/ADC" },
+            { code: "KEC502", name: "Microprocessor & Microcontroller", desc: "8085/8086 & 8051 Architecture, Assembly Programming, Interfacing" },
+            { code: "KEC503", name: "Digital Signal Processing", desc: "DFT, FFT, IIR/FIR Filter Design, Finite Word Length Effects" }
           ],
           "Semester 6": [
-            { code: "KEC601", name: "Antennas and Wave Propagation", desc: "Radiation Principles, Antenna Arrays, Wave Guides" }
+            { code: "KEC601", name: "Antennas and Wave Propagation", desc: "Radiation Principles, Dipole Antennas, Antenna Arrays, Waveguides" },
+            { code: "KEC602", name: "Control Systems", desc: "Transfer Functions, Root Locus, Bode Plots, Nyquist Stability, State Space" },
+            { code: "KEC603", name: "Data Communication Networks", desc: "Transmission Media, Error Detection, Flow Control, Network Layers" }
           ],
           "Semester 7": [
-            { code: "KEC701", name: "VLSI Design", desc: "MOS Inverter, Stick Diagrams, Layout Rules, CMOS Logic" }
+            { code: "KEC701", name: "VLSI Design", desc: "MOS Inverter, Stick Diagrams, Layout Rules, CMOS Combinational Logic" },
+            { code: "KEC702", name: "Optical Communication", desc: "Optical Fibers, Sources, Detectors, WDM, Optical Link Design" }
           ],
           "Semester 8": [
-            { code: "KEC801", name: "Wireless & Mobile Communication", desc: "Cellular Concepts, Handover, 4G/5G Standards" }
+            { code: "KEC801", name: "Wireless & Mobile Communication", desc: "Cellular Concepts, Handover, Fading Channels, 4G/5G Standards" }
           ]
         }
       };
@@ -359,8 +389,8 @@
       const sems = Object.keys(curriculum[branch] || {});
 
       sSel.innerHTML = sems.map(s => `<option value="${s}">${s}</option>`).join('');
-      if (sems.includes("Semester 5")) {
-        sSel.value = "Semester 5";
+      if (sems.includes("Semester 3")) {
+        sSel.value = "Semester 3";
       } else if (sems.length > 0) {
         sSel.value = sems[0];
       }
