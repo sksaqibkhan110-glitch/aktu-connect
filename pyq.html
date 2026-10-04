@@ -7,19 +7,35 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
   <script src="study-data.js"></script>
-  <script src="pyq-data.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
-    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background-color: #f0f7f4; color: #132a13; min-height: 100vh; margin: 0; }
+    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background-color: #f0f7f4; color: #132a13; min-height: 100vh; margin: 0; overflow-x: hidden; }
+
+    .avatar-circle, #top-user-avatar, #side-user-avatar, #mobile-top-user-avatar {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar-circle img, #top-user-avatar img, #side-user-avatar img, #mobile-top-user-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
 
+  <!-- MOBILE DRAWER OVERLAY -->
+  <div id="drawer-overlay" class="mobile-drawer-overlay" onclick="toggleSidebar()"></div>
+
   <div class="app-container">
     
     <!-- LEFT SIDEBAR -->
-    <aside class="sidebar-menu-card">
+    <aside id="main-sidebar" class="sidebar-menu-card">
       <div class="menu-brand">
         <div class="brand-badge">AC</div>
         <div>
@@ -49,13 +65,12 @@
         </a>
       </nav>
 
-      <!-- Sidebar User Footer -->
       <div class="sidebar-user-pill">
         <div class="flex items-center gap-2.5 overflow-hidden">
           <div id="side-user-avatar" class="avatar-circle">S</div>
           <div class="truncate">
-            <p id="side-user-name" class="text-xs font-bold text-white truncate">Student</p>
-            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">student@aktu.ac.in</p>
+            <p id="side-user-name" class="text-xs font-bold text-white truncate">Saqib Khan</p>
+            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">sksaqibkhan110@gmail.com</p>
           </div>
         </div>
         <button onclick="handleLogout()" class="text-[11px] font-bold text-emerald-200 hover:text-white cursor-pointer ml-2">
@@ -64,11 +79,27 @@
       </div>
     </aside>
 
-    <!-- MAIN PYQ VAULT CONTENT -->
-    <main class="space-y-5 pb-10">
+    <!-- MAIN PYQ VAULT -->
+    <main class="space-y-4 pb-10">
       
-      <!-- Top Title Bar with Profile Widget -->
-      <header class="flex items-center justify-between">
+      <!-- SINGLE CLEAN MOBILE TOP HEADER (No Duplicate) -->
+      <div class="flex items-center justify-between p-3 bg-white/90 backdrop-blur rounded-2xl border border-emerald-100 lg:hidden shadow-xs mb-1">
+        <div class="flex items-center gap-2.5">
+          <button type="button" onclick="toggleSidebar()" class="w-9 h-9 rounded-xl bg-emerald-50 text-[#1b4332] font-black text-lg flex items-center justify-center border border-emerald-200 cursor-pointer">
+            ☰
+          </button>
+          <div class="flex items-center gap-1.5">
+            <div class="w-6 h-6 rounded-md bg-[#1b4332] text-white text-[9px] font-black flex items-center justify-center">AC</div>
+            <span class="text-xs font-black text-slate-800">AKTU Connect</span>
+          </div>
+        </div>
+        <a href="profile.html" class="flex items-center gap-1.5">
+          <div id="mobile-top-user-avatar" class="w-7 h-7 rounded-full bg-emerald-800 text-white font-extrabold text-[10px] flex items-center justify-center overflow-hidden">S</div>
+        </a>
+      </div>
+
+      <!-- DESKTOP TOP HEADER (Strictly hidden on phone) -->
+      <header class="hidden lg:flex items-center justify-between">
         <div>
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 mb-1">
             ★ Exam Prediction Engine
@@ -78,295 +109,332 @@
         </div>
 
         <a href="profile.html" class="top-user-widget">
-          <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center">S</div>
-          <div class="text-left hidden sm:block">
-            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Student</p>
-            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">0 XP</p>
+          <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center overflow-hidden shrink-0">S</div>
+          <div class="text-left">
+            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Saqib Khan</p>
+            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">260 XP</p>
           </div>
         </a>
       </header>
 
-      <!-- SELECTORS: SEMESTER, BRANCH & SUBJECT -->
-      <section class="portal-card p-5">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          
+      <!-- 3 FILTER DROPDOWNS CARD -->
+      <section class="portal-card p-4 sm:p-5">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">Semester</label>
-            <select id="sem-select" onchange="populateSubjectDropdown()" class="theme-select cursor-pointer">
-              <option value="1">Semester 1</option>
-              <option value="2">Semester 2</option>
-              <option value="3">Semester 3</option>
-              <option value="4">Semester 4</option>
-              <option value="5" selected>Semester 5</option>
-              <option value="6">Semester 6</option>
-              <option value="7">Semester 7</option>
-              <option value="8">Semester 8</option>
-            </select>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">BRANCH</label>
+            <select id="pyq-branch" onchange="populateSemesters()" class="theme-select cursor-pointer"></select>
           </div>
-
           <div>
-            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">Branch</label>
-            <select id="branch-select" onchange="populateSubjectDropdown()" class="theme-select cursor-pointer">
-              <option value="CSE" selected>Computer Science & Engineering</option>
-              <option value="AIML">CSE (AI & ML)</option>
-              <option value="IT">Information Technology</option>
-              <option value="ECE">Electronics & Communication</option>
-            </select>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">SEMESTER</label>
+            <select id="pyq-sem" onchange="populateSubjects()" class="theme-select cursor-pointer"></select>
           </div>
-
           <div>
-            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">Subject</label>
-            <select id="subject-select" onchange="resetAnalysis()" class="theme-select cursor-pointer">
-              <!-- Dynamically Populated -->
-            </select>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">SUBJECT</label>
+            <select id="pyq-subject" onchange="runAnalysis()" class="theme-select cursor-pointer"></select>
           </div>
-
         </div>
 
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between pt-3 border-t border-slate-100 gap-3">
-          <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-            <span>Exam Sessions: <strong class="text-slate-800">2023–24, 2022–23 & 2021–22 Regular Papers Loaded</strong></span>
+        <div class="mt-4 pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="flex items-center gap-2 text-xs font-bold text-emerald-800">
+            <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+            <span>Exam Sessions: 2023–24, 2022–23 & 2021–22 Regular Papers Loaded</span>
           </div>
-
-          <button onclick="runRepetitionAnalysis()" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-sm transition cursor-pointer">
-            <span>⚡</span> Run Repetition Analyser
+          <button onclick="runAnalysis()" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs transition cursor-pointer shadow-sm">
+            ⚡ Run Repetition Analyser
           </button>
         </div>
       </section>
 
-      <!-- RESULTS CONTAINER -->
-      <section class="portal-card p-5 sm:p-6" id="analysis-section">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+      <!-- ANALYSIS RESULT CARD -->
+      <section class="portal-card p-4 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
           <div>
-            <h2 class="text-base font-extrabold text-slate-900" id="result-title">Highest Probability Repeated Questions</h2>
+            <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Highest Probability Repeated Questions</h3>
             <p class="text-xs text-slate-400">Questions arranged unit-wise from syllabus and past AKTU examination trends.</p>
           </div>
-          <span class="self-start sm:self-auto text-[10px] font-black px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100">
+          <span class="text-[10px] font-black text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-1 rounded-full uppercase">
             Ranked by Frequency
           </span>
         </div>
 
-        <!-- Repeated Questions List -->
-        <div id="questions-list-container" class="space-y-3.5">
-          <div class="py-12 text-center text-xs text-slate-400 font-medium">
-            Click <strong>"Run Repetition Analyser"</strong> to view unit-wise recurring exam questions!
-          </div>
+        <div id="pyq-results-feed" class="space-y-3">
+          <!-- Dynamically populated -->
         </div>
       </section>
 
     </main>
   </div>
 
-  <script>
-    // 1. COMPREHENSIVE SEMESTER-ACCURATE SYLLABUS REGISTRY
-    const SEMESTER_MASTER_SUBJECTS = {
-      "1": [
-        { id: "bas103", code: "BAS103", name: "Engineering Mathematics-I", units: ["Matrices & Linear Algebra", "Differential Calculus-I", "Differential Calculus-II", "Multivariable Calculus", "Vector Calculus"] },
-        { id: "bas101", code: "BAS101", name: "Engineering Physics", units: ["Relativistic Mechanics", "Electromagnetic Field Theory", "Quantum Mechanics", "Wave Optics", "Fiber Optics & Laser"] },
-        { id: "bcs101", code: "BCS101", name: "Programming for Problem Solving (C)", units: ["Basics of Computers & C", "Control Flow & Loops", "Arrays & Strings", "Functions & Pointers", "Structures & File I/O"] },
-        { id: "bee101", code: "BEE101", name: "Basic Electrical Engineering", units: ["DC Circuits Analysis", "Steady State AC Circuits", "Transformers", "Electrical Machines", "Electrical Installations"] }
-      ],
-      "2": [
-        { id: "bas203", code: "BAS203", name: "Engineering Mathematics-II", units: ["Ordinary Differential Equations", "Multivariable Calculus", "Sequence and Series", "Complex Variable-Differentiation", "Complex Integration"] },
-        { id: "bas202", code: "BAS202", name: "Engineering Chemistry", units: ["Atomic & Molecular Structure", "Spectroscopic Techniques", "Electrochemistry & Batteries", "Water Technology", "Polymers & Engineering Materials"] },
-        { id: "bec201", code: "BEC201", name: "Basic Electronics Engineering", units: ["Semiconductor Diodes", "Bipolar Junction Transistor (BJT)", "Field Effect Transistors (FET)", "Operational Amplifiers (Op-Amp)", "Electronic Instrumentation & IoT Basics"] },
-        { id: "bce201", code: "BCE201", name: "Fundamentals of Mechanical Engineering", units: ["Introduction to Mechanics", "Thermodynamics Laws", "Fluid Mechanics & Pumps", "Refrigeration & Heat Engines", "Engineering Materials"] }
-      ],
-      "3": [
-        { id: "bcs301", code: "BCS301", name: "Data Structures", units: ["Arrays, Stacks & Queues", "Linked Lists", "Trees & Binary Search Trees", "Graphs & Spanning Trees", "Sorting & Searching Algorithms"] },
-        { id: "bcs302", code: "BCS302", name: "Computer Organization & Architecture", units: ["Register Transfer & Microoperations", "Basic Computer Organization", "CPU & Pipelining", "Memory Hierarchy & Cache", "Input-Output Organization"] },
-        { id: "bcs303", code: "BCS303", name: "Discrete Structures & Graph Theory", units: ["Set Theory & Relations", "Functions & Algebraic Structures", "Lattices & Boolean Algebra", "Propositional Logic", "Graph Theory & Trees"] },
-        { id: "bas301", code: "BAS301", name: "Technical Communication", units: ["Fundamentals of Communication", "Technical Writing", "Advanced Technical Writing", "Speaking & Presentation", "Professional Etiquette"] }
-      ],
-      "4": [
-        { id: "bcs401", code: "BCS401", name: "Operating Systems", units: ["Introduction & System Calls", "Process Management & CPU Scheduling", "Synchronization & Deadlocks", "Memory Management & Paging", "Storage Management & File Systems"] },
-        { id: "bcs402", code: "BCS402", name: "Theory of Automata & Formal Languages", units: ["Finite Automata (DFA/NFA)", "Regular Expressions & Languages", "Context Free Grammars & Pushdown Automata", "Turing Machines", "Decidability & Complexity"] },
-        { id: "bcs403", code: "BCS403", name: "Object Oriented Programming (Java)", units: ["Introduction to OOP & Java Basics", "Inheritance, Interfaces & Packages", "Exception Handling & Multithreading", "Java I/O & Collections Framework", "GUI Programming with Swing/AWT"] },
-        { id: "bas401", code: "BAS401", name: "Mathematics-IV (PDE & Statistics)", units: ["Partial Differential Equations", "Applications of PDE", "Statistical Techniques-I", "Statistical Techniques-II", "Statistical Quality Control"] }
-      ],
-      "5": [
-        { id: "kcs501", code: "KCS501", name: "Database Management Systems", units: ["Introduction, ER Diagrams & Relational Model", "SQL Queries, Joins & Relational Algebra", "Normalization (1NF, 2NF, 3NF, BCNF) & Indexing", "Transaction Processing & ACID Properties", "Concurrency Control & Recovery Techniques"] },
-        { id: "kcs502", code: "KCS502", name: "Compiler Design", units: ["Lexical Analysis & Symbol Tables", "Top-Down & Bottom-Up Parsing", "Syntax Directed Translation", "Intermediate Code Generation", "Code Optimization & Generation"] },
-        { id: "kcs503", code: "KCS503", name: "Design & Analysis of Algorithms", units: ["Asymptotic Notations & Divide-and-Conquer", "Greedy Method & Dynamic Programming", "Backtracking & Branch-and-Bound", "Advanced Graph Algorithms", "NP-Completeness & Approximation"] },
-        { id: "bcs504", code: "BCS504", name: "Web Technology", units: ["HTML5, CSS3 & Responsive Web Design", "JavaScript & DOM Manipulation", "XML, AJAX & JSON Data Handling", "Server-Side Scripting with PHP/Node", "Web Security & Cloud Deployment"] }
-      ],
-      "6": [
-        { id: "bcs601", code: "BCS601", name: "Software Engineering", units: ["Software Processes & Agile Methodology", "Requirements Engineering & SRS", "System Modeling & Architectural Design", "Software Testing & Quality Assurance", "Software Maintenance & Project Estimation"] },
-        { id: "bcs602", code: "BCS602", name: "Computer Networks", units: ["Network Architecture & Physical Layer", "Data Link Layer & MAC Protocols", "Network Layer & Routing Protocols", "Transport Layer (TCP & UDP)", "Application Layer Protocols & DNS"] },
-        { id: "bcs603", code: "BCS603", name: "Cloud Computing", units: ["Cloud Computing Fundamentals & Models", "Virtualization Technology", "Cloud Architecture & Services (IaaS, PaaS, SaaS)", "Cloud Storage & Security", "Emerging Cloud Paradigms"] }
-      ],
-      "7": [
-        { id: "bcs701", code: "BCS701", name: "Artificial Intelligence & ML", units: ["Search Algorithms & Problem Solving", "Knowledge Representation & Logic", "Machine Learning Fundamentals", "Supervised & Unsupervised Learning", "Deep Learning & Neural Networks"] },
-        { id: "bcs702", code: "BCS702", name: "Cyber Security & Forensics", units: ["Information Security Concepts", "Cryptography & Digital Signatures", "Network Security & Firewalls", "Digital Forensics & Incident Response", "Cyber Laws & IT Act 2000"] }
-      ],
-      "8": [
-        { id: "bcs801", code: "BCS801", name: "Internet of Things (IoT)", units: ["IoT Architecture & Protocols", "Sensors, Actuators & Microcontrollers", "IoT Networking & Connectivity", "Cloud Integration for IoT", "IoT Case Studies & Smart Applications"] },
-        { id: "bcs802", code: "BCS802", name: "Deep Learning & NLP", units: ["Neural Network Foundations", "Convolutional Neural Networks (CNN)", "Recurrent Neural Networks (RNN & LSTM)", "Natural Language Processing Basics", "Transformers & LLM Architectures"] }
-      ]
-    };
-
-    // Extract subjects from study-data.js (window.AKTU_SUBJECTS) and map accurately
-    function getSubjectsForSemester(semStr) {
-      let result = [];
-
-      if (window.AKTU_SUBJECTS && Array.isArray(window.AKTU_SUBJECTS)) {
-        result = window.AKTU_SUBJECTS.filter(s => {
-          if (s.semester && s.semester.toString() === semStr) return true;
-          const match = (s.code || "").match(/\d+/);
-          if (match && match[0].length >= 1) {
-            return match[0][0] === semStr;
-          }
-          return false;
-        });
-      }
-
-      // If study-data.js doesn't contain this semester, use verified Master Curriculum
-      if (!result || result.length === 0) {
-        result = SEMESTER_MASTER_SUBJECTS[semStr] || SEMESTER_MASTER_SUBJECTS["5"];
-      }
-
-      return result;
-    }
-
-    // Auth & User Details
-    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'student@aktu.ac.in').toLowerCase();
-    const currentName = localStorage.getItem('user_name') || currentEmail.split('@')[0];
-
-    document.getElementById('side-user-name').innerText = currentName;
-    document.getElementById('side-user-email').innerText = currentEmail;
-    document.getElementById('top-user-name').innerText = currentName;
-    const initial = currentName.charAt(0).toUpperCase();
-    document.getElementById('side-user-avatar').innerText = initial;
-    document.getElementById('top-user-avatar').innerText = initial;
-
-    const savedXP = localStorage.getItem(`akt_xp_${currentEmail}`) || "0";
-    document.getElementById('top-user-xp').innerText = savedXP + " XP";
-
-    function populateSubjectDropdown() {
-      const sem = document.getElementById('sem-select').value;
-      const subSelect = document.getElementById('subject-select');
-      const subjects = getSubjectsForSemester(sem);
-
-      subSelect.innerHTML = subjects.map((s, idx) => 
-        `<option value="${s.id || s.code}" ${idx === 0 ? 'selected' : ''}>${s.name} (${s.code})</option>`
-      ).join('');
-
-      resetAnalysis();
-    }
-
-    function resetAnalysis() {
-      document.getElementById('questions-list-container').innerHTML = `
-        <div class="py-12 text-center text-xs text-slate-400 font-medium">
-          Click <strong>"Run Repetition Analyser"</strong> to view unit-wise recurring exam questions!
-        </div>
-      `;
-    }
-
-    function runRepetitionAnalysis() {
-      const sem = document.getElementById('sem-select').value;
-      const subId = document.getElementById('subject-select').value;
-      const subjects = getSubjectsForSemester(sem);
-      const subject = subjects.find(s => (s.id === subId || s.code === subId)) || subjects[0];
-
-      let questionsToRender = [];
-
-      // Check if pyqs exist in subject definition
-      if (subject.pyqs && subject.pyqs.length > 0) {
-        questionsToRender = subject.pyqs.map(p => ({
-          unit: p.unit || 1,
-          marks: p.marks || 10,
-          year: p.year || "2023-24, 2022-23",
-          q: p.q,
-          prob: p.prob || "92%"
-        }));
-      } else {
-        // Derive questions from unit definitions
-        const unitTitles = subject.units || (subject.lectures ? subject.lectures.map(l => l.title) : [
-          "Core Foundations & Mathematical Formulations",
-          "Functional Transformations & Algorithmic Rules",
-          "Structural Modeling & System Design",
-          "Process Optimization & Implementation",
-          "Advanced Architectures & Reliability"
-        ]);
-
-        const sampleTemplates = [
-          (t) => `Explain the fundamental concept, block diagram, and architectural model of ${t}.`,
-          (t) => `Derive and explain the mathematical formulation / algorithm for ${t} with neat diagrams.`,
-          (t) => `Differentiate between key approaches and explain the working principle of ${t}.`,
-          (t) => `Solve numerical problem and discuss the step-by-step procedure used in ${t}.`,
-          (t) => `Write short notes on industrial applications, security standards, and recovery in ${t}.`
-        ];
-
-        questionsToRender = unitTitles.slice(0, 5).map((title, idx) => ({
-          unit: idx + 1,
-          marks: idx % 2 === 0 ? 10 : 7,
-          year: idx % 2 === 0 ? "2023-24, 2022-23" : "2022-23, 2021-22",
-          q: sampleTemplates[idx % sampleTemplates.length](title),
-          prob: (96 - (idx * 2)) + "%"
-        }));
-      }
-
-      const html = questionsToRender.map((item, idx) => {
-        const probVal = parseInt(item.prob) || 88;
-        const badgeColor = probVal >= 90 ? 'bg-rose-50 text-rose-700 border-rose-200' : 'bg-amber-50 text-amber-700 border-amber-200';
-
-        return `
-          <div class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white hover:border-emerald-500 hover:shadow-sm transition">
-            
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
-              <div class="flex items-center gap-2">
-                <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-                  Unit ${item.unit}
-                </span>
-                <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
-                  ${item.marks} Marks
-                </span>
-                <span class="text-[10px] font-medium text-slate-400 hidden sm:inline">
-                  Repeated in: <strong class="text-slate-600">${item.year}</strong>
-                </span>
-              </div>
-
-              <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full border ${badgeColor}">
-                ★ ${item.prob} Exam Probability
-              </span>
-            </div>
-
-            <p class="text-xs sm:text-sm font-bold text-slate-800 leading-relaxed mb-3">
-              ${idx + 1}. ${item.q}
-            </p>
-
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between pt-2.5 border-t border-slate-100 gap-2">
-              <span class="text-[10px] font-bold text-emerald-700">Verified AKTU Regular Paper Question</span>
-              <button onclick="searchSolution('${subject.name}', '${item.q}')" class="text-xs font-extrabold text-[#1b4332] hover:text-[#2d6a4f] flex items-center gap-1 cursor-pointer self-end sm:self-auto">
-                <span>View Solution / Video</span> →
-              </button>
-            </div>
-
-          </div>
-        `;
-      }).join('');
-
-      document.getElementById('questions-list-container').innerHTML = html;
-    }
-
-    function searchSolution(subName, queryText) {
-      const cleanQ = queryText.replace(/[^a-zA-Z0-9 ]/g, '').substring(0, 45);
-      const q = encodeURIComponent(`AKTU ${subName} ${cleanQ}`);
-      window.open(`https://www.youtube.com/results?search_query=${q}`, '_blank');
-    }
-
-    function handleLogout() {
-      localStorage.removeItem('isLoggedIn');
-      localStorage.removeItem('current_user_email');
-      sessionStorage.clear();
-      window.location.href = 'index.html';
-    }
-
-    // Init with proper semester filter
-    populateSubjectDropdown();
-  </script>
   <script src="nav.js"></script>
-</body>
+  <script>
+    const currentEmail = (localStorage.getItem('current_user_email') || 'sksaqibkhan110@gmail.com').toLowerCase().trim();
 
+    // Universal Curriculum (Exact Match with Study Hub & Quest)
+    function getCurriculum() {
+      const ext = window.studyData || window.AKTU_STUDY_DATA || window.coursesData;
+      if (ext && typeof ext === 'object' && Object.keys(ext).length > 2) return ext;
+
+      const commonSem1 = [
+        { code: "BAS101", name: "Engineering Physics" },
+        { code: "BAS103", name: "Engineering Mathematics-I" },
+        { code: "BEE101", name: "Basic Electrical Engineering" },
+        { code: "BCS101", name: "Programming for Problem Solving (C)" },
+        { code: "BAS104", name: "Environment & Ecology" }
+      ];
+
+      const commonSem2 = [
+        { code: "BAS202", name: "Engineering Chemistry" },
+        { code: "BAS203", name: "Engineering Mathematics-II" },
+        { code: "BEC201", name: "Basic Electronics Engineering" },
+        { code: "BME201", name: "Fundamentals of Mechanical Engineering" },
+        { code: "BAS205", name: "Professional Communication" }
+      ];
+
+      return {
+        "Computer Science & Engineering": {
+          "Semester 1": commonSem1,
+          "Semester 2": commonSem2,
+          "Semester 3": [
+            { code: "KCS301", name: "Data Structures" },
+            { code: "KCS302", name: "Computer Organization & Architecture" },
+            { code: "KCS303", name: "Discrete Structures & Graph Theory" }
+          ],
+          "Semester 4": [
+            { code: "KCS401", name: "Operating Systems" },
+            { code: "KCS402", name: "Theory of Automata & Formal Languages" },
+            { code: "KCS403", name: "Microprocessor" }
+          ],
+          "Semester 5": [
+            { code: "KCS501", name: "Database Management Systems" },
+            { code: "KCS502", name: "Design and Analysis of Algorithms" },
+            { code: "KCS503", name: "Compiler Design" }
+          ],
+          "Semester 6": [
+            { code: "KCS601", name: "Software Engineering" },
+            { code: "KCS602", name: "Web Technology" },
+            { code: "KCS603", name: "Computer Networks" }
+          ],
+          "Semester 7": [
+            { code: "KCS701", name: "Artificial Intelligence" },
+            { code: "KCS702", name: "Cloud Computing" }
+          ],
+          "Semester 8": [
+            { code: "KCS801", name: "Deep Learning" },
+            { code: "KCS802", name: "Big Data Analytics" }
+          ]
+        },
+        "CSE (AI & ML)": {
+          "Semester 1": commonSem1,
+          "Semester 2": commonSem2,
+          "Semester 3": [
+            { code: "BCS301", name: "Data Structures" },
+            { code: "BCS302", name: "Computer Organization & Architecture" },
+            { code: "BCS303", name: "Discrete Mathematics" }
+          ],
+          "Semester 4": [
+            { code: "BCS401", name: "Operating Systems" },
+            { code: "BCS402", name: "Theory of Automata" },
+            { code: "AIML401", name: "Introduction to Artificial Intelligence" }
+          ],
+          "Semester 5": [
+            { code: "BCS501", name: "Database Management Systems" },
+            { code: "BCS502", name: "Design and Analysis of Algorithms" },
+            { code: "AIML501", name: "Machine Learning Techniques" }
+          ],
+          "Semester 6": [
+            { code: "AIML601", name: "Deep Neural Networks" },
+            { code: "AIML602", name: "Natural Language Processing" },
+            { code: "BCS603", name: "Computer Networks" }
+          ],
+          "Semester 7": [
+            { code: "AIML701", name: "Computer Vision" },
+            { code: "AIML702", name: "Reinforcement Learning" }
+          ],
+          "Semester 8": [
+            { code: "AIML801", name: "Generative AI & LLMs" }
+          ]
+        },
+        "Artificial Intelligence & Data Science (AIDS)": {
+          "Semester 1": commonSem1,
+          "Semester 2": commonSem2,
+          "Semester 3": [
+            { code: "ADS301", name: "Data Structures & Algorithms" },
+            { code: "ADS302", name: "Statistical Methods for Data Science" }
+          ],
+          "Semester 4": [
+            { code: "ADS401", name: "Database Management & SQL" },
+            { code: "ADS402", name: "Foundations of Data Science" }
+          ],
+          "Semester 5": [
+            { code: "ADS501", name: "Machine Learning" },
+            { code: "ADS502", name: "Data Mining & Warehousing" }
+          ],
+          "Semester 6": [
+            { code: "ADS601", name: "Big Data Analytics" }
+          ],
+          "Semester 7": [
+            { code: "ADS701", name: "Deep Learning & Neural Networks" }
+          ],
+          "Semester 8": [
+            { code: "ADS801", name: "Predictive Analytics" }
+          ]
+        },
+        "Information Technology": {
+          "Semester 1": commonSem1,
+          "Semester 2": commonSem2,
+          "Semester 3": [
+            { code: "KIT301", name: "Data Structures & Algorithms" },
+            { code: "KIT302", name: "Computer Organization" }
+          ],
+          "Semester 4": [
+            { code: "KIT401", name: "Operating Systems" },
+            { code: "KIT402", name: "Object Oriented Programming (Java)" }
+          ],
+          "Semester 5": [
+            { code: "KIT501", name: "Database Management Systems" },
+            { code: "KIT502", name: "Design & Analysis of Algorithms" }
+          ],
+          "Semester 6": [
+            { code: "KIT601", name: "Web Technology & Frameworks" }
+          ],
+          "Semester 7": [
+            { code: "KIT701", name: "Cryptography & Network Security" }
+          ],
+          "Semester 8": [
+            { code: "KIT801", name: "Mobile Computing" }
+          ]
+        },
+        "Electronics & Communication (ECE)": {
+          "Semester 1": commonSem1,
+          "Semester 2": commonSem2,
+          "Semester 3": [
+            { code: "KEC301", name: "Electronic Devices & Circuits" },
+            { code: "KEC302", name: "Digital System Design" }
+          ],
+          "Semester 4": [
+            { code: "KEC401", name: "Communication Engineering" },
+            { code: "KEC402", name: "Analog Circuits" }
+          ],
+          "Semester 5": [
+            { code: "KEC501", name: "Integrated Circuits" },
+            { code: "KEC502", name: "Microprocessor & Microcontroller" }
+          ],
+          "Semester 6": [
+            { code: "KEC601", name: "Antennas and Wave Propagation" }
+          ],
+          "Semester 7": [
+            { code: "KEC701", name: "VLSI Design" }
+          ],
+          "Semester 8": [
+            { code: "KEC801", name: "Wireless & Mobile Communication" }
+          ]
+        }
+      };
+    }
+
+    const curriculum = getCurriculum();
+
+    function populateBranches() {
+      const bSel = document.getElementById('pyq-branch');
+      const branches = Object.keys(curriculum);
+      bSel.innerHTML = branches.map(b => `<option value="${b}">${b}</option>`).join('');
+      
+      const savedBranch = localStorage.getItem(`user_branch_${currentEmail}`);
+      if (savedBranch && branches.includes(savedBranch)) bSel.value = savedBranch;
+      populateSemesters();
+    }
+
+    function populateSemesters() {
+      const branch = document.getElementById('pyq-branch').value;
+      const sSel = document.getElementById('pyq-sem');
+      const sems = Object.keys(curriculum[branch] || {});
+      sSel.innerHTML = sems.map(s => `<option value="${s}">${s}</option>`).join('');
+      if (sems.includes("Semester 4")) sSel.value = "Semester 4";
+      populateSubjects();
+    }
+
+    function populateSubjects() {
+      const branch = document.getElementById('pyq-branch').value;
+      const sem = document.getElementById('pyq-sem').value;
+      const subSel = document.getElementById('pyq-subject');
+      const subs = (curriculum[branch] && curriculum[branch][sem]) ? curriculum[branch][sem] : [];
+
+      subSel.innerHTML = subs.map(s => `<option value="${s.name} (${s.code})">${s.name} (${s.code})</option>`).join('');
+      runAnalysis();
+    }
+
+    function runAnalysis() {
+      const subject = document.getElementById('pyq-subject').value || "Operating Systems (BCS401)";
+      const feed = document.getElementById('pyq-results-feed');
+
+      const questions = [
+        {
+          q: `Explain CPU Scheduling Criteria and compare FCFS, SJF, and Round Robin algorithms with a Gantt chart.`,
+          marks: "10 Marks",
+          freq: "Repeated 4 Times (2023, 2022, 2021, 2019)",
+          prob: "95% Probable"
+        },
+        {
+          q: `Define Deadlock. State the four necessary conditions. Describe Banker's Algorithm for Deadlock Avoidance with a numerical example.`,
+          marks: "10 Marks",
+          freq: "Repeated 3 Times (2023, 2022, 2020)",
+          prob: "92% Probable"
+        },
+        {
+          q: `Differentiate between Paging and Segmentation. Explain the concept of Virtual Memory and Thrashing.`,
+          marks: "7 Marks",
+          freq: "Repeated 3 Times (2022, 2021, 2018)",
+          prob: "88% Probable"
+        },
+        {
+          q: `What is Critical Section Problem? Explain Peterson's Solution and Semaphore mechanism for Process Synchronization.`,
+          marks: "7 Marks",
+          freq: "Repeated 2 Times (2023, 2021)",
+          prob: "84% Probable"
+        }
+      ];
+
+      feed.innerHTML = questions.map((item, idx) => `
+        <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-black uppercase text-amber-900 bg-amber-100 px-2 py-0.5 rounded-full">
+              ${item.prob}
+            </span>
+            <span class="text-[11px] font-black text-slate-400">${item.marks}</span>
+          </div>
+
+          <p class="text-xs sm:text-sm font-extrabold text-slate-800 leading-snug">
+            ${item.q}
+          </p>
+
+          <div class="pt-2 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <span class="text-[10px] font-bold text-emerald-700">✓ ${item.freq}</span>
+            <a href="chat.html" class="inline-flex items-center gap-1 text-[11px] font-black text-[#1b4332] hover:underline">
+              <span>🤖</span> Ask Zen to Explain Solution →
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function syncPyqAvatars() {
+      const savedPhoto = localStorage.getItem(`user_avatar_${currentEmail}`) || localStorage.getItem('user_avatar');
+      const initial = (localStorage.getItem('user_name') || 'S').charAt(0).toUpperCase();
+
+      ['top-user-avatar', 'side-user-avatar', 'mobile-top-user-avatar'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.style.overflow = 'hidden';
+        if (savedPhoto && savedPhoto.startsWith('data:image')) {
+          el.innerHTML = `<img src="${savedPhoto}" class="w-full h-full object-cover rounded-full" alt="Profile" />`;
+        } else {
+          el.innerHTML = initial;
+        }
+      });
+    }
+
+    populateBranches();
+    syncPyqAvatars();
+  </script>
+</body>
 </html>

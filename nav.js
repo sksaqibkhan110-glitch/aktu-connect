@@ -1,5 +1,5 @@
 // ========================================================
-// AKTU Connect - Master Navigation, Mobile Drawer & Global Sync
+// AKTU Connect - Master Navigation & Global Avatar Sync
 // ========================================================
 
 function syncGlobalAvatars() {
@@ -12,7 +12,6 @@ function syncGlobalAvatars() {
                   || localStorage.getItem('user_avatar') 
                   || localStorage.getItem('profile_picture');
 
-  // DOM Elements Text Sync
   ['side-user-name', 'top-user-name', 'sidebar-username'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.innerText = userName;
@@ -23,8 +22,7 @@ function syncGlobalAvatars() {
     if (el) el.innerText = currentEmail;
   });
 
-  // Avatar Icons Sync
-  ['top-user-avatar', 'side-user-avatar', 'desktop-header-avatar', 'mobile-nav-avatar'].forEach(id => {
+  ['top-user-avatar', 'side-user-avatar', 'mobile-top-user-avatar', 'header-avatar'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
     el.style.overflow = 'hidden';
@@ -38,13 +36,10 @@ function syncGlobalAvatars() {
     } else {
       el.innerHTML = initial;
       el.style.padding = '';
-      if (!el.classList.contains('avatar-circle')) {
-        el.className = "w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center";
-      }
     }
   });
 
-  const userXP = localStorage.getItem(`akt_xp_${currentEmail}`) || "720";
+  const userXP = localStorage.getItem(`akt_xp_${currentEmail}`) || "260";
   ['top-user-xp', 'stat-xp', 'profile-card-xp'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.innerText = userXP + " XP";
@@ -74,37 +69,11 @@ function handleLogout() {
   window.location.href = 'index.html';
 }
 
-// Auto Inject Mobile Bar on pages that lack it
-function ensureMobileNavBar() {
-  if (window.innerWidth > 1024) return;
-  if (document.getElementById('mobile-top-nav-bar')) return;
-  if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') return;
-
-  const main = document.querySelector('main');
-  if (!main) return;
-
-  const navBar = document.createElement('div');
-  navBar.id = 'mobile-top-nav-bar';
-  navBar.className = 'flex items-center justify-between p-3 bg-white/90 backdrop-blur rounded-2xl border border-emerald-100 lg:hidden shadow-xs mb-3';
-  navBar.innerHTML = `
-    <div class="flex items-center gap-2.5">
-      <button type="button" onclick="toggleSidebar()" class="w-9 h-9 rounded-xl bg-emerald-50 text-[#1b4332] font-black text-lg flex items-center justify-center border border-emerald-200 cursor-pointer">
-        ☰
-      </button>
-      <div class="flex items-center gap-1.5">
-        <div class="w-6 h-6 rounded-md bg-[#1b4332] text-white text-[9px] font-black flex items-center justify-center">AC</div>
-        <span class="text-xs font-black text-slate-800">AKTU Connect</span>
-      </div>
-    </div>
-    <a href="profile.html">
-      <div id="mobile-nav-avatar" class="w-7 h-7 rounded-full bg-emerald-800 text-white font-extrabold text-[10px] flex items-center justify-center overflow-hidden">S</div>
-    </a>
-  `;
-  main.insertBefore(navBar, main.firstChild);
-}
-
+// NOTE: Auto-injection of extra mobile bar is disabled to PREVENT DUPLICATE NAVBARS!
 document.addEventListener('DOMContentLoaded', () => {
-  ensureMobileNavBar();
+  // Remove any duplicate header if previously injected
+  const autoBar = document.getElementById('mobile-top-nav-bar');
+  if (autoBar) autoBar.remove();
   syncGlobalAvatars();
 });
 
