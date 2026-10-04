@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-  // CORS Headers set karo
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -24,7 +23,6 @@ export default async function handler(req, res) {
 
   let partsArray = [{ text: userPrompt }];
 
-  // Agar photo attach hai toh multimodal parts me append karo
   if (imageBase64 && mimeType) {
     partsArray.push({
       inline_data: {
@@ -34,11 +32,11 @@ export default async function handler(req, res) {
     });
   }
 
-  // Active models priority list (Stable & active models first)
+  // Google ke latest available standard models list
   const candidateModels = [
+    "gemini-2.5-flash",
     "gemini-1.5-flash",
-    "gemini-1.5-flash-8b",
-    "gemini-2.0-flash"
+    "gemini-1.5-pro"
   ];
 
   let lastError = null;
@@ -71,6 +69,6 @@ export default async function handler(req, res) {
   }
 
   return res.status(200).json({ 
-    reply: `Zen server par high demand hai: ${lastError || "Try again in a moment."}` 
+    reply: `Zen server error: ${lastError || "Try again in a moment."}` 
   });
 }
