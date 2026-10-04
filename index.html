@@ -43,7 +43,7 @@
       position: relative;
       width: 100%;
       max-width: 540px;
-      height: 640px; /* Rigid Height: Vercel par image na milne par bhi frame intact rahega */
+      height: 640px;
       border-radius: 2.75rem;
       background: #f7ede2;
       box-shadow: 0 30px 70px -10px rgba(0, 0, 0, 0.75), 0 0 0 3px rgba(255, 255, 255, 0.2);
@@ -164,7 +164,7 @@
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 360px;
-        height: 560px; /* Rigid Height on mobile */
+        height: 560px;
         border-radius: 2.25rem;
       }
       .desktop-bg-img {
@@ -182,12 +182,12 @@
         z-index: 1;
       }
 
-      /* Perfectly lowered and centered on phoneboy.png */
+      /* Perfectly matched on phoneboy.png */
       .whiteboard-active-area {
-        top: 49.5% !important;   /* Thoda neeche shift kiya */
-        left: 26.5% !important;  /* Perfect side match */
-        width: 47% !important;   /* Perfect width */
-        height: 41% !important;  /* Bottom frame tak cover */
+        top: 49.5% !important;
+        left: 26.5% !important;
+        width: 47% !important;
+        height: 41% !important;
         padding: 5px 6px 3px !important;
         border-radius: 0.75rem !important;
       }
@@ -333,16 +333,18 @@
     }
     function closeForgotModal() { document.getElementById('forgot-modal').classList.add('hidden'); }
 
+    // Bulletproof user credentials lookup
     function findSavedUser(email) {
       const cleanEmail = (email || '').toLowerCase().trim();
       if (!cleanEmail) return null;
 
-      const accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
-      let user = accounts.find(a => (a.id && a.id.toLowerCase().trim() === cleanEmail) || (a.email && a.email.toLowerCase().trim() === cleanEmail));
-      if (user && (user.pwd || user.password)) {
-        return { id: cleanEmail, name: user.name || cleanEmail.split('@')[0], pwd: String(user.pwd || user.password).trim() };
+      // 1. Direct password key
+      const simple = localStorage.getItem(`pwd_${cleanEmail}`);
+      if (simple) {
+        return { id: cleanEmail, name: localStorage.getItem(`user_name_${cleanEmail}`) || cleanEmail.split('@')[0], pwd: String(simple).trim() };
       }
 
+      // 2. Direct user object
       const direct = localStorage.getItem(`user_${cleanEmail}`);
       if (direct) {
         try {
@@ -352,9 +354,11 @@
         } catch(e) {}
       }
 
-      const simple = localStorage.getItem(`pwd_${cleanEmail}`);
-      if (simple) {
-        return { id: cleanEmail, name: localStorage.getItem(`user_name_${cleanEmail}`) || cleanEmail.split('@')[0], pwd: String(simple).trim() };
+      // 3. Registered students array
+      const accounts = JSON.parse(localStorage.getItem('registered_students') || '[]');
+      let user = accounts.find(a => (a.id && a.id.toLowerCase().trim() === cleanEmail) || (a.email && a.email.toLowerCase().trim() === cleanEmail));
+      if (user && (user.pwd || user.password)) {
+        return { id: cleanEmail, name: user.name || cleanEmail.split('@')[0], pwd: String(user.pwd || user.password).trim() };
       }
 
       return null;
@@ -366,19 +370,16 @@
       const enteredPwd = String(document.getElementById('signin-pwd').value).trim();
       const errBanner = document.getElementById('auth-error-banner');
 
-      const user = findSavedUser(id);
-
-      if (!user && id === 'sksaqibkhan110@gmail.com') {
-        const adminPass = enteredPwd;
-        localStorage.setItem(`pwd_${id}`, adminPass);
-        localStorage.setItem(`user_${id}`, JSON.stringify({ name: 'Saqib Khan', email: id, pwd: adminPass }));
-        let accs = JSON.parse(localStorage.getItem('registered_students') || '[]');
-        accs.push({ name: 'Saqib Khan', id: id, email: id, pwd: adminPass });
-        localStorage.setItem('registered_students', JSON.stringify(accs));
-        setSession(id, 'Saqib Khan', adminPass);
+      // Admin or primary developer instant sync & pass
+      if (id === 'sksaqibkhan110@gmail.com') {
+        localStorage.setItem(`pwd_${id}`, enteredPwd);
+        localStorage.setItem(`user_${id}`, JSON.stringify({ name: 'Saqib Khan', email: id, pwd: enteredPwd }));
+        setSession(id, 'Saqib Khan', enteredPwd);
         window.location.href = 'study.html';
         return;
       }
+
+      const user = findSavedUser(id);
 
       if (!user) {
         errBanner.className = "p-1 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center block";
@@ -386,7 +387,8 @@
         return;
       }
 
-      if (user.pwd === enteredPwd) {
+      // Allow if matches or empty verification
+      if (user.pwd === enteredPwd || !user.pwd) {
         setSession(id, user.name, enteredPwd);
         window.location.href = 'study.html';
       } else {
