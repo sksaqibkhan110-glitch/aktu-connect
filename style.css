@@ -1,35 +1,91 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap');
 
 :root {
-  --font-main: 'Plus Jakarta Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --portal-navy: #0f172a;
+  --portal-slate: #334155;
+  --portal-blue: #2563eb;
+  --portal-amber: #f59e0b;
+  --border-subtle: #e2e8f0;
 }
 
 * {
-  font-family: var(--font-main);
+  font-family: 'Plus Jakarta Sans', sans-serif;
   -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
-/* Custom Soft Shadows matching Behance Portal */
-.portal-card {
-  background: #ffffff;
-  border: 1px solid #f1f3f7;
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
-  border-radius: 20px;
+/* Warm Yellowish-White Gradient Background */
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--portal-navy) !important;
+  min-height: 100vh;
+  background-color: #fdfbf7 !important;
+  background-image: 
+    radial-gradient(at 95% 5%, rgba(254, 240, 138, 0.45) 0px, transparent 55%),
+    radial-gradient(at 5% 90%, rgba(253, 230, 138, 0.25) 0px, transparent 50%),
+    radial-gradient(at 50% 30%, rgba(255, 251, 235, 0.8) 0px, transparent 70%) !important;
+  background-attachment: fixed !important;
 }
 
-.dark .portal-card {
-  background: #11131a;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+/* Global Portal Header (White Clean Navbar) */
+.portal-navbar {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
 }
 
-/* Pill Badges */
+.portal-nav-link {
+  color: #475569 !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  padding: 8px 14px !important;
+  border-radius: 12px !important;
+  transition: all 0.2s ease !important;
+}
+
+.portal-nav-link:hover {
+  color: #0f172a !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+.portal-nav-link.active {
+  color: #0f172a !important;
+  background: #fef3c7 !important;
+  border: 1px solid #fde68a !important;
+  font-weight: 700 !important;
+}
+
+/* Behance Portal Rich White Cards */
+.portal-card, .ui-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 12px 30px -6px rgba(15, 23, 42, 0.05), 0 4px 10px -2px rgba(245, 158, 11, 0.03) !important;
+  border-radius: 24px !important;
+  color: #0f172a !important;
+}
+
+/* Force dark text inside all cards */
+.portal-card h1, .portal-card h2, .portal-card h3, .portal-card h4,
+.ui-card h1, .ui-card h2, .ui-card h3, .ui-card h4 {
+  color: #0f172a !important;
+}
+
+.portal-card p, .ui-card p {
+  color: #475569 !important;
+}
+
+/* Global Headings */
+h1, h2, h3, h4 {
+  color: #0f172a !important;
+}
+
+/* Badges */
 .portal-pill {
   border-radius: 9999px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  padding: 4px 12px;
+  padding: 5px 14px;
   font-size: 11px;
   display: inline-flex;
   align-items: center;
@@ -37,27 +93,47 @@
 }
 
 .portal-pill-amber {
-  background: #fff3c4;
-  color: #945700;
+  background: #fef3c7 !important;
+  color: #b45309 !important;
+  border: 1px solid #fde68a !important;
 }
-.dark .portal-pill-amber {
-  background: rgba(251, 191, 36, 0.15);
-  color: #fbbf24;
+
+.portal-pill-navy {
+  background: #0f172a !important;
+  color: #ffffff !important;
 }
 
 .portal-pill-indigo {
-  background: #ede9fe;
-  color: #5b21b6;
-}
-.dark .portal-pill-indigo {
-  background: rgba(99, 102, 241, 0.15);
-  color: #a5b4fc;
+  background: #eff6ff !important;
+  color: #1d4ed8 !important;
+  border: 1px solid #bfdbfe !important;
 }
 
-/* Mobile-specific padding & clean tap targets */
-@media (max-width: 640px) {
-  .mobile-tight {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+/* Form Controls */
+select, input[type="text"], input[type="search"] {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  color: #0f172a !important;
+  font-weight: 600 !important;
+  border-radius: 16px !important;
+}
+
+select:focus, input:focus {
+  border-color: #f59e0b !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.18) !important;
+}
+
+/* Buttons */
+.portal-btn-primary {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border-radius: 14px !important;
+  font-weight: 700 !important;
+  transition: all 0.2s ease !important;
+}
+
+.portal-btn-primary:hover {
+  background: #1e293b !important;
+  transform: translateY(-1px);
 }
