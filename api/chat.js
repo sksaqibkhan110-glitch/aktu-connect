@@ -1,64 +1,77 @@
 export default async function handler(req, res) {
+  // CORS Headers set karo
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (req.method === "OPTIONS") return res.status(200).end();
-  if (req.method !== "POST") return res.status(405).json({ error: "Only POST allowed" });
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
 
-  const { text, imageBase64, mimeType } = req.body || {};
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Only POST method is allowed" });
+  }
+
+  const { text, message, imageBase64, mimeType } = req.body || {};
+  const userPrompt = text || message || "Hello Zen!";
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    return res.status(500).json({ error: "GEMINI_API_KEY environment variable missing in Vercel!" });
-  }
-
-  try {
-    let partsArray = [
-      {
-        text: "You are Zen, a friendly and witty AI tutor for AKTU engineering students. Keep answers structured, natural, concise, and to the point. Solve questions accurately. User prompt: " + (text || "Explain this image.")
-      }
-    ];
-
-    if (imageBase64 && mimeType) {
-      partsArray.push({
-        inline_data: {
-          mime_type: mimeType,
-          data: imageBase64
-        }
-      });
-    }
-
-    // Google ka recommended active model: gemini-3.8-flash
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
-
-    const response = await fetch(geminiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: partsArray
-          }
-        ]
-      })
+    return res.status(500).json({ 
+      error: "GEMINI_API_KEY Vercel Environment Variables me missing hai!" 
     });
-
-    const data = await response.json();
-    let reply = "";
-
-    if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-      reply = data.candidates[0].content.parts[0].text;
-    } else if (data.error) {
-      reply = "API Error: " + (data.error.message || JSON.stringify(data.error));
-    } else {
-      reply = "Zen ko response formulate karne me issue hua. Ek baar query dobara bhej kar dekho!";
-    }
-
-    return res.status(200).json({ reply });
-  } catch (err) {
-    return res.status(500).json({ error: "Server connection failed: " + err.message });
   }
+
+  let partsArray = [{ text: userPrompt }];
+
+  // Agar photo attach hai toh multimodal parts me append karo
+  if (imageBase64 && mimeType) {
+    partsArray.push({
+      inline_data: {
+        mime_type: mimeType,
+        data: imageBase64
+      }
+    });
+  }
+
+  // Active models priority list (demand spikes se bachne ke liye failover order)
+  const candidateModels = [
+    "gemini-2.0-flash",
+    "gemini-2.0-flash-lite",
+    "gemini-1.5-flash",
+    "gemini-1.5-flash-8b"
+  ];
+
+  let lastError = null;
+
+  for (const model of candidateModels) {
+    try {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: partsArray }]
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+        return res.status(200).json({ reply: data.candidates[0].content.parts[0].text });
+      }
+
+      if (data.error) {
+        lastError = data.error.message || JSON.stringify(data.error);
+        continue;
+      }
+    } catch (err) {
+      lastError = err.message;
+      continue;
+    }
+  }
+
+  return res.status(200).json({ 
+    reply: `Zen server par high demand hai: ${lastError || "Try again in a moment."}` 
+  });
 }
