@@ -2,6 +2,7 @@
    AKTU Connect - MOBILE ONLY overrides
    Sab kuch @media (max-width:1023px) ke andar hai.
    1024px+ (laptop) pe is file ka koi asar nahi.
+   Is file ko style.css ke BAAD load karo.
    ===================================================== */
 
 /* Bottom nav laptop pe hamesha hidden */
@@ -17,12 +18,16 @@
     --m-nav-h: 64px;
   }
 
-  /* ---------- Page base ---------- */
+  /* ---------- Page base padding fix (NO OVERLAP) ---------- */
   body {
-    padding-bottom: calc(var(--m-nav-h) + env(safe-area-inset-bottom, 0px) + 14px) !important;
+    padding-bottom: calc(var(--m-nav-h) + env(safe-area-inset-bottom, 0px) + 36px) !important;
   }
 
-  /* Keep Hamburger visible so drawer and logout are accessible */
+  main, .app-container {
+    padding-bottom: 28px !important;
+  }
+
+  /* Hamburger menu aur drawer accessible rakho */
   button[onclick*="toggleSidebar()"] { 
     display: flex !important; 
   }
