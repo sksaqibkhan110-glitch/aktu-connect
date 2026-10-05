@@ -1,3 +1,8 @@
+/* =====================================================
+   AKTU Connect - MOBILE ONLY overrides
+   Sab kuch @media (max-width:1023px) ke andar hai.
+   1024px+ (laptop) pe is file ka koi asar nahi.
+   ===================================================== */
 
 /* Bottom nav laptop pe hamesha hidden */
 .m-bottom-nav { display: none; }
@@ -14,11 +19,13 @@
 
   /* ---------- Page base ---------- */
   body {
-    padding-bottom: calc(var(--m-nav-h) + env(safe-area-inset-bottom, 0px) + 12px) !important;
+    padding-bottom: calc(var(--m-nav-h) + env(safe-area-inset-bottom, 0px) + 14px) !important;
   }
 
-  /* Hamburger ki jagah bottom nav hai, to header ka ☰ chhupa do */
-  button[onclick="toggleSidebar()"] { display: none !important; }
+  /* Keep Hamburger visible so drawer and logout are accessible */
+  button[onclick*="toggleSidebar()"] { 
+    display: flex !important; 
+  }
 
   /* ---------- Bottom tab bar ---------- */
   .m-bottom-nav {
@@ -29,7 +36,7 @@
     height: var(--m-nav-h);
     padding: 6px;
     gap: 2px;
-    background: rgba(255, 255, 255, 0.94);
+    background: rgba(255, 255, 255, 0.95);
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
     border: 1px solid var(--m-line);
@@ -39,16 +46,19 @@
   }
   .m-bottom-nav a {
     flex: 1;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
     gap: 2px;
     border-radius: 16px;
     text-decoration: none;
     color: #6b8478;
-    font-size: 10px; font-weight: 700;
+    font-size: 10px; 
+    font-weight: 700;
     transition: background .15s ease, color .15s ease, transform .15s ease;
   }
-  .m-bottom-nav a .m-ico { font-size: 20px; line-height: 1; }
+  .m-bottom-nav a .m-ico { font-size: 18px; line-height: 1; }
   .m-bottom-nav a:active { transform: scale(0.94); }
   .m-bottom-nav a.active {
     background: var(--m-green);
@@ -57,12 +67,11 @@
 
   /* ---------- Filters: dropdowns compact ---------- */
   select {
-    font-size: 14px !important;
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
-    min-height: 44px;
+    font-size: 13px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    min-height: 42px;
   }
-  /* Branch / Semester / Subject / Unit ek compact grid me */
   .m-filter-grid {
     display: grid !important;
     grid-template-columns: 1fr 1fr;
@@ -97,50 +106,50 @@
   .m-pyq-card[data-prob="mid"]  { --m-bar: #f59e0b; }
   .m-pyq-card[data-prob="low"]  { --m-bar: #22c55e; }
 
-  /* "Ask Zen" ko proper button banao */
   .m-ask-zen {
     display: flex !important;
     align-items: center; justify-content: center;
     width: 100%;
     margin-top: 10px;
-    padding: 11px 14px !important;
+    padding: 10px 14px !important;
     border-radius: 14px !important;
     background: var(--m-green) !important;
     color: #fff !important;
     font-weight: 800 !important;
-    font-size: 13px !important;
+    font-size: 12px !important;
     text-decoration: none;
   }
 
-  /* ---------- Zen chat ---------- */
-  /* 100vh mobile browser bar ke saath galat hota hai, dvh use karo */
-  main.flex.flex-col { height: calc(100dvh - 2rem - var(--m-nav-h) - 16px) !important; }
-  #chat-input { font-size: 16px !important; } /* zoom-on-focus band */
-  .prompt-chip { font-size: 0.8rem !important; padding: 0.5rem 1rem !important; }
+  /* ---------- Zen chat height scoped only to chat ---------- */
+  body.m-zen-page main.flex.flex-col { 
+    height: calc(100dvh - 2rem - var(--m-nav-h) - 16px) !important; 
+  }
+  #chat-input { font-size: 15px !important; }
+  .prompt-chip { font-size: 0.75rem !important; padding: 0.4rem 0.85rem !important; }
 
   .m-zen-empty {
     display: flex; flex-direction: column; align-items: center;
     text-align: center;
-    padding: 18px 8px 6px;
+    padding: 14px 8px 6px;
     gap: 8px;
   }
   .m-zen-empty img {
-    width: 150px; max-width: 45vw; height: auto;
-    filter: drop-shadow(0 8px 14px rgba(27, 67, 50, .2));
+    width: 120px; max-width: 40vw; height: auto;
+    border-radius: 1rem;
   }
-  .m-zen-empty h3 { margin: 0; font-size: 16px; font-weight: 900; color: var(--m-green); }
-  .m-zen-empty p  { margin: 0; font-size: 12px; font-weight: 600; color: #5b7568; }
+  .m-zen-empty h3 { margin: 0; font-size: 15px; font-weight: 900; color: var(--m-green); }
+  .m-zen-empty p  { margin: 0; font-size: 11px; font-weight: 600; color: #5b7568; }
   .m-zen-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-    width: 100%; margin-top: 8px;
+    width: 100%; margin-top: 6px;
   }
   .m-zen-grid button {
-    padding: 12px 10px;
-    border-radius: 16px;
+    padding: 10px 8px;
+    border-radius: 14px;
     border: 1px solid var(--m-line);
     background: var(--m-mint);
     color: var(--m-green);
-    font-size: 12px; font-weight: 800;
+    font-size: 11px; font-weight: 800;
   }
 
   /* ---------- Profile: forms collapse ---------- */
@@ -153,8 +162,8 @@
   }
   details.m-collapse > summary {
     list-style: none;
-    padding: 14px 0;
-    font-weight: 900; font-size: 14px;
+    padding: 12px 0;
+    font-weight: 900; font-size: 13px;
     color: var(--m-green);
     display: flex; justify-content: space-between; align-items: center;
   }

@@ -6,6 +6,7 @@
   <title>AKTU Connect - Study Hub</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="mobile.css" />
   <script src="study-data.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
@@ -175,6 +176,7 @@
   </div>
 
   <script src="nav.js"></script>
+  <script src="mobile-nav.js"></script>
   <script>
     const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'sksaqibkhan110@gmail.com').toLowerCase().trim();
     let currentName = localStorage.getItem('user_name') || currentEmail.split('@')[0];
