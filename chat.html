@@ -47,16 +47,14 @@
       border-color: #1b4332;
     }
 
-    /* PHONE ONLY ZEN BACKGROUND (<640px) */
+    /* PHONE ONLY: FULL VIBRANT ZEN BACKGROUND */
     @media (max-width: 640px) {
       #chat-messages {
-        position: relative;
-        background: radial-gradient(circle, rgba(253, 251, 247, 0.88) 15%, rgba(240, 247, 244, 0.94) 100%), 
-                    url('zen-bg.jpg') center 45% / 230px no-repeat !important;
-      }
-      #chat-messages > div {
-        position: relative;
-        z-index: 2;
+        background-color: #febc38 !important;
+        background-image: url('zen-bg.jpg') !important;
+        background-repeat: no-repeat !important;
+        background-position: center bottom !important;
+        background-size: contain !important;
       }
     }
   </style>
@@ -147,20 +145,23 @@
       </div>
 
       <!-- CHAT CONTAINER -->
-      <section class="portal-card flex-1 flex flex-col overflow-hidden p-3.5 sm:p-5">
+      <section class="portal-card flex-1 flex flex-col overflow-hidden p-3.5 sm:p-5 relative">
 
-        <div id="chat-messages" class="flex-1 overflow-y-auto space-y-3.5 pr-1 mb-2">
-          <div class="flex items-start gap-3">
-            <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0">Zen</div>
-            <div class="bg-emerald-50/95 backdrop-blur-xs border border-emerald-100 rounded-2xl p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
-              <p class="font-bold text-emerald-900 mb-0.5" id="zen-welcome-text">Hey! Main Zen hoon, tera AKTU AI Mentor ⚡</p>
-              <p class="text-slate-600 text-xs">Real Gemini AI connected hai! Syllabus topic, derivations, coding doubts, ya Quantum solutions—batao kya poochna hai?</p>
+        <div id="chat-messages" class="flex-1 overflow-y-auto space-y-3.5 pr-1 mb-2 relative rounded-2xl p-2 sm:p-0">
+
+          <!-- Welcome Message (High Contrast White Text) -->
+          <div class="flex items-start gap-3 relative z-10">
+            <div class="w-8 h-8 rounded-xl bg-emerald-800 text-white text-xs font-black flex items-center justify-center shrink-0 shadow-md">Zen</div>
+            <div class="bg-[#102a1e] border border-emerald-900/60 rounded-2xl p-3.5 max-w-xl text-xs sm:text-sm text-white leading-relaxed shadow-lg backdrop-blur-md">
+              <p class="font-extrabold text-amber-300 mb-0.5 text-xs sm:text-sm">Hey <span id="welcome-student-name">Student</span>! Main Zen hoon, tera AKTU AI Mentor ⚡</p>
+              <p class="text-slate-100 text-xs">Real Gemini AI connected hai! Syllabus topic, derivations, coding doubts, ya Quantum solutions—batao kya poochna hai?</p>
             </div>
           </div>
+
         </div>
 
         <!-- FORM INPUT -->
-        <div class="pt-2 border-t border-slate-100 flex items-center gap-2 shrink-0 bg-white">
+        <div class="pt-2 border-t border-slate-100 flex items-center gap-2 shrink-0 bg-white relative z-10">
           <input 
             type="text" 
             id="chat-input" 
@@ -185,15 +186,14 @@
 
   <script src="nav.js"></script>
   <script>
-    // Pure dynamic state from localStorage
     const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || '').toLowerCase().trim();
-    let currentName = localStorage.getItem('user_name') || (currentEmail ? currentEmail.split('@')[0] : 'Student');
+    let currentName = localStorage.getItem('user_name') || localStorage.getItem(`user_name_${currentEmail}`) || 'Student';
+    
+    if (currentName.toLowerCase() === 'saqib khan') currentName = 'Student';
     const firstName = currentName.split(' ')[0];
 
-    const welcomeEl = document.getElementById('zen-welcome-text');
-    if (welcomeEl) {
-      welcomeEl.innerText = `Hey ${firstName}! Main Zen hoon, tera AKTU AI Mentor ⚡`;
-    }
+    const welcomeSpan = document.getElementById('welcome-student-name');
+    if (welcomeSpan) welcomeSpan.innerText = firstName;
 
     const conversationHistory = [];
     const messagesBox = document.getElementById('chat-messages');
@@ -207,7 +207,7 @@
 
     function appendMessage(sender, text, isUser = false) {
       const msgDiv = document.createElement('div');
-      msgDiv.className = `flex items-start gap-3 ${isUser ? 'justify-end' : ''}`;
+      msgDiv.className = `flex items-start gap-3 relative z-10 ${isUser ? 'justify-end' : ''}`;
 
       const rendered = isUser
         ? escapeHtml(text)
@@ -217,20 +217,20 @@
       const initial = (currentName.charAt(0) || 'S').toUpperCase();
 
       const userAvatar = (savedPhoto && savedPhoto.startsWith('data:image'))
-        ? `<div class="w-8 h-8 rounded-xl overflow-hidden shrink-0"><img src="${savedPhoto}" class="w-full h-full object-cover" /></div>`
-        : `<div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-black flex items-center justify-center shrink-0">${escapeHtml(initial)}</div>`;
+        ? `<div class="w-8 h-8 rounded-xl overflow-hidden shrink-0 shadow"><img src="${savedPhoto}" class="w-full h-full object-cover" /></div>`
+        : `<div class="w-8 h-8 rounded-xl bg-amber-200 text-amber-950 text-xs font-black flex items-center justify-center shrink-0 shadow">${escapeHtml(initial)}</div>`;
 
       if (isUser) {
         msgDiv.innerHTML = `
-          <div class="bg-[#1b4332] text-white rounded-2xl rounded-tr-sm p-3.5 max-w-xl text-xs sm:text-sm font-medium leading-relaxed">
+          <div class="bg-[#0b1f16] text-white rounded-2xl rounded-tr-sm p-3.5 max-w-xl text-xs sm:text-sm font-medium leading-relaxed shadow-lg border border-emerald-950">
             ${rendered}
           </div>
           ${userAvatar}
         `;
       } else {
         msgDiv.innerHTML = `
-          <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0">Zen</div>
-          <div class="bg-emerald-50/95 backdrop-blur-xs border border-emerald-100 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
+          <div class="w-8 h-8 rounded-xl bg-emerald-800 text-white text-xs font-black flex items-center justify-center shrink-0 shadow">Zen</div>
+          <div class="bg-[#102a1e] border border-emerald-900/60 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs sm:text-sm text-white leading-relaxed shadow-lg">
             ${rendered}
           </div>
         `;
@@ -240,7 +240,6 @@
       messagesBox.scrollTop = messagesBox.scrollHeight;
     }
 
-    // Dynamic Gemini AI Fetcher
     async function fetchGeminiAI(userQuery) {
       try {
         const response = await fetch('/api/chat', {
@@ -256,14 +255,13 @@
         }
       } catch (err) {}
 
-      // Fallback Contextual Responses
       const q = userQuery.toLowerCase().trim();
 
       if (q.includes("gemini") && (q.includes("connect") || q.includes("kaun") || q.includes("model"))) {
-        return `Haan ${firstName}! Main Google Gemini model se connected hoon aur specially AKTU engineering curriculum, PYQ patterns, derivations aur Quantum series ke liye fine-tuned hoon. Batao kya solve karna hai?`;
+        return `Main Google Gemini model se connected hoon aur specially AKTU engineering curriculum, PYQ patterns, derivations aur Quantum series ke liye fine-tuned hoon. Batao kya solve karna hai?`;
       }
       if (/^(hi+|hello+|hey+|hii+|namaste)\b/.test(q) && q.split(/\s+/).length <= 3) {
-        return `Hello **${currentName}**! 👋 Batao aaj kis subject ya topic me doubt hai? Math, DBMS, DAA, COA ya OS—direct topic likho, main point-to-point solution deta hoon!`;
+        return `Hello **${firstName}**! 👋 Batao aaj kis subject ya topic me doubt hai? Math, DBMS, DAA, COA ya OS—direct topic likho, main point-to-point solution deta hoon!`;
       }
       if (q.includes("normalization")) {
         return `### 💡 Normalization in DBMS (AKTU 10 Marks Guaranteed):\n\n1. **1NF:** Har column me strictly atomic values honi chahiye (No multi-valued attributes).\n2. **2NF:** 1NF me hona chahiye + **No Partial Dependency** (Non-prime attribute candidate key ke part par depend nahi hona chahiye).\n3. **3NF:** 2NF me hona chahiye + **No Transitive Dependency** ($X \\rightarrow Y$, non-prime to non-prime strictly prohibited).\n4. **BCNF:** Har functional dependency $X \\rightarrow Y$ me $X$ strictly **Super Key** hona chahiye.`;
@@ -279,15 +277,15 @@
       const text = chatInput.value.trim();
       if (!text) return;
 
-      appendMessage(currentName, text, true);
+      appendMessage(firstName, text, true);
       conversationHistory.push({ role: 'user', text: text });
       chatInput.value = "";
       chatInput.focus();
 
       const typing = document.createElement('div');
       typing.id = "typing";
-      typing.className = "flex items-start gap-3";
-      typing.innerHTML = `<div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center">Zen</div><div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-3 text-xs text-emerald-800 font-bold animate-pulse">Zen is thinking...</div>`;
+      typing.className = "flex items-start gap-3 relative z-10";
+      typing.innerHTML = `<div class="w-8 h-8 rounded-xl bg-emerald-800 text-white text-xs font-black flex items-center justify-center shadow">Zen</div><div class="bg-[#102a1e] border border-emerald-900/60 rounded-2xl p-3 text-xs text-amber-300 font-bold animate-pulse shadow-md">Zen is thinking...</div>`;
       messagesBox.appendChild(typing);
       messagesBox.scrollTop = messagesBox.scrollHeight;
 
