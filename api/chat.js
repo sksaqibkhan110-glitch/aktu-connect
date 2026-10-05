@@ -14,18 +14,17 @@ export default async function handler(req, res) {
   }
 
   try {
-    // History ko Gemini format me pack karo
-    const formattedHistory = (history || []).map(h => ({
+    // Only pass recent context to keep payload tiny and latency low
+    const formattedHistory = (history || []).slice(-4).map(h => ({
       role: h.role === 'model' ? 'model' : 'user',
       parts: [{ text: h.text }]
     }));
 
-    // AKTU Syllabus & Exam Persona System Instruction
-    const systemInstruction = `You are Zen, an expert AI mentor for engineering students under Dr. A.P.J. Abdul Kalam Technical University (AKTU).
-Your guidelines:
-1. Deliver structured, point-to-point technical solutions for derivations, codes, and numericals.
-2. Highlight key terms and exam keywords that evaluators look for in 7-mark and 10-mark questions.
-3. Be encouraging, concise, and clear. Avoid robotic greetings.`;
+    const systemInstruction = `You are Zen, an expert AI mentor for AKTU engineering students.
+Guidelines:
+- Give crisp, point-to-point, exam-oriented explanations.
+- Highlight key terms for 7/10-mark questions.
+- Keep responses compact and direct to minimize latency.`;
 
     const payload = {
       system_instruction: {
@@ -39,13 +38,13 @@ Your guidelines:
         }
       ],
       generationConfig: {
-        temperature: 0.65,
-        maxOutputTokens: 1500
+        temperature: 0.5,
+        maxOutputTokens: 800
       }
     };
 
-    // Google Gemini 3.5 Flash Model Endpoint
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`, {
+    // Official production endpoint for instant response times
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -57,7 +56,7 @@ Your guidelines:
     }
 
     const data = await response.json();
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Solution generate karne me dikkat aayi, please dobara pucho!";
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Maaf karna dost, solution generate nahi ho paya. Dobara pucho!";
 
     return res.status(200).json({ reply });
   } catch (error) {
