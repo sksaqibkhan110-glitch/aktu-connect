@@ -255,11 +255,11 @@ async function fetchGeminiAI(userQuery) {
           return data.reply;
         } else {
           console.error("Chat API Issue:", data);
-          return `⚠️️ **API Error:** ${data.error || 'Serverless function connect nahi ho paayi'}.\n\nCheck karo ki Vercel Settings -> Environment Variables mein \`GEMINI_API_KEY\` added hai ya nahi!`;
+          return "Server is currently experiencing high load. Please try asking again in a moment.";
         }
       } catch (err) {
         console.error("Network Fetch Error:", err);
-        return `⚠️ **Network Issue:** Server se connect nahi ho raha. Check karo ki Vercel deployment me function active hai!`;
+        return "Unable to connect to the study server. Please check your internet connection.";
       }
     }
     async function triggerSendMessage() {
