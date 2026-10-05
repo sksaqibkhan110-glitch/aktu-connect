@@ -83,7 +83,7 @@
     <!-- MAIN PYQ VAULT -->
     <main class="space-y-4 pb-10">
       
-      <!-- MOBILE TOP HEADER -->
+      <!-- MOBILE TOP HEADER (Sirf Menu ☰) -->
       <div class="flex items-center justify-between p-3 bg-white/90 backdrop-blur rounded-2xl border border-emerald-100 lg:hidden shadow-xs mb-1">
         <div class="flex items-center gap-2.5">
           <button type="button" onclick="toggleSidebar()" class="w-9 h-9 rounded-xl bg-emerald-50 text-[#1b4332] font-black text-lg flex items-center justify-center border border-emerald-200 cursor-pointer">
@@ -182,7 +182,8 @@
         { code: "BAS103", name: "Engineering Mathematics-I" },
         { code: "BEE101", name: "Basic Electrical Engineering" },
         { code: "BCS101", name: "Programming for Problem Solving (C)" },
-        { code: "BAS104", name: "Environment & Ecology" }
+        { code: "BAS104", name: "Environment & Ecology" },
+        { code: "BAS105", name: "Soft Skills" }
       ];
 
       const commonSem2 = [
@@ -190,7 +191,8 @@
         { code: "BAS203", name: "Engineering Mathematics-II" },
         { code: "BEC201", name: "Basic Electronics Engineering" },
         { code: "BME201", name: "Fundamentals of Mechanical Engineering" },
-        { code: "BAS205", name: "Professional Communication" }
+        { code: "BAS205", name: "Professional Communication" },
+        { code: "BAS204", name: "Engineering Mechanics" }
       ];
 
       return {
@@ -200,30 +202,44 @@
           "Semester 3": [
             { code: "KCS301", name: "Data Structures" },
             { code: "KCS302", name: "Computer Organization & Architecture" },
-            { code: "KCS303", name: "Discrete Structures & Graph Theory" }
+            { code: "KCS303", name: "Discrete Structures & Graph Theory" },
+            { code: "BAS301", name: "Technical Communication" },
+            { code: "KNC301", name: "Universal Human Values" }
           ],
           "Semester 4": [
             { code: "KCS401", name: "Operating Systems" },
             { code: "KCS402", name: "Theory of Automata & Formal Languages" },
-            { code: "KCS403", name: "Microprocessor" }
+            { code: "KCS403", name: "Microprocessor" },
+            { code: "BAS403", name: "Engineering Mathematics-IV" },
+            { code: "KNC402", name: "Python Programming" }
           ],
           "Semester 5": [
             { code: "KCS501", name: "Database Management Systems" },
             { code: "KCS502", name: "Design and Analysis of Algorithms" },
-            { code: "KCS503", name: "Compiler Design" }
+            { code: "KCS503", name: "Compiler Design" },
+            { code: "KIT501", name: "Web Designing" },
+            { code: "KNC501", name: "Constitution of India" }
           ],
           "Semester 6": [
             { code: "KCS601", name: "Software Engineering" },
             { code: "KCS602", name: "Web Technology" },
-            { code: "KCS603", name: "Computer Networks" }
+            { code: "KCS603", name: "Computer Networks" },
+            { code: "KCS061", name: "Big Data Analytics" },
+            { code: "KCS062", name: "Image Processing" }
           ],
           "Semester 7": [
             { code: "KCS701", name: "Artificial Intelligence" },
-            { code: "KCS702", name: "Cloud Computing" }
+            { code: "KCS702", name: "Cloud Computing" },
+            { code: "KCS071", name: "Cryptography & Network Security" },
+            { code: "KCS072", name: "Natural Language Processing" },
+            { code: "KOE074", name: "Renewable Energy Resources" }
           ],
           "Semester 8": [
             { code: "KCS801", name: "Deep Learning" },
-            { code: "KCS802", name: "Big Data Analytics" }
+            { code: "KCS802", name: "Distributed Systems" },
+            { code: "KCS081", name: "High Performance Computing" },
+            { code: "KCS082", name: "Blockchain Architecture" },
+            { code: "KOE081", name: "Entrepreneurship Development" }
           ]
         },
         "CSE (AI & ML)": {
@@ -232,29 +248,41 @@
           "Semester 3": [
             { code: "BCS301", name: "Data Structures" },
             { code: "BCS302", name: "Computer Organization & Architecture" },
-            { code: "BCS303", name: "Discrete Mathematics" }
+            { code: "BCS303", name: "Discrete Mathematics" },
+            { code: "BAS301", name: "Technical Communication" },
+            { code: "BNC301", name: "Universal Human Values" }
           ],
           "Semester 4": [
             { code: "BCS401", name: "Operating Systems" },
             { code: "BCS402", name: "Theory of Automata" },
-            { code: "AIML401", name: "Introduction to Artificial Intelligence" }
+            { code: "AIML401", name: "Introduction to Artificial Intelligence" },
+            { code: "BAS403", name: "Optimization & Numerical Methods" },
+            { code: "BCS403", name: "Object Oriented Programming (Java)" }
           ],
           "Semester 5": [
             { code: "BCS501", name: "Database Management Systems" },
             { code: "BCS502", name: "Design and Analysis of Algorithms" },
-            { code: "AIML501", name: "Machine Learning Techniques" }
+            { code: "AIML501", name: "Machine Learning Techniques" },
+            { code: "AIML502", name: "Data Science with Python" },
+            { code: "BNC501", name: "Constitution of India" }
           ],
           "Semester 6": [
             { code: "AIML601", name: "Deep Neural Networks" },
             { code: "AIML602", name: "Natural Language Processing" },
-            { code: "BCS603", name: "Computer Networks" }
+            { code: "BCS603", name: "Computer Networks" },
+            { code: "AIML603", name: "Reinforcement Learning" },
+            { code: "BCS601", name: "Software Engineering" }
           ],
           "Semester 7": [
             { code: "AIML701", name: "Computer Vision" },
-            { code: "AIML702", name: "Reinforcement Learning" }
+            { code: "AIML702", name: "Generative AI & LLMs" },
+            { code: "BCS701", name: "Cloud Computing & MLOps" },
+            { code: "BCS702", name: "AI Ethics & Cyber Law" }
           ],
           "Semester 8": [
-            { code: "AIML801", name: "Generative AI & LLMs" }
+            { code: "AIML801", name: "Autonomous Systems & Robotics" },
+            { code: "AIML802", name: "Edge AI & IoT" },
+            { code: "BCS802", name: "Distributed Systems" }
           ]
         },
         "Artificial Intelligence & Data Science (AIDS)": {
@@ -262,24 +290,36 @@
           "Semester 2": commonSem2,
           "Semester 3": [
             { code: "ADS301", name: "Data Structures & Algorithms" },
-            { code: "ADS302", name: "Statistical Methods for Data Science" }
+            { code: "ADS302", name: "Statistical Methods for Data Science" },
+            { code: "ADS303", name: "Discrete Structures" },
+            { code: "BAS301", name: "Technical Communication" }
           ],
           "Semester 4": [
             { code: "ADS401", name: "Database Management & SQL" },
-            { code: "ADS402", name: "Foundations of Data Science" }
+            { code: "ADS402", name: "Foundations of Data Science" },
+            { code: "ADS403", name: "Operating Systems" },
+            { code: "ADS404", name: "Theory of Computation" }
           ],
           "Semester 5": [
             { code: "ADS501", name: "Machine Learning" },
-            { code: "ADS502", name: "Data Mining & Warehousing" }
+            { code: "ADS502", name: "Data Mining & Warehousing" },
+            { code: "ADS503", name: "Design & Analysis of Algorithms" },
+            { code: "ADS504", name: "Data Visualization Tools" }
           ],
           "Semester 6": [
-            { code: "ADS601", name: "Big Data Analytics" }
+            { code: "ADS601", name: "Big Data Analytics & Hadoop" },
+            { code: "ADS602", name: "Deep Learning" },
+            { code: "ADS603", name: "Computer Networks" },
+            { code: "ADS604", name: "Business Intelligence" }
           ],
           "Semester 7": [
-            { code: "ADS701", name: "Deep Learning & Neural Networks" }
+            { code: "ADS701", name: "Predictive Modeling & Analytics" },
+            { code: "ADS702", name: "Cloud Computing & Snowflake" },
+            { code: "ADS703", name: "NLP & Text Mining" }
           ],
           "Semester 8": [
-            { code: "ADS801", name: "Predictive Analytics" }
+            { code: "ADS801", name: "Data Privacy & Governance" },
+            { code: "ADS802", name: "Scalable Systems Architecture" }
           ]
         },
         "Information Technology": {
@@ -287,24 +327,36 @@
           "Semester 2": commonSem2,
           "Semester 3": [
             { code: "KIT301", name: "Data Structures & Algorithms" },
-            { code: "KIT302", name: "Computer Organization" }
+            { code: "KIT302", name: "Computer Organization" },
+            { code: "KIT303", name: "Discrete Structures" },
+            { code: "BAS301", name: "Technical Communication" }
           ],
           "Semester 4": [
             { code: "KIT401", name: "Operating Systems" },
-            { code: "KIT402", name: "Object Oriented Programming (Java)" }
+            { code: "KIT402", name: "Object Oriented Programming (Java)" },
+            { code: "KIT403", name: "Theory of Automata" },
+            { code: "BAS403", name: "Mathematics-IV" }
           ],
           "Semester 5": [
             { code: "KIT501", name: "Database Management Systems" },
-            { code: "KIT502", name: "Design & Analysis of Algorithms" }
+            { code: "KIT502", name: "Design & Analysis of Algorithms" },
+            { code: "KIT503", name: "Web Technology & Frameworks" },
+            { code: "KIT504", name: "Information Security" }
           ],
           "Semester 6": [
-            { code: "KIT601", name: "Web Technology & Frameworks" }
+            { code: "KIT601", name: "Software Project Management" },
+            { code: "KIT602", name: "Computer Networks" },
+            { code: "KIT603", name: "DevOps & Cloud Deployment" },
+            { code: "KIT604", name: "Mobile Computing" }
           ],
           "Semester 7": [
-            { code: "KIT701", name: "Cryptography & Network Security" }
+            { code: "KIT701", name: "Cryptography & Network Security" },
+            { code: "KIT702", name: "Artificial Intelligence" },
+            { code: "KIT703", name: "Internet of Things" }
           ],
           "Semester 8": [
-            { code: "KIT801", name: "Mobile Computing" }
+            { code: "KIT801", name: "Software Testing & QA" },
+            { code: "KIT802", name: "Enterprise Resource Planning" }
           ]
         },
         "Electronics & Communication (ECE)": {
@@ -312,24 +364,35 @@
           "Semester 2": commonSem2,
           "Semester 3": [
             { code: "KEC301", name: "Electronic Devices & Circuits" },
-            { code: "KEC302", name: "Digital System Design" }
+            { code: "KEC302", name: "Digital System Design" },
+            { code: "KEC303", name: "Network Analysis & Synthesis" },
+            { code: "BAS301", name: "Technical Communication" }
           ],
           "Semester 4": [
             { code: "KEC401", name: "Communication Engineering" },
-            { code: "KEC402", name: "Analog Circuits" }
+            { code: "KEC402", name: "Analog Circuits" },
+            { code: "KEC403", name: "Signal & Systems" },
+            { code: "BAS403", name: "Engineering Mathematics-IV" }
           ],
           "Semester 5": [
             { code: "KEC501", name: "Integrated Circuits" },
-            { code: "KEC502", name: "Microprocessor & Microcontroller" }
+            { code: "KEC502", name: "Microprocessor & Microcontroller" },
+            { code: "KEC503", name: "Digital Signal Processing" },
+            { code: "KEC504", name: "Electromagnetic Field Theory" }
           ],
           "Semester 6": [
-            { code: "KEC601", name: "Antennas and Wave Propagation" }
+            { code: "KEC601", name: "Antennas and Wave Propagation" },
+            { code: "KEC602", name: "Control Systems" },
+            { code: "KEC603", name: "VLSI Design" }
           ],
           "Semester 7": [
-            { code: "KEC701", name: "VLSI Design" }
+            { code: "KEC701", name: "Optical Communication" },
+            { code: "KEC702", name: "Wireless & Mobile Communication" },
+            { code: "KEC703", name: "Embedded System Design" }
           ],
           "Semester 8": [
-            { code: "KEC801", name: "Wireless & Mobile Communication" }
+            { code: "KEC801", name: "Satellite Communication" },
+            { code: "KEC802", name: "Radar & Navigation Aids" }
           ]
         }
       };
@@ -339,6 +402,7 @@
 
     function populateBranches() {
       const bSel = document.getElementById('pyq-branch');
+      if (!bSel) return;
       const branches = Object.keys(curriculum);
       bSel.innerHTML = branches.map(b => `<option value="${b}">${b}</option>`).join('');
       
@@ -348,19 +412,21 @@
     }
 
     function populateSemesters() {
-      const branch = document.getElementById('pyq-branch').value;
+      const bSel = document.getElementById('pyq-branch');
       const sSel = document.getElementById('pyq-sem');
-      const sems = Object.keys(curriculum[branch] || {});
+      if (!bSel || !sSel) return;
+      const sems = Object.keys(curriculum[bSel.value] || {});
       sSel.innerHTML = sems.map(s => `<option value="${s}">${s}</option>`).join('');
       if (sems.includes("Semester 4")) sSel.value = "Semester 4";
       populateSubjects();
     }
 
     function populateSubjects() {
-      const branch = document.getElementById('pyq-branch').value;
-      const sem = document.getElementById('pyq-sem').value;
+      const bSel = document.getElementById('pyq-branch');
+      const sSel = document.getElementById('pyq-sem');
       const subSel = document.getElementById('pyq-subject');
-      const subs = (curriculum[branch] && curriculum[branch][sem]) ? curriculum[branch][sem] : [];
+      if (!bSel || !sSel || !subSel) return;
+      const subs = (curriculum[bSel.value] && curriculum[bSel.value][sSel.value]) ? curriculum[bSel.value][sSel.value] : [];
 
       subSel.innerHTML = subs.map(s => `<option value="${s.name} (${s.code})">${s.name} (${s.code})</option>`).join('');
       runAnalysis();
@@ -368,10 +434,13 @@
 
     function runAnalysis() {
       const feed = document.getElementById('pyq-results-feed');
+      if (!feed) return;
+      const subSel = document.getElementById('pyq-subject');
+      const currentSub = subSel ? subSel.value : 'Operating Systems';
 
       const questions = [
         {
-          q: `Explain CPU Scheduling Criteria and compare FCFS, SJF, and Round Robin algorithms with a Gantt chart.`,
+          q: `Explain CPU Scheduling Criteria and compare FCFS, SJF, and Round Robin algorithms with a Gantt chart in ${currentSub}.`,
           marks: "10 Marks",
           freq: "Repeated 4 Times (2023, 2022, 2021, 2019)",
           prob: "95% Probable"
