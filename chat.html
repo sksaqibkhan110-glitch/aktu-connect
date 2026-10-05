@@ -239,40 +239,30 @@
       messagesBox.appendChild(msgDiv);
       messagesBox.scrollTop = messagesBox.scrollHeight;
     }
-
-    async function fetchGeminiAI(userQuery) {
+async function fetchGeminiAI(userQuery) {
       try {
         const response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: userQuery, history: conversationHistory.slice(-8) })
+          body: JSON.stringify({ 
+            message: userQuery, 
+            history: conversationHistory.slice(-6) 
+          })
         });
-        if (response.ok) {
-          const data = await response.json();
-          if (data && data.reply && !data.reply.includes("AKTU Study Insight for")) {
-            return data.reply;
-          }
+
+        const data = await response.json();
+
+        if (response.ok && data && data.reply) {
+          return data.reply;
+        } else {
+          console.error("Chat API Issue:", data);
+          return `⚠️️ **API Error:** ${data.error || 'Serverless function connect nahi ho paayi'}.\n\nCheck karo ki Vercel Settings -> Environment Variables mein \`GEMINI_API_KEY\` added hai ya nahi!`;
         }
-      } catch (err) {}
-
-      const q = userQuery.toLowerCase().trim();
-
-      if (q.includes("gemini") && (q.includes("connect") || q.includes("kaun") || q.includes("model"))) {
-        return `Main Google Gemini model se connected hoon aur specially AKTU engineering curriculum, PYQ patterns, derivations aur Quantum series ke liye fine-tuned hoon. Batao kya solve karna hai?`;
+      } catch (err) {
+        console.error("Network Fetch Error:", err);
+        return `⚠️ **Network Issue:** Server se connect nahi ho raha. Check karo ki Vercel deployment me function active hai!`;
       }
-      if (/^(hi+|hello+|hey+|hii+|namaste)\b/.test(q) && q.split(/\s+/).length <= 3) {
-        return `Hello **${firstName}**! 👋 Batao aaj kis subject ya topic me doubt hai? Math, DBMS, DAA, COA ya OS—direct topic likho, main point-to-point solution deta hoon!`;
-      }
-      if (q.includes("normalization")) {
-        return `### 💡 Normalization in DBMS (AKTU 10 Marks Guaranteed):\n\n1. **1NF:** Har column me strictly atomic values honi chahiye (No multi-valued attributes).\n2. **2NF:** 1NF me hona chahiye + **No Partial Dependency** (Non-prime attribute candidate key ke part par depend nahi hona chahiye).\n3. **3NF:** 2NF me hona chahiye + **No Transitive Dependency** ($X \\rightarrow Y$, non-prime to non-prime strictly prohibited).\n4. **BCNF:** Har functional dependency $X \\rightarrow Y$ me $X$ strictly **Super Key** hona chahiye.`;
-      }
-      if (q.includes("master theorem")) {
-        return `### ⚡ Master Theorem Formula & Cases:\n\nForm: $T(n) = aT(n/b) + f(n)$ where $c = \\log_b a$:\n1. **Case 1 ($f(n) = O(n^{c-\\epsilon})$):** $T(n) = \\Theta(n^c)$\n2. **Case 2 ($f(n) = \\Theta(n^c)$):** $T(n) = \\Theta(n^c \\log n)$\n3. **Case 3 ($f(n) = \\Omega(n^{c+\\epsilon})$):** $T(n) = \\Theta(f(n))$`;
-      }
-
-      return `📌 **Concept Breakdown: "${userQuery}"**\n\nIs topic par AKTU exam perspective se main points yeh hain:\n\n1. **Core Concept:** Iski definition exam evaluator technical terminology ke hisaab se check karta hai.\n2. **Architecture / Diagram:** Har 7 ya 10 marks question me neat labelled diagram banana zaroori hai.\n3. **Exam Hack:** Theory badhane ke bajay numbered points aur tabular differences likho.\n\nKoi specific numerical ya derivation solve karwana ho toh batana!`;
     }
-
     async function triggerSendMessage() {
       const text = chatInput.value.trim();
       if (!text) return;
