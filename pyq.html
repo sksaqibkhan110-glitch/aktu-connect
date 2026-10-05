@@ -279,12 +279,11 @@
       const list = PYQ_BANK[code] || [];
 
       if (!list.length) {
-        feed.innerHTML = `
-          <div class="p-6 rounded-2xl bg-white border border-dashed border-slate-300 text-center">
-            <p class="text-sm font-extrabold text-slate-700">PYQ analysis coming soon for this subject</p>
-            <p class="text-xs text-slate-400 mt-1">Abhi is subject ka data add nahi hua hai. Dusra subject try karo.</p>
-          </div>`;
-        return;
+       feed.innerHTML = `
+  <div class="p-6 rounded-2xl bg-white border border-dashed border-slate-300 text-center">
+    <p class="text-sm font-extrabold text-slate-700">PYQ analysis coming soon for this subject</p>
+    <p class="text-xs text-slate-400 mt-1">Questions for this subject haven't been added yet. Try another subject.</p>
+  </div>`;
       }
 
       /* Button text is split so this script never contains the full phrase
