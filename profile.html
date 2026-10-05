@@ -37,7 +37,7 @@
       pointer-events: none;
     }
 
-    /* Mobile only adjustments */
+    /* Mobile adjustments */
     @media (max-width: 1024px) {
       .app-container {
         display: flex;
@@ -55,7 +55,7 @@
 
   <div class="app-container">
     
-    <!-- LEFT SIDEBAR (Laptop Desktop Frame) -->
+    <!-- LEFT SIDEBAR -->
     <aside id="main-sidebar" class="sidebar-menu-card">
       <div class="menu-brand">
         <div class="brand-badge">AC</div>
@@ -91,8 +91,8 @@
         <div class="flex items-center gap-2.5 overflow-hidden w-full">
           <div id="side-user-avatar" class="avatar-circle">S</div>
           <div class="truncate flex-1">
-            <p id="side-user-name" class="text-xs font-bold text-white truncate">Saqib Khan</p>
-            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">sksaqibkhan110@gmail.com</p>
+            <p id="side-user-name" class="text-xs font-bold text-white truncate">Student</p>
+            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate"></p>
           </div>
         </div>
         <button onclick="handleLogout()" class="w-full py-2 rounded-xl bg-white/10 hover:bg-rose-600/80 text-rose-200 hover:text-white text-xs font-extrabold transition flex items-center justify-center gap-1.5 cursor-pointer">
@@ -104,7 +104,7 @@
     <!-- MAIN PROFILE CONTENT -->
     <main class="space-y-5 pb-10 w-full">
       
-      <!-- MOBILE TOP HEADER (Visible ONLY on Phone/Tablet) -->
+      <!-- MOBILE TOP HEADER (Sirf ☰ Menu) -->
       <div class="flex items-center justify-between p-3 bg-white/90 backdrop-blur rounded-2xl border border-emerald-100 lg:hidden shadow-xs">
         <div class="flex items-center gap-2.5">
           <button type="button" onclick="toggleSidebar()" class="w-9 h-9 rounded-xl bg-emerald-50 text-[#1b4332] font-black text-lg flex items-center justify-center border border-emerald-200 cursor-pointer">
@@ -120,7 +120,7 @@
         </a>
       </div>
 
-      <!-- DESKTOP TOP HEADER (Full Width for Laptop) -->
+      <!-- DESKTOP TOP HEADER -->
       <header class="hidden lg:flex items-center justify-between">
         <div>
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 mb-1">
@@ -133,27 +133,27 @@
         <div class="top-user-widget">
           <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center overflow-hidden shrink-0">S</div>
           <div class="text-left hidden sm:block">
-            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Saqib Khan</p>
-            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">190 XP</p>
+            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Student</p>
+            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">100 XP</p>
           </div>
         </div>
       </header>
 
-      <!-- BIG USER PROFILE CARD (Laptop Full Width) -->
+      <!-- BIG USER PROFILE CARD -->
       <section class="portal-card p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div class="flex items-center gap-4 sm:gap-5">
           
-          <!-- BIG AVATAR (Instant Live Sync) -->
+          <!-- BIG AVATAR -->
           <div id="profile-main-box" class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#1b4332] text-white text-2xl sm:text-3xl font-black flex items-center justify-center overflow-hidden shrink-0 border-2 border-emerald-500 shadow-sm relative">
             <span id="profile-fallback-letter">S</span>
           </div>
 
           <div>
             <div class="flex items-center gap-2 mb-1.5">
-              <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">★ CSE CORE</span>
-              <span class="text-xs text-slate-400 font-semibold" id="profile-header-details">GNIOT • Semester 5</span>
+              <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200" id="profile-branch-badge">★ CSE CORE</span>
+              <span class="text-xs text-slate-400 font-semibold" id="profile-header-details">College • Semester 5</span>
             </div>
-            <h2 class="text-xl sm:text-2xl font-black text-slate-900" id="profile-header-name">Saqib Khan</h2>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-900" id="profile-header-name">Student</h2>
             
             <!-- Upload & Remove Buttons -->
             <div class="flex items-center gap-2 mt-2.5">
@@ -171,56 +171,56 @@
         <!-- TOTAL XP DISPLAY -->
         <div class="bg-amber-50 border border-amber-200 p-4 sm:p-5 rounded-2xl flex items-center justify-between sm:flex-col sm:justify-center text-right sm:text-center min-w-[150px]">
           <span class="text-[10px] font-black text-amber-900 uppercase tracking-wider">Total XP</span>
-          <span class="text-xl sm:text-3xl font-black text-amber-950 my-0.5" id="profile-card-xp">190 XP</span>
-          <span class="text-[11px] text-emerald-800 font-bold hidden sm:block" id="profile-badge-status">Silver Scholar</span>
+          <span class="text-xl sm:text-3xl font-black text-amber-950 my-0.5" id="profile-card-xp">100 XP</span>
+          <span class="text-[11px] text-emerald-800 font-bold hidden sm:block" id="profile-badge-status">Scholar Candidate</span>
         </div>
       </section>
 
-      <!-- XP MILESTONES & ACHIEVEMENTS (5 Columns on Desktop) -->
+      <!-- XP MILESTONES & ACHIEVEMENTS (Dynamic Scale as per CGPA) -->
       <section class="portal-card p-5 sm:p-6 space-y-4">
         <div class="flex items-center justify-between pb-2 border-b border-slate-100">
           <div>
             <span class="text-[10px] font-black uppercase text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-full">Academic Milestones</span>
             <h3 class="text-sm sm:text-base font-extrabold text-slate-900 mt-1">XP Milestones & Achievements</h3>
           </div>
-          <span class="text-xs font-bold text-emerald-800" id="current-badge-title">Silver Scholar</span>
+          <span class="text-xs font-bold text-emerald-800" id="current-badge-title">Scholar Candidate</span>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="milestones-grid">
           <div class="p-3 text-center rounded-xl bg-amber-50/60 border border-amber-200">
             <span class="text-xl">🥉</span>
             <h4 class="text-xs font-extrabold text-slate-800 mt-1">Bronze</h4>
-            <p class="text-[10px] text-slate-400 font-bold">50 XP</p>
+            <p class="text-[10px] text-slate-400 font-bold" id="badge-bronze-xp">50 XP</p>
           </div>
-          <div class="p-3 text-center rounded-xl bg-emerald-50 border border-emerald-300">
+          <div class="p-3 text-center rounded-xl bg-slate-50 border border-slate-200" id="card-silver">
             <span class="text-xl">🥈</span>
-            <h4 class="text-xs font-extrabold text-emerald-900 mt-1">Silver</h4>
-            <p class="text-[10px] text-emerald-700 font-bold">150 XP</p>
+            <h4 class="text-xs font-extrabold text-slate-800 mt-1">Silver</h4>
+            <p class="text-[10px] text-slate-400 font-bold" id="badge-silver-xp">150 XP</p>
           </div>
-          <div class="p-3 text-center rounded-xl bg-slate-50 border border-slate-200">
+          <div class="p-3 text-center rounded-xl bg-slate-50 border border-slate-200" id="card-gold">
             <span class="text-xl">🥇</span>
             <h4 class="text-xs font-extrabold text-slate-800 mt-1">Gold</h4>
-            <p class="text-[10px] text-slate-400 font-bold">250 XP</p>
+            <p class="text-[10px] text-slate-400 font-bold" id="badge-gold-xp">300 XP</p>
           </div>
-          <div class="p-3 text-center rounded-xl bg-slate-50 border border-slate-200">
+          <div class="p-3 text-center rounded-xl bg-slate-50 border border-slate-200" id="card-diamond">
             <span class="text-xl">💎</span>
             <h4 class="text-xs font-extrabold text-slate-800 mt-1">Diamond</h4>
-            <p class="text-[10px] text-slate-400 font-bold">350 XP</p>
+            <p class="text-[10px] text-slate-400 font-bold" id="badge-diamond-xp">450 XP</p>
           </div>
-          <div class="p-3 text-center rounded-xl bg-slate-50 border border-slate-200 col-span-2 sm:col-span-1">
+          <div class="p-3 text-center rounded-xl bg-slate-50 border border-slate-200 col-span-2 sm:col-span-1" id="card-titan">
             <span class="text-xl">👑</span>
-            <h4 class="text-xs font-extrabold text-slate-800 mt-1">Conqueror</h4>
-            <p class="text-[10px] text-slate-400 font-bold">400+ XP</p>
+            <h4 class="text-xs font-extrabold text-slate-800 mt-1" id="titan-badge-name">Titan</h4>
+            <p class="text-[10px] text-slate-400 font-bold" id="badge-titan-xp">600+ XP</p>
           </div>
         </div>
 
         <div class="pt-2">
           <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
             <span>XP Progression to Target</span>
-            <span id="progress-ratio-label">190 / 400 XP</span>
+            <span id="progress-ratio-label">100 / 600 XP</span>
           </div>
           <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
-            <div id="progress-bar-fill" class="h-full bg-[#1b4332] rounded-full transition-all duration-300" style="width: 47%;"></div>
+            <div id="progress-bar-fill" class="h-full bg-[#1b4332] rounded-full transition-all duration-300" style="width: 20%;"></div>
           </div>
         </div>
       </section>
@@ -240,14 +240,39 @@
             </div>
             <div>
               <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">College Name</label>
-              <input type="text" id="input-college" placeholder="GNIOT, Greater Noida" class="theme-select" />
+              <input type="text" id="input-college" placeholder="GNIOT / KIET / Galgotias" class="theme-select" />
             </div>
             <div>
               <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">Branch</label>
               <select id="input-branch" class="theme-select cursor-pointer">
-                <option value="CSE Core">Computer Science & Engineering</option>
+                <option value="Computer Science & Engineering">Computer Science & Engineering</option>
                 <option value="CSE (AI & ML)">CSE (AI & ML)</option>
+                <option value="Artificial Intelligence & Data Science (AIDS)">AIDS</option>
                 <option value="Information Technology">Information Technology</option>
+                <option value="Electronics & Communication (ECE)">ECE</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">Current Semester</label>
+              <select id="input-sem" class="theme-select cursor-pointer">
+                <option value="Semester 1">Semester 1</option>
+                <option value="Semester 2">Semester 2</option>
+                <option value="Semester 3">Semester 3</option>
+                <option value="Semester 4">Semester 4</option>
+                <option value="Semester 5">Semester 5</option>
+                <option value="Semester 6">Semester 6</option>
+                <option value="Semester 7">Semester 7</option>
+                <option value="Semester 8">Semester 8</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">Target CGPA Goal</label>
+              <select id="input-cgpa" class="theme-select cursor-pointer">
+                <option value="9.5">🔥 9.5+ CGPA (Titan Milestone – 800 XP Required)</option>
+                <option value="9.0">⚡ 9.0+ CGPA (Dean's Scholar – 600 XP Required)</option>
+                <option value="8.5">🎯 8.5+ CGPA (Honor Role – 450 XP Required)</option>
+                <option value="8.0">📘 8.0+ CGPA (Consistent First Class – 350 XP Required)</option>
+                <option value="7.5">🌱 7.5+ CGPA (Foundation Goal – 250 XP Required)</option>
               </select>
             </div>
           </div>
@@ -304,27 +329,77 @@
   <script src="nav.js"></script>
   <script src="mobile-nav.js"></script>
   <script>
-    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'sksaqibkhan110@gmail.com').toLowerCase().trim();
-    let currentName = localStorage.getItem('user_name') || currentEmail.split('@')[0];
-    if (currentName.toLowerCase() === 'student') currentName = "Saqib Khan";
+    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || '').toLowerCase().trim();
+    let currentName = localStorage.getItem('user_name') || localStorage.getItem(`user_name_${currentEmail}`) || (currentEmail ? currentEmail.split('@')[0] : 'Student');
 
     document.getElementById('profile-header-name').innerText = currentName;
     document.getElementById('input-full-name').value = currentName;
     document.getElementById('input-email').value = currentEmail;
 
     const savedCollege = localStorage.getItem(`user_college_${currentEmail}`) || "GNIOT";
-    const savedBranch = localStorage.getItem(`user_branch_${currentEmail}`) || "CSE Core";
+    const savedBranch = localStorage.getItem(`user_branch_${currentEmail}`) || "Computer Science & Engineering";
+    const savedSem = localStorage.getItem(`user_sem_${currentEmail}`) || "Semester 5";
+    const savedCgpa = localStorage.getItem(`user_target_cgpa_${currentEmail}`) || "9.0";
+
     document.getElementById('input-college').value = savedCollege;
     document.getElementById('input-branch').value = savedBranch;
-    document.getElementById('profile-header-details').innerText = `${savedCollege} • Semester 5`;
+    document.getElementById('input-sem').value = savedSem;
+    document.getElementById('input-cgpa').value = savedCgpa;
 
-    const userXP = parseInt(localStorage.getItem(`akt_xp_${currentEmail}`) || "190", 10);
-    document.getElementById('profile-card-xp').innerText = userXP + " XP";
-    document.getElementById('progress-ratio-label').innerText = `${userXP} / 400 XP`;
-    const pct = Math.min(100, Math.round((userXP / 400) * 100));
-    document.getElementById('progress-bar-fill').style.width = pct + "%";
+    document.getElementById('profile-branch-badge').innerText = `★ ${savedBranch}`;
+    document.getElementById('profile-header-details').innerText = `${savedCollege} • ${savedSem}`;
 
-    // Instant Avatar Sync Function
+    // Dynamic CGPA and XP calibration engine[cite: 26, 27]
+    function updateCgpaProgression() {
+      const cgpa = parseFloat(localStorage.getItem(`user_target_cgpa_${currentEmail}`)) || 9.0;
+      let targetXp = 600;
+      let titanTitle = "Dean's Scholar 👑";
+
+      if (cgpa >= 9.5) {
+        targetXp = 800;
+        titanTitle = "Academic Titan 👑";
+        document.getElementById('badge-bronze-xp').innerText = "100 XP";
+        document.getElementById('badge-silver-xp').innerText = "250 XP";
+        document.getElementById('badge-gold-xp').innerText = "450 XP";
+        document.getElementById('badge-diamond-xp').innerText = "650 XP";
+        document.getElementById('badge-titan-xp').innerText = "800+ XP";
+      } else if (cgpa >= 9.0) {
+        targetXp = 600;
+        titanTitle = "Dean's Laureate 💎";
+        document.getElementById('badge-bronze-xp').innerText = "50 XP";
+        document.getElementById('badge-silver-xp').innerText = "150 XP";
+        document.getElementById('badge-gold-xp').innerText = "300 XP";
+        document.getElementById('badge-diamond-xp').innerText = "450 XP";
+        document.getElementById('badge-titan-xp').innerText = "600+ XP";
+      } else {
+        targetXp = 450;
+        titanTitle = "Distinction Leader 🥇";
+        document.getElementById('badge-bronze-xp').innerText = "50 XP";
+        document.getElementById('badge-silver-xp').innerText = "120 XP";
+        document.getElementById('badge-gold-xp').innerText = "220 XP";
+        document.getElementById('badge-diamond-xp').innerText = "320 XP";
+        document.getElementById('badge-titan-xp').innerText = "450+ XP";
+      }
+
+      document.getElementById('titan-badge-name').innerText = titanTitle.split(' ')[0];
+
+      const userXP = parseInt(localStorage.getItem(`akt_xp_${currentEmail}`) || "100", 10);
+      document.getElementById('profile-card-xp').innerText = userXP + " XP";
+      document.getElementById('progress-ratio-label').innerText = `${userXP} / ${targetXp} XP (Target: ${cgpa} CGPA)`;
+      
+      const pct = Math.min(100, Math.round((userXP / targetXp) * 100));
+      document.getElementById('progress-bar-fill').style.width = pct + "%";
+
+      let currentBadge = "Bronze Scholar";
+      if (userXP >= targetXp) currentBadge = titanTitle;
+      else if (userXP >= (targetXp * 0.75)) currentBadge = "Diamond Scholar 💎";
+      else if (userXP >= (targetXp * 0.5)) currentBadge = "Gold Scholar 🥇";
+      else if (userXP >= (targetXp * 0.25)) currentBadge = "Silver Scholar 🥈";
+
+      document.getElementById('profile-badge-status').innerText = currentBadge;
+      document.getElementById('current-badge-title').innerText = currentBadge;
+    }
+
     function renderMainBigAvatar() {
       const savedPhoto = localStorage.getItem(`user_avatar_${currentEmail}`) 
                       || localStorage.getItem('user_avatar') 
@@ -388,6 +463,8 @@
       const n = document.getElementById('input-full-name').value.trim();
       const col = document.getElementById('input-college').value.trim();
       const br = document.getElementById('input-branch').value;
+      const sm = document.getElementById('input-sem').value;
+      const cg = document.getElementById('input-cgpa').value;
 
       if (!n) return;
 
@@ -395,13 +472,17 @@
       localStorage.setItem(`user_name_${currentEmail}`, n);
       localStorage.setItem(`user_college_${currentEmail}`, col);
       localStorage.setItem(`user_branch_${currentEmail}`, br);
+      localStorage.setItem(`user_sem_${currentEmail}`, sm);
+      localStorage.setItem(`user_target_cgpa_${currentEmail}`, cg);
 
       currentName = n;
       document.getElementById('profile-header-name').innerText = n;
-      document.getElementById('profile-header-details').innerText = `${col} • Semester 5`;
+      document.getElementById('profile-branch-badge').innerText = `★ ${br}`;
+      document.getElementById('profile-header-details').innerText = `${col} • ${sm}`;
 
       renderMainBigAvatar();
-      alert("Profile details updated successfully! ✓");
+      updateCgpaProgression();
+      alert("Profile and Academic Goals saved successfully! ✓");
     }
 
     function handlePasswordChange(e) {
@@ -451,6 +532,7 @@
     }
 
     renderMainBigAvatar();
+    updateCgpaProgression();
   </script>
 </body>
 </html>
