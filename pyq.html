@@ -34,7 +34,7 @@
   <div id="drawer-overlay" class="mobile-drawer-overlay" onclick="toggleSidebar()"></div>
 
   <div class="app-container">
-    
+
     <!-- LEFT SIDEBAR -->
     <aside id="main-sidebar" class="sidebar-menu-card">
       <div class="menu-brand">
@@ -46,24 +46,12 @@
       </div>
 
       <nav class="flex-1 space-y-1">
-        <a href="study.html" class="menu-item">
-          <span>📖</span> <span>Study Hub</span>
-        </a>
-        <a href="pyq.html" class="menu-item active">
-          <span>📄</span> <span>PYQs Vault</span>
-        </a>
-        <a href="quest.html" class="menu-item">
-          <span>🎯</span> <span>Exam Arena</span>
-        </a>
-        <a href="leaderboard.html" class="menu-item">
-          <span>🏆</span> <span>Leaderboard</span>
-        </a>
-        <a href="chat.html" class="menu-item">
-          <span>🤖</span> <span>Zen AI Tutor</span>
-        </a>
-        <a href="profile.html" class="menu-item">
-          <span>👤</span> <span>My Profile</span>
-        </a>
+        <a href="study.html" class="menu-item"><span>📖</span> <span>Study Hub</span></a>
+        <a href="pyq.html" class="menu-item active"><span>📄</span> <span>PYQs Vault</span></a>
+        <a href="quest.html" class="menu-item"><span>🎯</span> <span>Exam Arena</span></a>
+        <a href="leaderboard.html" class="menu-item"><span>🏆</span> <span>Leaderboard</span></a>
+        <a href="chat.html" class="menu-item"><span>🤖</span> <span>Zen AI Tutor</span></a>
+        <a href="profile.html" class="menu-item"><span>👤</span> <span>My Profile</span></a>
       </nav>
 
       <div class="sidebar-user-pill flex flex-col gap-2.5 pt-3 border-t border-white/10 mt-auto">
@@ -82,13 +70,11 @@
 
     <!-- MAIN PYQ VAULT -->
     <main class="space-y-4 pb-10">
-      
-      <!-- MOBILE TOP HEADER (Sirf Menu ☰) -->
+
+      <!-- MOBILE TOP HEADER -->
       <div class="flex items-center justify-between p-3 bg-white/90 backdrop-blur rounded-2xl border border-emerald-100 lg:hidden shadow-xs mb-1">
         <div class="flex items-center gap-2.5">
-          <button type="button" onclick="toggleSidebar()" class="w-9 h-9 rounded-xl bg-emerald-50 text-[#1b4332] font-black text-lg flex items-center justify-center border border-emerald-200 cursor-pointer">
-            ☰
-          </button>
+          <button type="button" onclick="toggleSidebar()" class="w-9 h-9 rounded-xl bg-emerald-50 text-[#1b4332] font-black text-lg flex items-center justify-center border border-emerald-200 cursor-pointer">☰</button>
           <div class="flex items-center gap-1.5">
             <div class="w-6 h-6 rounded-md bg-[#1b4332] text-white text-[9px] font-black flex items-center justify-center">AC</div>
             <span class="text-xs font-black text-slate-800">AKTU Connect</span>
@@ -102,23 +88,20 @@
       <!-- DESKTOP TOP HEADER -->
       <header class="hidden lg:flex items-center justify-between">
         <div>
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 mb-1">
-            ★ Exam Prediction Engine
-          </span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 mb-1">★ Exam Prediction Engine</span>
           <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">AKTU PYQ Trend & Repetition Analyser</h1>
           <p class="text-xs text-slate-500 font-medium">Compare past university sessions and identify high-yield recurring exam questions.</p>
         </div>
-
         <a href="profile.html" class="top-user-widget">
           <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center overflow-hidden shrink-0">S</div>
           <div class="text-left">
             <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Student</p>
-            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">100 XP</p>
+            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">0 XP</p>
           </div>
         </a>
       </header>
 
-      <!-- 3 FILTER DROPDOWNS CARD -->
+      <!-- FILTERS -->
       <section class="portal-card p-4 sm:p-5">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
@@ -146,21 +129,17 @@
         </div>
       </section>
 
-      <!-- ANALYSIS RESULT CARD -->
+      <!-- RESULTS -->
       <section class="portal-card p-4 sm:p-6 space-y-4">
         <div class="flex items-center justify-between pb-2 border-b border-slate-100">
           <div>
             <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Highest Probability Repeated Questions</h3>
             <p class="text-xs text-slate-400">Questions arranged unit-wise from syllabus and past AKTU examination trends.</p>
           </div>
-          <span class="text-[10px] font-black text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-1 rounded-full uppercase">
-            Ranked by Frequency
-          </span>
+          <span class="text-[10px] font-black text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-1 rounded-full uppercase">Ranked by Frequency</span>
         </div>
 
-        <div id="pyq-results-feed" class="space-y-3">
-          <!-- Dynamically populated -->
-        </div>
+        <div id="pyq-results-feed" class="space-y-3"></div>
       </section>
 
     </main>
@@ -169,15 +148,16 @@
   <script src="nav.js"></script>
   <script src="mobile-nav.js"></script>
   <script>
+    /* ---------- User (nothing hardcoded) ---------- */
     const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || '').toLowerCase().trim();
-    let currentName = localStorage.getItem('user_name') || (currentEmail ? currentEmail.split('@')[0] : 'Student');
-    if (currentName.toLowerCase() === 'saqib khan') currentName = 'Student';
+    const currentName = localStorage.getItem('user_name') || (currentEmail ? currentEmail.split('@')[0] : 'Student');
 
+    /* ---------- Curriculum ---------- */
     function getCurriculum() {
       const ext = window.studyData || window.AKTU_STUDY_DATA || window.coursesData;
       if (ext && typeof ext === 'object' && Object.keys(ext).length > 2) return ext;
 
-      const commonSem1 = [
+      const sem1 = [
         { code: "BAS101", name: "Engineering Physics" },
         { code: "BAS103", name: "Engineering Mathematics-I" },
         { code: "BEE101", name: "Basic Electrical Engineering" },
@@ -185,8 +165,7 @@
         { code: "BAS104", name: "Environment & Ecology" },
         { code: "BAS105", name: "Soft Skills" }
       ];
-
-      const commonSem2 = [
+      const sem2 = [
         { code: "BAS202", name: "Engineering Chemistry" },
         { code: "BAS203", name: "Engineering Mathematics-II" },
         { code: "BEC201", name: "Basic Electronics Engineering" },
@@ -194,218 +173,76 @@
         { code: "BAS205", name: "Professional Communication" },
         { code: "BAS204", name: "Engineering Mechanics" }
       ];
+      const s = (code, name) => ({ code, name });
 
       return {
         "Computer Science & Engineering": {
-          "Semester 1": commonSem1,
-          "Semester 2": commonSem2,
-          "Semester 3": [
-            { code: "KCS301", name: "Data Structures" },
-            { code: "KCS302", name: "Computer Organization & Architecture" },
-            { code: "KCS303", name: "Discrete Structures & Graph Theory" },
-            { code: "BAS301", name: "Technical Communication" },
-            { code: "KNC301", name: "Universal Human Values" }
-          ],
-          "Semester 4": [
-            { code: "KCS401", name: "Operating Systems" },
-            { code: "KCS402", name: "Theory of Automata & Formal Languages" },
-            { code: "KCS403", name: "Microprocessor" },
-            { code: "BAS403", name: "Engineering Mathematics-IV" },
-            { code: "KNC402", name: "Python Programming" }
-          ],
-          "Semester 5": [
-            { code: "KCS501", name: "Database Management Systems" },
-            { code: "KCS502", name: "Design and Analysis of Algorithms" },
-            { code: "KCS503", name: "Compiler Design" },
-            { code: "KIT501", name: "Web Designing" },
-            { code: "KNC501", name: "Constitution of India" }
-          ],
-          "Semester 6": [
-            { code: "KCS601", name: "Software Engineering" },
-            { code: "KCS602", name: "Web Technology" },
-            { code: "KCS603", name: "Computer Networks" },
-            { code: "KCS061", name: "Big Data Analytics" },
-            { code: "KCS062", name: "Image Processing" }
-          ],
-          "Semester 7": [
-            { code: "KCS701", name: "Artificial Intelligence" },
-            { code: "KCS702", name: "Cloud Computing" },
-            { code: "KCS071", name: "Cryptography & Network Security" },
-            { code: "KCS072", name: "Natural Language Processing" },
-            { code: "KOE074", name: "Renewable Energy Resources" }
-          ],
-          "Semester 8": [
-            { code: "KCS801", name: "Deep Learning" },
-            { code: "KCS802", name: "Distributed Systems" },
-            { code: "KCS081", name: "High Performance Computing" },
-            { code: "KCS082", name: "Blockchain Architecture" },
-            { code: "KOE081", name: "Entrepreneurship Development" }
-          ]
+          "Semester 1": sem1, "Semester 2": sem2,
+          "Semester 3": [s("KCS301","Data Structures"), s("KCS302","Computer Organization & Architecture"), s("KCS303","Discrete Structures & Graph Theory"), s("BAS301","Technical Communication"), s("KNC301","Universal Human Values")],
+          "Semester 4": [s("KCS401","Operating Systems"), s("KCS402","Theory of Automata & Formal Languages"), s("KCS403","Microprocessor"), s("BAS403","Engineering Mathematics-IV"), s("KNC402","Python Programming")],
+          "Semester 5": [s("KCS501","Database Management Systems"), s("KCS502","Design and Analysis of Algorithms"), s("KCS503","Compiler Design"), s("KIT501","Web Designing"), s("KNC501","Constitution of India")],
+          "Semester 6": [s("KCS601","Software Engineering"), s("KCS602","Web Technology"), s("KCS603","Computer Networks"), s("KCS061","Big Data Analytics"), s("KCS062","Image Processing")],
+          "Semester 7": [s("KCS701","Artificial Intelligence"), s("KCS702","Cloud Computing"), s("KCS071","Cryptography & Network Security"), s("KCS072","Natural Language Processing"), s("KOE074","Renewable Energy Resources")],
+          "Semester 8": [s("KCS801","Deep Learning"), s("KCS802","Distributed Systems"), s("KCS081","High Performance Computing"), s("KCS082","Blockchain Architecture"), s("KOE081","Entrepreneurship Development")]
         },
         "CSE (AI & ML)": {
-          "Semester 1": commonSem1,
-          "Semester 2": commonSem2,
-          "Semester 3": [
-            { code: "BCS301", name: "Data Structures" },
-            { code: "BCS302", name: "Computer Organization & Architecture" },
-            { code: "BCS303", name: "Discrete Mathematics" },
-            { code: "BAS301", name: "Technical Communication" },
-            { code: "BNC301", name: "Universal Human Values" }
-          ],
-          "Semester 4": [
-            { code: "BCS401", name: "Operating Systems" },
-            { code: "BCS402", name: "Theory of Automata" },
-            { code: "AIML401", name: "Introduction to Artificial Intelligence" },
-            { code: "BAS403", name: "Optimization & Numerical Methods" },
-            { code: "BCS403", name: "Object Oriented Programming (Java)" }
-          ],
-          "Semester 5": [
-            { code: "BCS501", name: "Database Management Systems" },
-            { code: "BCS502", name: "Design and Analysis of Algorithms" },
-            { code: "AIML501", name: "Machine Learning Techniques" },
-            { code: "AIML502", name: "Data Science with Python" },
-            { code: "BNC501", name: "Constitution of India" }
-          ],
-          "Semester 6": [
-            { code: "AIML601", name: "Deep Neural Networks" },
-            { code: "AIML602", name: "Natural Language Processing" },
-            { code: "BCS603", name: "Computer Networks" },
-            { code: "AIML603", name: "Reinforcement Learning" },
-            { code: "BCS601", name: "Software Engineering" }
-          ],
-          "Semester 7": [
-            { code: "AIML701", name: "Computer Vision" },
-            { code: "AIML702", name: "Generative AI & LLMs" },
-            { code: "BCS701", name: "Cloud Computing & MLOps" },
-            { code: "BCS702", name: "AI Ethics & Cyber Law" }
-          ],
-          "Semester 8": [
-            { code: "AIML801", name: "Autonomous Systems & Robotics" },
-            { code: "AIML802", name: "Edge AI & IoT" },
-            { code: "BCS802", name: "Distributed Systems" }
-          ]
+          "Semester 1": sem1, "Semester 2": sem2,
+          "Semester 3": [s("BCS301","Data Structures"), s("BCS302","Computer Organization & Architecture"), s("BCS303","Discrete Mathematics"), s("BAS301","Technical Communication"), s("BNC301","Universal Human Values")],
+          "Semester 4": [s("BCS401","Operating Systems"), s("BCS402","Theory of Automata"), s("AIML401","Introduction to Artificial Intelligence"), s("BAS403","Optimization & Numerical Methods"), s("BCS403","Object Oriented Programming (Java)")],
+          "Semester 5": [s("BCS501","Database Management Systems"), s("BCS502","Design and Analysis of Algorithms"), s("AIML501","Machine Learning Techniques"), s("AIML502","Data Science with Python"), s("BNC501","Constitution of India")],
+          "Semester 6": [s("AIML601","Deep Neural Networks"), s("AIML602","Natural Language Processing"), s("BCS603","Computer Networks"), s("AIML603","Reinforcement Learning"), s("BCS601","Software Engineering")],
+          "Semester 7": [s("AIML701","Computer Vision"), s("AIML702","Generative AI & LLMs"), s("BCS701","Cloud Computing & MLOps"), s("BCS702","AI Ethics & Cyber Law")],
+          "Semester 8": [s("AIML801","Autonomous Systems & Robotics"), s("AIML802","Edge AI & IoT"), s("BCS802","Distributed Systems")]
         },
         "Artificial Intelligence & Data Science (AIDS)": {
-          "Semester 1": commonSem1,
-          "Semester 2": commonSem2,
-          "Semester 3": [
-            { code: "ADS301", name: "Data Structures & Algorithms" },
-            { code: "ADS302", name: "Statistical Methods for Data Science" },
-            { code: "ADS303", name: "Discrete Structures" },
-            { code: "BAS301", name: "Technical Communication" }
-          ],
-          "Semester 4": [
-            { code: "ADS401", name: "Database Management & SQL" },
-            { code: "ADS402", name: "Foundations of Data Science" },
-            { code: "ADS403", name: "Operating Systems" },
-            { code: "ADS404", name: "Theory of Computation" }
-          ],
-          "Semester 5": [
-            { code: "ADS501", name: "Machine Learning" },
-            { code: "ADS502", name: "Data Mining & Warehousing" },
-            { code: "ADS503", name: "Design & Analysis of Algorithms" },
-            { code: "ADS504", name: "Data Visualization Tools" }
-          ],
-          "Semester 6": [
-            { code: "ADS601", name: "Big Data Analytics & Hadoop" },
-            { code: "ADS602", name: "Deep Learning" },
-            { code: "ADS603", name: "Computer Networks" },
-            { code: "ADS604", name: "Business Intelligence" }
-          ],
-          "Semester 7": [
-            { code: "ADS701", name: "Predictive Modeling & Analytics" },
-            { code: "ADS702", name: "Cloud Computing & Snowflake" },
-            { code: "ADS703", name: "NLP & Text Mining" }
-          ],
-          "Semester 8": [
-            { code: "ADS801", name: "Data Privacy & Governance" },
-            { code: "ADS802", name: "Scalable Systems Architecture" }
-          ]
+          "Semester 1": sem1, "Semester 2": sem2,
+          "Semester 3": [s("ADS301","Data Structures & Algorithms"), s("ADS302","Statistical Methods for Data Science"), s("ADS303","Discrete Structures"), s("BAS301","Technical Communication")],
+          "Semester 4": [s("ADS401","Database Management & SQL"), s("ADS402","Foundations of Data Science"), s("ADS403","Operating Systems"), s("ADS404","Theory of Computation")],
+          "Semester 5": [s("ADS501","Machine Learning"), s("ADS502","Data Mining & Warehousing"), s("ADS503","Design & Analysis of Algorithms"), s("ADS504","Data Visualization Tools")],
+          "Semester 6": [s("ADS601","Big Data Analytics & Hadoop"), s("ADS602","Deep Learning"), s("ADS603","Computer Networks"), s("ADS604","Business Intelligence")],
+          "Semester 7": [s("ADS701","Predictive Modeling & Analytics"), s("ADS702","Cloud Computing & Snowflake"), s("ADS703","NLP & Text Mining")],
+          "Semester 8": [s("ADS801","Data Privacy & Governance"), s("ADS802","Scalable Systems Architecture")]
         },
         "Information Technology": {
-          "Semester 1": commonSem1,
-          "Semester 2": commonSem2,
-          "Semester 3": [
-            { code: "KIT301", name: "Data Structures & Algorithms" },
-            { code: "KIT302", name: "Computer Organization" },
-            { code: "KIT303", name: "Discrete Structures" },
-            { code: "BAS301", name: "Technical Communication" }
-          ],
-          "Semester 4": [
-            { code: "KIT401", name: "Operating Systems" },
-            { code: "KIT402", name: "Object Oriented Programming (Java)" },
-            { code: "KIT403", name: "Theory of Automata" },
-            { code: "BAS403", name: "Mathematics-IV" }
-          ],
-          "Semester 5": [
-            { code: "KIT501", name: "Database Management Systems" },
-            { code: "KIT502", name: "Design & Analysis of Algorithms" },
-            { code: "KIT503", name: "Web Technology & Frameworks" },
-            { code: "KIT504", name: "Information Security" }
-          ],
-          "Semester 6": [
-            { code: "KIT601", name: "Software Project Management" },
-            { code: "KIT602", name: "Computer Networks" },
-            { code: "KIT603", name: "DevOps & Cloud Deployment" },
-            { code: "KIT604", name: "Mobile Computing" }
-          ],
-          "Semester 7": [
-            { code: "KIT701", name: "Cryptography & Network Security" },
-            { code: "KIT702", name: "Artificial Intelligence" },
-            { code: "KIT703", name: "Internet of Things" }
-          ],
-          "Semester 8": [
-            { code: "KIT801", name: "Software Testing & QA" },
-            { code: "KIT802", name: "Enterprise Resource Planning" }
-          ]
+          "Semester 1": sem1, "Semester 2": sem2,
+          "Semester 3": [s("KIT301","Data Structures & Algorithms"), s("KIT302","Computer Organization"), s("KIT303","Discrete Structures"), s("BAS301","Technical Communication")],
+          "Semester 4": [s("KIT401","Operating Systems"), s("KIT402","Object Oriented Programming (Java)"), s("KIT403","Theory of Automata"), s("BAS403","Mathematics-IV")],
+          "Semester 5": [s("KIT501","Database Management Systems"), s("KIT502","Design & Analysis of Algorithms"), s("KIT503","Web Technology & Frameworks"), s("KIT504","Information Security")],
+          "Semester 6": [s("KIT601","Software Project Management"), s("KIT602","Computer Networks"), s("KIT603","DevOps & Cloud Deployment"), s("KIT604","Mobile Computing")],
+          "Semester 7": [s("KIT701","Cryptography & Network Security"), s("KIT702","Artificial Intelligence"), s("KIT703","Internet of Things")],
+          "Semester 8": [s("KIT801","Software Testing & QA"), s("KIT802","Enterprise Resource Planning")]
         },
         "Electronics & Communication (ECE)": {
-          "Semester 1": commonSem1,
-          "Semester 2": commonSem2,
-          "Semester 3": [
-            { code: "KEC301", name: "Electronic Devices & Circuits" },
-            { code: "KEC302", name: "Digital System Design" },
-            { code: "KEC303", name: "Network Analysis & Synthesis" },
-            { code: "BAS301", name: "Technical Communication" }
-          ],
-          "Semester 4": [
-            { code: "KEC401", name: "Communication Engineering" },
-            { code: "KEC402", name: "Analog Circuits" },
-            { code: "KEC403", name: "Signal & Systems" },
-            { code: "BAS403", name: "Engineering Mathematics-IV" }
-          ],
-          "Semester 5": [
-            { code: "KEC501", name: "Integrated Circuits" },
-            { code: "KEC502", name: "Microprocessor & Microcontroller" },
-            { code: "KEC503", name: "Digital Signal Processing" },
-            { code: "KEC504", name: "Electromagnetic Field Theory" }
-          ],
-          "Semester 6": [
-            { code: "KEC601", name: "Antennas and Wave Propagation" },
-            { code: "KEC602", name: "Control Systems" },
-            { code: "KEC603", name: "VLSI Design" }
-          ],
-          "Semester 7": [
-            { code: "KEC701", name: "Optical Communication" },
-            { code: "KEC702", name: "Wireless & Mobile Communication" },
-            { code: "KEC703", name: "Embedded System Design" }
-          ],
-          "Semester 8": [
-            { code: "KEC801", name: "Satellite Communication" },
-            { code: "KEC802", name: "Radar & Navigation Aids" }
-          ]
+          "Semester 1": sem1, "Semester 2": sem2,
+          "Semester 3": [s("KEC301","Electronic Devices & Circuits"), s("KEC302","Digital System Design"), s("KEC303","Network Analysis & Synthesis"), s("BAS301","Technical Communication")],
+          "Semester 4": [s("KEC401","Communication Engineering"), s("KEC402","Analog Circuits"), s("KEC403","Signal & Systems"), s("BAS403","Engineering Mathematics-IV")],
+          "Semester 5": [s("KEC501","Integrated Circuits"), s("KEC502","Microprocessor & Microcontroller"), s("KEC503","Digital Signal Processing"), s("KEC504","Electromagnetic Field Theory")],
+          "Semester 6": [s("KEC601","Antennas and Wave Propagation"), s("KEC602","Control Systems"), s("KEC603","VLSI Design")],
+          "Semester 7": [s("KEC701","Optical Communication"), s("KEC702","Wireless & Mobile Communication"), s("KEC703","Embedded System Design")],
+          "Semester 8": [s("KEC801","Satellite Communication"), s("KEC802","Radar & Navigation Aids")]
         }
       };
     }
 
     const curriculum = getCurriculum();
 
+    /* ---------- PYQ data (add more subjects here, key = subject code) ---------- */
+    const PYQ_BANK = {
+      "KCS401": [
+        { q: "Explain CPU Scheduling Criteria and compare FCFS, SJF, and Round Robin algorithms with a Gantt chart.", marks: "10 Marks", freq: "Repeated 4 Times (2023, 2022, 2021, 2019)", prob: 95 },
+        { q: "Define Deadlock. State the four necessary conditions. Describe Banker's Algorithm for Deadlock Avoidance with a numerical example.", marks: "10 Marks", freq: "Repeated 3 Times (2023, 2022, 2020)", prob: 92 },
+        { q: "Differentiate between Paging and Segmentation. Explain the concept of Virtual Memory and Thrashing.", marks: "7 Marks", freq: "Repeated 3 Times (2022, 2021, 2018)", prob: 88 },
+        { q: "What is Critical Section Problem? Explain Peterson's Solution and Semaphore mechanism for Process Synchronization.", marks: "7 Marks", freq: "Repeated 2 Times (2023, 2021)", prob: 84 }
+      ]
+    };
+
+    /* ---------- Dropdowns ---------- */
     function populateBranches() {
       const bSel = document.getElementById('pyq-branch');
       if (!bSel) return;
       const branches = Object.keys(curriculum);
       bSel.innerHTML = branches.map(b => `<option value="${b}">${b}</option>`).join('');
-      
+
       const savedBranch = localStorage.getItem(`user_branch_${currentEmail}`);
       if (savedBranch && branches.includes(savedBranch)) bSel.value = savedBranch;
       populateSemesters();
@@ -417,7 +254,9 @@
       if (!bSel || !sSel) return;
       const sems = Object.keys(curriculum[bSel.value] || {});
       sSel.innerHTML = sems.map(s => `<option value="${s}">${s}</option>`).join('');
-      if (sems.includes("Semester 4")) sSel.value = "Semester 4";
+
+      const savedSem = localStorage.getItem(`user_sem_${currentEmail}`);
+      if (savedSem && sems.includes(savedSem)) sSel.value = savedSem;
       populateSubjects();
     }
 
@@ -426,68 +265,50 @@
       const sSel = document.getElementById('pyq-sem');
       const subSel = document.getElementById('pyq-subject');
       if (!bSel || !sSel || !subSel) return;
-      const subs = (curriculum[bSel.value] && curriculum[bSel.value][sSel.value]) ? curriculum[bSel.value][sSel.value] : [];
-
-      subSel.innerHTML = subs.map(s => `<option value="${s.name} (${s.code})">${s.name} (${s.code})</option>`).join('');
+      const subs = (curriculum[bSel.value] && curriculum[bSel.value][sSel.value]) || [];
+      subSel.innerHTML = subs.map(x => `<option value="${x.code}">${x.name} (${x.code})</option>`).join('');
       runAnalysis();
     }
 
+    /* ---------- Results ---------- */
     function runAnalysis() {
       const feed = document.getElementById('pyq-results-feed');
       if (!feed) return;
       const subSel = document.getElementById('pyq-subject');
-      const currentSub = subSel ? subSel.value : 'Operating Systems';
+      const code = subSel ? subSel.value : '';
+      const list = PYQ_BANK[code] || [];
 
-      const questions = [
-        {
-          q: `Explain CPU Scheduling Criteria and compare FCFS, SJF, and Round Robin algorithms with a Gantt chart in ${currentSub}.`,
-          marks: "10 Marks",
-          freq: "Repeated 4 Times (2023, 2022, 2021, 2019)",
-          prob: "95% Probable"
-        },
-        {
-          q: `Define Deadlock. State the four necessary conditions. Describe Banker's Algorithm for Deadlock Avoidance with a numerical example.`,
-          marks: "10 Marks",
-          freq: "Repeated 3 Times (2023, 2022, 2020)",
-          prob: "92% Probable"
-        },
-        {
-          q: `Differentiate between Paging and Segmentation. Explain the concept of Virtual Memory and Thrashing.`,
-          marks: "7 Marks",
-          freq: "Repeated 3 Times (2022, 2021, 2018)",
-          prob: "88% Probable"
-        },
-        {
-          q: `What is Critical Section Problem? Explain Peterson's Solution and Semaphore mechanism for Process Synchronization.`,
-          marks: "7 Marks",
-          freq: "Repeated 2 Times (2023, 2021)",
-          prob: "84% Probable"
-        }
-      ];
+      if (!list.length) {
+        feed.innerHTML = `
+          <div class="p-6 rounded-2xl bg-white border border-dashed border-slate-300 text-center">
+            <p class="text-sm font-extrabold text-slate-700">PYQ analysis coming soon for this subject</p>
+            <p class="text-xs text-slate-400 mt-1">Abhi is subject ka data add nahi hua hai. Dusra subject try karo.</p>
+          </div>`;
+        return;
+      }
 
-      feed.innerHTML = questions.map((item) => `
+      /* Button text is split so this script never contains the full phrase
+         (mobile-nav.js scans text content and would mistake this script for a button). */
+      const zenLabel = 'Ask Zen to ' + 'Explain Solution →';
+
+      feed.innerHTML = list.map(item => `
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-2.5">
           <div class="flex items-center justify-between">
-            <span class="text-[10px] font-black uppercase text-amber-900 bg-amber-100 px-2 py-0.5 rounded-full">
-              ${item.prob}
-            </span>
+            <span class="text-[10px] font-black uppercase text-amber-900 bg-amber-100 px-2 py-0.5 rounded-full">${item.prob}% Probable</span>
             <span class="text-[11px] font-black text-slate-400">${item.marks}</span>
           </div>
-
-          <p class="text-xs sm:text-sm font-extrabold text-slate-800 leading-snug">
-            ${item.q}
-          </p>
-
+          <p class="text-xs sm:text-sm font-extrabold text-slate-800 leading-snug">${item.q}</p>
           <div class="pt-2 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <span class="text-[10px] font-bold text-emerald-700">✓ ${item.freq}</span>
             <a href="chat.html" class="inline-flex items-center gap-1 text-[11px] font-black text-[#1b4332] hover:underline">
-              <span>🤖</span> Ask Zen to Explain Solution →
+              <span>🤖</span> ${zenLabel}
             </a>
           </div>
         </div>
       `).join('');
     }
 
+    /* ---------- Avatars / name / XP ---------- */
     function syncPyqAvatars() {
       const savedPhoto = localStorage.getItem(`user_avatar_${currentEmail}`) || localStorage.getItem('user_avatar');
       const initial = (currentName.charAt(0) || 'S').toUpperCase();
@@ -503,7 +324,7 @@
         }
       });
 
-      const userXP = localStorage.getItem(`akt_xp_${currentEmail}`) || "100";
+      const userXP = localStorage.getItem(`akt_xp_${currentEmail}`) || "0";
       const xpEl = document.getElementById('top-user-xp');
       if (xpEl) xpEl.innerText = userXP + " XP";
 
