@@ -6,7 +6,6 @@
   <title>AKTU Connect - Zen AI Tutor</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="mobile.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
@@ -54,7 +53,7 @@
   <div id="drawer-overlay" class="mobile-drawer-overlay" onclick="toggleSidebar()"></div>
 
   <div class="app-container">
-
+    
     <aside id="main-sidebar" class="sidebar-menu-card">
       <div class="menu-brand">
         <div class="brand-badge">AC</div>
@@ -78,8 +77,8 @@
         <div class="flex items-center gap-2.5 overflow-hidden w-full">
           <div id="side-user-avatar" class="avatar-circle">S</div>
           <div class="truncate flex-1">
-            <p id="side-user-name" class="text-xs font-bold text-white truncate">Student</p>
-            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate"></p>
+            <p id="side-user-name" class="text-xs font-bold text-white truncate">Saqib Khan</p>
+            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">sksaqibkhan110@gmail.com</p>
           </div>
         </div>
         <button onclick="handleLogout()" class="w-full py-2 rounded-xl bg-white/10 hover:bg-rose-600/80 text-rose-200 hover:text-white text-xs font-extrabold transition flex items-center justify-center gap-1.5 cursor-pointer">
@@ -89,7 +88,7 @@
     </aside>
 
     <main class="flex flex-col h-[calc(100vh-2rem)] sm:h-[calc(100vh-2.5rem)] pb-2 space-y-3">
-
+      
       <!-- MOBILE TOP HEADER (Phone View) -->
       <div class="flex items-center justify-between p-3 bg-white/90 backdrop-blur rounded-2xl border border-emerald-100 lg:hidden shadow-xs mb-1">
         <div class="flex items-center gap-2.5">
@@ -119,8 +118,8 @@
         <a href="profile.html" class="top-user-widget">
           <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center overflow-hidden shrink-0">S</div>
           <div class="text-left hidden sm:block">
-            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Student</p>
-            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">0 XP</p>
+            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Saqib Khan</p>
+            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">470 XP</p>
           </div>
         </a>
       </header>
@@ -135,12 +134,12 @@
 
       <!-- CHAT CONTAINER -->
       <section class="portal-card flex-1 flex flex-col overflow-hidden p-3.5 sm:p-5">
-
+        
         <div id="chat-messages" class="flex-1 overflow-y-auto space-y-3.5 pr-1 mb-2">
           <div class="flex items-start gap-3">
             <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0">Zen</div>
             <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
-              <p class="font-bold text-emerald-900 mb-0.5">Hey <span id="welcome-name">dost</span>! Main Zen hoon, tera AKTU AI Mentor ⚡</p>
+              <p class="font-bold text-emerald-900 mb-0.5">Hey Saqib! Main Zen hoon, tera AKTU AI Mentor ⚡</p>
               <p class="text-slate-600 text-xs">Real Gemini AI connected hai! Syllabus topic, derivations, coding doubts, ya Quantum solutions—batao kya poochna hai?</p>
             </div>
           </div>
@@ -148,15 +147,15 @@
 
         <!-- FORM INPUT -->
         <div class="pt-2 border-t border-slate-100 flex items-center gap-2 shrink-0">
-          <input
-            type="text"
-            id="chat-input"
-            placeholder="Ask Zen anything about AKTU syllabus..."
-            class="flex-1 bg-[#f4faf6] border border-[#cce3d5] text-xs sm:text-sm font-semibold text-slate-900 px-4 py-3 rounded-2xl outline-none"
+          <input 
+            type="text" 
+            id="chat-input" 
+            placeholder="Ask Zen anything about AKTU syllabus..." 
+            class="flex-1 bg-[#f4faf6] border border-[#cce3d5] text-xs sm:text-sm font-semibold text-slate-900 px-4 py-3 rounded-2xl outline-none" 
             autocomplete="off"
           />
-          <button
-            type="button"
+          <button 
+            type="button" 
             id="send-btn"
             onclick="triggerSendMessage()"
             class="px-5 py-3 rounded-2xl bg-[#1b4332] hover:bg-[#2d6a4f] text-white text-xs sm:text-sm font-black flex items-center gap-1.5 transition cursor-pointer shrink-0"
@@ -171,41 +170,25 @@
   </div>
 
   <script src="nav.js"></script>
-  <script src="mobile-nav.js"></script>
   <script>
-    // Logged-in user ka data localStorage se aata hai. Koi hardcoded naam/email nahi.
-    const currentEmail = (localStorage.getItem('current_user_email') || '').toLowerCase().trim();
-    let currentName = (localStorage.getItem('user_name') || '').trim() || 'Student';
-    const firstName = currentName.split(' ')[0];
+    const currentEmail = (localStorage.getItem('current_user_email') || 'sksaqibkhan110@gmail.com').toLowerCase().trim();
+    let currentName = localStorage.getItem('user_name') || 'Saqib Khan';
 
     const conversationHistory = [];
     const messagesBox = document.getElementById('chat-messages');
     const chatInput = document.getElementById('chat-input');
 
-    // User ka text HTML ki tarah na chale (script injection se bachav)
-    function escapeHtml(s) {
-      return String(s).replace(/[&<>"']/g, function (c) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-      });
-    }
-
-    function getSavedPhoto() {
-      return localStorage.getItem('user_avatar_' + currentEmail) || localStorage.getItem('user_avatar');
-    }
-
     function appendMessage(sender, text, isUser = false) {
       const msgDiv = document.createElement('div');
       msgDiv.className = `flex items-start gap-3 ${isUser ? 'justify-end' : ''}`;
 
-      const rendered = isUser
-        ? escapeHtml(text)
-        : (typeof marked === 'undefined' ? escapeHtml(text) : marked.parse(text));
-      const savedPhoto = getSavedPhoto();
+      const rendered = (isUser || typeof marked === 'undefined') ? text : marked.parse(text);
+      const savedPhoto = localStorage.getItem(`user_avatar_${currentEmail}`) || localStorage.getItem('user_avatar');
       const initial = (currentName.charAt(0) || 'S').toUpperCase();
 
       const userAvatar = (savedPhoto && savedPhoto.startsWith('data:image'))
         ? `<div class="w-8 h-8 rounded-xl overflow-hidden shrink-0"><img src="${savedPhoto}" class="w-full h-full object-cover" /></div>`
-        : `<div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-black flex items-center justify-center shrink-0">${escapeHtml(initial)}</div>`;
+        : `<div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-black flex items-center justify-center shrink-0">${initial}</div>`;
 
       if (isUser) {
         msgDiv.innerHTML = `
@@ -243,14 +226,13 @@
         }
       } catch (err) {}
 
-      // Natural Human-Like AI Answers for Common Interactions (API fail hone par)
+      // Natural Human-Like AI Answers for Common Interactions
       const q = userQuery.toLowerCase().trim();
 
       if (q.includes("gemini") && (q.includes("connect") || q.includes("kaun") || q.includes("model"))) {
-        return `Haan ${firstName}! Main Google Gemini model se connected hoon aur specially AKTU engineering curriculum, PYQ patterns, derivations aur Quantum series ke liye fine-tuned hoon. Batao kya solve karna hai?`;
+        return `Haan Saqib! Main Google Gemini model se connected hoon aur specially AKTU engineering curriculum, PYQ patterns, derivations aur Quantum series ke liye fine-tuned hoon. Batao kya solve karna hai?`;
       }
-      // Pehle "hi" har word me match ho jata tha (this, which...). Ab sirf poora greeting word.
-      if (/^(hi+|hello+|hey+|hii+|namaste)\b/.test(q) && q.split(/\s+/).length <= 3) {
+      if (q.includes("hi") || q.includes("hello") || q.includes("hii") || q === "hey") {
         return `Hello **${currentName}**! 👋 Batao aaj kis subject ya topic me doubt hai? Math, DBMS, DAA, COA ya OS—direct topic likho, main point-to-point solution deta hoon!`;
       }
       if (q.includes("normalization")) {
@@ -300,7 +282,7 @@
     });
 
     function syncChatAvatars() {
-      const savedPhoto = getSavedPhoto();
+      const savedPhoto = localStorage.getItem(`user_avatar_${currentEmail}`) || localStorage.getItem('user_avatar');
       const initial = (currentName.charAt(0) || 'S').toUpperCase();
       ['top-user-avatar', 'side-user-avatar', 'mobile-top-user-avatar'].forEach(id => {
         const el = document.getElementById(id);
@@ -309,22 +291,12 @@
         if (savedPhoto && savedPhoto.startsWith('data:image')) {
           el.innerHTML = `<img src="${savedPhoto}" class="w-full h-full object-cover rounded-full" alt="Profile" />`;
         } else {
-          el.textContent = initial;
+          el.innerHTML = initial;
         }
       });
     }
 
-    // Logged-in user ka naam/email UI me bharo
-    function fillUserInfo() {
-      const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-      set('welcome-name', firstName);
-      set('side-user-name', currentName);
-      set('top-user-name', currentName);
-      set('side-user-email', currentEmail);
-    }
-
     syncChatAvatars();
-    fillUserInfo();
   </script>
 </body>
 </html>
