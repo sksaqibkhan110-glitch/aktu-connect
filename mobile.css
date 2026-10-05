@@ -32,6 +32,13 @@
     display: flex !important; 
   }
 
+  /* ---------- Section Strip Suppression (SIRF QUEST PE ALLOWED) ---------- */
+  body:not(.quest-page) .section-switch-pill,
+  body:not([data-page="quest"]) div[class*="Section-A"],
+  body:not([data-page="quest"]) div[class*="Section-B"] {
+    display: none !important;
+  }
+
   /* ---------- Bottom tab bar ---------- */
   .m-bottom-nav {
     display: flex;

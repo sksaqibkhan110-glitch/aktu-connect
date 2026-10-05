@@ -66,16 +66,16 @@
         </a>
       </nav>
 
-      <div class="sidebar-user-pill">
-        <div class="flex items-center gap-2.5 overflow-hidden">
+      <div class="sidebar-user-pill flex flex-col gap-2.5 pt-3 border-t border-white/10 mt-auto">
+        <div class="flex items-center gap-2.5 overflow-hidden w-full">
           <div id="side-user-avatar" class="avatar-circle">S</div>
-          <div class="truncate">
-            <p id="side-user-name" class="text-xs font-bold text-white truncate">Saqib Khan</p>
-            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">sksaqibkhan110@gmail.com</p>
+          <div class="truncate flex-1">
+            <p id="side-user-name" class="text-xs font-bold text-white truncate">Student</p>
+            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate"></p>
           </div>
         </div>
-        <button onclick="handleLogout()" class="text-[11px] font-bold text-emerald-200 hover:text-white cursor-pointer ml-2">
-          Logout
+        <button onclick="handleLogout()" class="w-full py-2 rounded-xl bg-white/10 hover:bg-rose-600/80 text-rose-200 hover:text-white text-xs font-extrabold transition flex items-center justify-center gap-1.5 cursor-pointer">
+          <span>🚪</span> Logout Account
         </button>
       </div>
     </aside>
@@ -83,7 +83,7 @@
     <!-- MAIN PYQ VAULT -->
     <main class="space-y-4 pb-10">
       
-      <!-- SINGLE CLEAN MOBILE TOP HEADER (No Duplicate) -->
+      <!-- MOBILE TOP HEADER -->
       <div class="flex items-center justify-between p-3 bg-white/90 backdrop-blur rounded-2xl border border-emerald-100 lg:hidden shadow-xs mb-1">
         <div class="flex items-center gap-2.5">
           <button type="button" onclick="toggleSidebar()" class="w-9 h-9 rounded-xl bg-emerald-50 text-[#1b4332] font-black text-lg flex items-center justify-center border border-emerald-200 cursor-pointer">
@@ -99,7 +99,7 @@
         </a>
       </div>
 
-      <!-- DESKTOP TOP HEADER (Strictly hidden on phone) -->
+      <!-- DESKTOP TOP HEADER -->
       <header class="hidden lg:flex items-center justify-between">
         <div>
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 mb-1">
@@ -112,8 +112,8 @@
         <a href="profile.html" class="top-user-widget">
           <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center overflow-hidden shrink-0">S</div>
           <div class="text-left">
-            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Saqib Khan</p>
-            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">260 XP</p>
+            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Student</p>
+            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">100 XP</p>
           </div>
         </a>
       </header>
@@ -123,15 +123,15 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
             <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">BRANCH</label>
-            <select id="pyq-branch" onchange="populateSemesters()" class="theme-select cursor-pointer"></select>
+            <select id="pyq-branch" onchange="populateSemesters()" class="theme-select cursor-pointer w-full"></select>
           </div>
           <div>
             <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">SEMESTER</label>
-            <select id="pyq-sem" onchange="populateSubjects()" class="theme-select cursor-pointer"></select>
+            <select id="pyq-sem" onchange="populateSubjects()" class="theme-select cursor-pointer w-full"></select>
           </div>
           <div>
             <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">SUBJECT</label>
-            <select id="pyq-subject" onchange="runAnalysis()" class="theme-select cursor-pointer"></select>
+            <select id="pyq-subject" onchange="runAnalysis()" class="theme-select cursor-pointer w-full"></select>
           </div>
         </div>
 
@@ -169,9 +169,10 @@
   <script src="nav.js"></script>
   <script src="mobile-nav.js"></script>
   <script>
-    const currentEmail = (localStorage.getItem('current_user_email') || 'sksaqibkhan110@gmail.com').toLowerCase().trim();
+    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || '').toLowerCase().trim();
+    let currentName = localStorage.getItem('user_name') || (currentEmail ? currentEmail.split('@')[0] : 'Student');
+    if (currentName.toLowerCase() === 'saqib khan') currentName = 'Student';
 
-    // Universal Curriculum (Exact Match with Study Hub & Quest)
     function getCurriculum() {
       const ext = window.studyData || window.AKTU_STUDY_DATA || window.coursesData;
       if (ext && typeof ext === 'object' && Object.keys(ext).length > 2) return ext;
@@ -366,7 +367,6 @@
     }
 
     function runAnalysis() {
-      const subject = document.getElementById('pyq-subject').value || "Operating Systems (BCS401)";
       const feed = document.getElementById('pyq-results-feed');
 
       const questions = [
@@ -396,7 +396,7 @@
         }
       ];
 
-      feed.innerHTML = questions.map((item, idx) => `
+      feed.innerHTML = questions.map((item) => `
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-2.5">
           <div class="flex items-center justify-between">
             <span class="text-[10px] font-black uppercase text-amber-900 bg-amber-100 px-2 py-0.5 rounded-full">
@@ -421,7 +421,7 @@
 
     function syncPyqAvatars() {
       const savedPhoto = localStorage.getItem(`user_avatar_${currentEmail}`) || localStorage.getItem('user_avatar');
-      const initial = (localStorage.getItem('user_name') || 'S').charAt(0).toUpperCase();
+      const initial = (currentName.charAt(0) || 'S').toUpperCase();
 
       ['top-user-avatar', 'side-user-avatar', 'mobile-top-user-avatar'].forEach(id => {
         const el = document.getElementById(id);
@@ -430,9 +430,22 @@
         if (savedPhoto && savedPhoto.startsWith('data:image')) {
           el.innerHTML = `<img src="${savedPhoto}" class="w-full h-full object-cover rounded-full" alt="Profile" />`;
         } else {
-          el.innerHTML = initial;
+          el.textContent = initial;
         }
       });
+
+      const userXP = localStorage.getItem(`akt_xp_${currentEmail}`) || "100";
+      const xpEl = document.getElementById('top-user-xp');
+      if (xpEl) xpEl.innerText = userXP + " XP";
+
+      const nameEl = document.getElementById('top-user-name');
+      if (nameEl) nameEl.innerText = currentName;
+
+      const sideName = document.getElementById('side-user-name');
+      if (sideName) sideName.innerText = currentName;
+
+      const sideEmail = document.getElementById('side-user-email');
+      if (sideEmail) sideEmail.innerText = currentEmail;
     }
 
     populateBranches();
