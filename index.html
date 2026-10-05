@@ -38,7 +38,6 @@
       overflow-x: hidden;
     }
 
-    /* Master Mockup Frame */
     .master-mockup-frame {
       position: relative;
       width: 100%;
@@ -85,7 +84,6 @@
       z-index: 20;
     }
 
-    /* Whiteboard Form Overlay (Laptop Placement) */
     .whiteboard-active-area {
       position: absolute;
       top: 50.5%;
@@ -160,7 +158,6 @@
       box-shadow: 0 1px 3px rgba(27, 67, 50, 0.15);
     }
 
-    /* PHONE VIEW ONLY (<640px) - EXACT USER LOCKED VALUES */
     @media (max-width: 640px) {
       .master-mockup-frame {
         max-width: 360px;
@@ -190,8 +187,6 @@
         transform: translateX(-50%) !important;
         width: 57% !important;
         height: 33.4% !important;
-        min-height: unset !important;
-        max-height: unset !important;
         background: transparent !important;
         box-shadow: none !important;
         border: none !important;
@@ -292,9 +287,9 @@
     </div>
   </div>
 
-  <!-- NEW STUDENT ACADEMIC ONBOARDING MODAL -->
+  <!-- ACADEMIC ONBOARDING WITH TARGET CGPA -->
   <div id="onboarding-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl p-5 sm:p-6 max-w-md w-full shadow-2xl border border-emerald-200 text-left">
+    <div class="bg-white rounded-3xl p-5 sm:p-6 max-w-md w-full shadow-2xl border border-emerald-200 text-left max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100 mb-3">
         <div>
           <span class="text-[9px] font-black uppercase text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">New Student Setup</span>
@@ -302,23 +297,23 @@
         </div>
         <span class="text-2xl">🎓</span>
       </div>
-      <p class="text-xs text-slate-500 mb-3">Enter your details so AKTU Connect can tailor your semester curriculum, PYQs and leaderboard standing.</p>
+      <p class="text-xs text-slate-500 mb-3">Tell us your targets so AKTU Connect can calibrate your XP progression and badge thresholds.</p>
 
       <form onsubmit="finishStudentOnboarding(event)" class="space-y-3">
         <div>
           <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">Student Full Name</label>
-          <input type="text" id="onboard-name" required placeholder="e.g. Pixel Sharma" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none focus:border-emerald-600" />
+          <input type="text" id="onboard-name" required placeholder="e.g. Rahul Verma" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none focus:border-emerald-600" />
         </div>
 
         <div>
           <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">College Name</label>
-          <input type="text" id="onboard-college" required placeholder="e.g. GNIOT / KIET / Galgotias / ABES" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none focus:border-emerald-600" />
+          <input type="text" id="onboard-college" required placeholder="e.g. GNIOT / KIET / AKGEC" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none focus:border-emerald-600" />
         </div>
 
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">Branch</label>
-            <select id="onboard-branch" class="w-full px-2.5 py-2 text-xs border border-slate-200 rounded-xl outline-none bg-white">
+            <select id="onboard-branch" class="w-full px-2.5 py-2 text-xs border border-slate-200 rounded-xl outline-none bg-white font-semibold">
               <option value="Computer Science & Engineering">CSE Core</option>
               <option value="CSE (AI & ML)">CSE (AI & ML)</option>
               <option value="Artificial Intelligence & Data Science (AIDS)">AIDS</option>
@@ -328,7 +323,7 @@
           </div>
           <div>
             <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">Current Semester</label>
-            <select id="onboard-sem" class="w-full px-2.5 py-2 text-xs border border-slate-200 rounded-xl outline-none bg-white">
+            <select id="onboard-sem" class="w-full px-2.5 py-2 text-xs border border-slate-200 rounded-xl outline-none bg-white font-semibold">
               <option value="Semester 1">Semester 1</option>
               <option value="Semester 2">Semester 2</option>
               <option value="Semester 3">Semester 3</option>
@@ -339,6 +334,19 @@
               <option value="Semester 8">Semester 8</option>
             </select>
           </div>
+        </div>
+
+        <!-- NEW: TARGET CGPA MILESTONE SELECTOR -->
+        <div>
+          <label class="block text-[10px] font-black text-slate-400 uppercase mb-1">Target Semester CGPA</label>
+          <select id="onboard-cgpa" class="w-full px-2.5 py-2 text-xs border border-emerald-300 rounded-xl outline-none bg-emerald-50/50 font-bold text-emerald-950">
+            <option value="9.5">🔥 9.5+ CGPA (Titan Milestone – 800 XP Required)</option>
+            <option value="9.0" selected>⚡ 9.0+ CGPA (Dean's Scholar – 600 XP Required)</option>
+            <option value="8.5">🎯 8.5+ CGPA (Honor Role – 450 XP Required)</option>
+            <option value="8.0">📘 8.0+ CGPA (Consistent First Class – 350 XP Required)</option>
+            <option value="7.5">🌱 7.5+ CGPA (Foundation Goal – 250 XP Required)</option>
+          </select>
+          <p class="text-[9px] text-emerald-700 mt-1 font-semibold">Higher target means specialized streak challenges and high-tier badges unlock as you practice questions[cite: 26, 27].</p>
         </div>
 
         <button type="submit" class="w-full py-2.5 board-btn-primary text-xs mt-2">Enter Dashboard 🚀</button>
@@ -460,13 +468,11 @@
       const user = findSavedUser(id);
 
       if (!user) {
-        // Agar naya user bina signup ke direct sign in try kar raha hai
         errBanner.className = "p-1 rounded bg-rose-50 border border-rose-200 text-rose-700 text-[8px] font-bold text-center block";
         errBanner.innerText = "❌ Account not found! Please click Sign Up.";
         return;
       }
 
-      // Check Password Match
       if (user.pwd === enteredPwd || !user.pwd) {
         setSession(id, user.name);
         window.location.href = 'study.html';
@@ -476,7 +482,6 @@
       }
     }
 
-    // Set Clean Session without polluting with other users' data
     function setSession(email, name) {
       const cleanEmail = email.toLowerCase().trim();
       const cleanName = name || cleanEmail.split('@')[0];
@@ -534,7 +539,6 @@
       }
     }
 
-    // Password set karne ke baad seedha ONBOARDING MODAL khulega
     function finalizePasswordAndOpenOnboarding(e) {
       e.preventDefault();
       const p1 = String(document.getElementById('new-reg-pwd').value).trim();
@@ -550,7 +554,6 @@
       temporaryPassword = p1;
       document.getElementById('set-pwd-modal').classList.add('hidden');
 
-      // Agar password reset tha toh direct login karo
       if (pendingAccountData.isReset) {
         const email = pendingAccountData.id;
         const name = pendingAccountData.name;
@@ -560,7 +563,6 @@
         return;
       }
 
-      // Naya user hai toh Onboarding Profile Details maango
       document.getElementById('onboard-name').value = pendingAccountData.name || '';
       document.getElementById('onboarding-modal').classList.remove('hidden');
     }
@@ -571,19 +573,22 @@
       const college = document.getElementById('onboard-college').value.trim();
       const branch = document.getElementById('onboard-branch').value;
       const sem = document.getElementById('onboard-sem').value;
+      const targetCgpa = parseFloat(document.getElementById('onboard-cgpa').value) || 8.5;
       const email = pendingAccountData.id.toLowerCase().trim();
 
-      // Save user record
       saveUserRecord(email, fullName, temporaryPassword);
 
-      // Save student specific onboarding settings
+      // Save student academic preferences
       localStorage.setItem(`user_name_${email}`, fullName);
       localStorage.setItem(`user_college_${email}`, college);
       localStorage.setItem(`user_branch_${email}`, branch);
       localStorage.setItem(`user_sem_${email}`, sem);
-      localStorage.setItem(`akt_xp_${email}`, "100"); // Fresh signup bonus XP
+      localStorage.setItem(`user_target_cgpa_${email}`, targetCgpa.toString());
 
-      // Clean default avatar so it doesn't leak old user's picture
+      // Target CGPA ke basis par starting threshold XP
+      const startingXp = targetCgpa >= 9.0 ? "150" : "100";
+      localStorage.setItem(`akt_xp_${email}`, startingXp);
+
       localStorage.removeItem(`user_avatar_${email}`);
 
       setSession(email, fullName);
