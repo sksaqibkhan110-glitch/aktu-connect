@@ -13,6 +13,16 @@
     * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background-color: #f0f7f4; color: #132a13; min-height: 100vh; margin: 0; overflow-x: hidden; }
 
+    /* ZEN AI CUSTOM BACKGROUND */
+    #chat-messages {
+      position: relative;
+      background-image: url('zen-bg.jpg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-color: #fdfbf7;
+    }
+
     #chat-messages::-webkit-scrollbar { width: 5px; }
     #chat-messages::-webkit-scrollbar-thumb { background: #cce3d5; border-radius: 9999px; }
 
@@ -73,13 +83,13 @@
         <a href="profile.html" class="menu-item"><span>👤</span> <span>My Profile</span></a>
       </nav>
 
-      <!-- Sidebar User Pill with Logout (Consistent across all pages) -->
+      <!-- Sidebar User Pill with Logout -->
       <div class="sidebar-user-pill flex flex-col gap-2.5 pt-3 border-t border-white/10 mt-auto">
         <div class="flex items-center gap-2.5 overflow-hidden w-full">
           <div id="side-user-avatar" class="avatar-circle">S</div>
           <div class="truncate flex-1">
-            <p id="side-user-name" class="text-xs font-bold text-white truncate">Saqib Khan</p>
-            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">sksaqibkhan110@gmail.com</p>
+            <p id="side-user-name" class="text-xs font-bold text-white truncate">Student</p>
+            <p id="side-user-email" class="text-[9px] text-emerald-200 truncate">student@aktu.ac.in</p>
           </div>
         </div>
         <button onclick="handleLogout()" class="w-full py-2 rounded-xl bg-white/10 hover:bg-rose-600/80 text-rose-200 hover:text-white text-xs font-extrabold transition flex items-center justify-center gap-1.5 cursor-pointer">
@@ -119,8 +129,8 @@
         <a href="profile.html" class="top-user-widget">
           <div id="top-user-avatar" class="w-8 h-8 rounded-full bg-emerald-800 text-white font-extrabold text-xs flex items-center justify-center overflow-hidden shrink-0">S</div>
           <div class="text-left hidden sm:block">
-            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Saqib Khan</p>
-            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">470 XP</p>
+            <p id="top-user-name" class="text-xs font-bold text-slate-800 leading-tight">Student</p>
+            <p class="text-[10px] font-extrabold text-emerald-700" id="top-user-xp">260 XP</p>
           </div>
         </a>
       </header>
@@ -139,15 +149,15 @@
         <div id="chat-messages" class="flex-1 overflow-y-auto space-y-3.5 pr-1 mb-2">
           <div class="flex items-start gap-3">
             <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0">Zen</div>
-            <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
-              <p class="font-bold text-emerald-900 mb-0.5">Hey Saqib! Main Zen hoon, tera AKTU AI Mentor ⚡</p>
+            <div class="bg-emerald-50/95 backdrop-blur-xs border border-emerald-100 rounded-2xl p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
+              <p class="font-bold text-emerald-900 mb-0.5" id="zen-welcome-msg">Hey! Main Zen hoon, tera AKTU AI Mentor ⚡</p>
               <p class="text-slate-600 text-xs">Real Gemini AI connected hai! Syllabus topic, derivations, coding doubts, ya Quantum solutions—batao kya poochna hai?</p>
             </div>
           </div>
         </div>
 
         <!-- FORM INPUT -->
-        <div class="pt-2 border-t border-slate-100 flex items-center gap-2 shrink-0">
+        <div class="pt-2 border-t border-slate-100 flex items-center gap-2 shrink-0 bg-white">
           <input 
             type="text" 
             id="chat-input" 
@@ -157,8 +167,8 @@
           />
           <button 
             type="button" 
-            id="send-btn"
-            onclick="triggerSendMessage()"
+            id="send-btn" 
+            onclick="triggerSendMessage()" 
             class="px-5 py-3 rounded-2xl bg-[#1b4332] hover:bg-[#2d6a4f] text-white text-xs sm:text-sm font-black flex items-center gap-1.5 transition cursor-pointer shrink-0"
           >
             <span>Send</span> <span>🚀</span>
@@ -173,8 +183,14 @@
   <script src="nav.js"></script>
   <script src="mobile-nav.js"></script>
   <script>
-    const currentEmail = (localStorage.getItem('current_user_email') || 'sksaqibkhan110@gmail.com').toLowerCase().trim();
-    let currentName = localStorage.getItem('user_name') || 'Saqib Khan';
+    const currentEmail = (localStorage.getItem('current_user_email') || localStorage.getItem('user_email') || 'student@aktu.ac.in').toLowerCase().trim();
+    let currentName = localStorage.getItem('user_name') || localStorage.getItem(`user_name_${currentEmail}`) || currentEmail.split('@')[0];
+
+    // Personal welcome message dynamically customized for whichever user is logged in
+    const welcomeEl = document.getElementById('zen-welcome-msg');
+    if (welcomeEl) {
+      welcomeEl.innerText = `Hey ${currentName}! Main Zen hoon, tera AKTU AI Mentor ⚡`;
+    }
 
     const conversationHistory = [];
     const messagesBox = document.getElementById('chat-messages');
@@ -202,7 +218,7 @@
       } else {
         msgDiv.innerHTML = `
           <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0">Zen</div>
-          <div class="bg-emerald-50 border border-emerald-100 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
+          <div class="bg-emerald-50/95 backdrop-blur-xs border border-emerald-100 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs sm:text-sm text-slate-800 leading-relaxed shadow-2xs">
             ${rendered}
           </div>
         `;
@@ -212,7 +228,7 @@
       messagesBox.scrollTop = messagesBox.scrollHeight;
     }
 
-    // Dynamic Gemini AI Fetcher (With contextual natural dialogue)
+    // Dynamic Gemini AI Fetcher
     async function fetchGeminiAI(userQuery) {
       try {
         const response = await fetch('/api/chat', {
@@ -228,11 +244,11 @@
         }
       } catch (err) {}
 
-      // Natural Human-Like AI Answers for Common Interactions
+      // Fallback Contextual Responses
       const q = userQuery.toLowerCase().trim();
 
       if (q.includes("gemini") && (q.includes("connect") || q.includes("kaun") || q.includes("model"))) {
-        return `Haan Saqib! Main Google Gemini model se connected hoon aur specially AKTU engineering curriculum, PYQ patterns, derivations aur Quantum series ke liye fine-tuned hoon. Batao kya solve karna hai?`;
+        return `Main Google Gemini model se connected hoon aur specially AKTU engineering curriculum, PYQ patterns, derivations aur Quantum series ke liye fine-tuned hoon. Batao kya solve karna hai?`;
       }
       if (q.includes("hi") || q.includes("hello") || q.includes("hii") || q === "hey") {
         return `Hello **${currentName}**! 👋 Batao aaj kis subject ya topic me doubt hai? Math, DBMS, DAA, COA ya OS—direct topic likho, main point-to-point solution deta hoon!`;
@@ -244,7 +260,6 @@
         return `### ⚡ Master Theorem Formula & Cases:\n\nForm: $T(n) = aT(n/b) + f(n)$ where $c = \\log_b a$:\n1. **Case 1 ($f(n) = O(n^{c-\\epsilon})$):** $T(n) = \\Theta(n^c)$\n2. **Case 2 ($f(n) = \\Theta(n^c)$):** $T(n) = \\Theta(n^c \\log n)$\n3. **Case 3 ($f(n) = \\Omega(n^{c+\\epsilon})$):** $T(n) = \\Theta(f(n))$`;
       }
 
-      // Conversational Intelligent Response
       return `📌 **Concept Breakdown: "${userQuery}"**\n\nIs topic par AKTU exam perspective se main points yeh hain:\n\n1. **Core Concept:** Iski definition exam evaluator technical terminology ke hisaab se check karta hai.\n2. **Architecture / Diagram:** Har 7 ya 10 marks question me neat labelled diagram banana zaroori hai.\n3. **Exam Hack:** Theory badhane ke bajay numbered points aur tabular differences likho.\n\nKoi specific numerical ya derivation solve karwana ho toh batana!`;
     }
 
