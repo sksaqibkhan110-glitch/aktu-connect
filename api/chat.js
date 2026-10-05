@@ -4,65 +4,63 @@ export default async function handler(req, res) {
   }
 
   const { message, history } = req.body;
+  if (!message) {
+    return res.status(400).json({ error: 'Message is required' });
+  }
+
   const apiKey = process.env.GEMINI_API_KEY;
-
   if (!apiKey) {
-    return res.status(500).json({ error: 'GEMINI_API_KEY is not configured on Vercel.' });
+    return res.status(500).json({ error: 'GEMINI_API_KEY environment variable missing in Vercel' });
   }
-
-  // Model ID set to Gemini 3.8 Flash
-const MODEL_NAME = "gemini-3.8-flash";
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
-
-  const systemInstruction = `You are Zen, an energetic, highly knowledgeable, and friendly AI academic mentor specifically designed for Dr. A.P.J. Abdul Kalam Technical University (AKTU) B.Tech engineering students.
-- Tone: Friendly, motivating, helpful, and natural Hinglish/English.
-- Answer user queries directly. If they casually greet or chat (like "sun bhai", "kaise ho", "kya chal raha hai"), respond naturally and warmly, don't throw random textbook definitions.
-- For AKTU engineering questions, provide accurate exam-oriented answers, key points, derivations, quantum tips, and mention 2-mark or 7/10-mark exam importance when relevant.
-- Keep answers formatted with neat markdown and bullet points.`;
-
-  const contents = [
-    { role: 'user', parts: [{ text: systemInstruction }] },
-    { role: 'model', parts: [{ text: 'Samajh gaya! Main Zen hoon, AKTU students ka smart study buddy. Poochho kya doubt hai!' }] }
-  ];
-
-  if (history && Array.isArray(history)) {
-    history.forEach(item => {
-      contents.push({
-        role: item.role === 'user' ? 'user' : 'model',
-        parts: [{ text: item.text }]
-      });
-    });
-  }
-
-  contents.push({
-    role: 'user',
-    parts: [{ text: message }]
-  });
 
   try {
-    const response = await fetch(url, {
+    // History ko Gemini format me pack karo
+    const formattedHistory = (history || []).map(h => ({
+      role: h.role === 'model' ? 'model' : 'user',
+      parts: [{ text: h.text }]
+    }));
+
+    // AKTU Syllabus & Exam Persona System Instruction
+    const systemInstruction = `You are Zen, an expert AI mentor for engineering students under Dr. A.P.J. Abdul Kalam Technical University (AKTU).
+Your guidelines:
+1. Deliver structured, point-to-point technical solutions for derivations, codes, and numericals.
+2. Highlight key terms and exam keywords that evaluators look for in 7-mark and 10-mark questions.
+3. Be encouraging, concise, and clear. Avoid robotic greetings.`;
+
+    const payload = {
+      system_instruction: {
+        parts: [{ text: systemInstruction }]
+      },
+      contents: [
+        ...formattedHistory,
+        {
+          role: 'user',
+          parts: [{ text: message }]
+        }
+      ],
+      generationConfig: {
+        temperature: 0.65,
+        maxOutputTokens: 1500
+      }
+    };
+
+    // Google Gemini 3.5 Flash Model Endpoint
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: contents,
-        generationConfig: {
-          temperature: 0.7,
-          maxOutputTokens: 1000
-        }
-      })
+      body: JSON.stringify(payload)
     });
 
-    const data = await response.json();
-
-    if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-      const reply = data.candidates[0].content.parts[0].text;
-      return res.status(200).json({ reply });
-    } else {
-      console.error('Gemini API Error:', data);
-      return res.status(500).json({ error: 'Failed to generate response from Gemini.' });
+    if (!response.ok) {
+      const errText = await response.text();
+      return res.status(response.status).json({ error: errText });
     }
+
+    const data = await response.json();
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Solution generate karne me dikkat aayi, please dobara pucho!";
+
+    return res.status(200).json({ reply });
   } catch (error) {
-    console.error('Request failed:', error);
-    return res.status(500).json({ error: 'Server error while calling Gemini.' });
+    return res.status(500).json({ error: error.message });
   }
 }
