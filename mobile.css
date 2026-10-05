@@ -1,12 +1,12 @@
 /* =====================================================
    AKTU Connect - MOBILE ONLY overrides
    Sab kuch @media (max-width:1023px) ke andar hai.
-   1024px+ (laptop) pe is file ka koi asar nahi.
-   Is file ko style.css ke BAAD load karo.
    ===================================================== */
 
-/* Bottom nav laptop pe hamesha hidden */
-.m-bottom-nav { display: none; }
+/* Bottom nav completely removed */
+.m-bottom-nav { 
+  display: none !important; 
+}
 
 @media (max-width: 1023px) {
 
@@ -15,66 +15,23 @@
     --m-green-2: #2d6a4f;
     --m-mint: #e8f7ef;
     --m-line: #d4ebdc;
-    --m-nav-h: 64px;
   }
 
-  /* ---------- Page base padding fix (NO OVERLAP) ---------- */
+  /* Normal mobile padding (no bottom bar overlap) */
   body {
-    padding-bottom: calc(var(--m-nav-h) + env(safe-area-inset-bottom, 0px) + 36px) !important;
+    padding-bottom: 24px !important;
   }
 
-  main, .app-container {
-    padding-bottom: 28px !important;
-  }
-
-  /* Hamburger menu aur drawer accessible rakho */
+  /* Hamburger header menu hamesha active */
   button[onclick*="toggleSidebar()"] { 
     display: flex !important; 
   }
 
-  /* ---------- Section Strip Suppression (SIRF QUEST PE ALLOWED) ---------- */
+  /* Section switch strip sirf quest.html pe show hoga */
   body:not(.quest-page) .section-switch-pill,
   body:not([data-page="quest"]) div[class*="Section-A"],
   body:not([data-page="quest"]) div[class*="Section-B"] {
     display: none !important;
-  }
-
-  /* ---------- Bottom tab bar ---------- */
-  .m-bottom-nav {
-    display: flex;
-    position: fixed;
-    left: 10px; right: 10px;
-    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
-    height: var(--m-nav-h);
-    padding: 6px;
-    gap: 2px;
-    background: rgba(255, 255, 255, 0.95);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
-    border: 1px solid var(--m-line);
-    border-radius: 22px;
-    box-shadow: 0 10px 30px rgba(27, 67, 50, 0.18);
-    z-index: 60;
-  }
-  .m-bottom-nav a {
-    flex: 1;
-    display: flex; 
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center;
-    gap: 2px;
-    border-radius: 16px;
-    text-decoration: none;
-    color: #6b8478;
-    font-size: 10px; 
-    font-weight: 700;
-    transition: background .15s ease, color .15s ease, transform .15s ease;
-  }
-  .m-bottom-nav a .m-ico { font-size: 18px; line-height: 1; }
-  .m-bottom-nav a:active { transform: scale(0.94); }
-  .m-bottom-nav a.active {
-    background: var(--m-green);
-    color: #fff;
   }
 
   /* ---------- Filters: dropdowns compact ---------- */
@@ -130,38 +87,6 @@
     font-weight: 800 !important;
     font-size: 12px !important;
     text-decoration: none;
-  }
-
-  /* ---------- Zen chat height scoped only to chat ---------- */
-  body.m-zen-page main.flex.flex-col { 
-    height: calc(100dvh - 2rem - var(--m-nav-h) - 16px) !important; 
-  }
-  #chat-input { font-size: 15px !important; }
-  .prompt-chip { font-size: 0.75rem !important; padding: 0.4rem 0.85rem !important; }
-
-  .m-zen-empty {
-    display: flex; flex-direction: column; align-items: center;
-    text-align: center;
-    padding: 14px 8px 6px;
-    gap: 8px;
-  }
-  .m-zen-empty img {
-    width: 120px; max-width: 40vw; height: auto;
-    border-radius: 1rem;
-  }
-  .m-zen-empty h3 { margin: 0; font-size: 15px; font-weight: 900; color: var(--m-green); }
-  .m-zen-empty p  { margin: 0; font-size: 11px; font-weight: 600; color: #5b7568; }
-  .m-zen-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-    width: 100%; margin-top: 6px;
-  }
-  .m-zen-grid button {
-    padding: 10px 8px;
-    border-radius: 14px;
-    border: 1px solid var(--m-line);
-    background: var(--m-mint);
-    color: var(--m-green);
-    font-size: 11px; font-weight: 800;
   }
 
   /* ---------- Profile: forms collapse ---------- */
