@@ -1,0 +1,164 @@
+
+/* Bottom nav laptop pe hamesha hidden */
+.m-bottom-nav { display: none; }
+
+@media (max-width: 1023px) {
+
+  :root {
+    --m-green: #1b4332;
+    --m-green-2: #2d6a4f;
+    --m-mint: #e8f7ef;
+    --m-line: #d4ebdc;
+    --m-nav-h: 64px;
+  }
+
+  /* ---------- Page base ---------- */
+  body {
+    padding-bottom: calc(var(--m-nav-h) + env(safe-area-inset-bottom, 0px) + 12px) !important;
+  }
+
+  /* Hamburger ki jagah bottom nav hai, to header ka ☰ chhupa do */
+  button[onclick="toggleSidebar()"] { display: none !important; }
+
+  /* ---------- Bottom tab bar ---------- */
+  .m-bottom-nav {
+    display: flex;
+    position: fixed;
+    left: 10px; right: 10px;
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    height: var(--m-nav-h);
+    padding: 6px;
+    gap: 2px;
+    background: rgba(255, 255, 255, 0.94);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--m-line);
+    border-radius: 22px;
+    box-shadow: 0 10px 30px rgba(27, 67, 50, 0.18);
+    z-index: 60;
+  }
+  .m-bottom-nav a {
+    flex: 1;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 2px;
+    border-radius: 16px;
+    text-decoration: none;
+    color: #6b8478;
+    font-size: 10px; font-weight: 700;
+    transition: background .15s ease, color .15s ease, transform .15s ease;
+  }
+  .m-bottom-nav a .m-ico { font-size: 20px; line-height: 1; }
+  .m-bottom-nav a:active { transform: scale(0.94); }
+  .m-bottom-nav a.active {
+    background: var(--m-green);
+    color: #fff;
+  }
+
+  /* ---------- Filters: dropdowns compact ---------- */
+  select {
+    font-size: 14px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    min-height: 44px;
+  }
+  /* Branch / Semester / Subject / Unit ek compact grid me */
+  .m-filter-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px !important;
+  }
+  .m-filter-grid > * { min-width: 0; }
+  .m-filter-grid > *:nth-child(1),
+  .m-filter-grid > *:nth-child(3):last-child { grid-column: 1 / -1; }
+  .m-filter-grid label,
+  .m-filter-grid .filter-label {
+    font-size: 10px !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* ---------- Study: units compact ---------- */
+  .m-unit-card { padding: 12px 14px !important; border-radius: 18px !important; }
+  .m-unit-card:nth-of-type(5n+1) { border-left: 5px solid #34d399; }
+  .m-unit-card:nth-of-type(5n+2) { border-left: 5px solid #60a5fa; }
+  .m-unit-card:nth-of-type(5n+3) { border-left: 5px solid #f59e0b; }
+  .m-unit-card:nth-of-type(5n+4) { border-left: 5px solid #f472b6; }
+  .m-unit-card:nth-of-type(5n+5) { border-left: 5px solid #a78bfa; }
+
+  /* ---------- PYQ: probability bar ---------- */
+  .m-pyq-card { position: relative; overflow: hidden; }
+  .m-pyq-card::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: var(--m-bar, #f59e0b);
+  }
+  .m-pyq-card[data-prob="high"] { --m-bar: #ef4444; }
+  .m-pyq-card[data-prob="mid"]  { --m-bar: #f59e0b; }
+  .m-pyq-card[data-prob="low"]  { --m-bar: #22c55e; }
+
+  /* "Ask Zen" ko proper button banao */
+  .m-ask-zen {
+    display: flex !important;
+    align-items: center; justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    padding: 11px 14px !important;
+    border-radius: 14px !important;
+    background: var(--m-green) !important;
+    color: #fff !important;
+    font-weight: 800 !important;
+    font-size: 13px !important;
+    text-decoration: none;
+  }
+
+  /* ---------- Zen chat ---------- */
+  /* 100vh mobile browser bar ke saath galat hota hai, dvh use karo */
+  main.flex.flex-col { height: calc(100dvh - 2rem - var(--m-nav-h) - 16px) !important; }
+  #chat-input { font-size: 16px !important; } /* zoom-on-focus band */
+  .prompt-chip { font-size: 0.8rem !important; padding: 0.5rem 1rem !important; }
+
+  .m-zen-empty {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+    padding: 18px 8px 6px;
+    gap: 8px;
+  }
+  .m-zen-empty img {
+    width: 150px; max-width: 45vw; height: auto;
+    filter: drop-shadow(0 8px 14px rgba(27, 67, 50, .2));
+  }
+  .m-zen-empty h3 { margin: 0; font-size: 16px; font-weight: 900; color: var(--m-green); }
+  .m-zen-empty p  { margin: 0; font-size: 12px; font-weight: 600; color: #5b7568; }
+  .m-zen-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    width: 100%; margin-top: 8px;
+  }
+  .m-zen-grid button {
+    padding: 12px 10px;
+    border-radius: 16px;
+    border: 1px solid var(--m-line);
+    background: var(--m-mint);
+    color: var(--m-green);
+    font-size: 12px; font-weight: 800;
+  }
+
+  /* ---------- Profile: forms collapse ---------- */
+  details.m-collapse {
+    border: 1px solid var(--m-line);
+    border-radius: 20px;
+    background: #fff;
+    padding: 4px 16px;
+    margin-top: 12px;
+  }
+  details.m-collapse > summary {
+    list-style: none;
+    padding: 14px 0;
+    font-weight: 900; font-size: 14px;
+    color: var(--m-green);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  details.m-collapse > summary::-webkit-details-marker { display: none; }
+  details.m-collapse > summary::after { content: "▾"; transition: transform .2s; }
+  details.m-collapse[open] > summary::after { transform: rotate(180deg); }
+}
